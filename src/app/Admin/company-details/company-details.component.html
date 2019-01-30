@@ -1,0 +1,298 @@
+<style> 
+
+    .header img {
+      float: left;
+      width: 150px;
+      height: 120px;
+      top: 50px;
+      background: #555;
+    }
+    
+    .header h2 {
+      position: relative;
+      top: 40px;
+      color: purple;
+      right: 0px;
+    }
+    
+    .cssmenu i {
+      font-size: 25px;
+      padding:10px;
+      float:right;
+      color: black;
+      margin-right: 30px;
+    }
+    
+    .navbar {
+      background: #20B2AA;
+      border: 0px;
+      top: 60px;
+      height: 2%;
+    }
+    
+    .navbar ul li {
+      margin-right: 160px;
+    }
+    
+    .flex-container{
+        width: 100%;
+        min-height: 400px;
+        margin: 0 auto;
+        display: -webkit-flex; /* Safari */     
+        display: flex; /* Standard syntax */
+    }
+    .flex-container .column{
+        padding: 10px;
+        background: #dbdfe5;
+        -webkit-flex: 1; /* Safari */
+        -ms-flex: 1; /* IE 10 */
+        flex: 1; /* Standard syntax */
+    }
+    .flex-container .column.bg-alt{
+        background: #b4bac0;
+    }
+    
+    .button {
+      background-color: #D3D3D3; /* Green */
+      border: none;
+      color: black;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    
+    .btn {
+      background-color: #20B2AA;
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .submitbtn {
+      background-color: #20B2AA;
+      border: none;
+      color: white;
+      float : right;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .popup_header {
+        height: 10%;
+      background-color: #20B2AA;
+      color: white;
+    }
+    
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      width: 246px; 
+    }
+    
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    
+    .container {
+      padding: 2px 16px;
+    }
+    
+    .card {
+      border: 1px solid #d3d3d3;
+      width: 246px;
+      height: 320px;
+      float: left;
+      margin: 8px;
+      border-radius: .20rem;
+    }
+    
+    .bg-img {
+      background-size: cover;
+      min-height: 140px;
+      float: center;
+    }
+    
+    .content {
+      padding: 15px;
+      text-align: center;
+    }
+    
+    button {
+      background-color: transparent;
+      border: 1px solid #2196F3;
+      padding: .5rem 1rem;
+      cursor: pointer;
+      border-radius: .25rem;
+    }
+    
+    .search-container{
+      width: 490px;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    input#search-bar{
+      margin: 0 auto;
+      width: 100%;
+      height: 45px;
+      padding: 0 20px;
+      font-size: 1rem;
+      border: 1px solid #D0CFCE;
+      outline: none;
+      
+      focus{
+        border: 1px solid #008ABF;
+        transition: 0.35s ease;
+        color: #008ABF;
+        ::-webkit-input-placeholder{
+          transition: opacity 0.45s ease; 
+          opacity: 0;
+         }
+        ::-moz-placeholder {
+          transition: opacity 0.45s ease; 
+          opacity: 0;
+         }
+        :-ms-placeholder {
+         transition: opacity 0.45s ease; 
+         opacity: 0;
+         }    
+       }
+     }
+    
+    .glyphicon-search{
+      position: relative;
+      float: right;
+      width: 75px;
+      height: 75px;
+      top: -35px;
+      right: -45px;
+    }
+    
+    .search-container {
+      float: left;
+      font-size:20px;
+      margin-right : 30px;
+    }
+    
+    .sortfilter i {
+      font-size: 20px;
+      padding:10px;
+      float:right;
+      color: black;
+      margin-right: 30px;
+    }
+    
+    .stickynavbar {
+      background: white;
+      border: 0px;
+      top: 60px;
+      height: 2%;
+    }
+    
+    .stickynavbar ul li {
+      margin-right: 100px;
+    }
+
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#placementrecord {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+    
+    
+    </style>
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+    
+      <!-- Right Column -->
+    <div class="w3-threequarter">
+        <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>
+          <h2 style = "text-align: center"><b>Company Description</b></h2>
+          <br><br>
+          <div>
+              <p style="font-size: 18px"><img src = "assets/images/jpmorgan.png" style = "width: 300px; height: 150px; float: left; margin: 10px"> J.P. Morgan Chase & Co. is an American multinational investment bank and financial services company headquartered in New York City. JPMorgan Chase is the largest bank in the United States, and is ranked by S&P Global as the sixth largest bank in the world by total assets as of 2018, to the amount of $2.534 trillion.    </p>
+          </div>
+          <br><br><br>
+          <h3 style = "float: left"><b>Company Profile:</b></h3>
+          <br><br><br><br>
+          <div>
+              <h4>Website: &nbsp; <a href = "https://www.jpmorgan.com/country/IN/en/jpmorgan"> &nbsp; https://www.jpmorgan.com/country/IN/en/jpmorgan</a></h4>
+              <h4>LinkedIn: &nbsp; <a href = "https://www.linkedin.com/company/j-p-morgan/?originalSubdomain=in"> &nbsp;https://www.linkedin.com/company/j-p-morgan/?originalSubdomain=in</a></h4>
+              <h4>Twitter: &nbsp; <a href = "https://twitter.com/jpmorgan?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">&nbsp;&nbsp; https://twitter.com/jpmorgan?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor</a></h4>
+          </div>
+  
+          <h3 style = "float: left"><b>Job Description:</b></h3>
+          <br><br><br><br>
+          <div>
+            <h4 contenteditable="true"> <b> Criteria : </b> 60% throughout Academics </h4>
+            <h4> <b> Designation : </b> Associate Software Engineer - G1 </h4>
+            <h4> <b> Required Skills : </b> Learning ability , Flexibility , Readiness to take up challenges , Reporting , Analytic , Excellent Communication Skills </h4>
+            <h4> <b> Job Location :  </b> Pune , Bangalore , Mumbai </h4>
+            <h4> <b> Salary :  </b> 4.5 lpa </h4>
+          </div>
+          <br><br><br>
+
+          <h3 style = "float: left"><b>Placement Record:</b></h3>
+          <br><br><br><br>
+          <div>
+              <table id = "placementrecord">
+                  <tr>
+                    <th>Batch</th>
+                    <th>Placed</th>
+                  </tr>
+                  <tr>
+                    <td>2016</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>2017</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>2018</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>2019</td>
+                    <td>6</td>
+                  </tr>
+
+              </table>
+          </div>
+          <a class = "btn" style="float: right;" onclick="" >Edit Profile</a> 
+          <br><br><br><br>
+        </div>
+        </div>
+      <!-- End Right Column -->
+  </div>
+  <!-- End Grid -->
+    <!-- End Page Container -->
+  </div>
+  

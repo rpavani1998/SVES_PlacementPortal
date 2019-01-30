@@ -1,0 +1,168 @@
+<html>
+
+<head>
+<title>Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- BootStrap Glyphions -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- BootStrap Glyphions Ending -->	
+</head>
+
+<style> 
+
+.header img {
+  float: left;
+  width: 150px;
+  height: 120px;
+  top: 50px;
+  background: #555;
+}
+
+.header h2 {
+  position: relative;
+  top: 40px;
+  color: purple;
+  right: 0px;
+}
+
+.cssmenu i {
+	font-size: 25px;
+	padding:10px;
+	float:right;
+	color: black;
+	margin-right: 30px;
+}
+
+.navbar {
+	background: #20B2AA;
+	border: 0px;
+	top: 60px;
+	height: 2%;
+}
+
+.navbar ul li {
+	margin-right: 160px;
+}
+
+.flex-container{
+    width: 100%;
+    min-height: 400px;
+    margin: 0 auto;
+    display: -webkit-flex; /* Safari */     
+    display: flex; /* Standard syntax */
+}
+.flex-container .column{
+    padding: 10px;
+    background: #dbdfe5;
+    -webkit-flex: 1; /* Safari */
+    -ms-flex: 1; /* IE 10 */
+    flex: 1; /* Standard syntax */
+}
+.flex-container .column.bg-alt{
+    background: #b4bac0;
+}
+
+.button {
+  background-color: #D3D3D3; /* Green */
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.btn {
+  background-color: #20B2AA;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submitbtn {
+  background-color: #20B2AA;
+  border: none;
+  color: white;
+  float : right;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.popup_header {
+    height: 10%;
+	background-color: #20B2AA;
+	color: white;
+}
+
+</style>
+
+<body>
+
+<script>
+function myFunction() {
+  var txt = document.getElementById('skill').value;
+  if (document.getElementById('submitSkill').clicked == true) {
+	console.log(txt);
+  } 
+  }
+</script>
+
+
+<div class="header">
+	<img src="assets/images/BVRIT.png" alt="logo" />
+	<h2 style = "font: sans serif"><b>Sri Vishnu Educational Society</b></h2>
+</div>
+
+<div class="cssmenu">
+	<a href = "#"><i class = "glyphicon glyphicon-off"></i></a>					    
+	<a href = "#"><i class = "glyphicon glyphicon-bell"></i></a>					    
+</div>
+
+<div><br><br><br>
+	<nav class = "navbar">
+		<div>
+			<ul class="nav navbar-nav">
+          <li>
+              <a routerLinkActive="active" routerLink="admindashboard" style = "color: white; font-size: 20px; font-family: sans serif ">Dashboard</a>
+          </li>
+          <li>
+              <a routerLinkActive="active" routerLink="admincompetition" style = "color: white; font-size: 20px; font-family: sans serif ">Competition</a>
+          </li>
+          <li>
+              <a routerLinkActive="active" routerLink="admininternship" style = "color: white; font-size: 20px; font-family: sans serif ">Internship</a>
+          </li>
+          <li>
+              <a routerLinkActive="active" routerLink="adminplacement" style = "color: white; font-size: 20px; font-family: sans serif ">Placement</a>
+          </li>
+          <li>
+              <a routerLinkActive="active" routerLink="filterstudent" style = "color: white; font-size: 20px; font-family: sans serif ">Students</a>
+          </li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<br><br>
+
+
+<router-outlet></router-outlet>
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>Copyright © 2019 Sri Vishnu Educational Society</p>
+  </footer>
+  
+  </body>
+  </html>

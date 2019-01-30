@@ -1,0 +1,241 @@
+<head>
+
+  <script type="text/JavaScript">
+    function Msg1(){
+    document.getElementById('myText').innerHTML = 'Hey <strong>Thanks!</strong>';
+  }
+    function myskill() {
+      var skill = document.getElementById("skill").value;
+      document.getElementById("yourskill").innerHTML = skill;
+      alert(skill);
+      console.log(skill);
+    }
+    function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+        }
+  </script>
+  </head>>
+  
+  <style> 
+  
+      .header img {
+        float: left;
+        width: 150px;
+        height: 120px;
+        top: 50px;
+        background: #555;
+      }
+      
+      .header h2 {
+        position: relative;
+        top: 40px;
+        color: purple;
+        right: 0px;
+      }
+      
+      .cssmenu i {
+        font-size: 25px;
+        padding:10px;
+        float:right;
+        color: black;
+        margin-right: 30px;
+      }
+      
+      .navbar {
+        background: #20B2AA;
+        border: 0px;
+        top: 60px;
+        height: 2%;
+      }
+      
+      .navbar ul li {
+        margin-right: 160px;
+      }
+      
+      .flex-container{
+          width: 100%;
+          min-height: 400px;
+          margin: 0 auto;
+          display: -webkit-flex; /* Safari */     
+          display: flex; /* Standard syntax */
+      }
+      .flex-container .column{
+          padding: 10px;
+          background: #dbdfe5;
+          -webkit-flex: 1; /* Safari */
+          -ms-flex: 1; /* IE 10 */
+          flex: 1; /* Standard syntax */
+      }
+      .flex-container .column.bg-alt{
+          background: #b4bac0;
+      }
+      
+      .button {
+        background-color: #D3D3D3; /* Green */
+        border: none;
+        color: black;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+      
+      .btn {
+        background-color: #20B2AA;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      .submitbtn {
+        background-color: #20B2AA;
+        border: none;
+        color: white;
+        float : left;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      .popup_header {
+          height: 10%;
+        background-color: #20B2AA;
+        color: white;
+      }
+
+      label { 
+        width: 200px;
+        float: left;
+        margin: 0 20px 0 0;
+      }
+      span { 
+        display: block;
+        margin: 0 0 3px; 
+        font-size: 1.2em; 
+        font-weight: bold; 
+      }
+      input, select { 
+        width: 200px;
+        border: 1px solid #000; 
+        padding: 5px; 
+      }
+
+  
+  </style> 
+  
+  <!-- Page Container -->
+  <div class="w3-content w3-margin-top" style="max-width:1400px;">
+  
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+      
+        <div class="w3-threequarter">
+          <form>
+            <h2>Education Filter</h2>
+         
+            <div>
+            <label>
+              <span>Degree</span>
+              <select>
+                  <option>ANY</option>
+                  <option>BE/Btech</option>
+                  <option>B.Sc</option>
+                  <option>M.Tech</option>
+                  <option>MBA</option>
+                </select>
+            </label>
+            <label>
+              <span>Branch</span>
+              <select>
+                  <option>CSE</option>
+                  <option>IT</option>
+                  <option>ECE</option>
+                  <option>EEE</option>
+                </select>
+            </label>
+            <label>
+                <span>Percentage</span>
+                
+                <input type="range" name="rangeInput" min="0" max="100" onchange="updateTextInput(this.value);">
+                <input type="text" id="textInput" value="">
+              </label>
+          </div>
+          <br><br><br><br>
+          <h2>Other Filter</h2>
+         
+            <div>
+                <label>
+                    <span>Batch : </span>
+                    <select>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Sort By : </span>
+                    <select>
+                      <option>Select Sorting Order..</option>
+                    </select>
+                  </label>
+                  </div>
+                  <br><br><br><br>
+                  <div>
+            <label>
+              <span>Gender</span>
+              <select>
+                <option>No Preference</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </label>
+            <label>
+                <span>Eligible for Job</span>
+                <select>
+                    <option>YES</option>
+                    <option>NO</option>
+                  </select>
+              </label>
+            </div>
+            <br><br><br><br>
+            <div>
+              <label>
+                  <span>Jobs in hand :</span>
+                  <select>
+                      <option>No Preference</option>
+                <option>1</option>
+                <option>2</option>
+                    </select>
+                </label>
+          </div>
+          <br><br><br><br>
+          <h2>Advance Filter</h2>
+            
+            <div>
+            <label>
+              <span>10<sup>th</sup> %</span>
+              <input type="text" id="10th percentage" />
+            </label>
+            <label>
+                <span>12<sup>th</sup> %</span>
+                <input type="text" id="12th percentage" />
+              </label>
+              </div>
+              <br><br><br><br>
+              <div>
+              <label>
+                  <span>Backlogs</span>
+                  <input type="text" id="Backlogs" />
+                </label>
+          </div>
+          </form>   
+          <br><br><br><br><br>
+          <button class="submitbtn" type = "submit" id = "submitskill" name = "submitskill" value = "Submit" onclick="myskill()" > Search </button><br><br>
+      </div>
+    </div>
+  </div>
