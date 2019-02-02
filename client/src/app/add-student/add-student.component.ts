@@ -35,7 +35,7 @@ export class AddStudentComponent{
   }
 
   private save(): void {
-    console.log(this.student);
+    console.info(this.student);
     this.studentService.addStudent(this.student)
         .subscribe();
   }

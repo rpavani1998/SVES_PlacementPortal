@@ -23,7 +23,7 @@ export class StudentDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = '15WH1A1234';
+    const id = this.route.snapshot.params.id;
     this.studentService.getStudent(id)
       .subscribe(student => this.student = student);
   }
@@ -36,7 +36,7 @@ export class StudentDetailsComponent implements OnInit {
 
   delete(): void {
     this.submitted = true;
-    this.studentService.deleteStudent(this.student.id)
+    this.studentService.deleteStudent(this.student.rollno)
         .subscribe(result => this.message = "Student Deleted Successfully!");
   }
 

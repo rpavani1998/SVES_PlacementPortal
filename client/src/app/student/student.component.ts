@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../student';
 import { StudentService } from '../student.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -23,8 +24,8 @@ export class StudentComponent  implements OnInit {
     return this.studentService.getStudents()
                .subscribe(
                  students => {
-                  console.log(students);
-                  this.students = students
+                   console.log(students)
+                   this.students = students;
                  }
                 );
  }
