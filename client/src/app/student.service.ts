@@ -30,12 +30,12 @@ export class StudentService {
   }
 
   addStudent (student: Student): Observable<Student> {
-    console.log(student)
+    console.log(this.http.post<Student>(this.studentsUrl, student, httpOptions))
     return this.http.post<Student>(this.studentsUrl, student, httpOptions);
   }
 
   deleteStudent (student: Student | string): Observable<Student> {
-    const id = typeof student === 'string' ? student : student.rollno;
+    const id = typeof student === 'string' ? student : student.roll_no;
     const url = `${this.studentsUrl}/${id}`;
 
     return this.http.delete<Student>(url, httpOptions);

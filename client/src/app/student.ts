@@ -1,5 +1,5 @@
 export class Student {
-    rollno: string;
-    firstname: string;
-    lastname: string;
+    roll_no: string;
+    first_name: string;
+    last_name: string;
 }

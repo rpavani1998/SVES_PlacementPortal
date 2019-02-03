@@ -36,7 +36,7 @@ export class StudentDetailsComponent implements OnInit {
 
   delete(): void {
     this.submitted = true;
-    this.studentService.deleteStudent(this.student.rollno)
+    this.studentService.deleteStudent(this.student.roll_no)
         .subscribe(result => this.message = "Student Deleted Successfully!");
   }
 
