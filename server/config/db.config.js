@@ -22,5 +22,6 @@ const db = {};
 db.sequelize = sequelize;
 
 db.students = require('../models/student.model.js')(sequelize, Sequelize);
+db.addjobpost = require('../models/addjobpost.model.js')(sequelize, Sequelize);
 module.exports = db;
   

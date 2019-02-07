@@ -8,6 +8,7 @@ exports.create = (req, res) => {
 		res.json(result);
 	});
 };
+
  
 
 exports.findAll = (req, res) => {
