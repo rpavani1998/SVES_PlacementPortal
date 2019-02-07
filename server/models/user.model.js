@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.STRING,
 			primaryKey: true
 	  },
-	 user_type: {
+	 user_type_id: {
 			type: Sequelize.STRING
       },
      college_id: {
@@ -20,10 +20,10 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.STRING
      },
      sms_notification_active: {
-         type: Sequelize.Boolean
+         type: Sequelize.BOOLEAN
      },
      email_notification_active: {
-        type: Sequelize.Boolean
+        type: Sequelize.BOOLEAN
     },
     user_image: {
         type: Sequelize.STRING
