@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from '../student/student.component';
 import { AddStudentComponent } from '../add-student/add-student.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
+import { UserLoginComponent } from '../user-login/user-login.component';
 
 const routes: Routes = [
    { 
@@ -18,8 +19,12 @@ const routes: Routes = [
      component: StudentDetailsComponent 
    },
    { 
+    path: 'login', 
+    component: UserLoginComponent
+  },
+   { 
      path: '', 
-     redirectTo: 'students', 
+     redirectTo: 'login', 
      pathMatch: 'full'
    }, 
 ];
