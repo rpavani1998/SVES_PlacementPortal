@@ -12,7 +12,7 @@ exports.create = (req, res) => {
 
 exports.authenticate = (req, res) => {
     console.log("id", req.body.id, req.body.password)
-    User.findByPk(req.body.id).then
+    User.findByPk().then
     .then(User => {
         if (!User) {
             res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
