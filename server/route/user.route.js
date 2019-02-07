@@ -8,7 +8,7 @@ module.exports = function(app) {
  
     app.get('/api/users/:userId', users.findById);
 
-    app.get('/api/users/login', users.authenticate);
+    app.post('/api/users/login/', users.authenticate);
  
     app.put('/api/users', users.update);
  

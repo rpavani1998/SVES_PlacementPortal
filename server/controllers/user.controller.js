@@ -12,25 +12,21 @@ exports.create = (req, res) => {
 
 exports.authenticate = (req, res) => {
     console.log("id", req.body.id, req.body.password)
-    User.findByPk().then
-    .then(User => {
-        if (!User) {
+    User.findByPk(req.body.id)
+    .then(user => {
+				console.log(user)
+        if (!user) {
             res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
           } else {
-            // check if password matches
-            User.comparePassword(req.body.password, function (err, isMatch) {
-              if (isMatch && !err) {
-                // if user is found and password is right create a token
-                var token = jwt.sign(User.toJSON(), config.secret);
-                // return the information including token as JSON
-                res.json({success: true, token: 'JWT ' + token});
+						// check if password matches
+						if (md5(req.body.password) == user.password) {
+                res.json({success: true});
               } else {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
               }
-            });
-        }
-    });
-};
+            }
+				});
+			}
 
 exports.findAll = (req, res) => {
 	User.findAll().then(users => {
