@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from '../student/student.component';
 import { AddStudentComponent } from '../add-student/add-student.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
-import { AddjobpostComponent } from '../addjobpost/addjobpost.component';
+import { AdminplacementComponent } from '../adminplacement/adminplacement.component';
 
 const routes: Routes = [
    { 
@@ -20,7 +20,7 @@ const routes: Routes = [
    },
    {
      path : 'addjob',
-     component: AddjobpostComponent,
+     component : AdminplacementComponent 
    },
    { 
      path: '', 
