@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from './student';
+import { EducationDetails } from './education-details';
+import { ExperienceDetails } from './experience-details';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -14,7 +16,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class StudentService {
-  private studentsUrl = 'http://localhost:4000/api/students';  // URL to web api
+  private studentsUrl = 'http://localhost:4000/api/students'; 
+  private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
   constructor( 
     private http: HttpClient
   ) { }
@@ -29,12 +32,20 @@ export class StudentService {
     return this.http.get<Student>(url);
   }
 
-  addStudent (student: Student): Observable<Student> {
+  addStudentProfile (student: Student): Observable<Student> {
     console.log(this.http.post<Student>(this.studentsUrl, student, httpOptions))
     return this.http.post<Student>(this.studentsUrl, student, httpOptions);
   }
 
-  deleteStudent (student: Student | string): Observable<Student> {
+  addStudentEducationDetails (educationDetails: EducationDetails): Observable<EducationDetails> {
+    return this.http.post<EducationDetails>(this.educationDetailsUrl, educationDetails);
+  }
+
+  addStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<ExperienceDetails> {
+    return this.http.post<ExperienceDetails>(this.educationDetailsUrl, experienceDetails);
+  }
+
+  deleteStudent (student: Student | string): Observable<Student > {
     const id = typeof student === 'string' ? student : student.roll_no;
     const url = `${this.studentsUrl}/${id}`;
 

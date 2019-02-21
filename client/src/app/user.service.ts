@@ -10,11 +10,21 @@ const httpOptions = {
   })
 };
 
+interface isLoggedIn {
+  status: boolean
+}
+
+interface logoutStatus {
+  success: boolean
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private usersUrl = 'http://localhost:4000/api/users';  // URL to web api
+  
   constructor( 
     private http: HttpClient
   ) { }
@@ -50,5 +60,15 @@ export class UserService {
 
   updateUser (User: User): Observable<any> {
     return this.http.put(this.usersUrl, User, httpOptions);
+  }
+
+  isLoggedIn(): Observable<isLoggedIn> {
+    const url = `${this.usersUrl}/isLoggedIn`;
+    return this.http.get<isLoggedIn>(url)
+  }
+
+  logout() {
+    const url = `${this.usersUrl}/logout`;
+    return this.http.get<logoutStatus>(url)
   }
 }
