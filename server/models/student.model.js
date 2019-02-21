@@ -9,7 +9,20 @@ module.exports = (sequelize, Sequelize) => {
 	  },
 	  last_name: {
 			type: Sequelize.STRING
+		},
+		branch: {
+			type: Sequelize.STRING
+		},
+		dob: {
+			type: Sequelize.DATE
+		},
+		backlogs: {
+			type: Sequelize.STRING
+		},
+		aadhar_no: {
+			type: Sequelize.STRING
 		}
+		
 	},{
 			timestamps: false
 	});
