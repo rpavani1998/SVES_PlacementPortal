@@ -12,6 +12,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { AddStudentComponent } from './add-student/add-student.component';
 import { AdminplacementComponent } from './adminplacement/adminplacement.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,12 +20,15 @@ import { AdminplacementComponent } from './adminplacement/adminplacement.compone
     StudentDetailsComponent,
     AddStudentComponent,
     AdminplacementComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule
+  ],
+  exports : [
+    AdminplacementComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

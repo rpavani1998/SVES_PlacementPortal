@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="http:/code.jquery.com/jquery-1.9.1.js"></script>
+<script src = "assets/adddegree.js" ></script>
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<script>
+  $(function () {
+    $(".repeat").on('click', function (e) {
+        e.preventDefault();
+        var $self = $(this);
+        $self.before($self.prev('table').clone());
+        //$self.remove();
+    });
+});
+</script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+</style>
+<body>
+
+<form id="regForm" #studentregForm = "gnForm">
+  <h1>Register:</h1>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab"><h3><b>Profile:</b></h3><br><br>
+    <div class="form-group">
+      <label>Roll Number</label>
+        <input type="text" oninput="this.className = ''" class="form-control" id="roll_no" placeholder="Roll Number" 
+        required
+        [(ngModel)]="student_profile.roll_no" name="roll_no" #roll_no="ngModel">
+        <div [hidden]="roll_no.valid || roll_no.pristine"
+             class="alert alert-danger">
+           Roll Number is required
+        </div>
+      </div><br><br>
+
+    <div class="form-group">
+        <label>First Name</label>  
+      <input type="text" oninput="this.className = ''" class="form-control" id="first_name" placeholder="First Name" 
+        required
+        [(ngModel)]="student_profile.first_name" name="first_name" #first_name="ngModel">
+        <div [hidden]="first_name.valid || first_name.pristine"
+             class="alert alert-danger">
+           First Name is required
+        </div>
+      </div><br><br>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" oninput="this.className = ''" class="form-control" id="last_name" placeholder="Last Name" 
+        required
+        [(ngModel)]="student_profile.last_name" name="last_name" #last_name="ngModel">
+        <div [hidden]="last_name.valid || last_name.pristine"
+             class="alert alert-danger">
+           Last Name is required
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+          <label>Branch</label>
+            <input type="text" oninput="this.className = ''" class="form-control" id="branch" placeholder="Branch" 
+            required
+            [(ngModel)]="student_profile.branch" name="branch" #branch="ngModel">
+            <div [hidden]="branch.valid || branch.pristine"
+                 class="alert alert-danger">
+               Branch is required
+            </div>
+          </div><br><br>
+
+    <div class="form-group">
+        <label>Date Of Birth </label>
+            <input type="date" oninput="this.className = ''" class="form-control" id="dob" placeholder="Date Of Birth" 
+            required
+            [(ngModel)]="student_profile.dob" name="dob" #dob="ngModel">
+            <div [hidden]="dob.valid || dob.pristine"
+                 class="alert alert-danger">
+               DOB is required
+            </div>
+          </div><br><br>
+
+    <div class="form-group">
+        <label>Backlogs</label>
+            <input type="text" oninput="this.className = ''" class="form-control" id="backlogs" placeholder="Backlogs" 
+            required
+            [(ngModel)]="student_profile.backlogs" name="backlogs" #backlogs="ngModel">
+            <div [hidden]="backlogs.valid || backlogs.pristine"
+                 class="alert alert-danger">
+               Backlogs is required
+            </div>
+          </div><br><br>
+
+    <div class="form-group">
+        <label>Aadhar Number</label>
+            <input type="text" oninput="this.className = ''" class="form-control" id="aadhar_no" placeholder="Aadhar Number" 
+            required
+            [(ngModel)]="student_profile.aadhar_no" name="aadhar_no" #aadhar_no="ngModel">
+            <div [hidden]="aadhar_no.valid || aadhar_no.pristine"
+                 class="alert alert-danger">
+               Aadhar Number is required
+            </div>
+          </div><br><br>
+    
+    <div class="form-group">
+        <label>Pan Number</label>
+            <input type="text" oninput="this.className = ''" class="form-control" id="pan_no" placeholder="Pan Number" 
+            required
+            [(ngModel)]="student_profile.pan_no" name="pan_no" #pan_no="ngModel">
+            <div [hidden]="pan_no.valid || pan_no.pristine"
+                 class="alert alert-danger">
+               Pan Number is required
+            </div>
+          </div><br><br>
+  </div>
+
+
+      
+    <div class="tab">
+        <div class="repeatable">
+            <table>
+                <caption><h3><b>Education : <b></h3></caption>
+                <tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Roll Number</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="roll_no" placeholder="Roll Number" 
+                            required
+                            [(ngModel)]="education.roll_no" name="roll_no" #roll_no="ngModel">
+                            <div [hidden]="roll_no.valid || roll_no.pristine"
+                                 class="alert alert-danger">
+                               Roll Number is required
+                            </div>
+                          </div> <br><br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Degree</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="certificate_degree_name" placeholder="Degree(Ex: 10th , 12th , B.Tech)" 
+                            required
+                            [(ngModel)]="education.certificate_degree_name" name="certificate_degree_name" #certificate_degree_name="ngModel">
+                            <div [hidden]="certificate_degree_name.valid || certificate_degree_name.pristine"
+                                 class="alert alert-danger">
+                               Degree is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Major</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="major" placeholder="major" 
+                            required
+                            [(ngModel)]="education.major" name="major" #major="ngModel">
+                            <div [hidden]="major.valid || major.pristine"
+                                 class="alert alert-danger">
+                               Major is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Institution</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="institute_university_name" placeholder="Institute Name" 
+                            required
+                            [(ngModel)]="education.institute_university_name" name="institute_university_name" #institute_university_name="ngModel">
+                            <div [hidden]="institute_university_name.valid || institute_university_name.pristine"
+                                 class="alert alert-danger">
+                               Institute is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Board</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="board" placeholder="Board" 
+                            required
+                            [(ngModel)]="education.board" name="board" #board="ngModel">
+                            <div [hidden]="board.valid || board.pristine"
+                                 class="alert alert-danger">
+                               Board is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Joining Date</label>
+                            <input type="date" oninput="this.className = ''" class="form-control" id="start_date" placeholder="Start Date" 
+                            required
+                            [(ngModel)]="education.start_date" name="start_date" #start_date="ngModel">
+                            <div [hidden]="start_date.valid || start_date.pristine"
+                                 class="alert alert-danger">
+                               Start Date is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Completion Date</label>
+                            <input type="date" oninput="this.className = ''" class="form-control" id="completion_date" placeholder="Completion Date" 
+                            required
+                            [(ngModel)]="education.completion_date" name="completion_date" #completion_date="ngModel">
+                            <div [hidden]="completion_date.valid || completion_date.pristine"
+                                 class="alert alert-danger">
+                               Completion Date is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Percentage</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="percentage" placeholder="Percentage" 
+                            required
+                            [(ngModel)]="education.percentage" name="percentage" #percentage="ngModel">
+                            <div [hidden]="percentage.valid || percentage.pristine"
+                                 class="alert alert-danger">
+                               Percentage is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>CGPA</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="cgpa" placeholder="CGPA" 
+                            required
+                            [(ngModel)]="education.cgpa" name="cgpa" #cgpa="ngModel">
+                            <div [hidden]="cgpa.valid || cgpa.pristine"
+                                 class="alert alert-danger">
+                               CGPA is required
+                            </div>
+                          </div><br><br>
+                    </td>
+                </tr>
+            </table>
+            <button class="repeat">Add Another Degree</button>
+        </div>
+        
+  </div>
+
+  <div class="tab">
+      <div class="repeatable">
+          <table>
+              <caption><h3><b>Experience : <b></h3></caption>
+              <tr>
+              <tr>
+                  <td>
+                      <div class="form-group">
+                          <label>Roll Number</label>
+                          <input type="text" oninput="this.className = ''" class="form-control" id="roll_no" placeholder="Roll Number" 
+                          required
+                          [(ngModel)]="experience.roll_no" name="roll_no" #roll_no="ngModel">
+                          <div [hidden]="roll_no.valid || roll_no.pristine"
+                               class="alert alert-danger">
+                             Roll Number is required
+                          </div>
+                        </div> <br><br>
+                  </td>
+                </tr>
+              <tr>
+                  <tr>
+                      <td>
+                          <div class="form-group">
+                              <label>Joining Date</label>
+                              <input type="date" oninput="this.className = ''" class="form-control" id="start_date" placeholder="Start Date" 
+                              required
+                              [(ngModel)]="experience.start_date" name="start_date" #start_date="ngModel">
+                              <div [hidden]="start_date.valid || start_date.pristine"
+                                   class="alert alert-danger">
+                                 Start Date is required
+                              </div>
+                            </div><br><br>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <div class="form-group">
+                              <label>Completion Date</label>
+                              <input type="date" oninput="this.className = ''" class="form-control" id="completion_date" placeholder="Completion Date" 
+                              required
+                              [(ngModel)]="experience.completion_date" name="completion_date" #completion_date="ngModel">
+                              <div [hidden]="completion_date.valid || completion_date.pristine"
+                                   class="alert alert-danger">
+                                 Completion Date is required
+                              </div>
+                            </div><br><br>
+                      </td>
+                  </tr>
+                  <td>
+                      <div class="form-group">
+                          <label>Job Title</label>
+                          <input type="text" oninput="this.className = ''" class="form-control" id="job_title" placeholder="Job Title" 
+                          required
+                          [(ngModel)]="experience.job_title" name="job_title" #job_title="ngModel">
+                          <div [hidden]="job_title.valid || job_title.pristine"
+                               class="alert alert-danger">
+                             Job Title is required
+                          </div>
+                        </div><br><br>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="form-group">
+                          <label>Company Name</label>
+                          <input type="text" oninput="this.className = ''" class="form-control" id="institute_university_name" placeholder="Institute Name" 
+                          required
+                          [(ngModel)]="experience.company_name" name="company_name" #company_name="ngModel">
+                          <div [hidden]="company_name.valid || company_name.pristine"
+                               class="alert alert-danger">
+                             Company Name is required
+                          </div>
+                        </div><br><br>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <div class="form-group">
+                          <label>Job Location</label>
+                          <input type="text" oninput="this.className = ''" class="form-control" id="job_location_city" placeholder="Job Location" 
+                          required
+                          [(ngModel)]="experience.job_location_city" name="job_location_city" #job_location_city="ngModel">
+                          <div [hidden]="job_location_city.valid || job_location_city.pristine"
+                               class="alert alert-danger">
+                             Job Location is required
+                          </div>
+                        </div><br><br>
+                  </td>
+              </tr>
+              
+              <tr>
+                  <td>
+                      <div class="form-group">
+                          <label>Job Description</label>
+                          <input type="text" oninput="this.className = ''" class="form-control" id="description" placeholder="Description" 
+                          required
+                          [(ngModel)]="experience.description" name="description" #description="ngModel">
+                          <div [hidden]="description.valid || description.pristine"
+                               class="alert alert-danger">
+                             Job Description is required
+                          </div>
+                        </div><br><br>
+                  </td>
+              </tr>
+
+              <tr>
+                  <td>
+                      <div class="form-group">
+                          <input type="checkbox" oninput="this.className = ''" class="form-control" id="is_current_job" 
+                          required
+                          [(ngModel)]="experience.is_current_job" name="is_current_job" #is_current_job="ngModel"> Currently Working
+                          <div [hidden]="is_current_job.valid || is_current_job.pristine"
+                              >
+                          </div>
+                        </div>
+                  </td>
+              </tr>
+          </table>
+          
+          <button class="repeat">Add Another Experience</button>
+      </div>
+      
+    </div>
+
+    <div class="tab">
+        <div class="repeatable">
+            <table>
+                <caption><h3><b>Skill Set : <b></h3></caption>
+                <tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label>Roll Number</label>
+                            <input type="text" oninput="this.className = ''" class="form-control" id="roll_no" placeholder="Roll Number" 
+                            required
+                            [(ngModel)]="student_skill_set.roll_no" name="roll_no" #roll_no="ngModel">
+                            <div [hidden]="roll_no.valid || roll_no.pristine"
+                                 class="alert alert-danger">
+                               Roll Number is required
+                            </div>
+                          </div> <br><br>
+                    </td>
+                  </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label>Skill Set ID</label>
+                                <input type="text" oninput="this.className = ''" class="form-control" id="skill_set_id" placeholder="Skill set ID" 
+                                required
+                                [(ngModel)]="student_skill_set.skill_set_id" name="skill_set_id" #skill_set_id="ngModel">
+                                <div [hidden]="skill_set_id.valid || skill_set_id.pristine"
+                                     class="alert alert-danger">
+                                   Skill Set ID is required
+                                </div>
+                              </div><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label>Skill Level</label>
+                                <input type="text" oninput="this.className = ''" class="form-control" id="skill_level" placeholder="Skill Level" 
+                                required
+                                [(ngModel)]="student_skill_set.skill_level" name="skill_level" #skill_level="ngModel">
+                                <div [hidden]="skill_level.valid || skill_level.pristine"
+                                     class="alert alert-danger">
+                                   Skill Set level is required
+                                </div>
+                              </div>
+                        </td>
+                    </tr>
+
+            </table>
+            <button class="repeat">Add Another Experience</button>
+        </div>
+        
+  </div>
+  
+
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </div>
+      
+</form>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AddJob } from './addjob';
+import { Company } from './company';
 
 
 const httpOptions = {
@@ -29,5 +30,13 @@ export class AddjobService {
     return this.http.post<AddJob>(this.addjobUrl, job, httpOptions);
   }
 
+  getJob (): Observable<AddJob[]> {
+    return this.http.get<AddJob[]>(this.addjobUrl);
+  }
+
+  // getJobs(id: string): Observable<AddJob> {
+  //   const url = `${this.addjobUrl}/${id}`;
+  //   return this.http.get<AddJob>(url);
+  // }
 
 }

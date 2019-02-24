@@ -26,5 +26,10 @@ export class CompanyService {
     console.log(this.http.post<Company>(this.companyUrl, company, httpOptions))
     return this.http.post<Company>(this.companyUrl, company, httpOptions);
   }
+  
+  getCompany (): Observable<Company[]> {
+    console.log((this.companyUrl));
+    return this.http.get<Company[]>(this.companyUrl);
+  }
 
 }

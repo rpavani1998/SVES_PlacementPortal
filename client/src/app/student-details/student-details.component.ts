@@ -25,8 +25,12 @@ export class StudentDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
     this.studentService.getStudent(id)
-      .subscribe(student => this.student = student);
+      .subscribe(student =>  {
+        console.info( "Student Details Data : " ,  student.roll_no);
+        this.student = student
+      });
   }
+  
 
   update(): void {
     this.submitted = true;
