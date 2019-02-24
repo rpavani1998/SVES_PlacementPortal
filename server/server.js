@@ -16,6 +16,10 @@ app.use(cors(corsOptions))
 
 require('./route/student.route.js')(app);
 require('./route/user.route.js')(app);
+require('./route/company.route.js')(app);
+require('./route/addjob.route.js')(app);  
+require('./route/jobtype.route.js')(app);  
+
 
 const db = require('./config/db.config.js');
 

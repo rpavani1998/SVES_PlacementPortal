@@ -1,6 +1,7 @@
 const db = require('../config/db.config.js');
 const Student = db.students;
 
+
 // Post a Student
 exports.create = (req, res) => {	
 	let student = req.body;
@@ -8,8 +9,6 @@ exports.create = (req, res) => {
 		res.json(result);
 	});
 };
-
- 
 
 exports.findAll = (req, res) => {
 	Student.findAll().then(students => {
@@ -24,6 +23,8 @@ exports.findById = (req, res) => {
 		res.json(student);
 	})
 };
+
+
  
 // Update a Student
 exports.update = (req, res) => {
