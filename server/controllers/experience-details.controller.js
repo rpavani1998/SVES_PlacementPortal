@@ -3,8 +3,6 @@ const ExperienceDetails = db.experience_details;
 
 // Post a ExperienceDetails
 exports.create = (req, res) => {
-	req.body.roll_no = req.session.user	
-	console.log(req.body, req.session.user)
 	let experience_details = req.body;
 	ExperienceDetails.create(experience_details).then(result => {	
 		res.json(result);
@@ -13,7 +11,7 @@ exports.create = (req, res) => {
  
 
 exports.findAll = (req, res) => {
-	ExperienceDetails.findAll().then(experience_details => {
+	ExperienceDetails.findAll({where:{roll_no:req.params.id}}).then(experience_details => {
 		console.log(experience_details);
 	  res.json(experience_details);
 	});
@@ -21,8 +19,9 @@ exports.findAll = (req, res) => {
 
 // Find a ExperienceDetails by Id
 exports.findById = (req, res) => {	
+	console.log("Params", req.params)
 	ExperienceDetails.findById(req.params.id).then(experience_detail => {
-		res.json(experience_detail);
+		res.json(experience_detail)
 	})
 };
  
@@ -30,19 +29,18 @@ exports.findById = (req, res) => {
 exports.update = (req, res) => {
 	let experience_detail = req.body;
 	console.log("Update",experience_detail)
-	let id = req.body.roll_no;
 	ExperienceDetails.update(experience_detail, 
-					 { where: {roll_no: id} }
+					 { where: {roll_no: req.body.roll_no, start_date: req.body.start_date, end_date: req.body.end_date} }
 				   ).then(() => {
-						 res.status(200).json({msg:"updated successfully a experience_detail with id = " + id});
+						 res.status(200).json({msg:"updated successfully a experience_detail with id = " + req.body.roll_no+ " "+ req.body.start_date + " " + req.body.end_date});
 				   });	
 };
  
 exports.delete = (req, res) => {
 	const id = req.params.experience_detailId;
 	ExperienceDetails.destroy({
-	  where: { roll_no: id }
+	  where: { where: {roll_no: req.body.roll_no, start_date: req.body.start_date, end_date: req.body.end_date} }
 	}).then(() => {
-	  res.status(200).json({msg:'deleted successfully a experience_detail with id = ' + id});
+	  res.status(200).json({msg:'deleted successfully a experience_detail with id = ' + req.body.roll_no+ " "+ req.body.start_date + " " + req.body.end_date});
 	});
 };

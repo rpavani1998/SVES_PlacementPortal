@@ -8,10 +8,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN
         },
         start_date: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
-        completion_date: {
-            type: Sequelize.DATE
+        end_date: {
+            type: Sequelize.DATEONLY
         },
         job_title: {
             type: Sequelize.STRING

@@ -13,17 +13,17 @@ module.exports = (sequelize, Sequelize) => {
 		institute_university_name: {
 			type: Sequelize.STRING
 		},
-		start_date: {
-			type: Sequelize.DATE
-		},
-		completion_date: {
-			type: Sequelize.DATE
+		passing_year:{
+			type:Sequelize.INTEGER
 		},
 		percentage: {
 			type: Sequelize.FLOAT
 		},
 		cgpa: {
 			type: Sequelize.FLOAT
+		},
+		proof_document: {
+			type: Sequelize.BLOB('long')
 		}
 
 	}, {

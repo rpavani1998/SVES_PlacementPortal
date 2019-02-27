@@ -38,7 +38,7 @@ exports.update = (req, res) => {
  
 // Delete a Student by Id
 exports.delete = (req, res) => {
-	const id = req.params.studentId;
+	const id = req.params.id;
 	Student.destroy({
 	  where: { roll_no: id }
 	}).then(() => {

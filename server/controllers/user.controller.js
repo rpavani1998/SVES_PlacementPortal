@@ -75,7 +75,7 @@ exports.update = (req, res) => {
 
 // Delete a User by Id
 exports.delete = (req, res) => {
-	const id = req.params.userId;
+	const id = req.params.id;
 	User.destroy({
 		where: { roll_no: id }
 	}).then(() => {

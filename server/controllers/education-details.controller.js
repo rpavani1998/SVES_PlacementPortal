@@ -3,9 +3,6 @@ const EducationDetails = db.education_details;
 
 // Post a EducationDetails
 exports.create = (req, res) => {
-	console.log("INNNNNNNNNN")
-	req.body.roll_no = req.session.user	
-	console.log(req.body, req.session.user)
 	let education_details = req.body;
 	EducationDetails.create(education_details).then(result => {	
 		res.json(result);
@@ -14,7 +11,7 @@ exports.create = (req, res) => {
  
 
 exports.findAll = (req, res) => {
-	EducationDetails.findAll().then(education_details => {
+	EducationDetails.findAll({where:{roll_no:req.params.id}}).then(education_details => {
 		console.log(education_details);
 	  res.json(education_details);
 	});
@@ -22,7 +19,7 @@ exports.findAll = (req, res) => {
 
 // Find a EducationDetails by Id
 exports.findById = (req, res) => {	
-	EducationDetails.findById(req.params.education_detailId).then(education_detail => {
+	EducationDetails.findById(req.params.id).then(education_detail => {
 		res.json(education_detail);
 	})
 };
@@ -31,19 +28,19 @@ exports.findById = (req, res) => {
 exports.update = (req, res) => {
 	let education_detail = req.body;
 	console.log("Update",education_detail)
-	let id = req.body.roll_no;
 	EducationDetails.update(education_detail, 
-					 { where: {roll_no: id} }
+					 { where: {roll_no: req.body.roll_no, certificate_degree_name: req.body.certificate_degree_name , major: req.body.major
+					} }
 				   ).then(() => {
-						 res.status(200).json({msg:"updated successfully a education_detail with id = " + id});
+						 res.status(200).json({msg:"updated successfully a education_detail with id = " + req.body.roll_no + " "+ req.body.certificate_degree_name + " " + req.body.major});
 				   });	
 };
  
 exports.delete = (req, res) => {
-	const id = req.params.education_detailId;
+	const id = req.params.id;
 	EducationDetails.destroy({
-	  where: { roll_no: id }
+	  where: { roll_no: req.body.roll_no, certificate_degree_name: req.body.certificate_degree_name , major: req.body.major }
 	}).then(() => {
-	  res.status(200).json({msg:'deleted successfully a education_detail with id = ' + id});
+	  res.status(200).json({msg:'deleted successfully a education_detail with id = ' + req.body.roll_no + " "+ req.body.certificate_degree_name + " " + req.body.major});
 	});
 };
