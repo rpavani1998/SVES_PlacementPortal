@@ -23,7 +23,7 @@ app.use(cors(corsOptions))
 
 require('./route/student.route.js')(app);
 require('./route/user.route.js')(app);
-
+require('./route/utils.route')(app);
 var server = app.listen(4000, function () {
  
     let host = server.address().address

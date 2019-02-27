@@ -16,182 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `auth_group`
+-- Table structure for table `branches`
 --
 
-DROP TABLE IF EXISTS `auth_group`;
+DROP TABLE IF EXISTS `branches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+CREATE TABLE `branches` (
+  `id` varchar(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `branch_name` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth_group`
+-- Dumping data for table `branches`
 --
 
-LOCK TABLES `auth_group` WRITE;
-/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+LOCK TABLES `branches` WRITE;
+/*!40000 ALTER TABLE `branches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `branches` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `auth_group_permissions`
+-- Table structure for table `colleges`
 --
 
-DROP TABLE IF EXISTS `auth_group_permissions`;
+DROP TABLE IF EXISTS `colleges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_group_permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
-  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
-  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_group_permissions`
---
-
-LOCK TABLES `auth_group_permissions` WRITE;
-/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `auth_permission`
---
-
-DROP TABLE IF EXISTS `auth_permission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
-  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_permission`
---
-
-LOCK TABLES `auth_permission` WRITE;
-/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session');
-/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `auth_user`
---
-
-DROP TABLE IF EXISTS `auth_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_login` datetime(6) DEFAULT NULL,
-  `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `first_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(254) COLLATE utf8mb4_general_ci NOT NULL,
-  `is_staff` tinyint(1) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `date_joined` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_user`
---
-
-LOCK TABLES `auth_user` WRITE;
-/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `auth_user_groups`
---
-
-DROP TABLE IF EXISTS `auth_user_groups`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_user_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
-  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
-  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
-  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_user_groups`
---
-
-LOCK TABLES `auth_user_groups` WRITE;
-/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `auth_user_user_permissions`
---
-
-DROP TABLE IF EXISTS `auth_user_user_permissions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `auth_user_user_permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
-  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
-  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `auth_user_user_permissions`
---
-
-LOCK TABLES `auth_user_user_permissions` WRITE;
-/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `college`
---
-
-DROP TABLE IF EXISTS `college`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `college` (
+CREATE TABLE `colleges` (
   `id` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `college_name` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -199,23 +52,23 @@ CREATE TABLE `college` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `college`
+-- Dumping data for table `colleges`
 --
 
-LOCK TABLES `college` WRITE;
-/*!40000 ALTER TABLE `college` DISABLE KEYS */;
-INSERT INTO `college` VALUES ('BVRW','BVRIT Hyderabad College of Engineering for Women');
-/*!40000 ALTER TABLE `college` ENABLE KEYS */;
+LOCK TABLES `colleges` WRITE;
+/*!40000 ALTER TABLE `colleges` DISABLE KEYS */;
+INSERT INTO `colleges` VALUES ('BVRW','BVRIT Hyderabad College of Engineering for Women');
+/*!40000 ALTER TABLE `colleges` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `company`
+-- Table structure for table `companies`
 --
 
-DROP TABLE IF EXISTS `company`;
+DROP TABLE IF EXISTS `companies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `company` (
+CREATE TABLE `companies` (
   `id` int(11) NOT NULL,
   `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `profile_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
@@ -227,132 +80,23 @@ CREATE TABLE `company` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `company`
+-- Dumping data for table `companies`
 --
 
-LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+LOCK TABLES `companies` WRITE;
+/*!40000 ALTER TABLE `companies` DISABLE KEYS */;
+INSERT INTO `companies` VALUES (1,'fcgvhb',NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `companies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `django_admin_log`
+-- Table structure for table `education_details`
 --
 
-DROP TABLE IF EXISTS `django_admin_log`;
+DROP TABLE IF EXISTS `education_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `django_admin_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `action_time` datetime(6) NOT NULL,
-  `object_id` longtext COLLATE utf8mb4_general_ci,
-  `object_repr` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `action_flag` smallint(5) unsigned NOT NULL,
-  `change_message` longtext COLLATE utf8mb4_general_ci NOT NULL,
-  `content_type_id` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
-  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
-  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `django_admin_log`
---
-
-LOCK TABLES `django_admin_log` WRITE;
-/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `django_content_type`
---
-
-DROP TABLE IF EXISTS `django_content_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `django_content_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `model` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `django_content_type`
---
-
-LOCK TABLES `django_content_type` WRITE;
-/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(6,'sessions','session');
-/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `django_migrations`
---
-
-DROP TABLE IF EXISTS `django_migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `django_migrations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `applied` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `django_migrations`
---
-
-LOCK TABLES `django_migrations` WRITE;
-/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2019-01-28 11:45:38.440326'),(2,'auth','0001_initial','2019-01-28 11:45:38.923238'),(3,'admin','0001_initial','2019-01-28 11:45:39.031324'),(4,'admin','0002_logentry_remove_auto_add','2019-01-28 11:45:39.043445'),(5,'admin','0003_logentry_add_action_flag_choices','2019-01-28 11:45:39.053914'),(6,'contenttypes','0002_remove_content_type_name','2019-01-28 11:45:39.119530'),(7,'auth','0002_alter_permission_name_max_length','2019-01-28 11:45:39.157377'),(8,'auth','0003_alter_user_email_max_length','2019-01-28 11:45:39.185204'),(9,'auth','0004_alter_user_username_opts','2019-01-28 11:45:39.195702'),(10,'auth','0005_alter_user_last_login_null','2019-01-28 11:45:39.240012'),(11,'auth','0006_require_contenttypes_0002','2019-01-28 11:45:39.243902'),(12,'auth','0007_alter_validators_add_error_messages','2019-01-28 11:45:39.255303'),(13,'auth','0008_alter_user_username_max_length','2019-01-28 11:45:39.312448'),(14,'auth','0009_alter_user_last_name_max_length','2019-01-28 11:45:39.360491'),(15,'sessions','0001_initial','2019-01-28 11:45:39.386993');
-/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `django_session`
---
-
-DROP TABLE IF EXISTS `django_session`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `django_session` (
-  `session_key` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
-  `session_data` longtext COLLATE utf8mb4_general_ci NOT NULL,
-  `expire_date` datetime(6) NOT NULL,
-  PRIMARY KEY (`session_key`),
-  KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `django_session`
---
-
-LOCK TABLES `django_session` WRITE;
-/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `education_detail`
---
-
-DROP TABLE IF EXISTS `education_detail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `education_detail` (
+CREATE TABLE `education_details` (
   `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `certificate_degree_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `major` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -360,31 +104,31 @@ CREATE TABLE `education_detail` (
   `board` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `completion_date` date DEFAULT NULL,
-  `percentage` decimal(2,2) DEFAULT NULL,
-  `cgpa` decimal(1,1) DEFAULT NULL,
+  `percentage` decimal(10,0) DEFAULT NULL,
+  `cgpa` decimal(10,0) DEFAULT NULL,
   `proof_document` blob,
   PRIMARY KEY (`roll_no`,`certificate_degree_name`,`major`),
-  CONSTRAINT `education_detail_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`)
+  CONSTRAINT `education_details_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `education_detail`
+-- Dumping data for table `education_details`
 --
 
-LOCK TABLES `education_detail` WRITE;
-/*!40000 ALTER TABLE `education_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `education_detail` ENABLE KEYS */;
+LOCK TABLES `education_details` WRITE;
+/*!40000 ALTER TABLE `education_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `education_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `experience_detail`
+-- Table structure for table `experience_details`
 --
 
-DROP TABLE IF EXISTS `experience_detail`;
+DROP TABLE IF EXISTS `experience_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `experience_detail` (
+CREATE TABLE `experience_details` (
   `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `is_current_job` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `start_date` date NOT NULL,
@@ -395,27 +139,54 @@ CREATE TABLE `experience_detail` (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `proof_document` blob,
   PRIMARY KEY (`roll_no`,`start_date`,`end_date`),
-  CONSTRAINT `experience_detail_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`)
+  CONSTRAINT `experience_details_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `experience_detail`
+-- Dumping data for table `experience_details`
 --
 
-LOCK TABLES `experience_detail` WRITE;
-/*!40000 ALTER TABLE `experience_detail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `experience_detail` ENABLE KEYS */;
+LOCK TABLES `experience_details` WRITE;
+/*!40000 ALTER TABLE `experience_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `experience_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `job_post`
+-- Table structure for table `job_post_activities`
 --
 
-DROP TABLE IF EXISTS `job_post`;
+DROP TABLE IF EXISTS `job_post_activities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `job_post` (
+CREATE TABLE `job_post_activities` (
+  `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `job_post_id` int(11) NOT NULL,
+  `apply_date` date DEFAULT NULL,
+  PRIMARY KEY (`roll_no`,`job_post_id`),
+  KEY `job_post_id` (`job_post_id`),
+  CONSTRAINT `job_post_activities_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
+  CONSTRAINT `job_post_activities_ibfk_2` FOREIGN KEY (`job_post_id`) REFERENCES `job_posts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `job_post_activities`
+--
+
+LOCK TABLES `job_post_activities` WRITE;
+/*!40000 ALTER TABLE `job_post_activities` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_post_activities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `job_posts`
+--
+
+DROP TABLE IF EXISTS `job_posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `job_posts` (
   `id` int(11) NOT NULL,
   `job_type` int(11) DEFAULT NULL,
   `job_profile` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -430,55 +201,28 @@ CREATE TABLE `job_post` (
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`),
   KEY `job_type` (`job_type`),
-  CONSTRAINT `job_post_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
-  CONSTRAINT `job_post_ibfk_2` FOREIGN KEY (`job_type`) REFERENCES `job_type` (`id`)
+  CONSTRAINT `job_posts_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`),
+  CONSTRAINT `job_posts_ibfk_2` FOREIGN KEY (`job_type`) REFERENCES `job_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `job_post`
+-- Dumping data for table `job_posts`
 --
 
-LOCK TABLES `job_post` WRITE;
-/*!40000 ALTER TABLE `job_post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job_post` ENABLE KEYS */;
+LOCK TABLES `job_posts` WRITE;
+/*!40000 ALTER TABLE `job_posts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `job_post_activity`
+-- Table structure for table `job_processes`
 --
 
-DROP TABLE IF EXISTS `job_post_activity`;
+DROP TABLE IF EXISTS `job_processes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `job_post_activity` (
-  `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `job_post_id` int(11) NOT NULL,
-  `apply_date` date DEFAULT NULL,
-  PRIMARY KEY (`roll_no`,`job_post_id`),
-  KEY `job_post_id` (`job_post_id`),
-  CONSTRAINT `job_post_activity_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
-  CONSTRAINT `job_post_activity_ibfk_2` FOREIGN KEY (`job_post_id`) REFERENCES `job_post` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `job_post_activity`
---
-
-LOCK TABLES `job_post_activity` WRITE;
-/*!40000 ALTER TABLE `job_post_activity` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job_post_activity` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `job_process`
---
-
-DROP TABLE IF EXISTS `job_process`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `job_process` (
+CREATE TABLE `job_processes` (
   `id` int(11) NOT NULL,
   `job_post_id` int(11) DEFAULT NULL,
   `job_stage_id` int(11) DEFAULT NULL,
@@ -486,28 +230,28 @@ CREATE TABLE `job_process` (
   PRIMARY KEY (`id`),
   KEY `job_post_id` (`job_post_id`),
   KEY `job_stage_id` (`job_stage_id`),
-  CONSTRAINT `job_process_ibfk_1` FOREIGN KEY (`job_post_id`) REFERENCES `job_post` (`id`),
-  CONSTRAINT `job_process_ibfk_2` FOREIGN KEY (`job_stage_id`) REFERENCES `job_stage` (`id`)
+  CONSTRAINT `job_processes_ibfk_1` FOREIGN KEY (`job_post_id`) REFERENCES `job_posts` (`id`),
+  CONSTRAINT `job_processes_ibfk_2` FOREIGN KEY (`job_stage_id`) REFERENCES `job_stages` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `job_process`
+-- Dumping data for table `job_processes`
 --
 
-LOCK TABLES `job_process` WRITE;
-/*!40000 ALTER TABLE `job_process` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job_process` ENABLE KEYS */;
+LOCK TABLES `job_processes` WRITE;
+/*!40000 ALTER TABLE `job_processes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_processes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `job_stage`
+-- Table structure for table `job_stages`
 --
 
-DROP TABLE IF EXISTS `job_stage`;
+DROP TABLE IF EXISTS `job_stages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `job_stage` (
+CREATE TABLE `job_stages` (
   `id` int(11) NOT NULL,
   `stage_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -515,22 +259,22 @@ CREATE TABLE `job_stage` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `job_stage`
+-- Dumping data for table `job_stages`
 --
 
-LOCK TABLES `job_stage` WRITE;
-/*!40000 ALTER TABLE `job_stage` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job_stage` ENABLE KEYS */;
+LOCK TABLES `job_stages` WRITE;
+/*!40000 ALTER TABLE `job_stages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_stages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `job_type`
+-- Table structure for table `job_types`
 --
 
-DROP TABLE IF EXISTS `job_type`;
+DROP TABLE IF EXISTS `job_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `job_type` (
+CREATE TABLE `job_types` (
   `id` int(11) NOT NULL,
   `job_type_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -538,22 +282,22 @@ CREATE TABLE `job_type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `job_type`
+-- Dumping data for table `job_types`
 --
 
-LOCK TABLES `job_type` WRITE;
-/*!40000 ALTER TABLE `job_type` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job_type` ENABLE KEYS */;
+LOCK TABLES `job_types` WRITE;
+/*!40000 ALTER TABLE `job_types` DISABLE KEYS */;
+/*!40000 ALTER TABLE `job_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `skill_set`
+-- Table structure for table `skill_sets`
 --
 
-DROP TABLE IF EXISTS `skill_set`;
+DROP TABLE IF EXISTS `skill_sets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `skill_set` (
+CREATE TABLE `skill_sets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `skill_set_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -561,39 +305,39 @@ CREATE TABLE `skill_set` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `skill_set`
+-- Dumping data for table `skill_sets`
 --
 
-LOCK TABLES `skill_set` WRITE;
-/*!40000 ALTER TABLE `skill_set` DISABLE KEYS */;
-/*!40000 ALTER TABLE `skill_set` ENABLE KEYS */;
+LOCK TABLES `skill_sets` WRITE;
+/*!40000 ALTER TABLE `skill_sets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `skill_sets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `student_job_application`
+-- Table structure for table `student_job_applications`
 --
 
-DROP TABLE IF EXISTS `student_job_application`;
+DROP TABLE IF EXISTS `student_job_applications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `student_job_application` (
+CREATE TABLE `student_job_applications` (
   `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `job_process_id` int(11) NOT NULL,
   `is_qualified` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`roll_no`,`job_process_id`),
   KEY `job_process_id` (`job_process_id`),
-  CONSTRAINT `student_job_application_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
-  CONSTRAINT `student_job_application_ibfk_2` FOREIGN KEY (`job_process_id`) REFERENCES `job_process` (`id`)
+  CONSTRAINT `student_job_applications_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
+  CONSTRAINT `student_job_applications_ibfk_2` FOREIGN KEY (`job_process_id`) REFERENCES `job_processes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student_job_application`
+-- Dumping data for table `student_job_applications`
 --
 
-LOCK TABLES `student_job_application` WRITE;
-/*!40000 ALTER TABLE `student_job_application` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student_job_application` ENABLE KEYS */;
+LOCK TABLES `student_job_applications` WRITE;
+/*!40000 ALTER TABLE `student_job_applications` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student_job_applications` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -609,7 +353,7 @@ CREATE TABLE `student_profiles` (
   `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `branch` varchar(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `backlogs` varchar(2) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `backlogs` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `aadhar_no` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pan_no` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`roll_no`),
@@ -623,35 +367,34 @@ CREATE TABLE `student_profiles` (
 
 LOCK TABLES `student_profiles` WRITE;
 /*!40000 ALTER TABLE `student_profiles` DISABLE KEYS */;
-INSERT INTO `student_profiles` VALUES ('15WH1A1234','Pavani','R',NULL,NULL,NULL,NULL,NULL),('15WH1A1235','Suchitra','G',NULL,NULL,NULL,NULL,NULL),('15WH1A1237','Preethi','P',NULL,NULL,NULL,NULL,NULL),('15WH1A1238','Manasa','G',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `student_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `student_skill_set`
+-- Table structure for table `student_skill_sets`
 --
 
-DROP TABLE IF EXISTS `student_skill_set`;
+DROP TABLE IF EXISTS `student_skill_sets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `student_skill_set` (
+CREATE TABLE `student_skill_sets` (
   `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `skill_set_id` int(11) NOT NULL,
   `skill_level` int(11) DEFAULT NULL,
   PRIMARY KEY (`roll_no`,`skill_set_id`),
   KEY `skill_set_id` (`skill_set_id`),
-  CONSTRAINT `student_skill_set_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
-  CONSTRAINT `student_skill_set_ibfk_2` FOREIGN KEY (`skill_set_id`) REFERENCES `skill_set` (`id`)
+  CONSTRAINT `student_skill_sets_ibfk_1` FOREIGN KEY (`roll_no`) REFERENCES `student_profiles` (`roll_no`),
+  CONSTRAINT `student_skill_sets_ibfk_2` FOREIGN KEY (`skill_set_id`) REFERENCES `skill_sets` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student_skill_set`
+-- Dumping data for table `student_skill_sets`
 --
 
-LOCK TABLES `student_skill_set` WRITE;
-/*!40000 ALTER TABLE `student_skill_set` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student_skill_set` ENABLE KEYS */;
+LOCK TABLES `student_skill_sets` WRITE;
+/*!40000 ALTER TABLE `student_skill_sets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `student_skill_sets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -674,8 +417,8 @@ CREATE TABLE `user_accounts` (
   PRIMARY KEY (`id`),
   KEY `user_type_id` (`user_type_id`),
   KEY `college_id` (`college_id`),
-  CONSTRAINT `user_accounts_ibfk_1` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`id`),
-  CONSTRAINT `user_accounts_ibfk_2` FOREIGN KEY (`college_id`) REFERENCES `college` (`id`)
+  CONSTRAINT `user_accounts_ibfk_1` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`),
+  CONSTRAINT `user_accounts_ibfk_2` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -690,13 +433,13 @@ INSERT INTO `user_accounts` VALUES ('14wh1a0448','STUD','BVRW','','15e7b15d9bc3b
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_type`
+-- Table structure for table `user_types`
 --
 
-DROP TABLE IF EXISTS `user_type`;
+DROP TABLE IF EXISTS `user_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user_type` (
+CREATE TABLE `user_types` (
   `id` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_type_name` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -704,13 +447,103 @@ CREATE TABLE `user_type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_type`
+-- Dumping data for table `user_types`
 --
 
-LOCK TABLES `user_type` WRITE;
-/*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
-INSERT INTO `user_type` VALUES ('STUD','Student');
-/*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
+LOCK TABLES `user_types` WRITE;
+/*!40000 ALTER TABLE `user_types` DISABLE KEYS */;
+INSERT INTO `user_types` VALUES ('STUD','Student');
+/*!40000 ALTER TABLE `user_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `verified_education_details`
+--
+
+DROP TABLE IF EXISTS `verified_education_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `verified_education_details` (
+  `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `certificate_degree_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `major` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `institute_university_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `board` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `completion_date` date DEFAULT NULL,
+  `percentage` decimal(10,0) DEFAULT NULL,
+  `cgpa` decimal(10,0) DEFAULT NULL,
+  `proof_document` blob,
+  PRIMARY KEY (`roll_no`,`certificate_degree_name`,`major`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `verified_education_details`
+--
+
+LOCK TABLES `verified_education_details` WRITE;
+/*!40000 ALTER TABLE `verified_education_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `verified_education_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `verified_experience_details`
+--
+
+DROP TABLE IF EXISTS `verified_experience_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `verified_experience_details` (
+  `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `is_current_job` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `job_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `company_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `job_location_city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `proof_document` blob,
+  PRIMARY KEY (`roll_no`,`start_date`,`end_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `verified_experience_details`
+--
+
+LOCK TABLES `verified_experience_details` WRITE;
+/*!40000 ALTER TABLE `verified_experience_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `verified_experience_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `verified_student_profiles`
+--
+
+DROP TABLE IF EXISTS `verified_student_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `verified_student_profiles` (
+  `roll_no` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `branch` varchar(6) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `backlogs` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `aadhar_no` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `pan_no` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`roll_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `verified_student_profiles`
+--
+
+LOCK TABLES `verified_student_profiles` WRITE;
+/*!40000 ALTER TABLE `verified_student_profiles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `verified_student_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -722,4 +555,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-04 21:44:00
+-- Dump completed on 2019-02-23 18:08:18

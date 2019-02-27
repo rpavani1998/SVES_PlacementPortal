@@ -25,6 +25,10 @@ db.students = require('../models/student.model.js')(sequelize, Sequelize);
 db.users = require('../models/user.model.js')(sequelize, Sequelize);
 db.education_details = require('../models/education-details.model')(sequelize, Sequelize);
 db.experience_details = require('../models/experience-details.model')(sequelize, Sequelize);
+db.skill_set = require('../models/skill-set.model')(sequelize, Sequelize);
+db.college = require('../models/college.model')(sequelize, Sequelize);
+db.branch = require('../models/branch.model')(sequelize, Sequelize);
+db.student_skill_set =  require('../models/student-skill-set.model')(sequelize, Sequelize);
 
 module.exports = db;
   
