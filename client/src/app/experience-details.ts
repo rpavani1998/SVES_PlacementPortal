@@ -1,4 +1,5 @@
 export class ExperienceDetails {
+    roll_no : string
     is_current_job: boolean = false
     start_date: Date = null
     end_date: Date =  null

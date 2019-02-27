@@ -12,21 +12,28 @@ import { Observable } from 'rxjs';
 
 export class StudentComponent  implements OnInit {
 
-  students: Student[];
+  student: Student;
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-     this.getStudents();
+    this.getStudentDetails();
   }
 
-  getStudents() {
-    return this.studentService.getStudents()
-               .subscribe(
-                 students => {
-                   console.log(students)
-                   this.students = students;
-                 }
-                );
+  getStudentDetails() {
+    const id = localStorage.getItem('currentUser');
+    console.log(this.studentService.getStudent(id)
+    .subscribe(student => {
+      this.student = student
+      this.studentService.getStudentEducationalDetails(id)
+      .subscribe(educationDetails => 
+        this.student.education_details = educationDetails)
+      this.studentService.getStudentExperienceDetails(id)
+        .subscribe(experienceDetails => 
+          this.student.experience_details = experienceDetails)
+      console.log(this.student)
+    }))
+  
+    return this.student;
  }
 }

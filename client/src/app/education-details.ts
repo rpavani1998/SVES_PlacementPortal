@@ -1,10 +1,11 @@
 export class EducationDetails {
+  roll_no: string = ''
   certificate_degree_name: string = ''
   major: string = ''
   institute_university_name: string = ''
-  start_date: Date = null
-  completion_date: Date = null
+  board: string =''
+  passing_year: number = 2019
   percentage: number = 100
   cgpa: number = 10
-  proof_document: any = null
+  proof_document: File = null
 }

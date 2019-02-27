@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../student';
 import { StudentService } from '../student.service';
-
+import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { EducationDetails } from '../education-details';
+import { Branch } from '../branch';
+import { UtilsService } from '../utils.service';
+import { ExperienceDetails } from '../experience-details';
 
 @Component({
   selector: 'app-student-details',
@@ -12,27 +16,208 @@ import { Location } from '@angular/common';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  student = new Student() ;
+  student = new Student();
   submitted = false;
   message: string;
+  branches: Branch[]
+  backlogs = ["Never had any backlog", "Cleared All", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "More than 10"];
+
+  data = {
+    education_details : [],
+    experience_details : []
+  }
+  
+  myForm: FormGroup;
 
   constructor(
     private studentService: StudentService,
+    private utilService: UtilsService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
+    this.utilService.getBranches().subscribe(branch => {
+      this.branches = branch;
+    })
+    const id = localStorage.getItem('currentUser');
     this.studentService.getStudent(id)
-      .subscribe(student => this.student = student);
+    .subscribe(student => {
+      this.student = student
+    });
+    // for(var i = 0; i = this.branches.length; i++){
+    //   if(this.branches[i].branch_name == this.student.branch){
+    //     this.student.branch = this.branches[i].id
+    //     break
+    //   }
+    // }
+  this.myForm = this.fb.group({
+    education_details: this.fb.array([]),
+    experience_details: this.fb.array([])
+  })
+
+  this.studentService.getStudentEducationalDetails(id)
+  .subscribe(educationDetails => {
+    let control = <FormArray>this.myForm.controls.education_details;
+    educationDetails.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: localStorage.getItem('currentUser'),
+        certificate_degree_name: x.certificate_degree_name,
+        major: x.major,
+        board: x.board,
+        institute_university_name : x.institute_university_name,
+        passing_year : x.passing_year,
+        percentage: x.percentage,
+        cgpa: x.cgpa,
+        proof_document: x.proof_document
+       }))
+    })
+    });
+this.studentService.getStudentExperienceDetails(id)
+  .subscribe(experienceDetails => {
+    let control = <FormArray>this.myForm.controls.experience_details;
+    experienceDetails.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: localStorage.getItem('currentUser'),
+        is_current_job: x.is_current_job,
+        start_date: x.start_date,
+        end_date: x.end_date,
+        job_title: x.job_title,
+        company_name: x.company_name,
+        job_location_city: x.job_location_city,
+        description: x.description,
+        proof_document: x.proof_document
+       }))
+    })
+  });
+  this.setEducationDetails();
+  this.setExperienceDetails();
   }
 
+  deleteEducationDetails(index) {
+    let control = <FormArray>this.myForm.controls.education_details;
+    control.removeAt(index)
+  }
+  
   update(): void {
     this.submitted = true;
     this.studentService.updateStudent(this.student)
-        .subscribe(result => this.message = "Student Updated Successfully!");
+        .subscribe();
+    for(var i=0; i < this.myForm.value.education_details.length; i++){
+      this.studentService.updateStudentEducationalDeails(this.myForm.value.education_details[i])
+      .subscribe();
+    }
+    for(var i=0; i < this.myForm.value.experience_details.length; i++){
+      this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
+      .subscribe();
+    }
+   
   }
+
+  addNewExperienceForm() {
+    let control = <FormArray>this.myForm.controls.experience_details;
+    control.push(
+      this.fb.group({
+        roll_no: localStorage.getItem('currentUser'),
+        is_current_job: false,
+        start_date: null,
+        end_date: null,
+        job_title: '',
+        company_name: '',
+        job_location_city:  '',
+        description: '',
+        proof_document: null
+      })
+    )
+  }
+
+  addNewEducationForm() {
+    let control = <FormArray>this.myForm.controls.education_details;
+    control.push(
+      this.fb.group({
+        roll_no: localStorage.getItem('currentUser'),
+        certificate_degree_name: '',
+        major: '',
+        board: '',
+        institute_university_name : '',
+        passing_year : 2019,
+        percentage: 100,
+        cgpa: 10,
+        proof_document: null
+      })
+    )
+  }
+  
+
+  setExperienceDetails() {
+    let control = <FormArray>this.myForm.controls.experience_details;
+    this.data.experience_details.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        is_current_job: x.is_current_job,
+        start_date: x.start_date,
+        end_date: x.end_date,
+        job_title: x.job_title,
+        company_name: x.company_name,
+        job_location_city: x.job_location_city,
+        description: x.description,
+        proof_document: x.proof_document
+       }))
+    })
+  }
+
+  setExperienceDetails_() {
+    let control = <FormArray>this.myForm.controls.education_details;
+    this.student.experience_details.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        is_current_job: x.is_current_job,
+        start_date: x.start_date,
+        end_date: x.end_date,
+        job_title: x.job_title,
+        company_name: x.company_name,
+        job_location_city: x.job_location_city,
+        description: x.description,
+        proof_document: x.proof_document
+       }))
+    })
+  }
+
+  setEducationDetails() {
+    let control = <FormArray>this.myForm.controls.education_details;
+    this.data.education_details.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        certificate_degree_name: x.certificate_degree_name,
+        major: x.major,
+        board: x.board,
+        institute_university_name : x.institute_university_name,
+        passing_year : x.passing_year,
+        percentage: x.percentage,
+        cgpa: x.cgpa,
+        proof_document: x.proof_document
+       }))
+    })
+  }
+
+  setEducationDetails_() {
+    let control = <FormArray>this.myForm.controls.education_details;
+    this.data.education_details.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        certificate_degree_name: x.certificate_degree_name,
+        major: x.major,
+        board: x.board,
+        institute_university_name : x.institute_university_name,
+        passing_year : x.passing_year,
+        percentage: x.percentage,
+        cgpa: x.cgpa,
+        proof_document: x.proof_document
+       }))
+    })
+  }
+
 
   delete(): void {
     this.submitted = true;
@@ -43,4 +228,6 @@ export class StudentDetailsComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+
 }

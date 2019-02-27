@@ -33,6 +33,7 @@ private authenticate(): void {
   
   this.Auth.getUserDetails(this.user.id, this.user.password).subscribe(data => {
     if(data.success) {
+      localStorage.setItem('currentUser', this.user.id);
       this.router.navigate(['/student/add'])
       this.Auth.setLoggedIn(true)
     } else {

@@ -10,6 +10,6 @@ export class Student {
     backlogs: string = ''
     aadhar_no: string = ''
     pan_no: string = ''
-    educational_details: Array<EducationDetails>
+    education_details: Array<EducationDetails>
     experience_details: Array<ExperienceDetails>
 }
