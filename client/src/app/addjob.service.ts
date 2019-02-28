@@ -34,9 +34,8 @@ export class AddjobService {
     return this.http.get<AddJob[]>(this.addjobUrl);
   }
 
-  // getJobs(id: string): Observable<AddJob> {
-  //   const url = `${this.addjobUrl}/${id}`;
-  //   return this.http.get<AddJob>(url);
-  // }
-
+  getJobPosts (): Observable<AddJob[]> {
+    return this.http.get<AddJob[]>(this.addjobUrl);
+  }
+  
 }

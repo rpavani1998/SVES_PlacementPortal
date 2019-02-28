@@ -31,6 +31,7 @@ export class StudentDetailsComponent implements OnInit {
       });
   }
   
+  
 
   update(): void {
     this.submitted = true;

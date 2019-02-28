@@ -12,10 +12,12 @@ module.exports = (sequelize, Sequelize) => {
       },
       company_website_url : {
           type : Sequelize.STRING
-			},
+			}, 
 	},{
 			timestamps: false
 	});
+
+	
 	
 	return Company;
 }

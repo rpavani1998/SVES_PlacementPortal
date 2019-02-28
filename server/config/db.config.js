@@ -24,6 +24,7 @@ db.sequelize = sequelize;
 db.students = require('../models/student.model.js')(sequelize, Sequelize);
 db.company = require('../models/company.model.js')(sequelize , Sequelize);
 db.job_post = require('../models/addjob.model.js')(sequelize , Sequelize);
+db.job_posts = require('../models/jobposts.model.js')(sequelize , Sequelize);
 db.job_type = require('../models/jobtype.model.js')(sequelize , Sequelize);
 
 module.exports = db;

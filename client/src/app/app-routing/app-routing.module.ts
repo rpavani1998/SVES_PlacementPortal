@@ -4,6 +4,8 @@ import { StudentComponent } from '../student/student.component';
 import { AddStudentComponent } from '../add-student/add-student.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
 import { AdminplacementComponent } from '../adminplacement/adminplacement.component';
+import { JobpostsComponent } from '../jobposts/jobposts.component';
+import { CompanydetailsComponent } from '../companydetails/companydetails.component';
 
 const routes: Routes = [
    { 
@@ -22,6 +24,14 @@ const routes: Routes = [
      path : 'addjob',
      component : AdminplacementComponent 
    },
+   {
+    path : 'jobposts',
+    component : JobpostsComponent 
+  },
+  {
+    path : 'companydetails/:companyid',
+    component : CompanydetailsComponent
+  },
    { 
      path: '', 
      redirectTo: 'students', 

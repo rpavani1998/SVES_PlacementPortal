@@ -34,31 +34,10 @@ exports.create = (req, res) => {
 	})
 };
 
-// exports.findById = (req, res) => {	
 
-// 	Company.findAll({ where: {company_name: req.params.companyDetails} })
-	
-// 	.spread((companyid, created) => {
-// 		console.log("companyid : " , companyid.get({
-// 		  plain: true
-// 		}))
-// 		AddJob.findAll( { where: {company_id: companyid.company_id} } ).then(job => {
-// 			console.log(job)
-// 			res.json(job);
-// 		})
-// 	})
+// exports.findAll = (req, res) => {
+// 	AddJob.findAll().then(jobposts => {
+// 		console.log(jobposts);
+// 	  res.json(jobposts);
+// 	});
 // };
-
-
-exports.findAll = (req, res) => {
-	AddJob.findAll().then(jobtype => {
-		console.log(jobtype);
-	  res.json(jobtype);
-	});
-};
-
-// exports.findById = (req, res) => {	
-// 	JobType.findById(req.body.job_type).then(jobtype => {
-// 		res.json(jobtype);
-// 	})
-// };	

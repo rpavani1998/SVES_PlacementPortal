@@ -11,6 +11,8 @@ import { StudentComponent } from './student/student.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { AdminplacementComponent } from './adminplacement/adminplacement.component';
+import { JobpostsComponent } from './jobposts/jobposts.component';
+import { CompanydetailsComponent } from './companydetails/companydetails.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AdminplacementComponent } from './adminplacement/adminplacement.compone
     StudentComponent,
     StudentDetailsComponent,
     AddStudentComponent,
-    AdminplacementComponent
+    AdminplacementComponent,
+    JobpostsComponent,
+    CompanydetailsComponent
     ],
   imports: [
     BrowserModule,

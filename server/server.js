@@ -19,6 +19,7 @@ require('./route/user.route.js')(app);
 require('./route/company.route.js')(app);
 require('./route/addjob.route.js')(app);  
 require('./route/jobtype.route.js')(app);  
+require('./route/jobposts.route.js')(app);  
 
 
 const db = require('./config/db.config.js');
