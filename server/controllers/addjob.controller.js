@@ -25,9 +25,9 @@ exports.create = (req, res) => {
 		console.log("user : " , user.get({
 		  plain: true
 		}))
-		console.log(user.id)
+		console.log(user.job_type_id)
 		job.is_active = 1; // 1 indicating open
-		job.job_type = user.id	
+		job.job_type = user.job_type_id	
 		AddJob.create(job).then(result => {	
 			res.json(result);
 		});

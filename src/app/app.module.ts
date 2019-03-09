@@ -9,6 +9,7 @@ import { AdminInternshipComponent } from './Admin/admin-internship/admin-interns
 import { AdminPlacementComponent } from './Admin/admin-placement/admin-placement.component';
 import { AdminCompetitionComponent } from './Admin/admin-competition/admin-competition.component';
 import { CompanyDetailsComponent } from './Admin/company-details/company-details.component';
+import { EditcompanydetailsComponent } from './editcompanydetails/editcompanydetails.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CompanyDetailsComponent } from './Admin/company-details/company-details
     AdminPlacementComponent,
     AdminCompetitionComponent,
     CompanyDetailsComponent,
+    EditcompanydetailsComponent,
   ],
   imports: [
     BrowserModule,

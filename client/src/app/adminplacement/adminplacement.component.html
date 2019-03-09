@@ -13,7 +13,7 @@
 <h3>Add Job</h3>
 
 <div [hidden]="submitted">
-    <form #adminplacementForm="ngForm">
+    <form #adminplacementForm="ngForm" >
 
       <div class="form-group">
         <label for="company_name">Company Name : </label>
@@ -31,6 +31,18 @@
       </div><br><br>
 
       <div class="form-group" *ngIf="job.company_name == 'others' ">
+
+
+          <div class="form-group">
+              <label for="company_id">Company ID : </label>
+              <input type="text" class="form-control" id="company_id" placeholder="Company ID" 
+              required
+              [(ngModel)]="job.company_id" name="company_id" #company_id="ngModel">
+              <div [hidden]="company_id.valid || company_id.pristine"
+                   class="alert alert-danger">
+                 Company ID is required
+              </div>
+            </div><br><br>
 
           <div class="form-group">
               <label for="cn">Company Name : </label>
@@ -66,76 +78,21 @@
             </div>
           </div><br><br>
 
-		      <div class="form-group">
-            <label for="company_id">Company ID : </label>
-            <input type="text" class="form-control" id="company_id" placeholder="Company ID" 
-            required
-            [(ngModel)]="job.company_id" name="company_id" #company_id="ngModel">
-            <div [hidden]="company_id.valid || company_id.pristine"
-                 class="alert alert-danger">
-               Company ID is required
-            </div>
-          </div><br><br>
-
-         <div class="form-group">
-            <label for="company_logo">Company Logo : </label>
-            <input type="file" accept = "image/*" class="form-control" id="company_logo" placeholder="Company Logo" 
-            required
-            [(ngModel)]="job.company_logo" name="company_logo" #company_logo="ngModel">
-            <div [hidden]="company_logo.valid || company_logo.pristine"
-                 class="alert alert-danger">
-               Company Logo is required
-            </div>
-          </div><br><br>
-
 
       </div>
 
 
-      <!-- <div class="form-group">
-          <label for="profile_description">Profile Description : </label>
-          <input type="text" class="form-control" id="profile_description" placeholder="Profile Description" style='display:none;'
-          required
-          [(ngModel)]="company.profile_description" name="profile_description" #profile_description="ngModel">
-          <div [hidden]="profile_description.valid || profile_description.pristine"
-               class="alert alert-danger">
-             Profile Description is required
-          </div>
-        </div><br><br>
-
-        <div class="form-group">
-            <label for="company_website_url">Company URL : </label>
-            <input type="text" class="form-control" id="company_website_url" placeholder="Company URL" style='display:none;'
-            required
-            [(ngModel)]="company.company_website_url" name="company_website_url" #company_website_url="ngModel">
-            <div [hidden]="company_website_url.valid || company_website_url.pristine"
-                 class="alert alert-danger">
-               Company URL is required
-            </div>
-          </div><br><br>
-
-		<div class="form-group">
-            <label for="company_id">Company ID : </label>
-            <input type="text" class="form-control" id="company_id" placeholder="Company ID" style='display:none;'
-            required
-            [(ngModel)]="company.company_id" name="company_id" #company_id="ngModel">
-            <div [hidden]="company_id.valid || company_id.pristine"
-                 class="alert alert-danger">
-               Company ID is required
-            </div>
-          </div><br><br> -->
-
-<div class="form-group">
-            <label for="id">ID : </label>
-            <input type="text" class="form-control" id="id" placeholder="Job ID" 
-            required
-            [(ngModel)]="job.id" name="id" #id="ngModel">
-            <div [hidden]="id.valid || id.pristine"
-                 class="alert alert-danger">
-               Job ID is required
-            </div>
-          </div><br><br>
-
+    
+          <div class="form-group">
+              <label for="id">ID : </label>
+              <input type="text" class="form-control" id="id" placeholder="Job ID" 
+              required
+              [(ngModel)]="job.id" name="id" #id="ngModel">
+              <div [hidden]="id.valid || id.pristine"
+                   class="alert alert-danger">
+                 Job ID is required
+              </div>
+            </div><br><br>
         
             <div class="form-group">
                 <label for="job_type">Job type : </label>
@@ -151,17 +108,6 @@
                 </div>
               </div><br><br>
   
-          <!-- <div class="form-group">
-            <label for="job_type">Job type : </label>
-            <input type="text" class="form-control" id="job_type" placeholder="Job Type" 
-            required
-            [(ngModel)]="job.job_type" name="job_type" #job_type="ngModel">
-            <div [hidden]="job_type.valid || job_type.pristine"
-                 class="alert alert-danger">
-               Job Type is required
-            </div>
-          </div><br><br> -->
-
           <div class="form-group">
             <label for="job_profile">Job Profile: </label>
             <input type="text" class="form-control" id="job_profile" placeholder="Job Profile" 
@@ -243,7 +189,7 @@
           </div><br><br>
 
 	  <div class="btn-group btn-group-sm">
-      	<button [routerLink]="['/jobposts']" type="button"  class="btn btn-dark" (click)="addCompany(); addJob()"  [disabled]="!adminplacementForm.form.valid">Add</button>
+      	<button type="button"  class="btn btn-dark" (click)="addCompany(); addJob()"  [disabled]="!adminplacementForm.form.valid">Add</button>
       </div>
 
     </form>

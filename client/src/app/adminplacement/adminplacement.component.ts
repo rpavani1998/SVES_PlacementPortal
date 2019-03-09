@@ -16,7 +16,6 @@ import { Router } from "@angular/router";
 export class AdminplacementComponent implements OnInit {
 
   
-
   company = new Company();
   job = new AddJob();
   jt = new JobType();
@@ -25,7 +24,7 @@ export class AdminplacementComponent implements OnInit {
   
   constructor(
     private addjobService : AddjobService,
-    private route: Router,
+    private router: Router,
     private companyService : CompanyService,
     private jobtypeService : JobTypeService
   ) { }
@@ -35,7 +34,7 @@ export class AdminplacementComponent implements OnInit {
     this.company = new Company();
   }
 
-  addCompany() {
+  addCompany() {  
     this.submitted = true;
     this.saveCompany();
   }
@@ -86,10 +85,13 @@ export class AdminplacementComponent implements OnInit {
     this.companyService.addCompany(this.job)
         .subscribe();
   }
+  
 
   private saveJob(): void {
     console.info("job info", this.job);
     this.addjobService.addJob(this.job)
         .subscribe();
+        this.router.navigateByUrl('/jobposts');
+        window.location.reload();
   }
 }

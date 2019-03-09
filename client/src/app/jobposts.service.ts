@@ -34,4 +34,15 @@ export class JobpostsService {
     return this.http.get<JobPosts>(url);
   }
 
+  getJobData(companyid: string): Observable<JobPosts> {
+    const url = `${this.jobpostsUrl}/${companyid}`;
+    return this.http.get<JobPosts>(url);
+  }
+
+  deleteJobPost ( jobid : JobPosts | number): Observable<JobPosts> {
+    const id = typeof jobid === 'number' ? jobid : jobid.id;
+    const url = `${this.jobpostsUrl}/${id}`;
+
+    return this.http.delete<JobPosts>(url, httpOptions);
+  }
 }

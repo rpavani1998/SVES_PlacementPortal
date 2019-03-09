@@ -6,6 +6,8 @@ import { StudentDetailsComponent } from '../student-details/student-details.comp
 import { AdminplacementComponent } from '../adminplacement/adminplacement.component';
 import { JobpostsComponent } from '../jobposts/jobposts.component';
 import { CompanydetailsComponent } from '../companydetails/companydetails.component';
+import { EditjobpostComponent } from '../editjobpost/editjobpost.component';
+
 
 const routes: Routes = [
    { 
@@ -29,8 +31,12 @@ const routes: Routes = [
     component : JobpostsComponent 
   },
   {
-    path : 'companydetails/:companyid',
+    path : 'jobposts/:companyid',
     component : CompanydetailsComponent
+  },
+  {
+    path : 'editjobposts/:jobid',
+    component : EditjobpostComponent 
   },
    { 
      path: '', 

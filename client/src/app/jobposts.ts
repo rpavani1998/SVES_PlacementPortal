@@ -1,5 +1,5 @@
 export class JobPosts {
-    id: number;
+    id : number;
     job_type: number;
     job_profile: string;
     job_description : string;

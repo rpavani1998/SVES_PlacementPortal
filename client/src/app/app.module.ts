@@ -13,6 +13,7 @@ import { AddStudentComponent } from './add-student/add-student.component';
 import { AdminplacementComponent } from './adminplacement/adminplacement.component';
 import { JobpostsComponent } from './jobposts/jobposts.component';
 import { CompanydetailsComponent } from './companydetails/companydetails.component';
+import { EditjobpostComponent } from './editjobpost/editjobpost.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CompanydetailsComponent } from './companydetails/companydetails.compone
     AddStudentComponent,
     AdminplacementComponent,
     JobpostsComponent,
-    CompanydetailsComponent
+    CompanydetailsComponent,
+    EditjobpostComponent
     ],
   imports: [
     BrowserModule,

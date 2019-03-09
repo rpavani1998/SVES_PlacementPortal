@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
 	const JobPosts = sequelize.define('job_post', {
 	  id: {
 			type: Sequelize.INTEGER,
-			primaryKey: true
+			primaryKey: true,
 	  },
 	  job_type: {
 			type: Sequelize.STRING,
@@ -44,6 +44,15 @@ module.exports = (sequelize, Sequelize) => {
       company_website_url : { 
         type : Sequelize.STRING,
 			}, 
+			company_image : {
+				type : Sequelize.BLOB,
+			},
+			job_type_id : {
+				type : Sequelize.STRING,
+			},
+			job_type_name : {
+				type : Sequelize.STRING,
+			},
 	},{
 			timestamps: false
 	});

@@ -1,8 +1,22 @@
-<div>
+<!-- <div *ngFor = "let jobdata of jobdata">
     <b> <label> Company Name :  </label> </b> {{jobdata.company_name}} <br><br>
+    <b> <label> Job Type :  </label> </b> {{jobdata.job_type_name}} <br><br>
     <b> <label> Job Profile :  </label> </b> {{jobdata.job_profile}} <br><br>
     <b> <label> Job Description :  </label> </b> {{jobdata.job_description}} <br><br>
     <b> <label> Job Location :  </label> </b> {{jobdata.job_location}} <br><br>
     <b> <label> Salary :  </label> </b> {{jobdata.salary_lpa}} <br><br>
-    <button class = "btn">Apply</button><br><br>
-</div>
+    <button (click) = "back()" > Back </button><br><br>
+    <button [routerLink]="['/editjobposts', jobdata.id]" > Edit </button><br><br>
+    <button (click) = "delete()" > Delete </button><br><br>
+    <button>Apply</button><br><br>
+</div> -->
+
+    <b> <label> Company Name :  </label> </b> {{jobdata.company_name}} <br><br>
+    <b> <label> Job Type :  </label> </b> {{jobdata.job_type_name}} <br><br>
+    <b> <label> Job Profile :  </label> </b> {{jobdata.job_profile}} <br><br>
+    <b> <label> Job Description :  </label> </b> {{jobdata.job_description}} <br><br>
+    <b> <label> Job Location :  </label> </b> {{jobdata.job_location}} <br><br>
+    <b> <label> Salary :  </label> </b> {{jobdata.salary_lpa}} <br><br>
+    <button (click) = "back()" > Back </button><br><br>
+    <button [routerLink]="['/editjobposts', jobdata.id]" > Edit </button><br><br>
+    <button (click) = "delete()" > Delete </button><br><br>

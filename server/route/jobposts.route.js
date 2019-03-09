@@ -6,5 +6,8 @@ module.exports = function(app) {
 
     app.get('/api/jobposts/:companyId', jobposts.findById);
 
+    // app.put('/api/editjobposts/:jobId', jobposts.updateJobPost);
+
+    app.delete('/api/jobposts/:companyId', jobposts.delete);
 
 }

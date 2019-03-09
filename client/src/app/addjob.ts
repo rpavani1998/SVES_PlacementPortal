@@ -12,5 +12,5 @@ export class AddJob {
     company_name: string;
     profile_description: string;
     company_website_url : string;
-    company_logo : Blob;
+    company_image : Blob;
 }

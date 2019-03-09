@@ -214,10 +214,12 @@
                             <div class="bg-img"><img src="assets/images/google.png" style="width:246px; height : 140px"  alt="Avatar"></div>
                               <div class="content">
                                 Company Name : <h4> {{job.company_name}} </h4>
-                                Job Profile : <h4>{{job.job_profile}}</h4>
-                                Job Description : <h4>{{job.job_description}}</h4>
-                                Job Location : <h4>{{job.job_location}}</h4>
-                                <button [routerLink]="['/companydetails', job.id]" class = "btn">View Details</button> </div>
+                                Job ID : <h4> {{job.job_posts[0].id}} </h4>
+                                Job Type : <h4> {{job.job_posts[0].job_types[0].job_type_name}} </h4> 
+                                Job Profile : <h4>{{job.job_posts[0].job_profile}}</h4>
+                                Job Description : <h4>{{job.job_posts[0].job_description}}</h4>
+                                Job Location : <h4>{{job.job_posts[0].job_location}}</h4>
+                                <button [routerLink]="['/jobposts', job.job_posts[0].id]" class = "btn">View Details</button> </div>
                           </div>
                           
               </div>
