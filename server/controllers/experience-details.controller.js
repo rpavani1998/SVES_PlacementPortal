@@ -5,7 +5,7 @@ const ExperienceDetails = db.experience_details;
 exports.create = (req, res) => {
 	let experience_details = req.body;
 	ExperienceDetails.create(experience_details).then(result => {	
-		res.json(result);
+		res.json('X'+result.id);
 	});
 };
  

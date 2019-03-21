@@ -24,6 +24,15 @@ app.use(cors(corsOptions))
 require('./route/student.route.js')(app);
 require('./route/user.route.js')(app);
 require('./route/utils.route')(app);
+// require('./route/addjob.route.js')(app);  
+require('./route/job-type.route')(app);  
+require('./route/job-post.route.js')(app); 
+require('./route/company.route')(app)
+// require('./route/editjobpost.route.js')(app); 
+
+let router = require('./route/file.router.js');
+app.use('/', router);
+
 var server = app.listen(4000, function () {
  
     let host = server.address().address

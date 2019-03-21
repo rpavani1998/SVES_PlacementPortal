@@ -29,6 +29,15 @@ db.skill_set = require('../models/skill-set.model')(sequelize, Sequelize);
 db.college = require('../models/college.model')(sequelize, Sequelize);
 db.branch = require('../models/branch.model')(sequelize, Sequelize);
 db.student_skill_set =  require('../models/student-skill-set.model')(sequelize, Sequelize);
-
+db.files = require('../models/file.model.js')(sequelize, Sequelize);
+db.company = require('../models/company.model.js')(sequelize , Sequelize);
+// db.job_posts = require('../models/jobposts.model.js')(sequelize , Sequelize);
+// db.job_type = require('../models/jobtype.model.js')(sequelize , Sequelize);
+db.job_post = require('../models/job-post.model.js')(sequelize , Sequelize);
+db.job_post_activity  = require('../models/job-post-activity.model')(sequelize , Sequelize);
+// db.company.hasMany(db.job_posts )
+// db.job_posts.belongsTo(db.company )
+// db.job_posts.hasMany(db.job_type)
+// db.job_type.belongsTo(db.job_posts)
 module.exports = db;
   

@@ -1,8 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Student = sequelize.define('experience_detail', {
-        roll_no: {
-            type: Sequelize.STRING,
+        id: {
+			type: Sequelize.INTEGER,
+            autoIncrement: true,
             primaryKey: true
+		},
+        roll_no: {
+            type: Sequelize.STRING
         },
         is_current_job: {
             type: Sequelize.BOOLEAN
@@ -24,7 +28,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         description: {
             type: Sequelize.STRING
-        }
+        },
+        // proof_document: {
+		// 	type: Sequelize.BLOB('long')
+		// }
 
     }, {
             timestamps: false

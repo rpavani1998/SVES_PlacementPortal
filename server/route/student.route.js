@@ -1,3 +1,5 @@
+let upload = require('../config/multer.config.js');
+
 module.exports = function(app) {
  
     const students = require('../controllers/student.controller.js');

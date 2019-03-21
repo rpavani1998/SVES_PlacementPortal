@@ -1,3 +1,4 @@
+var stream = require('stream');
 const db = require('../config/db.config.js');
 const EducationDetails = db.education_details;
 
@@ -5,10 +6,10 @@ const EducationDetails = db.education_details;
 exports.create = (req, res) => {
 	let education_details = req.body;
 	EducationDetails.create(education_details).then(result => {	
-		res.json(result);
+		res.json('E'+result.id);
 	});
 };
- 
+
 
 exports.findAll = (req, res) => {
 	EducationDetails.findAll({where:{roll_no:req.params.id}}).then(education_details => {

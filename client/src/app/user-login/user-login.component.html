@@ -1,25 +1,30 @@
-<br>
-<br>
-<br>
-<br>
+<h2>Login</h2>
 <form #loginForm="ngForm">
 
-  <div class="form-group">
-    <label for="id">UserId</label>
+  <div>
+    <mat-form-field class="example-full-width">
+        <input matInput id="id" placeholder="User Id" type="text" required
+        [(ngModel)]="user.id" name="id" #id="ngModel">
+    <!-- <label for="id">UserId</label>
     <input type="text" class="form-control" id="id" placeholder="User Id" 
     required
-    [(ngModel)]="user.id" name="id" #id="ngModel">
+    [(ngModel)]="user.id" name="id" #id="ngModel"> -->
     <div [hidden]="id.valid || id.pristine"
          class="alert alert-danger">
        UserId is required
     </div>
+    </mat-form-field>
   </div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
+  <div>
+      <mat-form-field class="example-full-width">
+          <input matInput id="password" placeholder="Password" type="password" required
+          [(ngModel)]="user.password" name="password" #id="ngModel">
+      </mat-form-field>
+    <!-- <label for="password">Password</label>
     <input type="password" class="form-control" id="password" placeholder="Password" 
     required
-    [(ngModel)]="user.password" name="password" #id="ngModel">
+    [(ngModel)]="user.password" name="password" #id="ngModel"> -->
     <!-- <div [hidden]="password.valid || password.pristine"
          class="alert alert-danger">
        Password is required
@@ -27,6 +32,6 @@
   </div>
 
   <div class="btn-group btn-group-sm">
-      <button type="button" class="btn btn-dark" (click)="authenticate()" [disabled]="!loginForm.form.valid">Login</button>
+      <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="authenticate()" [disabled]="!loginForm.form.valid">Login</button>
     </div>
 </form>

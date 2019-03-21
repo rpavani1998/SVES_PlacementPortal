@@ -1,8 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
 	const Student = sequelize.define('education_detail', {
+		id: {
+			type: Sequelize.INTEGER,
+			autoIncrement: true,
+			primaryKey: true
+		},
 		roll_no: {
 			type: Sequelize.STRING,
-			primaryKey: true
 		},
 		certificate_degree_name: {
 			type: Sequelize.STRING
@@ -22,9 +26,9 @@ module.exports = (sequelize, Sequelize) => {
 		cgpa: {
 			type: Sequelize.FLOAT
 		},
-		proof_document: {
-			type: Sequelize.BLOB('long')
-		}
+		// proof_document: {
+		// 	type: Sequelize.BLOB('long')
+		// }
 
 	}, {
 			timestamps: false
@@ -32,3 +36,4 @@ module.exports = (sequelize, Sequelize) => {
 
 	return Student;
 }
+
