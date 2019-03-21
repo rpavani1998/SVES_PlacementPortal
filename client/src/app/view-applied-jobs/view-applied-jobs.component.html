@@ -1,0 +1,17 @@
+<h5>Applied Job Posts</h5>
+
+<table style="width:100%">
+    <tr>
+      <td>S.no </td>
+      <td>Company</td> 
+      <td>Profile</td>
+    </tr>
+<tr *ngFor="let job_post of data; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{job_post.job_details.company.name}}</td> 
+          <td>{{job_post.job_details.job_profile}}</td>
+</tr>
+</table>
+<!-- <div><button class = "btn"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div> -->
+
+

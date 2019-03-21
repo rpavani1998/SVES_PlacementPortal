@@ -1,0 +1,221 @@
+  <div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Profile</h4>
+                      <p class="card-category">Complete your profile</p>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                          <mat-accordion class="example-headers-align">
+                              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    Personal Details
+                                  </mat-panel-title>
+                                  <mat-panel-description>
+                                  </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <form>
+                                  <!-- Student details -->
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Roll Number" >
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Branch">
+                                          </mat-form-field>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="First Name" type="text">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Last Name" type="text">
+                                        </mat-form-field>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Date of Birth" type="date">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Backlogs" type="number">
+                                          </mat-form-field>
+                                        </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Aadhar Number" type="text">
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Pan Number" type="text">
+                                              </mat-form-field>
+                                            </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                              </form>
+                                
+                                <mat-action-row>
+                                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                                </mat-action-row>
+                              </mat-expansion-panel>
+                            
+                              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    Education Details
+                                  </mat-panel-title>
+                                  <mat-panel-description>
+                                  </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <form>
+                                  <!-- Education details -->
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Certificate Degree Name" type="text">
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Major" type="text">
+                                          </mat-form-field>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Institute University Name" type="text">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <br>
+                                        <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                          <input class="ng-hide" id="input-file-id" multiple type="file" />
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Start Date" type="date">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Completion Date" type="date">
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Percentage" type="number">
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="CGPA" type="number">
+                                          </mat-form-field>
+                                        </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <br>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add Degree</button>
+                              </form>
+                            
+                                <mat-action-row>
+                                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                                </mat-action-row>
+                              </mat-expansion-panel>
+                            
+                              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                  Experience Details
+                                  </mat-panel-title>
+                                  <mat-panel-description>
+                                  </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <form>
+                                  <!-- Experience details -->
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Job Title" type="text">
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Company/Organization Name" type="text">
+                                          </mat-form-field>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Job Location City" type="text">
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <br>
+                                        <input type="checkbox"/> Is Current Job<span class="checkmark"></span>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Description" type="text">
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Start Date" type="date">
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Completion Date" type="date">
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+                                  <div class="clearfix"></div>
+                                  <br>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add Experience</button>
+                              </form>
+                                <mat-action-row>
+                                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                                  <button mat-button color="primary" (click)="nextStep()">End</button>
+                                </mat-action-row>
+                              </mat-expansion-panel>
+                            
+                            </mat-accordion>
+                            <br>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
