@@ -3,6 +3,7 @@ module.exports = function(app) {
     const skill_set = require('../controllers/skill-set.controller.js');
     const college = require('../controllers/college.controller.js');
     const branch = require('../controllers/branch.controller.js')
+    const utils = require('../controllers/utils.controller')
 
     app.post('/api/skill_set', skill_set.create);
  
@@ -33,6 +34,8 @@ module.exports = function(app) {
     app.put('/api/college', college.update);
 
     app.delete('/api/college/:userId', college.delete);
+
+    app.post('/api/mail',utils.mail);
 
  
 }

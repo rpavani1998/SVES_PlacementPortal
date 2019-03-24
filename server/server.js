@@ -11,7 +11,7 @@ const cors = require('cors')
 const corsOptions = {
   origin: 'http://localhost:4200',
   credentials: true
-}
+ }
 
 app.use(session({
   secret: "its a secret!",
@@ -20,7 +20,11 @@ app.use(session({
 }));
 
 app.use(cors(corsOptions))
-
+app.all('/*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
+  next();
+});
 require('./route/student.route.js')(app);
 require('./route/user.route.js')(app);
 require('./route/utils.route')(app);
@@ -32,7 +36,8 @@ require('./route/company.route')(app)
 
 let router = require('./route/file.router.js');
 app.use('/', router);
-
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 var server = app.listen(4000, function () {
  
     let host = server.address().address
