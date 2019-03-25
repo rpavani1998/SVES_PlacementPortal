@@ -1,6 +1,15 @@
-<h2>Profile</h2>
+<div class="main-content">
+        <div class="container-fluid">
+
+    <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title"> Profile</h4>
+                <!-- <p class="card-category">Complete your profile</p> -->
+            </div>
+            <div class="card-body">
+<!-- <h2>Profile</h2> -->
 <div class="btn-group btn-group-sm">
-    <button mat-raised-button type="button" class="btn btn-danger pull-right" [routerLink]="['../edit']">Edit</button>
+    <button mat-raised-button type="button" class="btn btn-danger pull-right" [routerLink]="['../student/edit']">Edit</button>
 </div>
 <div *ngFor="let student of data">
 <br>
@@ -45,5 +54,7 @@
             <div>Proof Document: <a href="http://localhost:4000/api/file/X{{exp_details.id}}">Proof Document</a></div>
     </div>
 </div>
-
+</div>
+</div>
+</div>
 </div>

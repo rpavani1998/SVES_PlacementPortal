@@ -24,6 +24,16 @@ import {
   MatTableModule,
   MatSlideToggleModule
 } from '@angular/material';
+import { StudentProfileComponent } from 'src/app/student-profile/student-profile.component';
+import { StudentEditComponent } from 'src/app/student-edit/student-edit.component';
+import { RegisterStudentComponent } from 'src/app/student-registration/student-registration.component';
+import { UserLoginComponent } from 'src/app/user-login/user-login.component';
+import { JobPostsComponent } from 'src/app/job-posts/job-posts.component';
+import { ViewJobPostComponent } from 'src/app/view-job-post/view-job-post.component';
+import { ViewAppliedJobsComponent } from 'src/app/view-applied-jobs/view-applied-jobs.component';
+import { StudentLayoutComponent } from './student-layout.component';
+import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-competitions/view-registered-competitions.component';
+import { ViewCompetitionComponent } from 'src/app/view-competition/view-competition.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -48,6 +58,19 @@ import {
     InternshipsComponent,
     CompetitionsComponent,
     NotificationsComponent,
+    StudentProfileComponent,
+    // StudentEditComponent,
+    // RegisterStudentComponent,
+    // UserLoginComponent,
+    JobPostsComponent,
+    ViewJobPostComponent,
+    ViewAppliedJobsComponent,
+    InternshipsComponent,
+    CompetitionsComponent,
+    ViewRegisteredCompetitionsComponent,
+    ViewRegisteredCompetitionsComponent,
+    ViewCompetitionComponent
+    
     //RegisterStudentComponent
   ]
 })

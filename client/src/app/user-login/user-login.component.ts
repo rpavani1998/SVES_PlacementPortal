@@ -39,7 +39,7 @@ private authenticate(): void {
       const id = localStorage.getItem('currentUser');
       this.studentService.getStudent(id).subscribe(student => {
       if (student) {
-        this.router.navigate(['/student/profile'])
+        this.router.navigate(['/user-profile'])
         this.Auth.setLoggedIn(true)
       }else{
         this.router.navigate(['/student/add'])

@@ -15,7 +15,15 @@
     <div>Drive Location: {{job_post.drive_location}}</div>
     <div>Last Date For Applying: {{job_post.last_date_for_application}}</div>
     <div>Job Description : {{job_post.job_description}}</div>
+<br>
+Eligibility Criteria
+<li> {{job_post.degree}}</li>
+    <li>Overall Agregate >{{job_post.overall_aggregate}}</li>
+    <li>Should have {{job_post.backlogs}} backlogs</li>
+    <li>Should have >{{job_post.inter_aggregate}} Intermediate Aggregate</li>
+    <li>Should have >{{job_post.tenth_aggregate} 10th Aggregate}</li>
+
 </div>
-<div><button class = "btn"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div>
+<div><button class="btn btn-danger"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div>
 </li>
 

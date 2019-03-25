@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Branch } from '../../models/branch';
 import { SkillSet } from '../../models/skill-set';
+import { MailFormat } from 'src/app/models/mail-format';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -17,6 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UtilsService {
+  private baseUrl = 'http://localhost:4000/api/mail';
   private collegeUrl = 'http://localhost:4000/api/college';  // URL to web api
   private branchUrl = 'http://localhost:4000/api/branch';  // URL to web api
   private skillSetUrl = 'http://localhost:4000/api/skill_set';
@@ -100,6 +102,12 @@ export class UtilsService {
 
   updateSkillSet (SkillSet: SkillSet): Observable<any> {
     return this.http.put(this.skillSetUrl, SkillSet, httpOptions);
+  }
+
+  sendMail(MailFormat : MailFormat): Observable<any> {
+    console.log(this.http.post(this.baseUrl, MailFormat, httpOptions))
+    return this.http.post(this.baseUrl, MailFormat, httpOptions);
+
   }
 
 }

@@ -147,9 +147,9 @@
   }
 
   focus{
-      border: 1px solid #008ABF;
+      border: 1px solid #f44336;
       transition: 0.35s ease;
-      color: #008ABF;
+      color: #f44336;
   }
       ::-webkit-input-placeholder{
         transition: opacity 0.45s ease; 

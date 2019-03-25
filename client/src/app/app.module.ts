@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
-
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -23,18 +22,18 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, M
 
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
 import { ComponentsModule } from './components/components.module';
+import { InternshipsComponent } from './internships/internships.component';
+import { CompetitionsComponent } from './competitions/competitions.component';
+import { ViewRegisteredCompetitionsComponent } from './view-registered-competitions/view-registered-competitions.component';
+import { ViewCompetitionComponent } from './view-competition/view-competition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentProfileComponent,
-    StudentEditComponent,
-    RegisterStudentComponent,
-    UserLoginComponent,
-    JobPostsComponent,
-    ViewJobPostComponent,
-    ViewAppliedJobsComponent,
-    StudentLayoutComponent,
+   StudentLayoutComponent,
+   UserLoginComponent,
+   RegisterStudentComponent,
+   StudentEditComponent
   ],
   imports: [
     BrowserAnimationsModule,

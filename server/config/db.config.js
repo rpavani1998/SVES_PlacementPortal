@@ -35,9 +35,11 @@ db.company = require('../models/company.model.js')(sequelize , Sequelize);
 // db.job_type = require('../models/jobtype.model.js')(sequelize , Sequelize);
 db.job_post = require('../models/job-post.model.js')(sequelize , Sequelize);
 db.job_post_activity  = require('../models/job-post-activity.model')(sequelize , Sequelize);
+db.competition = require('../models/competition.model')(sequelize,Sequelize)
+db.competition_registration = require('../models/student-comp-registration.model')(sequelize,Sequelize)
 // db.company.hasMany(db.job_posts )
 // db.job_posts.belongsTo(db.company )
-// db.job_posts.hasMany(db.job_type)
+// db.job_posts.hasMany(db.job_type)    
 // db.job_type.belongsTo(db.job_posts)
 module.exports = db;
   

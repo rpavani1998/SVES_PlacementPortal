@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Student } from '../models/student';
 import { Branch } from '../models/branch';
 import { StudentService } from '../services/student/student.service';
@@ -7,9 +6,10 @@ import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
 import { Location } from '@angular/common';
 import { UtilsService } from '../services/utils/utils.service';
 import { UploadFileService } from '../services/file/file.service';
+import { MailFormat } from '../models/mail-format';
 
 @Component({
-  selector: 'app-registartion',
+  selector: 'app-student-registartion',
   templateUrl: './student-registration.component.html',
   styleUrls: ['./student-registration.component.css']
 })
@@ -19,6 +19,7 @@ export class RegisterStudentComponent{
   submitted = false;
   myForm: FormGroup;
   branches: Branch[]
+  selectedFiles: FileList;
   backlogs = ["Never had any backlog", "Cleared All", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "More than 10"];
   data = {
     education_details : [
@@ -53,7 +54,6 @@ export class RegisterStudentComponent{
     private utilService: UtilsService,
     private uploadService: UploadFileService,
     private location: Location,
-    private router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -71,20 +71,6 @@ export class RegisterStudentComponent{
     this.setEducationDetails();
     this.setExperienceDetails();
   }
-  
-  step = 0;
-  
-    setStep(index: number) {
-      this.step = index;
-    }
-  
-    nextStep() {
-      this.step++;
-    }
-  
-    prevStep() {
-      this.step--;
-    }
 
   deleteEducationDetails(index) {
     let control = <FormArray>this.myForm.controls.education_details;
@@ -94,7 +80,6 @@ export class RegisterStudentComponent{
   newStudent(): void {
     this.submitted = false;
     this.student = new Student();
-    this.router.navigate(['/dashboard']);
   }
 
 
@@ -159,22 +144,18 @@ setEducationDetails() {
   })
 }
 
-// onFileChange(event, i) {
-//   let reader = new FileReader();
-//   if(event.target.files && event.target.files.length > 0) {
-//     let file = event.target.files[0];
-//     reader.readAsDataURL(file);
-//     reader.onload = () => {
-//       console.log(this.myForm)
-//       this.myForm.controls['education_details'][i].get('proof_document').setValue({
-//         filename: file.name,
-//         filetype: file.type,
-//         value: reader.result
-//         // .split(',')[1]
-//       })
-//     };
-//   }
-// }
+selectFile(event) {
+  this.selectedFiles = event.target.files;
+}
+
+loadfiles() {
+  for(var i = 0; i < this.myForm.value.education_details.length; i++){
+    this.myForm.value.education_details[i].proof_document = this.selectedFiles.item(i);
+  }
+  for(; i < this.myForm.value.experience_details.length; i++){
+    this.myForm.value.experience_details[i].proof_document = this.selectedFiles.item(i);
+  }
+}
 
 addNewEducationForm() {
   let control = <FormArray>this.myForm.controls.education_details;
@@ -200,17 +181,31 @@ addNewEducationForm() {
   private save(): void {
     console.info("student info", this.student);
     this.student.roll_no = localStorage.getItem('currentUser');
+    this.loadfiles()
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.studentService.addStudentProfile(this.student)
     .subscribe();
     for(let i in this.student.education_details){
-       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(); 
-    }
-    for(let i in this.student.experience_details){
-      this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe();  
-   }
+       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+         console.log("E", result)
+        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    
+    })
   }
-
+    for(let i in this.student.experience_details){
+      this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+        console.log("E", result)
+       this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+      });
+    }
+    var mailFormat = new MailFormat();
+    mailFormat.to = this.student.roll_no+'@bvrithyderabad.edu.in';
+    mailFormat.subject = 'Placement Portal:Registrated Successfully.';
+    mailFormat.text = 'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by your department placement co-ordinated. You will be notified soon. ';
+    mailFormat.html =  'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by your department placement co-ordinated. You will be notified soon.';
+   console.log(mailFormat)
+    this.utilService.sendMail(mailFormat)
+  }
 }
 

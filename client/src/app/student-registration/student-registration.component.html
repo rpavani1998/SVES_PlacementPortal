@@ -31,13 +31,13 @@
                               </div>
 
                               <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput type="text" id="branches" placeholder="Branch" required
-                                        [(ngModel)]="student.branch" name="branch" #branch="ngModel" [ngModelOptions]="{standalone: true}">
-                                        <div [hidden]="branch.valid || branch.pristine" class="alert alert-danger">
-                                            Branch is required
-                                          </div>
-                                    </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label for="branches">Branch</mat-label>
+                                  <select matNativeControl id="branches" name="branches" required [(ngModel)]="student.branch" name="branch" #branch="ngModel"
+                                  [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let branch of branches" [value]="branch.id">{{branch.branch_name}}</option>
+                               </select>
+                                </mat-form-field>
                               </div>
                               </div>
                             
@@ -132,20 +132,15 @@
                                                   formControlName="major" required>
                                               </mat-form-field>
                                             </div>
+
                                             <div class="col-md-4">
-                                                <mat-form-field>
-                                                    <input matInput [matDatepicker]="start_date1" placeholder="Start Date">
-                                                    <mat-datepicker-toggle matSuffix [for]="start_date1"></mat-datepicker-toggle>
-                                                    <mat-datepicker #start_date1></mat-datepicker>
-                                                  </mat-form-field>
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="number" class="form-control" id="passing_year" placeholder="Passing Year" name="passing_year"
+                                                    formControlName="passing_year"   min="1000" max="9999" required>
+                                                </mat-form-field>
                                               </div>
-                                              <div class="col-md-4">
-                                                  <mat-form-field>
-                                                      <input matInput [matDatepicker]="end_date1" placeholder="Completion Date">
-                                                      <mat-datepicker-toggle matSuffix [for]="end_date1"></mat-datepicker-toggle>
-                                                      <mat-datepicker #end_date1></mat-datepicker>
-                                                    </mat-form-field>
-                                                </div>
+
+                          
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -162,7 +157,7 @@
                                               </div>
                                             <div class="col-md-4">
                                                 <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                                                  <input class="ng-hide" id="input-file-id" multiple type="file" />
+                                                  <input class="ng-hide" type="file" (change)="selectFile($event)">
                                               </div>
                                               </div>
                                       </div>
@@ -217,8 +212,8 @@
                                       <div class="row">
                                           <div class="col-md-4">
                                             <br>
-                                                  <label> <input type="checkbox" [value]="true" id="is_current_job"
-                                                    name="is_current_job" formControlName="is_current_job"> Is Current Job</label>
+                                                  <mat-label> <input type="checkbox" [value]="true" id="is_current_job"
+                                                    name="is_current_job" formControlName="is_current_job" [(ngModel)]="currentJob" > Is Current Job</mat-label>
                                           </div>
                                           <div class="col-md-4">
                                               <mat-form-field>
@@ -228,7 +223,8 @@
                                                   <mat-datepicker #start_date2></mat-datepicker>
                                                 </mat-form-field>
                                           </div>
-                                          <div class="col-md-4">
+                              
+                                          <div class="col-md-4" [hidden]="currentJob" >
                                               <mat-form-field>
                                                   <input matInput [matDatepicker]="end_date2" id="end_date" placeholder="Completion Date" required [(ngModel)]="student.end_date"
                                                   name="end_date" #end_date="ngModel" [ngModelOptions]="{standalone: true}">
@@ -236,7 +232,16 @@
                                                   <mat-datepicker #end_date2></mat-datepicker>
                                                 </mat-form-field>
                                           </div>
+
+                                          <div class="col-md-4">
+                                              <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                                <input class="ng-hide" type="file" (change)="selectFile($event)">
+                                            </div>
+                                            </div>
+
                                         </div>
+
+                                       
                                     </div>
                                   </fieldset>
                                 </div>
@@ -246,10 +251,10 @@
                                 <button mat-raised-button type="button" class="btn btn-danger" (click)="addStudent()">Add</button>
                               </div>
                               <div [hidden]="!submitted">
-                                <p>Submitted Successfully! -> <span class="badge badge-light">{{student.first_name}} {{student.last_name}}</span>
-                                </p>
-                                <div class="btn-group btn-group-sm">
-                                  <button mat-raised-button type="button" class="btn btn-danger" (click)="newStudent(); addStudentForm.reset()">Continue</button>
+                                <!-- <p>Submitted Successfully! -> <span class="badge badge-light">{{student.first_name}} {{student.last_name}}</span> -->
+                                <!-- </p> -->
+                                  <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-dark" [routerLink]="['/login']">Done</button>  <button mat-raised-button type="button" class="btn btn-danger" (click)="newStudent(); addStudentForm.reset()">Continue</button>
                                 </div>
                               </div>
                             

@@ -1,6 +1,7 @@
 
-<!-- Page Container -->
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+<h1>Placement Corner</h1>
         <div class="w3-row-padding">
         <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>  
           <br><br><br>
@@ -13,7 +14,7 @@
                                 <div>Job Profile : {{job.job_profile}}</div>
                               <div>Job Location : {{job.job_location}}</div>
                             <div>Salary : {{job.salary_lpa}}</div>
-                                <button [routerLink]="['/jobpost', job.id]" class = "btn">View Details</button> </div>
+                                <button [routerLink]="['/post', job.id]" class="btn btn-danger">View Details</button> </div>
                           </div>
                           
               </div>

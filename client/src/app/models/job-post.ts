@@ -12,5 +12,10 @@ export class JobPost {
     ppt_talk : Date;
     company_id : string;
     company : Company;
+    degree:string;
+    overall_aggregate : number
+    backlogs: string
+    inter_aggregate: number
+    tenth_aggregate:number
 
 }

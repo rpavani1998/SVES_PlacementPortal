@@ -32,6 +32,9 @@ export class JobPostsComponent implements OnInit {
           this.companyService.getCompany(jobpost.company_id).subscribe(
             company => {
             jobpost.company = company
+            if(jobpost.job_type == 3 || jobpost.job_type == 4){
+              this.data.push(jobpost)
+            }
             this.data.push(jobpost)
           })
         })
