@@ -22,7 +22,7 @@
   }
   
   .navbar {
-    background: #20B2AA;
+    background: #f44336;
     border: 0px;
     top: 60px;
     height: 2%;
@@ -65,7 +65,7 @@
   }
   
   .btn {
-    background-color: #20B2AA;
+    background-color: #f44336;
     border: none;
     color: white;
     padding: 12px 16px;
@@ -74,7 +74,7 @@
   }
   
   .submitbtn {
-    background-color: #20B2AA;
+    background-color: #f44336;
     border: none;
     color: white;
     float : right;
@@ -84,7 +84,7 @@
   
   .popup_header {
       height: 10%;
-    background-color: #20B2AA;
+    background-color: #f44336;
     color: white;
   }
   

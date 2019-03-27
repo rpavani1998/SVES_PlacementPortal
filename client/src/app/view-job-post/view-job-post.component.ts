@@ -20,6 +20,7 @@ import { Student } from '../models/student';
 export class ViewJobPostComponent implements OnInit {
 
   data = []
+  is_applied = false
   student_data = []
   jobdata = new JobPost();
   submitted = false;
@@ -57,11 +58,20 @@ export class ViewJobPostComponent implements OnInit {
 
   ngOnInit() {
     this.getStudentDetails();
+    const id = localStorage.getItem('currentUser');
     const jobid = this.route.snapshot.params.id;
     console.log('id', jobid)
     this.jobPostsService.getJobData(jobid)
       .subscribe(jobdata =>  {
         this.jobdata = jobdata;
+        this.jobPostsService.getAppliedJobDetails(id).subscribe(job_posts =>
+          {
+            job_posts.forEach(job_post => {
+              if(job_post.job_post_id== jobdata.id)
+                  this.is_applied = true
+                }
+              )
+            });
         this.companyService.getCompany(jobdata.company_id).subscribe(company => {
           this.jobdata.company = company;
           this.data.push(this.jobdata)

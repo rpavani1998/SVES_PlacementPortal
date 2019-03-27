@@ -109,32 +109,12 @@ this.studentService.getStudentExperienceDetails(id)
         .subscribe();
     for(var i=0; i < this.myForm.value.education_details.length; i++){
       this.studentService.updateStudentEducationalDeails(this.myForm.value.education_details[i])
-      .subscribe(student=>{
-        console.log('id')
-        if(!student){
-          for(let i in this.student.education_details){
-                this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
-                  console.log("E", result)
-                  this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
-              
-              })
-            }
-
-        }
-      });
+      .subscribe();
     
     }
     for(var i=0; i < this.myForm.value.experience_details.length; i++){
       this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
-      .subscribe(student=> {
-        if(!student){
-          for(let i in this.student.experience_details){
-            this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
-              console.log("E", result)
-             this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
-            });
-          }
-        }});
+      .subscribe();
     }
    
   }

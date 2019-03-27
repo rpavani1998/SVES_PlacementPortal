@@ -26,6 +26,8 @@ exports.findAll = (req, res) => {
 	});
 };
 
+
+
 // Find a JobPost by Id
 exports.findById = (req, res) => {	
 	console.log("Params", req.params)
@@ -35,7 +37,7 @@ exports.findById = (req, res) => {
 };
 
 exports.findAllApplied = (req, res) => {
-	JobPostActivity.findAll({attributes: ['job_post_id', 'apply_date']},{where:{roll_no:req.params.id}}).then(jobs => {
+	JobPostActivity.findAll({where:{roll_no:req.params.id}}).then(jobs => {
 		console.log(jobs);
 	  res.json(jobs);
 	});

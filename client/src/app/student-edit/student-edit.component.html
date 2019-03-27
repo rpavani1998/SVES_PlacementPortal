@@ -247,16 +247,14 @@
                                   </div>
                                 </div>
                                 <div class="btn-group btn-group-sm">
-                                  <button mat-raised-button type="button" class="btn btn-danger" (click)="goBack()">Back</button>
-                                  <button mat-raised-button type="button" class="btn btn-danger" (click)="addStudent()">Add</button>
+                                  <!-- <button mat-raised-button type="button" class="btn btn-danger" (click)="goBack()">Back</button> -->
+                                  <button mat-raised-button type="button" class="btn btn-danger" [routerLink]="['/user-profile']" (click)="update()">Update</button>
                                 </div>
-                                <div [hidden]="!submitted">
-                                  <p>Submitted Successfully! -> <span class="badge badge-light">{{student.first_name}} {{student.last_name}}</span>
-                                  </p>
-                                  <div class="btn-group btn-group-sm">
-                                    <button mat-raised-button type="button" class="btn btn-danger" (click)="newStudent(); addStudentForm.reset()">Continue</button>
-                                  </div>
-                                </div>
+          
+                                  <!-- <div class="btn-group btn-group-sm">
+                                    <button mat-raised-button type="button" class="btn btn-danger" (click)="newStudent(); addStudentForm.reset()">Done</button>
+                                  </div> -->
+                                <!-- </div> -->
                               
                               </form>
                               <br>

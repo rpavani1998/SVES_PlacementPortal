@@ -35,6 +35,7 @@ export class JobPostsService {
 
   getAppliedJobDetails(roll_no: string): Observable<JobPostActivity[]> {
     const url = `${this.jobpostsUrl}/applied/${roll_no}`;
+    console.log(url)
     return this.http.get<JobPostActivity[]>(url);
   }
 
