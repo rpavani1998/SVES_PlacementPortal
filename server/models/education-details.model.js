@@ -26,9 +26,9 @@ module.exports = (sequelize, Sequelize) => {
 		cgpa: {
 			type: Sequelize.FLOAT
 		},
-		// proof_document: {
-		// 	type: Sequelize.BLOB('long')
-		// }
+		status: {
+			type: Sequelize.STRING
+		}
 
 	}, {
 			timestamps: false

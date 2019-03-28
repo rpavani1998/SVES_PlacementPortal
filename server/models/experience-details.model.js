@@ -29,6 +29,9 @@ module.exports = (sequelize, Sequelize) => {
         description: {
             type: Sequelize.STRING
         },
+		is_verified: {
+			type: Sequelize.STRING
+		}
         // proof_document: {
 		// 	type: Sequelize.BLOB('long')
 		// }

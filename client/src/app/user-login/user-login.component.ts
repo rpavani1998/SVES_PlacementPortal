@@ -37,13 +37,21 @@ private authenticate(): void {
     if(data.success) {
       localStorage.setItem('currentUser', this.user.id);
       const id = localStorage.getItem('currentUser');
-      this.studentService.getStudent(id).subscribe(student => {
-      if (student) {
-        this.router.navigate(['/user-profile'])
-        this.Auth.setLoggedIn(true)
-      }else{
-        this.router.navigate(['/student/add'])
-      }});
+      this.userService.getUser(id).subscribe(user => {
+        if(user.user_type_id == "STUD"){
+          this.studentService.getStudent(id).subscribe(student => {
+          if (student) {
+            console.log("STUD", student)
+            this.router.navigate(['/user-profile'])
+            this.Auth.setLoggedIn(true)
+          }else{
+            this.router.navigate(['/student/add'])
+          }});
+        } else{
+          this.router.navigate(['/admin-profile'])
+          this.Auth.setLoggedIn(true)
+        }
+      })
     } else {
       window.alert(data.message)
     }

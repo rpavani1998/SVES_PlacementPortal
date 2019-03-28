@@ -9,4 +9,5 @@ export class EducationDetails {
   percentage: number = 100
   cgpa: number = 10
   proof_document: File = null
+  is_verfied: string = 'False'
 }

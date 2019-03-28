@@ -22,7 +22,9 @@ app.use(session({
 app.use(cors(corsOptions))
 app.all('/*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  // res.header('Content-Type', 'application/X-www-form-urlencoded');
   next();
 });
 require('./route/student.route.js')(app);
@@ -39,6 +41,7 @@ let router = require('./route/file.router.js');
 app.use('/', router);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
 var server = app.listen(4000, function () {
  
     let host = server.address().address

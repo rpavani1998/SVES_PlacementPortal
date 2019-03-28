@@ -10,6 +10,9 @@ const httpOptions = {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin' : '*',
+    
+    // 'Access-Control-Allow-Methods' : 'GET, POST, PUT, OPTIONS',
+    // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
   })
 };
 
@@ -101,12 +104,13 @@ export class UtilsService {
   }
 
   updateSkillSet (SkillSet: SkillSet): Observable<any> {
-    return this.http.put(this.skillSetUrl, SkillSet, httpOptions);
+    return this.http.put<any>(this.skillSetUrl, SkillSet, httpOptions);
   }
 
-  sendMail(MailFormat : MailFormat): Observable<any> {
-    console.log(this.http.post(this.baseUrl, MailFormat, httpOptions))
-    return this.http.post(this.baseUrl, MailFormat, httpOptions);
+  sendMail(MailFormat : MailFormat): Observable<string> {
+    console.log(this.baseUrl, MailFormat, httpOptions)
+    console.log(this.http.post<string>(this.baseUrl, MailFormat, httpOptions))
+    return this.http.post<string> (this.baseUrl, MailFormat, httpOptions);
 
   }
 

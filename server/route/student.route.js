@@ -6,6 +6,10 @@ module.exports = function(app) {
     const education_details = require('../controllers/education-details.controller.js');
     const experience_details = require('../controllers/experience-details.controller');
 
+    const students_verified = require('../controllers/student-verified.controller');
+    const education_details_verified = require('../controllers/education-details-verified.controller');
+    const experience_details_verified = require('../controllers/experience-details-verified.controller');
+
     app.post('/api/students', students.create);
  
     app.get('/api/students', students.findAll);
@@ -18,8 +22,6 @@ module.exports = function(app) {
  
     app.post('/api/student/education_details', education_details.create);
  
-    // app.get('/api/student/education_details', education_details.findAll);
- 
     app.get('/api/student/education_details/:id', education_details.findAll);
  
     app.put('/api/student/education_details', education_details.update);
@@ -28,11 +30,36 @@ module.exports = function(app) {
 
     app.post('/api/student/experience_details', experience_details.create);
  
-    // app.get('/api/student/experience_details', experience_details.findAll);
- 
     app.get('/api/student/experience_details/:id', experience_details.findAll);
  
     app.put('/api/student/experience_details', experience_details.update);
  
     app.delete('/api/student/experience_details/:id', experience_details.delete);
+
+    
+    app.post('/api/students_verified', students_verified.create);
+ 
+    app.get('/api/students_verified', students_verified.findAll);
+ 
+    app.get('/api/students_verified/:studentId', students_verified.findById);
+ 
+    app.put('/api/students_verified', students_verified.update);
+ 
+    app.delete('/api/students_verified/:studentId', students_verified.delete);
+ 
+    app.post('/api/student/education_details_verified', education_details_verified.create);
+ 
+    app.get('/api/student/education_details_verified/:id', education_details_verified.findAll);
+ 
+    app.put('/api/student/education_details_verified', education_details_verified.update);
+ 
+    app.delete('/api/student/education_details_verified/:education_detailId', education_details_verified.delete);
+
+    app.post('/api/student/experience_details_verified', experience_details_verified.create);
+ 
+    app.get('/api/student/experience_details_verified/:id', experience_details_verified.findAll);
+ 
+    app.put('/api/student/experience_details_verified', experience_details_verified.update);
+ 
+    app.delete('/api/student/experience_details_verified/:id', experience_details_verified.delete);
 }

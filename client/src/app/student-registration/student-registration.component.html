@@ -1,3 +1,4 @@
+
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
@@ -8,15 +9,16 @@
                       <p class="card-category">Complete your profile</p>
                   </div>
                   <div class="card-body">
-                          <form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                          <form [formGroup]="myForm" (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm" novalidate>
                               <div class="row">                          
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                   <input matInput type="text" id="first_name" placeholder="First Name" required
                                     [(ngModel)]="student.first_name" name="first_name" #first_name="ngModel" [ngModelOptions]="{standalone: true}">
-                                    <div [hidden]="first_name.valid || first_name.pristine" class="alert alert-danger">
-                                    First Name is required
-                                  </div>
+                                    <div [hidden]="first_name.valid || first_name.pristine"
+                                    class="alert alert-danger">
+                                  First Name is required
+                               </div>
                                 </mat-form-field>
                               </div>
                             
@@ -24,10 +26,11 @@
                                   <mat-form-field class="example-full-width">
                                 <input matInput type="text" id="last_name" placeholder="Last Name" required
                                   [(ngModel)]="student.last_name" name="last_name" #last_name="ngModel" [ngModelOptions]="{standalone: true}">
-                                <div [hidden]="last_name.valid || last_name.pristine" class="alert alert-danger">
-                                  Last Name is required
-                                </div>
-                              </mat-form-field>
+                                        </mat-form-field>
+                                        <div [hidden]="last_name.valid || last_name.pristine"
+                                        class="alert alert-danger">
+                                      Last Name is required
+                                   </div>
                               </div>
 
                               <div class="col-md-4">
@@ -38,6 +41,10 @@
                                   <option *ngFor="let branch of branches" [value]="branch.id">{{branch.branch_name}}</option>
                                </select>
                                 </mat-form-field>
+                                <div [hidden]="branch.valid || branch.pristine"
+                                class="alert alert-danger">
+                              Branch is required
+                           </div>
                               </div>
                               </div>
                             
@@ -49,28 +56,32 @@
                                   [ngModelOptions]="{standalone: true}">
                                   <option *ngFor="let backlog of backlogs" [value]="backlog">{{backlog}}</option>
                                 </select>
+            
                               </mat-form-field>
+                              <div [hidden]="backlog.valid || backlog.pristine"
+                              class="alert alert-danger">
+                            Backlogs is required
+                         </div>
                               </div>
                             
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                <input matInput type="text" id="aadhar_no" placeholder="Aadhar Number" required
+                                <input matInput type="text" data-type="adhaar-number" maxLength="19" id="aadhar_no" placeholder="Aadhar Number" required 
                                   [(ngModel)]="student.aadhar_no" name="aadhar_no" #aadhar_no="ngModel" [ngModelOptions]="{standalone: true}">
-                                <div [hidden]="aadhar_no.valid || aadhar_no.pristine" class="alert alert-danger">
-                                  Aadhar Number is required
-                                </div>
+      
                               </mat-form-field>
-                              </div>
+                              <div [hidden]="aadhar_no.valid || aadhar_no.pristine"
+                              class="alert alert-danger">
+                            Aadhar Number is required
+                         </div>
+                            </div>
 
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                      <input matInput type="text" id="pan_no" placeholder="Pan Number" required
-                                      [(ngModel)]="student.pan_no" name="pan_no" #pan_no="ngModel" [ngModelOptions]="{standalone: true}">
-                                    <div [hidden]="pan_no.valid || pan_no.pristine" class="alert alert-danger">
-                                      Pan Number is required
-                                    </div>
-                                  </mat-form-field>
-                              </div>
+                            <div class="col-md-4">
+                                <mat-label for="backlogs">Aadhar Proof</mat-label>
+                              <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                <input class="ng-hide" type="file" (change)="selectFile($event)" required>
+                            </div>
+                            </div>
 
                             </div>
 
@@ -81,10 +92,11 @@
                                     name="dob" #dob="ngModel" [ngModelOptions]="{standalone: true}">
                                     <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
                                     <mat-datepicker #date></mat-datepicker>
-                                    <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
-                                        Date of Birth is required
-                                    </div>
                                   </mat-form-field>
+                                  <div [hidden]="dob.valid || dob.pristine"
+                                  class="alert alert-danger">
+                                DOB is required
+                             </div>
                               </div>
                             </div>
                                                                                      
@@ -111,17 +123,29 @@
                                                   <input matInput type="text" id="certificate_degree_name" placeholder="Certificate Degree Name"
                                             name="certificate_degree_name" formControlName="certificate_degree_name" required>
                                                 </mat-form-field>
+                                                <!-- <div [hidden]="certificate_degree_name.valid || certificate_degree_name.pristine"
+                                                class="alert alert-danger">
+                                              Degree is required
+                                           </div> -->
                                             </div>
                                             <div class="col-md-4">
                                                 <mat-form-field class="example-full-width">
                                                     <input matInput type="text" id="board" placeholder="Board" name="major" formControlName="board" required>
                                                     </mat-form-field>
+                                                    <!-- <div [hidden]="board.valid || board.pristine"
+                                                    class="alert alert-danger">
+                                                  Board is required
+                                               </div> -->
                                               </div>
                                             <div class="col-md-4">
                                                 <mat-form-field class="example-full-width">
                                                     <input matInput type="text" id="institute_university_namer"
                                                     placeholder="Institute University Name" name="major" formControlName="institute_university_name"
                                                     required>
+                                                    <!-- <div [hidden]="institute_university_name.valid || institute_university_name.pristine"
+                                                    class="alert alert-danger">
+                                                  Institute is required
+                                               </div> -->
                                                 </mat-form-field>
                                             </div>
                                         </div>
@@ -130,7 +154,12 @@
                                               <mat-form-field class="example-full-width">
                                                   <input matInput type="text" id="major" placeholder="Major" name="major"
                                                   formControlName="major" required>
+                                  
                                               </mat-form-field>
+                                              <!-- <div [hidden]="major.valid || major.pristine"
+                                              class="alert alert-danger">
+                                            Major is required
+                                         </div> -->
                                             </div>
 
                                             <div class="col-md-4">
@@ -138,23 +167,32 @@
                                                     <input matInput type="number" class="form-control" id="passing_year" placeholder="Passing Year" name="passing_year"
                                                     formControlName="passing_year"   min="1000" max="9999" required>
                                                 </mat-form-field>
+                                                <!-- <div [hidden]="passing_year.valid || passing_year.pristine"
+                                                class="alert alert-danger">
+                                             Passing Year is required
+                                           </div> -->
                                               </div>
 
+                                              <div class="col-md-4">
+                                                  <mat-form-field class="example-full-width">
+                                                      <input matInput type="number" id="percentage" placeholder="Percentage" name="percentage"
+                                                      formControlName="percentage"  min="1" max="100" required>
+                                                  </mat-form-field>
+                                                  <!-- <div [hidden]="percentage.valid || percentage.pristine"
+                                                  class="alert alert-danger">
+                                                Percentage is required
+                                                </div> -->
                           
                                         </div>
+                                        </div>
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput type="number" id="percentage" placeholder="Percentage" name="percentage"
-                                                    formControlName="percentage"  min="1" max="100" required>
-                                                </mat-form-field>
-                                              </div>
-                                              <div class="col-md-4">
+                                           
+                                              <!-- <div class="col-md-4">
                                                 <mat-form-field class="example-full-width">
                                                     <input matInput type="number" id="number" placeholder="CGPA" name="cgpa"  min="1" max="10"
                                                     formControlName="cgpa" required>
                                                 </mat-form-field>
-                                              </div>
+                                              </div> -->
                                             <div class="col-md-4">
                                                 <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
                                                   <input class="ng-hide" type="file" (change)="selectFile($event)">
@@ -189,18 +227,30 @@
                                             <input matInput type="text" id="job_title" placeholder="Job Title" name="job_title"
                                             formControlName="job_title" required>
                                             </mat-form-field>
+                                            <!-- <div [hidden]="job_title.valid || job_title.pristine"
+                                            class="alert alert-danger">
+                                          Job Title is required
+                                       </div> -->
                                         </div>
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput type="text" id="company_name" placeholder="Company/Organization Name"
                                                 name="company_name" formControlName="company_name" required>
                                             </mat-form-field>
+                                            <!-- <div [hidden]="company_name.valid || company_name.pristine"
+                                            class="alert alert-danger">
+                                          Company Name is required
+                                       </div> -->
                                         </div>
                                         <div class="col-md-4">
                                             <mat-form-field class="example-full-width">
                                                 <input matInput type="text" id="job_location_city" placeholder="Job Location City" name="job_location_city"
                                                 formControlName="job_location_city" required>
                                             </mat-form-field>
+                                            <!-- <div [hidden]="job_location_city.valid || job_location_city.pristine"
+                                            class="alert alert-danger">
+                                          Job Location is required
+                                       </div> -->
                                         </div>
                                       </div>
                                       <p>
@@ -208,6 +258,11 @@
                                               <textarea matInput type="text" id="description" placeholder="Description" name="description"
                                               formControlName="description" required></textarea>
                                           </mat-form-field>
+                                          <!-- <div [hidden]="description.valid || description.pristine"
+                                          class="alert alert-danger">
+                                        Job Description is required
+                                     </div> -->
+                                
                                       </p>
                                       <div class="row">
                                           <div class="col-md-4">
@@ -222,7 +277,12 @@
                                                   <mat-datepicker-toggle matSuffix [for]="start_date2"></mat-datepicker-toggle>
                                                   <mat-datepicker #start_date2></mat-datepicker>
                                                 </mat-form-field>
+                                                <!-- <div [hidden]="start_date.valid || start_date.pristine"
+                                   class="alert alert-danger">
+                                 Start Date is required
+                              </div> -->
                                           </div>
+
                               
                                           <div class="col-md-4" [hidden]="currentJob" >
                                               <mat-form-field>
@@ -247,14 +307,15 @@
                                 </div>
                               </div>
                               <div class="btn-group btn-group-sm">
-                                <button mat-raised-button type="button" class="btn btn-danger" (click)="goBack()">Back</button>
-                                <button mat-raised-button type="button" class="btn btn-danger" (click)="addStudent()">Add</button>
+                                <button mat-raised-button type="button" class="btn btn-danger"[routerLink]="['/login']">Cancel</button>
+                                <button mat-raised-button type="button" class="btn btn-danger"  (click)="addStudent()" [disabled]="!registrationForm.form.valid">Add</button>
                               </div>
+
                               <div [hidden]="!submitted">
                                 <!-- <p>Submitted Successfully! -> <span class="badge badge-light">{{student.first_name}} {{student.last_name}}</span> -->
                                 <!-- </p> -->
                                   <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-dark" [routerLink]="['/login']">Done</button>  <button mat-raised-button type="button" class="btn btn-danger" (click)="newStudent(); addStudentForm.reset()">Continue</button>
+                                    <button type="button" class="btn btn-dark" [routerLink]="['/login']">Done</button> 
                                 </div>
                               </div>
                             

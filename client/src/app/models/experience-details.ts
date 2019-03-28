@@ -9,4 +9,5 @@ export class ExperienceDetails {
     job_location_city: string = ''
     description: string = ''
     proof_document: any = null
+    is_verfied: string = 'False'
 }

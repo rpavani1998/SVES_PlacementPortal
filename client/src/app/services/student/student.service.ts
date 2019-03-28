@@ -19,6 +19,9 @@ export class StudentService {
   private studentsUrl = 'http://localhost:4000/api/students'; 
   private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
   private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
+  private verifiedStudentsUrl = 'http://localhost:4000/api/students_verified'; 
+  private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
+  private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verfied'; 
 
   constructor( 
     private http: HttpClient
@@ -70,6 +73,49 @@ export class StudentService {
     return this.http.put(this.studentsUrl, educationDetails, httpOptions);
   }
   updateStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<any> {
+    return this.http.put(this.studentsUrl, experienceDetails, httpOptions);
+  }
+
+
+  getVerifiedStudents (): Observable<Student[]> {
+    console.log((this.verifiedStudentsUrl));
+    return this.http.get<Student[]>(this.studentsUrl);
+  }
+
+  getVerifiedStudent(id: string): Observable<Student> {
+    const url = `${this.verifiedStudentsUrl}/${id}`;
+    return this.http.get<Student>(url);
+  }
+
+  addVerifiedStudentProfile (student: Student): Observable<Student> {
+    console.log(this.http.post<Student>(this.verifiedStudentsUrl, student, httpOptions))
+    return this.http.post<Student>(this.verifiedStudentsUrl, student, httpOptions);
+  }
+
+  addVerifiedStudentEducationDetails (educationDetails: EducationDetails): Observable<EducationDetails> {
+    return this.http.post<EducationDetails>(this.verifiedEducationDetailsUrl, educationDetails);
+  }
+
+ addVerifiedStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<ExperienceDetails> {
+    return this.http.post<ExperienceDetails>(this.verifiedExperienceDetailsUrl, experienceDetails);
+  }
+
+  getVerifiedStudentExperienceDetails (id: string): Observable<ExperienceDetails[]> {
+    return this.http.get<ExperienceDetails[]>(`${this.verifiedExperienceDetailsUrl}/${id}`);
+  }
+
+  getVerifiedStudentEducationalDetails (id: string): Observable<EducationDetails[]> {
+    console.log((`${this.verifiedEducationDetailsUrl}/${id}`))
+    return this.http.get<EducationDetails[]>(`${this.verifiedEducationDetailsUrl}/${id}`);
+  }
+
+  updateVerifiedStudent (student: Student): Observable<any> {
+    return this.http.put(this.verifiedStudentsUrl, student, httpOptions);
+  }
+  updateVerifiedStudentEducationalDeails (educationDetails: EducationDetails): Observable<any> {
+    return this.http.put(this.verifiedStudentsUrl, educationDetails, httpOptions);
+  }
+  updateVerifiedStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<any> {
     return this.http.put(this.studentsUrl, experienceDetails, httpOptions);
   }
 }

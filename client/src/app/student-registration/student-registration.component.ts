@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
 import { Branch } from '../models/branch';
 import { StudentService } from '../services/student/student.service';
-import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
+import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import { Location } from '@angular/common';
 import { UtilsService } from '../services/utils/utils.service';
 import { UploadFileService } from '../services/file/file.service';
@@ -25,13 +25,13 @@ export class RegisterStudentComponent{
     education_details : [
       {
       roll_no: localStorage.getItem('currentUser'),
-      certificate_degree_name: '',
-      major: '',
-      board: '',
-      institute_university_name : '',
-      passing_year: 2019,
-      percentage: 100,
-      cgpa: 10,
+      certificate_degree_name: ['', Validators.required],
+      major: ['', Validators.required],
+      board: ['', Validators.required],
+      institute_university_name : ['', Validators.required],
+      passing_year: [2019, Validators.required],
+      percentage: [100, Validators.required],
+      // cgpa: 10,
       proof_document: null    
       }
     ],
@@ -39,12 +39,12 @@ export class RegisterStudentComponent{
       {
       roll_no: localStorage.getItem('currentUser'),
       is_current_job: false,
-      start_date: null,
+      start_date: ['', Validators.required],
       end_date: null,
-      job_title: '',
-      company_name: '',
-      job_location_city:  '',
-      description: '',
+      job_title: ['', Validators.required],
+      company_name: ['', Validators.required],
+      job_location_city: ['', Validators.required],
+      description: ['', Validators.required],
       proof_document: null
       }
     ]
@@ -58,10 +58,24 @@ export class RegisterStudentComponent{
   ) {}
 
   ngOnInit() {
-    this.utilService.getBranches().subscribe(branch => {
-      this.branches = branch;
+    // const branch = new Branch()
+    // branch.id = ''
+    // branch.branch_name 
+    this.utilService.getBranches().subscribe(branches => {
+      // console.log("br", branches)
+      // branches.forEach(branch =>
+      //   this.branches.push(branch))
+      // // this.branches = branch;
+      // console.log("branches", this.branches)
+      this.branches = branches
     })
     this.myForm = this.fb.group({
+      // first_name: [null, Validators.required],
+      // last_name: [null, Validators.required],
+      // branch: [null, Validators.required],
+      // dob: [null, Validators.required],
+      // backlogs: [null, Validators.required],
+      // aadhar_no: [null, Validators.required],
       education_details: this.fb.array([]),
       experience_details: this.fb.array([])
     })
@@ -108,17 +122,17 @@ export class RegisterStudentComponent{
 addNewExperienceForm() {
   let control = <FormArray>this.myForm.controls.experience_details;
   control.push(
-    this.fb.group({
+    this.fb.group( {
       roll_no: localStorage.getItem('currentUser'),
       is_current_job: false,
-      start_date: null,
+      start_date: ['', Validators.required],
       end_date: null,
-      job_title: '',
-      company_name: '',
-      job_location_city:  '',
-      description: '',
+      job_title: ['', Validators.required],
+      company_name: ['', Validators.required],
+      job_location_city: ['', Validators.required],
+      description: ['', Validators.required],
       proof_document: null
-    })
+      })
   )
 }
 
@@ -138,7 +152,7 @@ setEducationDetails() {
       institute_university_name : x.institute_university_name,
       passing_year : x.passing_year,
       percentage: x.percentage,
-      cgpa: x.cgpa,
+      // cgpa: x.cgpa,
       proof_document: x.proof_document
      }))
   })
@@ -149,11 +163,13 @@ selectFile(event) {
 }
 
 loadfiles() {
+  var index = 0
+  this.student.id_proof = this.selectedFiles.item(index++);
   for(var i = 0; i < this.myForm.value.education_details.length; i++){
-    this.myForm.value.education_details[i].proof_document = this.selectedFiles.item(i);
+    this.myForm.value.education_details[i].proof_document = this.selectedFiles.item(index++);
   }
-  for(; i < this.myForm.value.experience_details.length; i++){
-    this.myForm.value.experience_details[i].proof_document = this.selectedFiles.item(i);
+  for(i= 0; i < this.myForm.value.experience_details.length; i++){
+    this.myForm.value.experience_details[i].proof_document = this.selectedFiles.item(index++);
   }
 }
 
@@ -162,15 +178,15 @@ addNewEducationForm() {
   control.push(
     this.fb.group({
       roll_no: localStorage.getItem('currentUser'),
-      certificate_degree_name: '',
-      major: '',
-      board: '',
-      institute_university_name : '',
-      passing_year : 2019,
-      percentage: 100,
-      cgpa: 10,
-      proof_document: null
-    })
+      certificate_degree_name: ['', Validators.required],
+      major: ['', Validators.required],
+      board: ['', Validators.required],
+      institute_university_name : ['', Validators.required],
+      passing_year: [2019, Validators.required],
+      percentage: [100, Validators.required],
+      // cgpa: 10,
+      proof_document: null    
+      })
   )
 }
 
@@ -180,32 +196,34 @@ addNewEducationForm() {
 
   private save(): void {
     console.info("student info", this.student);
+    console.log(localStorage.getItem('currentUser'))
     this.student.roll_no = localStorage.getItem('currentUser');
     this.loadfiles()
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
-    this.studentService.addStudentProfile(this.student)
-    .subscribe();
-    for(let i in this.student.education_details){
-       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
-         console.log("E", result)
-        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
-    
-    })
-  }
-    for(let i in this.student.experience_details){
-      this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
-        console.log("E", result)
-       this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
-      });
-    }
+    this.studentService.addStudentProfile(this.student).subscribe();
     var mailFormat = new MailFormat();
     mailFormat.to = this.student.roll_no+'@bvrithyderabad.edu.in';
     mailFormat.subject = 'Placement Portal:Registrated Successfully.';
-    mailFormat.text = 'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by your department placement co-ordinated. You will be notified soon. ';
-    mailFormat.html =  'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by your department placement co-ordinated. You will be notified soon.';
-   console.log(mailFormat)
+    mailFormat.text = 'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you';
+    mailFormat.html =  'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you';
+    console.log(mailFormat)
     this.utilService.sendMail(mailFormat)
+  //   for(var i = 0; i < 10000; i++){}
+  //   this.uploadService.pushFileToStorage(this.student.roll_no, this.student.id_proof).subscribe();
+  //   for(let i in this.student.education_details){
+  //      this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+  //        console.log("E", result)
+  //       this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    
+  //   })
+  // }
+  //   for(let i in this.student.experience_details){
+  //     this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+  //       console.log("E", result)
+  //      this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+  //     });
+  //   }
   }
 }
 

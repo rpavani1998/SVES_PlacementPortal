@@ -1,11 +1,12 @@
 const db = require('../config/db.config.js');
 const Student = db.students;
-
+const util = require('../controllers/utils.controller')
 // Post a Student
 exports.create = (req, res) => {	
 	let student = req.body;
 	Student.create(student).then(result => {	
 		res.json(result);
+		util.mail(result.roll_no)
 	});
 };
  
