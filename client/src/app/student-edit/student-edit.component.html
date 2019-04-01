@@ -61,17 +61,6 @@
                                   </div>
                                 </mat-form-field>
                                 </div>
-  
-                                <div class="col-md-4">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput type="text" id="pan_no" placeholder="Pan Number" required
-                                        [(ngModel)]="student.pan_no" name="pan_no" #pan_no="ngModel" [ngModelOptions]="{standalone: true}">
-                                      <div [hidden]="pan_no.valid || pan_no.pristine" class="alert alert-danger">
-                                        Pan Number is required
-                                      </div>
-                                    </mat-form-field>
-                                </div>
-  
                               </div>
   
                               <div class="row">

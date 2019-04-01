@@ -53,7 +53,7 @@ export class StudentEditComponent implements OnInit {
     experience_details: this.fb.array([])
   })
 
-  var ids = []
+  var edu_ids = []
 
   this.studentService.getStudentEducationalDetails(id)
   .subscribe(educationDetails => {
@@ -70,11 +70,11 @@ export class StudentEditComponent implements OnInit {
         cgpa: x.cgpa,
         proof_document: x.proof_document
        }))
-       ids.push(x.id)
+       edu_ids.push(x.id)
     })
     });
 
-
+var exp_ids = []
 
 this.studentService.getStudentExperienceDetails(id)
   .subscribe(experienceDetails => {
@@ -91,7 +91,7 @@ this.studentService.getStudentExperienceDetails(id)
         description: x.description,
         proof_document: x.proof_document
        }))
-      ids.push(x.id)
+      exp_ids.push(x.id)
     })
   });
   this.setEducationDetails();
@@ -108,7 +108,7 @@ this.studentService.getStudentExperienceDetails(id)
     this.studentService.updateStudent(this.student)
         .subscribe();
     for(var i=0; i < this.myForm.value.education_details.length; i++){
-      this.studentService.updateStudentEducationalDeails(this.myForm.value.education_details[i])
+      this.studentService.updateStudentEducationalDetails(this.myForm.value.education_details[i])
       .subscribe();
     
     }

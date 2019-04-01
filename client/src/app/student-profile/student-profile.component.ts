@@ -13,6 +13,7 @@ export class StudentProfileComponent  implements OnInit {
 
   student: Student;
   data = [];
+  img_id = null
   @Input() fileUpload: string;
 
   constructor(private studentService: StudentService,

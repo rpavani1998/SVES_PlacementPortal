@@ -69,7 +69,7 @@ export class StudentService {
   updateStudent (student: Student): Observable<any> {
     return this.http.put(this.studentsUrl, student, httpOptions);
   }
-  updateStudentEducationalDeails (educationDetails: EducationDetails): Observable<any> {
+  updateStudentEducationalDetails (educationDetails: EducationDetails): Observable<any> {
     return this.http.put(this.studentsUrl, educationDetails, httpOptions);
   }
   updateStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<any> {

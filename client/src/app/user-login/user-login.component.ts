@@ -38,6 +38,8 @@ private authenticate(): void {
       localStorage.setItem('currentUser', this.user.id);
       const id = localStorage.getItem('currentUser');
       this.userService.getUser(id).subscribe(user => {
+        localStorage.setItem('role', user.user_type_id)
+        localStorage.setItem('college', user.college_id)
         if(user.user_type_id == "STUD"){
           this.studentService.getStudent(id).subscribe(student => {
           if (student) {

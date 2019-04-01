@@ -1,17 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
 	const JobPosts = sequelize.define('job_posts')
 	const Company = sequelize.define('company', {
-	  id: {
+	  company_id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true
 	  },
-	 name: {
+	 company_name: {
 			type: Sequelize.STRING
 	  },
-	  description: {
+	  profile_description: {
 			type: Sequelize.STRING
     },
-   website_url : {
+   company_website_url : {
           type : Sequelize.STRING
 		},
 	company_image : {

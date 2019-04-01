@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { UtilsService } from '../services/utils/utils.service';
 import { UploadFileService } from '../services/file/file.service';
 import { MailFormat } from '../models/mail-format';
+// import { FILE } from 'dns';
 
 @Component({
   selector: 'app-student-registartion',
@@ -202,28 +203,21 @@ addNewEducationForm() {
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.studentService.addStudentProfile(this.student).subscribe();
-    var mailFormat = new MailFormat();
-    mailFormat.to = this.student.roll_no+'@bvrithyderabad.edu.in';
-    mailFormat.subject = 'Placement Portal:Registrated Successfully.';
-    mailFormat.text = 'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you';
-    mailFormat.html =  'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you';
-    console.log(mailFormat)
-    this.utilService.sendMail(mailFormat)
-  //   for(var i = 0; i < 10000; i++){}
-  //   this.uploadService.pushFileToStorage(this.student.roll_no, this.student.id_proof).subscribe();
-  //   for(let i in this.student.education_details){
-  //      this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
-  //        console.log("E", result)
-  //       this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    // this.uploadService.pushFileToStorage("Img"+this.student.roll_no, ).subscribe();
+
+    this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
+    for(let i in this.student.education_details){
+       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+         console.log("E", result)
+        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
     
-  //   })
-  // }
-  //   for(let i in this.student.experience_details){
-  //     this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
-  //       console.log("E", result)
-  //      this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
-  //     });
-  //   }
+    })
+  }
+    for(let i in this.student.experience_details){
+      this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+        console.log("E", result)
+       this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+      });
+    }
   }
 }
-
