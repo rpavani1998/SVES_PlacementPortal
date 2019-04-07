@@ -34,6 +34,7 @@ import { ViewAppliedJobsComponent } from 'src/app/view-applied-jobs/view-applied
 import { StudentLayoutComponent } from './student-layout.component';
 import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from 'src/app/view-competition/view-competition.component';
+import { UserAccountComponent } from 'src/app/user-account/user-account.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -59,6 +60,7 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     CompetitionsComponent,
     NotificationsComponent,
     StudentProfileComponent,
+    UserAccountComponent,
     // StudentEditComponent,
     // RegisterStudentComponent,
     // UserLoginComponent,

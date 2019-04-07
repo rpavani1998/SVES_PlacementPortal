@@ -30,6 +30,7 @@ import { ViewCompetitionComponent } from './view-competition/view-competition.co
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NotifyMessageComponent } from './notify-message/notify-message.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { NotifyMessageComponent } from './notify-message/notify-message.componen
    RegisterStudentComponent,
    StudentEditComponent,
    NotifyMessageComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,

@@ -11,6 +11,7 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
 import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-competitions/view-registered-competitions.component';
 import { ViewJobPostComponent } from 'src/app/view-job-post/view-job-post.component';
 import { ViewAppliedJobsComponent } from 'src/app/view-applied-jobs/view-applied-jobs.component';
+import { UserAccountComponent } from 'src/app/user-account/user-account.component';
 
 const routes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -55,6 +56,10 @@ const routes: Routes = [
    path : 'jobposts/applied',
    component : ViewAppliedJobsComponent
  },
+ {
+  path : 'useraccount',
+  component : UserAccountComponent
+},
 ];
 
 @NgModule({
