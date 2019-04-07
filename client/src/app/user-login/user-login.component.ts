@@ -17,6 +17,7 @@ export class UserLoginComponent {
   submitted = false;
   message = '';
   data: any;
+  invalid = false;
 
   constructor(
     private Auth: AuthService,
@@ -51,11 +52,14 @@ private authenticate(): void {
           }});
         } else{
           this.router.navigate(['/admin-profile'])
-          this.Auth.setLoggedIn(true)
+          // this.Auth.setLoggedIn(true)
         }
       })
     } else {
-      window.alert(data.message)
+      console.log("Error:", data.msg)
+      this.invalid = true;
+      this.message = data.msg
+      // window.alert(data.msg)
     }
   })
   // console.log(username, password)

@@ -33,7 +33,7 @@ import { ViewCompetitionComponent } from './view-competition/view-competition.co
    StudentLayoutComponent,
    UserLoginComponent,
    RegisterStudentComponent,
-   StudentEditComponent
+   StudentEditComponent,
   ],
   imports: [
     BrowserAnimationsModule,

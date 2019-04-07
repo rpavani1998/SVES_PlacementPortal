@@ -7,3 +7,10 @@ exports.findAll = (req, res) => {
 	  res.json(jobtype);
 	});
 };
+
+exports.findById = (req, res) => {	
+	console.log('jobtype',req.params.jobtypeid)
+	JobType.findById(req.params.jobtypeid).then(jobtype => {
+		res.json(jobtype);
+	})
+};

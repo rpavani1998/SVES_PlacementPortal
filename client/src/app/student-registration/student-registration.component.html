@@ -67,7 +67,7 @@
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                 <input matInput type="text" data-type="adhaar-number" maxLength="19" id="aadhar_no" placeholder="Aadhar Number" required 
-                                  [(ngModel)]="student.aadhar_no" name="aadhar_no" #aadhar_no="ngModel" [ngModelOptions]="{standalone: true}">
+                                  [(ngModel)]="student.aadhar_no" name="aadhar_no" #aadhar_no="ngModel" [ngModelOptions]="{standalone: true}" maxlength='12'>
       
                               </mat-form-field>
                               <div [hidden]="aadhar_no.valid || aadhar_no.pristine"
@@ -79,7 +79,7 @@
                             <div class="col-md-4">
                                 <mat-label for="backlogs">Aadhar Proof</mat-label>
                               <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                                <input class="ng-hide" type="file" (change)="selectFile($event)" required>
+                                <input class="ng-hide" type="file" (change)="selectAadharProof($event)" required>
                             </div>
                             </div>
 
@@ -99,6 +99,8 @@
                              </div>
                               </div>
                             </div>
+
+                            <hr>
                                                                                      
                               <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
                                 (click)="addNewEducationForm()">
@@ -120,7 +122,7 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                               <mat-form-field class="example-full-width">
-                                                  <input matInput type="text" id="certificate_degree_name" placeholder="Certificate Degree Name"
+                                                  <input matInput type="text" id="certificate_degree_name" placeholder="Certificate Degree Name Ex. B.Tech,12th,10th"
                                             name="certificate_degree_name" formControlName="certificate_degree_name" required>
                                                 </mat-form-field>
                                                 <!-- <div [hidden]="certificate_degree_name.valid || certificate_degree_name.pristine"
@@ -130,7 +132,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <mat-form-field class="example-full-width">
-                                                    <input matInput type="text" id="board" placeholder="Board" name="major" formControlName="board" required>
+                                                    <input matInput type="text" id="board" placeholder="Board/Affliated University" name="board" formControlName="board" required>
                                                     </mat-form-field>
                                                     <!-- <div [hidden]="board.valid || board.pristine"
                                                     class="alert alert-danger">
@@ -195,16 +197,21 @@
                                               </div> -->
                                             <div class="col-md-4">
                                                 <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                                                  <input class="ng-hide" type="file" (change)="selectFile($event)">
+                                                  <input class="ng-hide" type="file" (change)="selectEduProofs($event,i)">
                                               </div>
                                               </div>
                                       </div>
                                         <div class="clearfix"></div>
 
                                     </div>
+                                    <hr>
                                   </fieldset>
                                 </div>
                               </div>
+
+                              <hr>
+                              <hr>
+
                               <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
                                 (click)="addNewExperienceForm()">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Experience
@@ -271,12 +278,19 @@
                                                     name="is_current_job" formControlName="is_current_job" [(ngModel)]="currentJob" > Is Current Job</mat-label>
                                           </div>
                                           <div class="col-md-4">
-                                              <mat-form-field>
-                                                  <input matInput [matDatepicker]="start_date2" id="start_date" placeholder="Start Date" required [(ngModel)]="student.start_date"
+                                              <!-- <mat-form-field>
+                                                  <input matInput [matDatepicker]="start_date2" id="start_date" placeholder="Start Date" required [(ngModel)]="start_date"
                                                   name="start_date" #start_date="ngModel" [ngModelOptions]="{standalone: true}">
                                                   <mat-datepicker-toggle matSuffix [for]="start_date2"></mat-datepicker-toggle>
                                                   <mat-datepicker #start_date2></mat-datepicker>
-                                                </mat-form-field>
+                                                </mat-form-field> -->
+   
+                                                <mat-form-field>
+                                                    <input matInput [matDatepicker]="start_date" placeholder="Start Date" formControlName="start_date">
+                                                    <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+                                                    <mat-datepicker #start_date></mat-datepicker>
+                                                  </mat-form-field>
+                                                  
                                                 <!-- <div [hidden]="start_date.valid || start_date.pristine"
                                    class="alert alert-danger">
                                  Start Date is required
@@ -286,16 +300,16 @@
                               
                                           <div class="col-md-4" [hidden]="currentJob" >
                                               <mat-form-field>
-                                                  <input matInput [matDatepicker]="end_date2" id="end_date" placeholder="Completion Date" required [(ngModel)]="student.end_date"
-                                                  name="end_date" #end_date="ngModel" [ngModelOptions]="{standalone: true}">
-                                                  <mat-datepicker-toggle matSuffix [for]="end_date2"></mat-datepicker-toggle>
-                                                  <mat-datepicker #end_date2></mat-datepicker>
+                                                  <input matInput [matDatepicker]="end_date" placeholder="End Date" formControlName="end_date">
+                                                  <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+                                                  <mat-datepicker #end_date></mat-datepicker>
                                                 </mat-form-field>
+                                                
                                           </div>
 
                                           <div class="col-md-4">
                                               <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                                                <input class="ng-hide" type="file" (change)="selectFile($event)">
+                                                <input class="ng-hide" type="file" (change)="selectExpProofs($event,i)">
                                             </div>
                                             </div>
 
@@ -303,9 +317,12 @@
 
                                        
                                     </div>
+                                    <hr>
                                   </fieldset>
                                 </div>
                               </div>
+                              <hr>
+                              <hr>
                               <div class="btn-group btn-group-sm">
                                 <button mat-raised-button type="button" class="btn btn-danger"[routerLink]="['/login']">Cancel</button>
                                 <button mat-raised-button type="button" class="btn btn-danger"  (click)="addStudent()" [disabled]="!registrationForm.form.valid">Add</button>
@@ -328,3 +345,6 @@
       </div>
   </div>
 </div>
+
+
+<pre>{{myForm.value | json}}</pre>

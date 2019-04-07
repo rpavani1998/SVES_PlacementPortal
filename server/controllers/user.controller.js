@@ -16,7 +16,7 @@ exports.authenticate = (req, res) => {
 		.then(user => {
 			console.log(user)
 			if (!user) {
-				res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+				res.json({ success: false, msg: 'Authentication failed. User not found.' });
 			} else {
 				// check if password matches
 				if (md5(req.body.password) == user.password) {
@@ -24,7 +24,7 @@ exports.authenticate = (req, res) => {
 					console.log(req.session, req.session.user)
 					res.json({ success: true, msg: 'Authentication successful' });
 				} else {
-					res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+					res.json({ success: false, msg: 'Authentication failed. Wrong password.' });
 				}
 			}
 		});

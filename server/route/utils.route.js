@@ -37,5 +37,7 @@ module.exports = function(app) {
 
     app.post('/api/mail',utils.mail);
 
+    // app.get('/api/usertype' , usertype.findAll);
+
  
 }

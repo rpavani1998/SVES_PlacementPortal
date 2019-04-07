@@ -38,6 +38,11 @@ db.job_post = require('../models/job-post.model.js')(sequelize , Sequelize);
 db.job_post_activity  = require('../models/job-post-activity.model')(sequelize , Sequelize);
 db.competition = require('../models/competition.model')(sequelize,Sequelize)
 db.competition_registration = require('../models/student-comp-registration.model')(sequelize,Sequelize)
+db.jobprocess = require('../models/job-process.model.js')(sequelize, Sequelize);
+db.job_type = require('../models/job-type.model.js')(sequelize , Sequelize);
+db.jobstage = require('../models/job-stage.model.js')(sequelize, Sequelize);
+db.verified_education_detail = require ('../models/education-details-verified.model')(sequelize , Sequelize);
+db.verified_experience_detail = require ('../models/experience-details-verified.model')(sequelize , Sequelize);
 
 module.exports = db;
   

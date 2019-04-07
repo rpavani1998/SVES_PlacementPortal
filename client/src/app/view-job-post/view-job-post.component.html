@@ -4,33 +4,34 @@
         <h4 class="card-title">Job Post</h4>
     </div>
     <div class="card-body">
-<li *ngFor="let job_post of data">
+<div *ngFor="let job_post of data">
  
 <div >
-    <div class="bg-img"><img src="assets/img/{{job_post.company.name}}.png" style="width:246px; height : 140px"  alt="Img"></div>
+    <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job_post.company.company_id}}" style="width:246px; height : 140px"  alt="Img"></div>
     <div>Company Name: {{job_post.company.company_name}}</div>
     <div>Comapny Description: {{job_post.company.profile_description}}</div>
     <div>Establish Date : {{job_post.company.establish_date}}</div>
     <div>Company Website: {{job_post.company.website_url}}</div>
  <br>   
     <div>Job Profile : {{job_post.job_profile}}</div>
-    <div>Job Location: {{job_po  st.job_location}}</div>
+    <div>Job Location: {{job_post.job_location}}</div>
     <div>Salary: {{job_post.salary_lpa}}</div>
     <div>Drive Location: {{job_post.drive_location}}</div>
     <div>Last Date For Applying: {{job_post.last_date_for_application}}</div>
     <div>Job Description : {{job_post.job_description}}</div>
+    <div>Job Description Document: <a href="http://localhost:4000/api/file/J{{job_post.id}}">Proof Document</a></div>
 <br>
 Eligibility Criteria
 <li> {{job_post.degree}}</li>
     <li>Overall Agregate >{{job_post.overall_aggregate}}</li>
     <li>Should have {{job_post.backlogs}} backlogs</li>
     <li>Should have >{{job_post.inter_aggregate}} Intermediate Aggregate</li>
-    <li>Should have >{{job_post.tenth_aggregate} 10th Aggregate}</li>
+    <li>Should have >{{job_post.tenth_aggregate}} 10th Aggregate</li>
 
 </div>
 <div [hidden]="is_applied" ><button [class.button-disabled]="is_applied" [routerLink]="['/post', job_post.id]" class="btn btn-danger"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div>
 <div [hidden]="!is_applied" style= "color: red">You have already Registered for this event.</div>
-</li>
+</div>
 
 </div>
 </div>

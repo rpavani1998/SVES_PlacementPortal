@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface myData {
   success: boolean,
-  message: string
+  msg: string
 }
 
 const httpOptions = {

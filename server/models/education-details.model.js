@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
 		certificate_degree_name: {
 			type: Sequelize.STRING
 		},
+		board: {
+			type: Sequelize.STRING
+		},
 		major: {
 			type: Sequelize.STRING
 		},

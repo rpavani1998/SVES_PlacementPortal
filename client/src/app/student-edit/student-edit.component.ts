@@ -28,6 +28,8 @@ export class StudentEditComponent implements OnInit {
   }
   
   myForm: FormGroup;
+  edu_ids = [];
+  exp_ids = []
 
   constructor(
     private studentService: StudentService,
@@ -53,7 +55,7 @@ export class StudentEditComponent implements OnInit {
     experience_details: this.fb.array([])
   })
 
-  var edu_ids = []
+
 
   this.studentService.getStudentEducationalDetails(id)
   .subscribe(educationDetails => {
@@ -70,11 +72,11 @@ export class StudentEditComponent implements OnInit {
         cgpa: x.cgpa,
         proof_document: x.proof_document
        }))
-       edu_ids.push(x.id)
+       this.edu_ids.push(x.id)
     })
     });
 
-var exp_ids = []
+
 
 this.studentService.getStudentExperienceDetails(id)
   .subscribe(experienceDetails => {
@@ -91,7 +93,7 @@ this.studentService.getStudentExperienceDetails(id)
         description: x.description,
         proof_document: x.proof_document
        }))
-      exp_ids.push(x.id)
+      this.exp_ids.push(x.id)
     })
   });
   this.setEducationDetails();
@@ -108,13 +110,28 @@ this.studentService.getStudentExperienceDetails(id)
     this.studentService.updateStudent(this.student)
         .subscribe();
     for(var i=0; i < this.myForm.value.education_details.length; i++){
+      if (this.myForm.value.educationDetails[i].id in this.edu_ids){
       this.studentService.updateStudentEducationalDetails(this.myForm.value.education_details[i])
       .subscribe();
-    
+      }else{
+        this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+          console.log("E", result)
+         this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+      });
     }
+    }
+
     for(var i=0; i < this.myForm.value.experience_details.length; i++){
-      this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
-      .subscribe();
+      if (this.myForm.value.experience_details[i].id in this.exp_ids){
+        this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
+        .subscribe();
+      } else{
+        this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+          console.log("E", result)
+         this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+        });
+      }
+     
     }
    
   }

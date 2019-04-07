@@ -18,6 +18,12 @@ const routes: Routes = [
     path: 'login', 
     component: UserLoginComponent
   },
+   { 
+     path: '', 
+     redirectTo: 'login', 
+     pathMatch: 'full'
+   },
+
 //   { 
 //     path: 'student/profile', 
 //     component: StudentProfileComponent 

@@ -15,4 +15,14 @@ module.exports = function(app) {
     app.delete('/api/jobposts/:id', jobposts.delete);
 
     app.get('/api/jobpost/:roll_no/:job_post_id', jobposts.register)
+
+    app.get('/api/job_stage' , jobposts.jobStages);
+
+    app.post('/api/addjob', jobposts.create);
+
+    app.post('/api/addjob', jobposts.addJobprocesses);
+
+    app.get('/api/addjob/:jobId', jobposts.jobProcesses);
+
+ 
 } 

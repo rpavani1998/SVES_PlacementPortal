@@ -20,7 +20,7 @@ export class RegisterStudentComponent{
   submitted = false;
   myForm: FormGroup;
   branches: Branch[]
-  selectedFiles: FileList;
+ 
   backlogs = ["Never had any backlog", "Cleared All", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "More than 10"];
   data = {
     education_details : [
@@ -59,29 +59,14 @@ export class RegisterStudentComponent{
   ) {}
 
   ngOnInit() {
-    // const branch = new Branch()
-    // branch.id = ''
-    // branch.branch_name 
+
     this.utilService.getBranches().subscribe(branches => {
-      // console.log("br", branches)
-      // branches.forEach(branch =>
-      //   this.branches.push(branch))
-      // // this.branches = branch;
-      // console.log("branches", this.branches)
       this.branches = branches
     })
     this.myForm = this.fb.group({
-      // first_name: [null, Validators.required],
-      // last_name: [null, Validators.required],
-      // branch: [null, Validators.required],
-      // dob: [null, Validators.required],
-      // backlogs: [null, Validators.required],
-      // aadhar_no: [null, Validators.required],
       education_details: this.fb.array([]),
       experience_details: this.fb.array([])
     })
-    // console.log(this.data)
-    // const id = localStorage.getItem('currentUser');
     
     this.setEducationDetails();
     this.setExperienceDetails();
@@ -159,19 +144,18 @@ setEducationDetails() {
   })
 }
 
-selectFile(event) {
-  this.selectedFiles = event.target.files;
+selectAadharProof(event) {
+  this.student.id_proof = event.target.files[0];
 }
 
-loadfiles() {
-  var index = 0
-  this.student.id_proof = this.selectedFiles.item(index++);
-  for(var i = 0; i < this.myForm.value.education_details.length; i++){
-    this.myForm.value.education_details[i].proof_document = this.selectedFiles.item(index++);
-  }
-  for(i= 0; i < this.myForm.value.experience_details.length; i++){
-    this.myForm.value.experience_details[i].proof_document = this.selectedFiles.item(index++);
-  }
+selectEduProofs(event,i){
+  this.myForm.value.education_details[i].proof_document =  event.target.files[0];
+  console.log('EduProofs',i, event.target.files)
+}
+
+selectExpProofs(event, i){
+  this.myForm.value.experience_details[i].proof_document =  event.target.files[0];
+  console.log('ExpProofs',i, event.target.files)
 }
 
 addNewEducationForm() {
@@ -199,12 +183,9 @@ addNewEducationForm() {
     console.info("student info", this.student);
     console.log(localStorage.getItem('currentUser'))
     this.student.roll_no = localStorage.getItem('currentUser');
-    this.loadfiles()
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.studentService.addStudentProfile(this.student).subscribe();
-    // this.uploadService.pushFileToStorage("Img"+this.student.roll_no, ).subscribe();
-
     this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i in this.student.education_details){
        this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
