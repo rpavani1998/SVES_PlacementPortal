@@ -48,7 +48,12 @@ private authenticate(): void {
             this.router.navigate(['/user-profile'])
             this.Auth.setLoggedIn(true)
           }else{
-            this.router.navigate(['/student/add'])
+            this.studentService.getVerifiedStudent(id).subscribe(student => {
+              if(student)
+              this.router.navigate(['/student/add'])
+              else
+              this.router.navigate(['/message'])
+            })
           }});
         } else{
           this.router.navigate(['/admin/dashboard'])

@@ -28,6 +28,7 @@ import { CompetitionsComponent } from './competitions/competitions.component';
 import { ViewRegisteredCompetitionsComponent } from './view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { NotifyMessageComponent } from './notify-message/notify-message.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
    UserLoginComponent,
    RegisterStudentComponent,
    StudentEditComponent,
+   NotifyMessageComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -62,4 +62,13 @@ module.exports = function(app) {
     app.put('/api/student/experience_details_verified', experience_details_verified.update);
  
     app.delete('/api/student/experience_details_verified/:id', experience_details_verified.delete);
+
+    app.get('/api/notifications/:branchID',  education_details.findByBranchId);
+
+    app.put('/api/notifications',  education_details.approveRequest);
+
+    app.get('/api/placements/:percentage' , education_details.getEligibleStudents);
+
+    app.get('/api/studentdetails/:college/:major/:passing_year/:percentage/:backlogs' , education_details.getData);
+
 }
