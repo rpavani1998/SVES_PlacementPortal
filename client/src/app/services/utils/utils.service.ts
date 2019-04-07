@@ -5,6 +5,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Branch } from '../../models/branch';
 import { SkillSet } from '../../models/skill-set';
 import { MailFormat } from 'src/app/models/mail-format';
+import { JobProcess } from 'src/app/models/jobprocess';
+import { JobStage } from 'src/app/models/jobstage';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -25,10 +27,28 @@ export class UtilsService {
   private collegeUrl = 'http://localhost:4000/api/college';  // URL to web api
   private branchUrl = 'http://localhost:4000/api/branch';  // URL to web api
   private skillSetUrl = 'http://localhost:4000/api/skill_set';
+  private jobstageUrl = 'http://localhost:4000/api/job_stage';
+  private jobprocessurl = 'http://localhost:4000/api/addjob';
   constructor( 
     private http: HttpClient
   ) { }
 
+  addJobProcess (JobProcess : JobProcess): Observable<JobProcess> {
+    console.log(this.http.post<JobProcess>(this.jobprocessurl, JobProcess, httpOptions))
+    return this.http.post<JobProcess>(this.jobprocessurl, JobProcess, httpOptions);
+  }
+
+  getJobStages() : Observable<JobStage[]> {
+    console.log((this.jobstageUrl));
+    return this.http.get<JobStage[]>(this.jobstageUrl);
+  }
+
+  getJobProcess(jobid: number): Observable<JobProcess> {
+    const url = `${this.jobprocessurl}/${jobid}`;
+    console.log("Job Processes URL : " , url);
+    return this.http.get<JobProcess>(url);
+  }
+  
   getColleges (): Observable<College[]> {
     console.log((this.collegeUrl));
     return this.http.get<College[]>(this.collegeUrl);

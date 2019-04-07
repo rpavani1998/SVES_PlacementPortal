@@ -1,0 +1,91 @@
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Profile">
+        <div class="main-content middle">
+            <div class="container-fluid">
+                Email : {{userdata.email}}<br><br>
+                Contact : {{userdata.contact_number}}
+            </div>
+
+        </div>
+    </mat-tab>
+    <mat-tab label="Add Role">
+        <div class="main-content middle">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="User ID" type="text" id="id" required [(ngModel)]="user.id"
+                                name="id" #id="ngModel">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-select placeholder="Select Role" id="user_type_id" required
+                                [(ngModel)]="user.user_type_id" name="user_type_id" #major="ngModel">
+                                <mat-option *ngFor="let usertype of usertype" [value]="usertype.id">
+                                    {{usertype.user_type_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-select placeholder="Select College" id="college_id" required
+                                [(ngModel)]="user.college_id" name="college_id" #college_id="ngModel">
+                                <mat-option *ngFor="let institute_university_name of institute_university_names"
+                                    [value]="institute_university_name.id">
+                                    {{institute_university_name.college_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-select placeholder="Select Branch" id="branch_id" required [(ngModel)]="user.branch_id"
+                                name="branch_id" #branch_id="ngModel">
+                                <mat-option *ngFor="let major of majors" [value]="major.id">
+                                    {{major.branch_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email ID" type="text" id="email" required
+                                [(ngModel)]="user.email" name="email" #email="ngModel">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Password" type="password" id="password" required
+                                [(ngModel)]="user.password" name="password" #password="ngModel">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Contact Number" type="text" id="contact_number" required
+                                [(ngModel)]="user.contact_number" name="contact_number" #contact_number="ngModel">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                    (click)="addAdmin()">Add</button>
+
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

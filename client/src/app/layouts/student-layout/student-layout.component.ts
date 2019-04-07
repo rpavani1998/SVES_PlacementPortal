@@ -5,7 +5,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
-
+// import SideBarComponent from '../../admin-components/sidebar/sidebar.component'
 @Component({
   selector: 'app-student-layout',
   templateUrl: './student-layout.component.html',

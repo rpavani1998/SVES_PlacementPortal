@@ -19,14 +19,15 @@
         <div class="bg-img"><img src='http://localhost:4000/api/file/student' style="width:160px; height : 160px"  alt="Img"></div>
    
    <br>
-        <div>RollNo :{{student.roll_no}}</div>
+    <div>Roll No: {{student.roll_no}}</div>
     <div>Name: {{student.first_name}}{{student.last_name}}</div>
     <div>Branch : {{student.branch}}</div>
     <div>DOB : {{student.dob}}</div>
     <div>Backlog : {{student.backlogs}}</div>
     <div>Aadhar Card Number: {{student.aadhar_no}}</div>
 </div>
-<br>
+<hr>
+<hr>
 <h3> Educational Details</h3>
 <br>
 
@@ -40,9 +41,10 @@
         <div>Percentage: {{edu_details.percentage}}</div>
         <div>CGPA: {{edu_details.cgpa}}</div>
         <div>Proof Document: <a href="http://localhost:4000/api/file/E{{edu_details.id}}">Proof Document</a></div>
+        <hr>
     </div>
 </div>
-<br>
+<hr>
 <h3>Experience Details</h3>
 <br>
 <div>
@@ -55,6 +57,7 @@
             <div>Job Location: {{exp_details.job_location_city}}</div>
             <div>Description: {{exp_details.description}}</div>
             <div>Proof Document: <a href="http://localhost:4000/api/file/X{{exp_details.id}}">Proof Document</a></div>
+            <hr>
     </div>
 </div>
 </div>

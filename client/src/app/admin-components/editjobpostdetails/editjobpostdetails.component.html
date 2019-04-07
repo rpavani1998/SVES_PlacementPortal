@@ -1,0 +1,61 @@
+
+<div [hidden]="submitted">
+  <form #editjobpostForm="ngForm">
+    <div class="form-group">
+      <label for="job_profile">Job Profile</label>
+      <input type="text" class="form-control" id="job_profile" required
+      [(ngModel)]="data[0].job_profile" name="job_profile" #job_profile="ngModel">
+      <div [hidden]="job_profile.valid || job_profile.pristine"
+           class="alert alert-danger">
+          Job Profile is required
+      </div> 
+    </div>
+
+    <div class="form-group">
+      <label for="job_description">Job Description</label>
+      <input type="text" class="form-control" id="job_description" required
+      [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel">
+      <div [hidden]="job_description.valid || job_description.pristine"
+           class="alert alert-danger">
+          Job Description is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="job_location">Job Location</label>
+      <input type="text" class="form-control" id="job_location" required
+      [(ngModel)]="data[0].job_location" name="job_location" #job_location="ngModel">
+      <div [hidden]="job_location.valid || job_location.pristine"
+           class="alert alert-danger">
+          Job Location is required
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="salary_lpa">Salary</label>
+        <input type="text" class="form-control" id="salary_lpa" required
+        [(ngModel)]="data[0].salary_lpa" name="salary_lpa" #salary_lpa="ngModel">
+        <div [hidden]="salary_lpa.valid || salary_lpa.pristine"
+             class="alert alert-danger">
+            Salary is required
+        </div>
+      </div>
+
+
+    <div class="form-group">
+      <label for="last_date_for_application">Apply Before</label>
+      <input type="date" class="form-control" id="last_date_for_application" required
+      [(ngModel)]="data[0].last_date_for_application" name="last_date_for_application" #last_date_for_application="ngModel">
+      <div [hidden]="last_date_for_application.valid || last_date_for_application.pristine"
+           class="alert alert-danger">
+          Apply Before is required
+      </div>
+    </div>
+
+
+    <div class="btn-group btn-group-sm">
+      <button type="button" class="btn btn-dark" (click)="goBack()">Back</button>
+      <button type="button" class="btn btn-dark" (click)="updateJobPost()" [disabled]="!editjobpostForm.form.valid">Update</button>
+    </div>
+  </form>
+</div>

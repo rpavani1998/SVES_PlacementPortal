@@ -12,6 +12,7 @@ import { InternshipsComponent } from './internships/internships.component';
 import { CompetitionsComponent } from './competitions/competitions.component';
 import { ViewRegisteredCompetitionsComponent } from './view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   { 
@@ -36,43 +37,6 @@ const routes: Routes = [
     path: 'student/edit', 
     component: StudentEditComponent 
   },
-//   { 
-//    path: 'login', 
-//    component: UserLoginComponent
-//  },
-//   { 
-//     path: '', 
-//     redirectTo: 'login', 
-//     pathMatch: 'full'
-//   }, 
-//   {
-//    path : 'jobposts',
-//    component : JobPostsComponent 
-//  },
-//  {
-//   path : 'internships',
-//   component : InternshipsComponent
-// },
-// {
-//   path : 'competitions/:id',
-//   component : ViewCompetitionComponent
-// },
-// {
-//   path : 'competitions',
-//   component : CompetitionsComponent
-// },
-// {
-//   path : 'competitions/applied',
-//   component : ViewRegisteredCompetitionsComponent
-// },
-//  {
-//    path : 'post/:id',
-//    component : ViewJobPostComponent 
-//  },
-//  {
-//    path : 'jobposts/applied',
-//    component : ViewAppliedJobsComponent
-//  },
    {
     path: '',
     component: StudentLayoutComponent,
@@ -80,7 +44,15 @@ const routes: Routes = [
         {
       path: '',
       loadChildren: './layouts/student-layout/student-layout.module#StudentLayoutModule'
-  }]} 
+  }]} ,
+  {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+        {
+      path: '',
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+  }]}
 ];
 
 @NgModule({

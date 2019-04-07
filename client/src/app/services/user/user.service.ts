@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
+import { EducationDetails } from 'src/app/models/notifications';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -24,6 +25,7 @@ interface logoutStatus {
 })
 export class UserService {
   private usersUrl = 'http://localhost:4000/api/users';  // URL to web api
+  private eligiblestudentsUrl = 'http://localhost:4000/api/placements';
   
   constructor( 
     private http: HttpClient
@@ -49,6 +51,11 @@ export class UserService {
   addUser (User: User): Observable<User> {
     console.log(this.http.post<User>(this.usersUrl, User, httpOptions))
     return this.http.post<User>(this.usersUrl, User, httpOptions);
+  }
+
+  getUsersData(percentage : string): Observable<EducationDetails[]> {
+    const url = `${this.eligiblestudentsUrl}/${percentage}`;
+    return this.http.get<EducationDetails[]>(url);
   }
 
   deleteUser (User: User | string): Observable<User> {

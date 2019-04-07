@@ -22,15 +22,18 @@ import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, M
 
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
 import { ComponentsModule } from './components/components.module';
+import { AdminComponentsModule } from './admin-components/components.module';
 import { InternshipsComponent } from './internships/internships.component';
 import { CompetitionsComponent } from './competitions/competitions.component';
 import { ViewRegisteredCompetitionsComponent } from './view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
    StudentLayoutComponent,
+   AdminLayoutComponent,
    UserLoginComponent,
    RegisterStudentComponent,
    StudentEditComponent,
@@ -38,6 +41,7 @@ import { ViewCompetitionComponent } from './view-competition/view-competition.co
   imports: [
     BrowserAnimationsModule,
     ComponentsModule,
+    AdminComponentsModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,

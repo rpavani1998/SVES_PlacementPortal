@@ -51,8 +51,9 @@ private authenticate(): void {
             this.router.navigate(['/student/add'])
           }});
         } else{
-          this.router.navigate(['/admin-profile'])
-          // this.Auth.setLoggedIn(true)
+          this.router.navigate(['/admin/dashboard'])
+          console.log("LoggedIn Admin")
+          this.Auth.setLoggedIn(true)
         }
       })
     } else {
