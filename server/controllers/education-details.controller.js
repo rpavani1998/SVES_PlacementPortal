@@ -50,13 +50,13 @@ exports.delete = (req, res) => {
 
 
 exports.findByBranchId = (req, res) => {
-	let userdata = req.body;
+	let userdata = req.body;	
 	console.log("Branch : ", req.params.branchID)
-	EducationDetail.findAll({ where: { major: req.params.branchID } }).then(educationdetail => {
+	EducationDetails.findAll({ where: { major: req.params.branchID , status : "Requested"} }).then(educationdetail => {
 		console.log('ed',educationdetail);
 		res.json(educationdetail);
 	});
-};
+}; 	
 
 exports.getEligibleStudents = (req, res) => {
 	console.log("Percentage : ", req.params.percentage)
@@ -108,23 +108,44 @@ exports.getData = (req, res) => {
 
 exports.approveRequest = (req, res) => {
 	let roll_no = req.body.roll_no;
-	let degree = req.body.degree;
+	let degree = req.body.certificate_degree_name;
 	let major = req.body.major;
 	let percentage = req.body.percentage;
 	let cgpa = req.body.cgpa;
 	let backlogs = req.body.backlogs;
 	console.log("Update")
-	var values = { roll_no: roll_no, degree: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs }
+	var values = req.body
 	var con = { where: { roll_no: roll_no } };
 	console.log("Roll Number : ", roll_no);
 
-	VerifiedEducationDetail.update(values, con).then(() => {
+	VerifiedEducationDetail.create(values, con).then(() => {
 		res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 	});
+ 
+	var value = { roll_no: roll_no, degree: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs , status : "Accepted" }
+	var con = { where: { roll_no: roll_no } };
 
-	EducationDetail.destroy({
-		where: { roll_no: roll_no }
-	}).then(() => {
-		res.status(200).json({ msg: 'successfully deleted roll no edu details = ' + roll_no });
+	EducationDetails.update(value, con).then(() => {
+		res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 	});
+	
+}
+
+
+exports.rejectRequest = (req, res) => {
+	let roll_no = req.body.roll_no;
+	let degree = req.body.degree;
+	let major = req.body.major;
+	let percentage = req.body.percentage; 
+	let cgpa = req.body.cgpa;
+	let backlogs = req.body.backlogs;
+	console.log("Update")
+
+	var value = { roll_no: roll_no, degree: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs , status : "Rejected" }
+	var con = { where: { roll_no: roll_no } };
+
+	EducationDetails.update(value, con).then(() => {
+		res.status(200).json({ msg: "Rejected verification of education details with roll num = " + roll_no });
+	});
+	
 }

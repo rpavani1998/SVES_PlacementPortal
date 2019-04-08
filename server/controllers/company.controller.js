@@ -44,7 +44,7 @@ exports.create = (req, res) => {
 		company.company_name = company.cn
 		console.log( "Company Name from controller" , company.company_name)
 	}		
-	Company.create(company).then(result => {
+	Company.create(company).then(result => { 
 		res.json(result);
 	});
 };

@@ -19,14 +19,22 @@ module.exports = function(app) {
     app.put('/api/students', students.update);
  
     app.delete('/api/students/:studentId', students.delete);
+
+    app.get('/api/student/education_details/:branchID' , students.getStudentProfiles);
  
     app.post('/api/student/education_details', education_details.create);
  
     app.get('/api/student/education_details/:id', education_details.findAll);
  
     app.put('/api/student/education_details', education_details.update);
+
+    app.put('/api/notifications',  education_details.approveRequest);
+
+    app.put('/api/notifications',  education_details.rejectRequest);
  
     app.delete('/api/student/education_details/:education_detailId', education_details.delete);
+
+    app.get('/api/notifications/:branchID' , education_details.findByBranchId);
 
     app.post('/api/student/experience_details', experience_details.create);
  

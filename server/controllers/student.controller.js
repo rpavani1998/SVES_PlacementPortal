@@ -46,3 +46,9 @@ exports.delete = (req, res) => {
 	  res.status(200).json({msg:'deleted successfully a student with id = ' + id});
 	});
 };
+
+exports.getStudentProfiles =(req , res) => {
+	Student.findAll({where : { branch :  req.params.branchID}}).then(student => {
+		res.json(student);
+	})
+}  
