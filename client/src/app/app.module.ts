@@ -7,7 +7,7 @@ import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { StudentEditComponent } from './student-edit/student-edit.component';
+//import { StudentEditComponent } from './student-edit/student-edit.component';
 import { RegisterStudentComponent } from './student-registration/student-registration.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AuthService } from './services/auth/auth.service';
@@ -36,7 +36,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
    AdminLayoutComponent,
    UserLoginComponent,
    RegisterStudentComponent,
-   StudentEditComponent,
+   //StudentEditComponent,
   ],
   imports: [
     BrowserAnimationsModule,

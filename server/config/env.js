@@ -1,7 +1,7 @@
 const env = {
   database: 'sves_db',
   username: 'root',
-  password: 'root',
+  password: 'root@123',
   host: 'localhost',
   dialect: 'mysql',
   pool: {

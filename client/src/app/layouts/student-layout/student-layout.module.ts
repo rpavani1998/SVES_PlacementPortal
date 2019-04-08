@@ -39,6 +39,7 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     CommonModule,
     StudentLayoutRoutes,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -69,8 +70,8 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     CompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
-    ViewCompetitionComponent
-    
+    ViewCompetitionComponent,
+    StudentEditComponent,
     //RegisterStudentComponent
   ]
 })

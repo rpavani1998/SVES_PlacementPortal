@@ -33,10 +33,6 @@ const routes: Routes = [
     path: 'student/add', 
     component: RegisterStudentComponent
   },
-  { 
-    path: 'student/edit', 
-    component: StudentEditComponent 
-  },
    {
     path: '',
     component: StudentLayoutComponent,
