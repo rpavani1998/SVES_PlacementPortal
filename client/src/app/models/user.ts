@@ -8,4 +8,5 @@ export class User {
     sms_notification_active: boolean = true;
     email_notification_active: boolean = true;
     user_image: string = '';
+    branch_id;
 }

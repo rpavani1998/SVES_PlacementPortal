@@ -20,28 +20,6 @@ import { NotificationsService } from 'src/app/services/notifications/notificatio
 import { StudentService } from 'src/app/services/student/student.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { Student } from 'src/app/models/student';
-// import { JobTypeService } from '../jobtype.service';
-// import { JobpostsService } from '../jobposts.service';
-// import { JobPosts } from '../jobposts';
-// import { Company } from '../company';
-// import { AddJob } from '../addjob';
-// import { Router } from "@angular/router";
-// import { UploadFileService } from '../file.service';
-// import { Branch } from '../branch';
-// import { JobStage } from '../jobstage';
-// import { UtilsService } from '../utils.service';
-// import { CompanyService } from '../company.service';
-// import { JobType } from '../jobtype';
-// import { EducationDetails } from '../notifications'
-// import { College } from '../college';
-// import { NotificationsService } from '../notifications.service';
-// import { UserService } from '../user.service';
-// import { StudentService } from '../student.service';
-// import { Student } from '../student';
-// import { ActivatedRoute, Params } from '@angular/router';
-// import { ngxCsv } from 'ngx-csv/ngx-csv';
-// import { User } from '../user';
-// import { JobProcess } from '../jobprocess';
 
 
 @Component({
@@ -122,7 +100,7 @@ export class AdminPlacementsComponent implements OnInit {
 
     this.utilService.getJobStages().subscribe(jobstage => {
       this.jobstage = jobstage;
-      console.log("Job Stage : ", jobstage);
+      console.log("Job Stage : ", jobstage); 
     })
 
     var uid = localStorage.getItem('currentUser');
@@ -210,7 +188,7 @@ export class AdminPlacementsComponent implements OnInit {
     console.info("company info", this.job);
     this.companyService.addCompany(this.job)
       .subscribe(company =>
-        this.uploadService.pushFileToStorage('C'+company.id, this.company.company_image).subscribe()
+        this.uploadService.pushFileToStorage('C'+company.company_id, this.company.company_image).subscribe()
       );
   }
 

@@ -18,24 +18,45 @@ module.exports = function(app) {
  
     app.put('/api/students', students.update);
  
-    app.delete('/api/students/:studentId', students.delete);
+    app.delete('/api/students/:studentId', students.delete); 
+
+    app.get('/api/student/education_details/:branchID' , students.getStudentProfiles);
  
-    app.post('/api/student/education_details', education_details.create);
+    app.post('/api/student/education_details', education_details.create); 
  
     app.get('/api/student/education_details/:id', education_details.findAll);
  
     app.put('/api/student/education_details', education_details.update);
+
+    app.put('/api/notifications',  education_details.approveRequest);
+
+    app.put('/api/notifications/reject',  education_details.rejectRequest);
+
+    app.put('/api/notifications/profileaccept',  education_details.approveProfileRequest);
+
+    app.put('/api/notifications/profilereject',  education_details.rejectProfileRequest);
+
+    app.put('/api/notifications/expaccept',  education_details.approveExperienceRequest);
+
+    app.put('/api/notifications/expreject',  education_details.rejectExperienceRequest);
  
     app.delete('/api/student/education_details/:education_detailId', education_details.delete);
+
+    app.get('/api/notifications/:branchID' , education_details.findByBranchId);
 
     app.post('/api/student/experience_details', experience_details.create);
  
     app.get('/api/student/experience_details/:id', experience_details.findAll);
  
     app.put('/api/student/experience_details', experience_details.update);
+
+    app.get('/api/student/experience_details', experience_details.getExperiences);
  
     app.delete('/api/student/experience_details/:id', experience_details.delete);
 
+    // app.put('/api/students' , students.approveStudentProfileRequest);
+
+    // app.put('/api/students' , students.rejectStudentProfileRequest);
     
     app.post('/api/students_verified', students_verified.create);
  

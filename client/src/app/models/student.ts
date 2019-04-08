@@ -13,4 +13,5 @@ export class Student {
     experience_details: Array<ExperienceDetails>
     id_proof: any
     is_verfied: string = 'False'
+    experiencedetails : ExperienceDetails
 }

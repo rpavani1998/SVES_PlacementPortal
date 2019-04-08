@@ -1,5 +1,9 @@
 const db = require('../config/db.config.js');
+const addjob = ('../controllers/job-post.controller.js');
 const JobPost = db.job_post;
+const JobType = db.job_type;
+const AddJob = db.job_post;
+
 const JobPostActivity = db.job_post_activity;
 const JobStage = db.jobstage;
 const JobProcesses = db.jobprocess;
@@ -70,7 +74,7 @@ exports.jobStages = (req , res) => {
 		console.log(jobstage);
 		res.json(jobstage);
 	})
-};
+}; 
 
 
 exports.create = (req, res) => {
@@ -99,26 +103,16 @@ exports.create = (req, res) => {
 					job.job_type = user.job_type_id
 
 					AddJob.create(job).then(result => {
-						job_id = result.id;
 						res.json(result)
 						let jobprocess = req.body;
 						// utils.jobData(result); 
-						console.log(" Add Job : Job ID : ", job_id);
-						addjobprocess.addJobprocesses(result, jobprocess)
+						addjob.addJobprocesses(result , jobprocess);
 					});
 				})
 		})
 };
-
-exports.jobProcesses = (req , res) => {
-	JobProcesses.findAll({ where : {job_post_id : req.params.jobId} }).then(jobprocess => {
-		res.json(jobprocess) 
-	})
-}
-
+ 
 exports.addJobprocesses = (result, jobprocess) => {
-
-	// let jobprocess = req.body;
 	var keys = Object.keys(jobprocess.job_stage_id);
 	var len = keys.length;
 	const jobid = result.id; 
@@ -127,4 +121,10 @@ exports.addJobprocesses = (result, jobprocess) => {
 		JobProcess.create({ job_process_id:  jobid.toString() + 0 + jobprocess.job_stage_id[i], job_post_id: jobid, job_stage_id: jobprocess.job_stage_id[i] }).then(jobprocess => {
 		});
 	}
+}
+
+exports.jobProcesses = (req , res) => {
+	JobProcesses.findAll({ where : {job_post_id : req.params.jobId} }).then(jobprocess => {
+		res.json(jobprocess) 
+	})
 }

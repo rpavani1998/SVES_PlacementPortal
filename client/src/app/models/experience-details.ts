@@ -1,3 +1,5 @@
+import { Student } from '../models/student';
+
 export class ExperienceDetails {
     id: number
     roll_no : string
@@ -10,4 +12,5 @@ export class ExperienceDetails {
     description: string = ''
     proof_document: any = null
     is_verfied: string = 'False'
+    student : Student
 }

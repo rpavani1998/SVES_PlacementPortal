@@ -1,6 +1,7 @@
 const db = require('../config/db.config.js');
 const Student = db.students;
 const util = require('../controllers/utils.controller')
+const VerifiedStudent = db.students_verified;
 // Post a Student
 exports.create = (req, res) => {	
 	let student = req.body;
@@ -46,3 +47,9 @@ exports.delete = (req, res) => {
 	  res.status(200).json({msg:'deleted successfully a student with id = ' + id});
 	});
 };
+
+exports.getStudentProfiles =(req , res) => {
+	Student.findAll({where : { branch :  req.params.branchID , status : 'Requested' }}).then(student => {
+		res.json(student);
+	})
+}  

@@ -14,7 +14,7 @@ const httpOptions = {
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class StudentService {
   private studentsUrl = 'http://localhost:4000/api/students'; 
   private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
@@ -26,6 +26,16 @@ export class StudentService {
   constructor( 
     private http: HttpClient
   ) { }
+
+  approveRequest (studdata : Student): Observable<any> {
+    console.log( " In Service Education Details :  " , studdata );
+    return this.http.put(this.studentsUrl, studdata , httpOptions); 
+  }
+ 
+  rejectRequest (studdata : Student): Observable<any> {
+    console.log( " In Service Education Details :  " , studdata );
+    return this.http.put(this.studentsUrl, studdata , httpOptions); 
+  }
 
   getStudents (): Observable<Student[]> {
     console.log((this.studentsUrl));
@@ -54,10 +64,21 @@ export class StudentService {
     return this.http.get<ExperienceDetails[]>(`${this.experienceDetailsUrl}/${id}`);
   }
 
+  getStudentexperiences (): Observable<ExperienceDetails[]> {
+    console.log((this.experienceDetailsUrl));
+    return this.http.get<ExperienceDetails[]>(this.experienceDetailsUrl);
+  }
+
   getStudentEducationalDetails (id: string): Observable<EducationDetails[]> {
     console.log((`${this.educationDetailsUrl}/${id}`))
     return this.http.get<EducationDetails[]>(`${this.educationDetailsUrl}/${id}`);
   }
+
+  getStudentProfiles(branchid: string): Observable<Student> {
+    const url = `${this.educationDetailsUrl}/${branchid}`;
+    console.log("Student Profiles : " , url);
+    return this.http.get<Student>(url);
+  } 
 
   deleteStudent (student: Student | string): Observable<Student > {
     const id = typeof student === 'string' ? student : student.roll_no;

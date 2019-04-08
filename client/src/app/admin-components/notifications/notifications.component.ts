@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-declare var $: any;
+import { Router } from "@angular/router";
+import { NotificationsService } from '../../services/notifications/notifications.service';
+import { UserService } from '../../services/user/user.service';
+import { EducationDetails } from '../../models/notifications';
+import { User } from '../../models/user';
+import { StudentService } from '../../services/student/student.service';
+import { Student } from '../../models/student';
+import { ExperienceDetails } from 'src/app/models/experience-details';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -7,36 +15,116 @@ declare var $: any;
 })
 export class NotificationsComponent implements OnInit {
 
-  constructor() { }
-  showNotification(from, align){
-      const type = ['','info','success','warning','danger'];
+  educationdetails = new EducationDetails();
+  user = new User();
+  submitted = false;
+  message: string;
 
-      const color = Math.floor((Math.random() * 4) + 1);
 
-      $.notify({
-          icon: "notifications",
-          message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+  constructor(
+    private router: Router,
+    private educationservice: NotificationsService,
+    private studentService : StudentService,
+    private userService: UserService
+  ) { }
 
-      },{
-          type: type[color],
-          timer: 4000,
-          placement: {
-              from: from,
-              align: align
-          },
-          template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-            '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-            '<i class="material-icons" data-notify="icon">notifications</i> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-              '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            '</div>' +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-          '</div>'
-      });
+  ngOnInit(): void {
+    this.getUserDetails();
+    // this.getEducationDetails();
   }
-  ngOnInit() {
+
+  userdata: User;
+  edudata: EducationDetails;
+  experiencedetails : ExperienceDetails;
+  studentdata : Student;
+  data = [];
+  expdata = [];
+  getUserDetails() {
+    var uid = localStorage.getItem('currentUser');
+    return this.userService.getUser(uid)
+      .subscribe(userdata => {
+          console.log("User Data : ", userdata);
+          this.userdata = userdata;
+          this.studentService.getStudentProfiles(userdata.branch_id).subscribe(studentdata => {
+            this.studentdata = studentdata
+            console.log("Student Data : " , studentdata);
+          });
+          this.educationservice.getEducationData(userdata.branch_id)
+            .subscribe(
+              edudata => {
+                console.log("Educational Data : ", edudata);
+                this.edudata = edudata
+                this.data.push(edudata);
+              });
+          this.studentService.getStudentexperiences().subscribe(studexps => {
+            studexps.forEach(studexp => {
+              this.studentService.getStudent(studexp.roll_no).subscribe(expdata => {
+                if ( expdata.branch == userdata.branch_id ) {
+                  this.expdata.push(studexp);
+                }
+              })
+            })
+          })
+          console.log("Experience Details : " , this.expdata);        
+        } 
+      ); 
+      
   }
+
+  approveRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.approveRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+
+  rejectRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.rejectRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+
+  approveProfileRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.approveProfileRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+
+  rejectProfileRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.rejectProfileRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+
+  approveExperienceRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.approveExperienceRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+
+  rejectExperienceRequest(data): void {
+    this.submitted = true;
+    console.log("Id of particular student : ", data);
+    this.educationservice.rejectExperienceRequest(data)
+      .subscribe(result => this.message = "Job Post Updated Successfully!");
+    this.router.navigateByUrl('/notifications');
+    window.location.reload()
+  }
+  
+
 
 }

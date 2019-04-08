@@ -17,6 +17,15 @@ exports.findAll = (req, res) => {
 	});
 };
 
+
+exports.getExperiences = (req, res) => {
+	ExperienceDetails.findAll({where : {status : 'Requested'}}).then(experience_details => {
+		console.log(experience_details);
+	  res.json(experience_details);
+	});
+};
+
+
 // Find a ExperienceDetails by Id
 exports.findById = (req, res) => {	
 	console.log("Params", req.params)

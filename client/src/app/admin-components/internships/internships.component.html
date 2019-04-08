@@ -1,64 +1,59 @@
 <mat-tab-group dynamicHeight>
+
   <mat-tab label="Open Internships"> <br>
     <div class="col-md-12 row">
-      <div class="col-md-3" *ngFor="let jobpost of internshipjobpost">
-        <div *ngFor="let post of jobpost.job_posts ; let i = index ">
-          <div *ngIf="jobpost.job_posts[0].is_active ==  '1' ">
-            <mat-card class="example-card">
-              <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{jobpost.company_name}}</mat-card-title>
-                <mat-card-subtitle>{{jobpost.job_posts[0].job_profile}}</mat-card-subtitle>
-              </mat-card-header>
-              <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-              <mat-card-content>
-                <p>Job Type : {{jobpost.job_posts[0].job_types[0].job_type_name}}</p>
-                <p>Location : {{jobpost.job_posts[0].job_location}}</p>
-                <p>Salary : {{jobpost.job_posts[0].salary_lpa}}</p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-button [routerLink]="['/admin/jobposts', jobpost.job_posts[0].id]">Edit</button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-
-        </div>
+      <div class="col-md-3" *ngFor="let d of data ; let i = index">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{d.company.company_name}}</mat-card-title>
+            <mat-card-subtitle>{{d.job_profile}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Job Type : {{d.jobtype.job_type_name}}</p>
+            <p>Location : {{d.job_location}}</p>
+            <p>Salary : {{d.salary_lpa}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="['/admin/jobposts', d.id]">Edit</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
       <br>
       <br>
     </div>
+    <br>
   </mat-tab>
-  <mat-tab label="Closed Internships"> <br><br>
+
+
+  <mat-tab label="Closed Job Postings"> <br>
     <div class="col-md-12 row">
-      <div class="col-md-3" *ngFor="let jobpost of internshipjobpost">
-        <div *ngFor="let post of jobpost.job_posts ; let i = index ">
-          <div *ngIf="jobpost.job_posts[0].is_active ==  '0' ">
-            <mat-card class="example-card">
-              <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{jobpost.company_name}}</mat-card-title>
-                <mat-card-subtitle>{{jobpost.job_posts[0].job_profile}}</mat-card-subtitle>
-              </mat-card-header>
-              <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-              <mat-card-content>
-                <p>Job ID : {{jobpost.job_posts[0].id}} </p>
-                <p>Job Type : {{jobpost.job_posts[0].job_types[0].job_type_name}}</p>
-                <p>Location : {{jobpost.job_posts[0].job_location}}</p>
-                <p>Salary : {{jobpost.job_posts[0].salary_lpa}}</p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-button [routerLink]="['/admin/jobposts', jobpost.job_posts[0].id]">Edit</button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-
-        </div>
+      <div class="col-md-3" *ngFor="let data_ of closeddata ; let i = index">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{data_.company.company_name}}</mat-card-title>
+            <mat-card-subtitle>{{data_.job_profile}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Job Type : {{data_.jobtype.job_type_name}}</p>
+            <p>Location : {{data_.job_location}}</p>
+            <p>Salary : {{data_.salary_lpa}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [routerLink]="['/admin/jobposts', data_.id]">Edit</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
       <br>
       <br>
     </div>
+    <br>
   </mat-tab>
-  <mat-tab label="Add Internship">
+
+
+
+  <mat-tab label="Add Internship" *ngIf="userdata.user_type_id == 'TPO' " enable>
     <div class="main-content middle">
       <div class="container-fluid">
         <div class="row">
