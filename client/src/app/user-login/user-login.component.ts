@@ -50,7 +50,7 @@ private authenticate(): void {
           }else{
             this.studentService.getVerifiedStudent(id).subscribe(std => {
               console.log(std)
-              if(std){
+              if(std  == null){
               this.router.navigate(['/student/add'])
               }else{
               this.router.navigate(['/message'])

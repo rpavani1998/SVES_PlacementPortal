@@ -1,6 +1,7 @@
 import { Company } from './company_';
 import { JobProcess } from './jobprocess';
 import { JobType } from './jobtype';
+import { JobPost } from './job-post';
 
 export class JobPosts {
     id : number;
@@ -26,4 +27,5 @@ export class JobPosts {
     company : Company;
     jobprocess : JobProcess;
     jobtype : JobType;
+    jobpost : JobPost
 }

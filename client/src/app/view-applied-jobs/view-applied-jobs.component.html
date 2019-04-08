@@ -5,13 +5,17 @@
       <td>S.no </td>
       <td>Company</td> 
       <td>Profile</td>
+      <td>Drive Location</td>
+      <td>PPT Talk</td>
+      <td>Status</td>
     </tr>
 <tr *ngFor="let job_post of data; index as i" >
           <td>{{i+1}}</td>
-          <td>{{job_post.job_details.company.name}}</td> 
+          <td>{{job_post.job_details.company.company_name}}</td> 
           <td>{{job_post.job_details.job_profile}}</td>
+          <td>{{jobposts.drive_location}}</td>
+          <td>{{jobposts.ppt_talk}}</td>
+          <td>Registered</td>
 </tr>
 </table>
-<!-- <div><button class="btn btn-danger"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div> -->
-
 

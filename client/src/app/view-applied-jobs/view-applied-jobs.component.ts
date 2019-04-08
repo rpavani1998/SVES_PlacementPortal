@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { JobPostActivity } from 'src/app/models/job-post-activity';
 import { JobPostsService } from 'src/app/services/job-posts/job-posts.service';
 import { CompanyService } from 'src/app/services/company/company.service';
+import { JobPosts } from '../models/jobposts';
+import { UtilsService } from '../services/utils/utils.service';
 
 @Component({
   selector: 'app-view-applied-jobs',
@@ -11,11 +13,13 @@ import { CompanyService } from 'src/app/services/company/company.service';
 export class ViewAppliedJobsComponent implements OnInit {
 
   constructor( private jobPostsService : JobPostsService,
-    private  companyService: CompanyService) { 
+    private  companyService: CompanyService,
+    private utilService: UtilsService) { 
   }
 
   data = []
   job_post_activity = new JobPostActivity()
+  jobposts = new JobPosts()
 
   ngOnInit() {
     const id = localStorage.getItem('currentUser');
@@ -25,6 +29,9 @@ export class ViewAppliedJobsComponent implements OnInit {
           this.job_post_activity = job_post 
           this.jobPostsService.getJobDetails(job_post.job_post_id.toString()).subscribe(job_post_details =>{
               this.job_post_activity.job_details = job_post_details
+              this.utilService.getJobProcess(job_post.job_post_id).subscribe(jobprocess => {
+                this.jobposts.jobprocess = jobprocess
+              })
               this.companyService.getCompany(job_post_details.company_id).subscribe(company => {
                 this.job_post_activity.job_details.company = company;
                 console.log(this.job_post_activity)

@@ -29,6 +29,7 @@ import { ViewRegisteredCompetitionsComponent } from './view-registered-competiti
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NotifyMessageComponent } from './notify-message/notify-message.component';
+import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { NotifyMessageComponent } from './notify-message/notify-message.componen
    RegisterStudentComponent,
    StudentEditComponent,
    NotifyMessageComponent,
+   EditUserAccountComponent,
 
   ],
   imports: [
