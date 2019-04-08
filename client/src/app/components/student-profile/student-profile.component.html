@@ -1,0 +1,40 @@
+<h5>Profile</h5>
+
+<li *ngFor="let student of data">
+
+<div >
+    <div>RollNo :{{student.roll_no}}</div>
+    <div>Name: {{student.first_name}}{{student.last_name}}</div>
+    <div>Branch : {{student.branch}}</div>
+    <div>DOB : {{student.dob}}</div>
+    <div>Backlog : {{student.backlog}}</div>
+    <div>Aadhar Card Number: {{student.aadhar_no}}</div>
+</div>
+<br>
+<div>
+    <li *ngFor= "let edu_details of student.education_details">
+        <div>Certificate Degree Name: {{edu_details.certificate_degree_name}}</div>
+        <div>Major: {{edu_details.major}}</div>
+        <div>Institute/University Name: {{edu_details.institute_university_name}}</div>
+        <div>Board: {{edu_details.board}}</div>
+        <div>Passing Year: {{edu_details.passing_year}}</div>
+        <div>Percentage: {{edu_details.percentage}}</div>
+        <div>CGPA: {{edu_details.cgpa}}</div>
+        <div>Proof Document: <a href="http://localhost:4000/api/file/E{{edu_details.id}}">Proof Document</a></div>
+    </li>
+</div>
+<br>
+<div>
+    <li *ngFor= "let exp_details of student.experience_details">
+            <div>Job Title : {{exp_details.job_title}}</div>
+            <div>Company Name: {{exp_details.company_name}}</div>
+            <div>Is Current Job: {{exp_details.is_current_job}}</div>
+            <div>Start_Date: {{exp_details.start_date}}</div>
+            <div>End Date: {{exp_details.end_date}}</div>
+            <div>Job Location: {{exp_details.job_location_city}}</div>
+            <div>Description: {{exp_details.description}}</div>
+            <div>Proof Document: <a href="http://localhost:4000/api/file/X{{exp_details.id}}">Proof Document</a></div>
+    </li>
+</div>
+
+</li>

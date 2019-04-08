@@ -1,4 +1,5 @@
 const db = require('../config/db.config.js');
+<<<<<<< HEAD
 const addjob = ('../controllers/job-post.controller.js');
 const JobPost = db.job_post;
 const JobType = db.job_type;
@@ -8,6 +9,11 @@ const JobPostActivity = db.job_post_activity;
 const JobStage = db.jobstage;
 const JobProcesses = db.jobprocess;
 const Company = db.company
+=======
+const JobPost = db.job_post;
+const JobPostActivity = db.job_post_activity;
+
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 // Post a JobPost
 exports.create = (req, res) => {
 	let job_post = req.body;
@@ -32,8 +38,11 @@ exports.findAll = (req, res) => {
 	});
 };
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 // Find a JobPost by Id
 exports.findById = (req, res) => {	
 	console.log("Params", req.params)
@@ -43,7 +52,11 @@ exports.findById = (req, res) => {
 };
 
 exports.findAllApplied = (req, res) => {
+<<<<<<< HEAD
 	JobPostActivity.findAll({where:{roll_no:req.params.id}}).then(jobs => {
+=======
+	JobPostActivity.findAll({attributes: ['job_post_id', 'apply_date']},{where:{roll_no:req.params.id}}).then(jobs => {
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 		console.log(jobs);
 	  res.json(jobs);
 	});
@@ -67,6 +80,7 @@ exports.delete = (req, res) => {
 	}).then(() => {
 	  res.status(200).json({msg:'deleted successfully a post with id = ' + req.body.id});
 	});
+<<<<<<< HEAD
 };
 
 exports.jobStages = (req , res) => {
@@ -128,3 +142,6 @@ exports.jobProcesses = (req , res) => {
 		res.json(jobprocess) 
 	})
 }
+=======
+};
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3

@@ -29,9 +29,15 @@ module.exports = (sequelize, Sequelize) => {
 		cgpa: {
 			type: Sequelize.FLOAT
 		},
+<<<<<<< HEAD
 		status: {
 			type: Sequelize.STRING
 		}
+=======
+		// proof_document: {
+		// 	type: Sequelize.BLOB('long')
+		// }
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 
 	}, {
 			timestamps: false

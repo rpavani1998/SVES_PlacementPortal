@@ -44,7 +44,11 @@ exports.create = (req, res) => {
 		company.company_name = company.cn
 		console.log( "Company Name from controller" , company.company_name)
 	}		
+<<<<<<< HEAD
 	Company.create(company).then(result => { 
+=======
+	Company.create(company).then(result => {
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 		res.json(result);
 	});
 };

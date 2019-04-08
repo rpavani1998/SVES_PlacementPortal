@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
+<<<<<<< HEAD:client/src/app/services/user/user.service.ts
 import { EducationDetails } from 'src/app/models/notifications';
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3:client/src/app/services/user/user.service.ts
 
 const httpOptions = {
   headers: new HttpHeaders({ 

@@ -4,9 +4,12 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Branch } from '../../models/branch';
 import { SkillSet } from '../../models/skill-set';
+<<<<<<< HEAD:client/src/app/services/utils/utils.service.ts
 import { MailFormat } from 'src/app/models/mail-format';
 import { JobProcess } from 'src/app/models/jobprocess';
 import { JobStage } from 'src/app/models/jobstage';
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3:client/src/app/services/utils/utils.service.ts
 
 const httpOptions = {
   headers: new HttpHeaders({ 

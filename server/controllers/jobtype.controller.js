@@ -7,6 +7,7 @@ exports.findAll = (req, res) => {
 	  res.json(jobtype);
 	});
 };
+<<<<<<< HEAD
 
 exports.findById = (req, res) => {	
 	console.log('jobtype',req.params.jobtypeid)
@@ -14,3 +15,5 @@ exports.findById = (req, res) => {
 		res.json(jobtype);
 	})
 };
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3

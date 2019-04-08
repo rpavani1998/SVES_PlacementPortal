@@ -34,13 +34,19 @@ require('./route/utils.route')(app);
 require('./route/job-type.route')(app);  
 require('./route/job-post.route.js')(app); 
 require('./route/company.route')(app)
+<<<<<<< HEAD
 require('./route/competition.route')(app)
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 // require('./route/editjobpost.route.js')(app); 
 
 let router = require('./route/file.router.js');
 app.use('/', router);
+<<<<<<< HEAD
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+=======
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 
 var server = app.listen(4000, function () {
  

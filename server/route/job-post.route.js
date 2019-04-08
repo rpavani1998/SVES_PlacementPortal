@@ -14,6 +14,7 @@ module.exports = function(app) {
 
     app.delete('/api/jobposts/:id', jobposts.delete);
 
+<<<<<<< HEAD
     app.get('/api/jobpost/:roll_no/:job_post_id', jobposts.register) 
 
     app.get('/api/job_stage' , jobposts.jobStages);
@@ -25,4 +26,7 @@ module.exports = function(app) {
     app.get('/api/addjob/:jobId', jobposts.jobProcesses);
 
  
+=======
+    app.get('/api/jobpost/:roll_no/:job_post_id', jobposts.register)
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 } 

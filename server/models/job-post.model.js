@@ -34,6 +34,7 @@ module.exports = (sequelize, Sequelize) => {
 	  },
 	  ppt_talk : {
           type : Sequelize.DATE,
+<<<<<<< HEAD
 			},
 		degree: {
 			type : Sequelize.STRING,
@@ -50,6 +51,9 @@ module.exports = (sequelize, Sequelize) => {
 		tenth_aggregate: {
 			type: Sequelize.STRING,
 		}
+=======
+      },
+>>>>>>> 7d2bba97b9eb2faa3acbfa42495cd98f7680fdd3
 	},{
 			timestamps: false
 	});
