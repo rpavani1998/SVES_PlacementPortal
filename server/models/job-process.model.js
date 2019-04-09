@@ -9,6 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     job_stage_id : {
         type : Sequelize.INTEGER,
+	},
+	date : {
+        type : Sequelize.DATEONLY,
     },
 	},{
 			timestamps: false

@@ -2,6 +2,7 @@ import { Company } from './company_';
 import { JobProcess } from './jobprocess';
 import { JobType } from './jobtype';
 import { JobPost } from './job-post';
+import { JobPostActivity } from './job-post-activity';
 
 export class JobPosts {
     id : number;
@@ -25,7 +26,8 @@ export class JobPosts {
     inter_aggregate : string;
     tenth_aggregate : string;
     company : Company;
-    jobprocess : JobProcess;
+    jobprocesses : JobProcess[];
     jobtype : JobType;
     jobpost : JobPost
+    job_Post_actiivty : JobPostActivity
 }
