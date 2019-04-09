@@ -3,7 +3,9 @@ const JobPost = db.job_post;
 const JobPostActivity = db.job_post_activity;
 const JobStage = db.jobstage;
 const JobProcesses = db.jobprocess;
-const Company = db.company
+const Company = db.company;
+const JobType = db.job_type;
+const AddJob = db.job_post;
 // Post a JobPost
 exports.create = (req, res) => {
 	let job_post = req.body;
@@ -99,7 +101,7 @@ exports.create = (req, res) => {
 					job.job_type = user.job_type_id
 
 					AddJob.create(job).then(result => {
-						job_id = result.id;
+						let job_id = result.id;
 						res.json(result)
 						let jobprocess = req.body;
 						// utils.jobData(result); 

@@ -72,6 +72,15 @@ export class ManageaccountComponent implements OnInit {
           this.majors = major;
           console.log("Branches : ", major);
         });
+
+        var uid = localStorage.getItem('currentUser');
+    this.userService.getUser(uid)
+      .subscribe(
+        userdata => {
+          console.log("User Data : ", userdata.user_type_id);
+          this.userdata = userdata;
+        });
+
     
         
   }

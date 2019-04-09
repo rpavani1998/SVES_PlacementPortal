@@ -2,6 +2,7 @@ export class User {
     id: string = '';
     user_type_id : string = '';
     college_id: string = '';
+    branch_id: string ='';
     email: string = '';
     password: string = '';
     contact_number: string = '';

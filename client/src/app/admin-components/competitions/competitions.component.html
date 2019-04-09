@@ -2,17 +2,68 @@
 <div class="col-md-12">
   <mat-card class="example-card">
     <mat-card-header>
-      <h3>Competitions Corner</h3>
+      <h3>Competitions corner</h3>
     </mat-card-header>
     <mat-card-content>
-      <mat-tab-group dynamicHeight>
-        <mat-tab label="Open competitions">
+        <mat-tab-group dynamicHeight>
 
-        </mat-tab>
-        <mat-tab label="Add Competitions">
+            <mat-tab label="Open Competitions" *ngFor = "let competitions of competitions"> 
+              {{competitions.name}}<br>
+              {{competitions.description}}<br>
+              {{competitions.url}}  <br>
+            </mat-tab>
           
-        </mat-tab>
-      </mat-tab-group>
+          
+            <mat-tab label="Add Competition">
+                  <div class="row">
+                    <div class="col-md-8">
+          
+                      <div class="card">
+                        <div class="card-header card-header-danger">
+                          <h4 class="card-title">Competition</h4>
+                          <p class="card-category">Add Competition Details</p>
+                        </div>
+                        <div class="card-body" [hidden]="submitted">
+                          <form #adminPlacementForm="ngForm">
+                            <!-- Company details -->
+                            <label>
+                              <h4>Competition Details<sup>*</sup></h4>
+                            </label>
+          
+                            <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Competition Name" type="text" id="name" required [(ngModel)]="competition.name"
+                                    name="name" #name="ngModel">
+                                </mat-form-field>
+                              </div>
+          
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Competition Description" type="text" id="description" required [(ngModel)]="competition.description"
+                                      name="description" #description="ngModel">
+                                  </mat-form-field>
+                                </div>
+          
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Competition URL" type="text" id="url" required [(ngModel)]="competition.url"
+                                        name="description" #description="ngModel">
+                                    </mat-form-field>
+                                  </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                              (click)="addCompetition()">Add Competition</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+
+            </mat-tab>
+          </mat-tab-group>
     </mat-card-content>
   </mat-card>
 </div>
+

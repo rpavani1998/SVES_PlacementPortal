@@ -22,6 +22,11 @@ export class CompetitionService {
   constructor(
     private http: HttpClient
   ) { }
+
+  addCompetition (competition : Competition): Observable<Competition> {
+    console.log(this.http.post<Competition>(this.competitionsUrl, competition, httpOptions))
+    return this.http.post<Competition>(this.competitionsUrl, competition, httpOptions);
+  }
   
   getCompetitions (): Observable<Competition[]> {
     console.log((this.competitionsUrl));

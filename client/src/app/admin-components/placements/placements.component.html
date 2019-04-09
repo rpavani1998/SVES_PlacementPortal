@@ -1,278 +1,290 @@
-<mat-tab-group dynamicHeight>
+<br>
+<div class="col-md-12">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <h3>Placement Corner</h3>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group dynamicHeight>
 
-    <mat-tab label="Open Job Postings"> <br>
-    <div class="col-md-12 row">
-      <div class="col-md-3" *ngFor="let d of data ; let i = index">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{d.company.company_name}}</mat-card-title>
-              <mat-card-subtitle>{{d.job_profile}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>Job Type : {{d.jobtype.job_type_name}}</p>
-              <p>Location : {{d.job_location}}</p>
-              <p>Salary : {{d.salary_lpa}}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button [routerLink]="['/admin/jobposts', d.id]">Edit</button>
-            </mat-card-actions>
-          </mat-card> 
-      </div>
-      <br>
-      <br>
-    </div>
-    <br>
-  </mat-tab>
- 
-  <mat-tab label="Closed Job Postings"> <br>
-    <div class="col-md-12 row">
-      <div class="col-md-3" *ngFor="let data_ of closeddata ; let i = index">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{data_.company.company_name}}</mat-card-title>
-              <mat-card-subtitle>{{data_.job_profile}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>Job Type : {{data_.jobtype.job_type_name}}</p>
-              <p>Location : {{data_.job_location}}</p>
-              <p>Salary : {{data_.salary_lpa}}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button [routerLink]="['/admin/jobposts', data_.id]">Edit</button>
-            </mat-card-actions>
-          </mat-card> 
-      </div>
-      <br>
-      <br>
-    </div>
-    <br>
-  </mat-tab>
- 
-  
+        <mat-tab label="Open Job Postings"> <br>
+          <div class="col-md-12 row">
+            <div class="col-md-3" *ngFor="let d of data ; let i = index">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{d.company.company_name}}</mat-card-title>
+                  <mat-card-subtitle>{{d.job_profile}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>Job Type : {{d.jobtype.job_type_name}}</p>
+                  <p>Location : {{d.job_location}}</p>
+                  <p>Salary : {{d.salary_lpa}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button class="btn btn-danger" [routerLink]="['/admin/jobposts', d.id]">Edit</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <br>
+            <br>
+          </div>
+          <br>
+        </mat-tab>
 
-  <mat-tab label="Add job">
-    <div class="main-content middle">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-8">
+        <mat-tab label="Closed Job Postings"> <br>
+          <div class="col-md-12 row">
+            <div class="col-md-3" *ngFor="let data_ of closeddata ; let i = index">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{data_.company.company_name}}</mat-card-title>
+                  <mat-card-subtitle>{{data_.job_profile}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>Job Type : {{data_.jobtype.job_type_name}}</p>
+                  <p>Location : {{data_.job_location}}</p>
+                  <p>Salary : {{data_.salary_lpa}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button class="btn btn-danger" [routerLink]="['/admin/jobposts', data_.id]">Edit</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <br>
+            <br>
+          </div>
+          <br>
+        </mat-tab>
 
-            <div class="card">
-              <div class="card-header card-header-danger">
-                <h4 class="card-title">Job Post</h4>
-                <p class="card-category">Add Company Details</p>
-              </div>
-              <div class="card-body" [hidden]="submitted">
-                <form #adminPlacementForm="ngForm">
-                  <!-- Company details -->
-                  <label>
-                    <h4>Company Details<sup>*</sup></h4>
-                  </label>
-                  <div class="row"> 
-                    <div class="col-md-12">
-                      <mat-form-field>
-                        <mat-select placeholder="Select Company" id="company_name" required
-                          [(ngModel)]="job.company_name" name="company_name" #company_name="ngModel">
-                          <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
-                            {{comp.company_name}}
-                          </mat-option>
-                          <mat-option value="others">
-                            Others 
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
+
+
+        <mat-tab label="Add job" *ngIf="userdata.user_type_id == 'TPO' " enable>
+          <div class="main-content middle">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-8">
+
+                  <div class="card">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title">Job Post</h4>
+                      <p class="card-category">Add Company Details</p>
                     </div>
-                  </div>
-
-                  <div *ngIf="job.company_name == 'others' ">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Company ID" type="text" id="company_id" required
-                            [(ngModel)]="job.company_id" name="company_id" #company_id="ngModel">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Company Name" type="text" id="cn" required [(ngModel)]="job.cn"
-                            name="cn" #cn="ngModel">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Profile Description" type="text" id="profile_description"
-                            required [(ngModel)]="job.profile_description" name="profile_description"
-                            #profile_description="ngModel">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-6">
-                        <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Company URL" type="text" id="company_website_url" required
-                            [(ngModel)]="job.company_website_url" name="company_website_url"
-                            #company_website_url="ngModel">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-
-                      <div class="col-md-6">
-                        <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                          <input mat-raised-button class="ng-hide" id="company_image" type="file"
-                            (change)="selectCompanyImage($event)">
+                    <div class="card-body" [hidden]="submitted">
+                      <form #adminPlacementForm="ngForm">
+                        <!-- Company details -->
+                        <label>
+                          <h4>Company Details<sup>*</sup></h4>
+                        </label>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field>
+                              <mat-select placeholder="Select Company" id="company_name" required
+                                [(ngModel)]="job.company_name" name="company_name" #company_name="ngModel">
+                                <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
+                                  {{comp.company_name}}
+                                </mat-option>
+                                <mat-option value="others">
+                                  Others
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <br>
-                  <!-- Important information -->
-                  <label>
-                    <h4>Important Information<sup>*</sup></h4>
-                  </label>
-                  <div class="row">
-                    <!-- <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Job Id" type="text" id="id" required [(ngModel)]="job.id" name="id"
-                          #id="ngModel">
-                      </mat-form-field>
-                    </div> -->
-                  </div>
-                  <div class="row">
+                        <div *ngIf="job.company_name == 'others' ">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Company ID" type="text" id="company_id" required
+                                  [(ngModel)]="job.company_id" name="company_id" #company_id="ngModel">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Company Name" type="text" id="cn" required
+                                  [(ngModel)]="job.cn" name="cn" #cn="ngModel">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Profile Description" type="text" id="profile_description"
+                                  required [(ngModel)]="job.profile_description" name="profile_description"
+                                  #profile_description="ngModel">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Company URL" type="text" id="company_website_url" required
+                                  [(ngModel)]="job.company_website_url" name="company_website_url"
+                                  #company_website_url="ngModel">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
 
-                      <div class="col-md-6">
-                          <mat-form-field>
-                            <mat-select placeholder="Select Job Type" id="job_type_name" required
-                              [(ngModel)]="job.job_type_name" name="job_type_name" #job_type_name="ngModel">
-                              <mat-option value="Job">Job</mat-option>
-                            </mat-select>
+                            <div class="col-md-6">
+                              <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                <input mat-raised-button class="ng-hide" id="company_image" type="file"
+                                  (change)="selectCompanyImage($event)">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <br>
+                        <!-- Important information -->
+                        <label>
+                          <h4>Important Information<sup>*</sup></h4>
+                        </label>
+                        <div class="row">
+                          <!-- <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Job Id" type="text" id="id" required [(ngModel)]="job.id" name="id"
+                              #id="ngModel">
                           </mat-form-field>
+                        </div> -->
                         </div>
+                        <div class="row">
 
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Job Profile" type="text" id="job_profile" required
-                          [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
-                          
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Job Description" type="text" id="job_description" required
-                          [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel">
-                          
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Apply Before" type="date" id="last_date_for_application" required
-                          [(ngModel)]="job.last_date_for_application" name="last_date_for_application"
-                          #last_date_for_application="ngModel">
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Joining At" type="text" id="job_location" required
-                          [(ngModel)]="job.job_location" name="job_location" #job_location="ngModel">
-                      </mat-form-field>
-                    </div>
+                          <div class="col-md-6">
+                            <mat-form-field>
+                              <mat-select placeholder="Select Job Type" id="job_type_name" required
+                                [(ngModel)]="job.job_type_name" name="job_type_name" #job_type_name="ngModel">
+                                <mat-option value="Job">Job</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
 
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="PPT Talk" type="date" id="ppt_talk" required
-                          [(ngModel)]="job.ppt_talk" name="ppt_talk" #ppt_talk="ngModel">
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Salary" type="number" id="salary_lpa" required
-                          [(ngModel)]="job.salary_lpa" name="salary_lpa" #salary_lpa="ngModel">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Drive Location" type="text" id="drive_location" required
-                          [(ngModel)]="job.drive_location" name="drive_location" #drive_location="ngModel">
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field>
-                        <mat-select multiple placeholder="Select Job Stage" id="job_stage_id" required
-                          [(ngModel)]="job.job_stage_id" name="job_stage_id" #job_stage_id="ngModel">
-                          <mat-option *ngFor="let jobstage of jobstage" [value]="jobstage.id">
-                            {{jobstage.stage_name}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <br>
-                  <!-- Eligibility Criteria -->
-                  <label>
-                    <h4>Eligibility Criteria<sup>*</sup></h4>
-                  </label>
-                  <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Job Profile" type="text" id="job_profile" required
+                                [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
 
-                    <div class="col-md-6">
-                      <mat-form-field>
-                        <mat-select placeholder="Select Degree" id="degree" required [(ngModel)]="job.degree"
-                          name="degree" #degree="ngModel">
-                          <mat-option value="B.Tech">B.Tech</mat-option>
-                          <mat-option value="M.Tech">M.Tech</mat-option>
-                          <mat-option value="BPharm">BPharm</mat-option>
-                          <mat-option value="MPharm">MPharm</mat-option>
-                          <mat-option value="MBA">MBA</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Overall Aggregate" type="text" id="overall_aggregate" required
-                          [(ngModel)]="job.overall_aggregate" name="overall_aggregate" #overall_aggregate="ngModel">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Backlogs" type="number" id="backlogs" required
-                          [(ngModel)]="job.backlogs" name="backlogs" #backlogs="ngModel">
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="12th Aggregate" type="text" id="inter_aggregate" required
-                          [(ngModel)]="job.inter_aggregate" name="inter_aggregate" #inter_aggregate="ngModel">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="example-full-width">
-                        <input matInput placeholder="10th Aggregate" type="text" id="tenth_aggregate" required
-                          [(ngModel)]="job.tenth_aggregate" name="tenth_aggregate" #tenth_aggregate="ngModel">
-                      </mat-form-field>
-                    </div>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Job Description" type="text" id="job_description" required
+                                [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel">
 
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Apply Before" type="date" id="last_date_for_application"
+                                required [(ngModel)]="job.last_date_for_application" name="last_date_for_application"
+                                #last_date_for_application="ngModel">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Joining At" type="text" id="job_location" required
+                                [(ngModel)]="job.job_location" name="job_location" #job_location="ngModel">
+                            </mat-form-field>
+                          </div>
+
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="PPT Talk" type="date" id="ppt_talk" required
+                                [(ngModel)]="job.ppt_talk" name="ppt_talk" #ppt_talk="ngModel">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Salary" type="number" id="salary_lpa" required
+                                [(ngModel)]="job.salary_lpa" name="salary_lpa" #salary_lpa="ngModel">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Drive Location" type="text" id="drive_location" required
+                                [(ngModel)]="job.drive_location" name="drive_location" #drive_location="ngModel">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field>
+                              <mat-select multiple placeholder="Select Job Stage" id="job_stage_id" required
+                                [(ngModel)]="job.job_stage_id" name="job_stage_id" #job_stage_id="ngModel">
+                                <mat-option *ngFor="let jobstage of jobstage" [value]="jobstage.id">
+                                  {{jobstage.stage_name}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <br>
+                        <!-- Eligibility Criteria -->
+                        <label>
+                          <h4>Eligibility Criteria<sup>*</sup></h4>
+                        </label>
+                        <div class="row">
+
+                          <div class="col-md-6">
+                            <mat-form-field>
+                              <mat-select placeholder="Select Degree" id="degree" required [(ngModel)]="job.degree"
+                                name="degree" #degree="ngModel">
+                                <mat-option value="B.Tech">B.Tech</mat-option>
+                                <mat-option value="M.Tech">M.Tech</mat-option>
+                                <mat-option value="BPharm">BPharm</mat-option>
+                                <mat-option value="MPharm">MPharm</mat-option>
+                                <mat-option value="MBA">MBA</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Overall Aggregate" type="text" id="overall_aggregate"
+                                required [(ngModel)]="job.overall_aggregate" name="overall_aggregate"
+                                #overall_aggregate="ngModel">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Backlogs" type="number" id="backlogs" required
+                                [(ngModel)]="job.backlogs" name="backlogs" #backlogs="ngModel">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="12th Aggregate" type="text" id="inter_aggregate" required
+                                [(ngModel)]="job.inter_aggregate" name="inter_aggregate" #inter_aggregate="ngModel">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="10th Aggregate" type="text" id="tenth_aggregate" required
+                                [(ngModel)]="job.tenth_aggregate" name="tenth_aggregate" #tenth_aggregate="ngModel">
+                            </mat-form-field>
+                          </div>
+
+                        </div>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                          (click)="addJob(); addCompany()">Add Post</button>
+                        <div class="clearfix"></div>
+                      </form>
+                    </div>
                   </div>
-                  <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                    (click)="addJob(); addCompany()">Add Post</button>
-                  <div class="clearfix"></div>
-                </form>
+                </div>
+
               </div>
             </div>
           </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
 
-        </div>
-      </div>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+  </mat-card>
+</div>

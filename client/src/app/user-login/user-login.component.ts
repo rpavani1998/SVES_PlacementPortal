@@ -48,7 +48,7 @@ private authenticate(): void {
             this.router.navigate(['/user-profile'])
             this.Auth.setLoggedIn(true)
           }else{
-            this.studentService.getVerifiedStudent(id).subscribe(std => {
+            this.studentService.getStudent(id).subscribe(std => {
               console.log(std)
               if(std  == null){
               this.router.navigate(['/student/add'])

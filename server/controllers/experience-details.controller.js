@@ -44,3 +44,11 @@ exports.delete = (req, res) => {
 	  res.status(200).json({msg:'deleted successfully a experience_detail with id = ' + req.body.roll_no+ " "+ req.body.start_date + " " + req.body.end_date});
 	});
 };
+
+exports.getExperiences = (req, res) => {
+	ExperienceDetails.findAll({where : {status : 'Requested'}}).then(experience_details => {
+		console.log(experience_details);
+	  res.json(experience_details);
+	});
+};
+

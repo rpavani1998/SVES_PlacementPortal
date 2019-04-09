@@ -66,7 +66,7 @@ export class JobpostdetailsComponent implements OnInit {
           this.jobdata.company = company; 
         })
         this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
-          this.jobdata.jobprocess = jobprocess; 
+          this.jobdata.jobprocesses = jobprocess; 
         }) 
         this.jobtypeService.getJobType(jobdata.job_type).subscribe(jobtype => {
           this.jobdata.jobtype = jobtype

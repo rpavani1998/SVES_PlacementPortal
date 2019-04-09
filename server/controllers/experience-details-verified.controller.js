@@ -12,7 +12,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 	ExperienceDetails.findAll({where:{roll_no:req.params.id}}).then(experience_details => {
-		console.log(experience_details);
+		console.log("INNNNN" , experience_details);
 	  res.json(experience_details);
 	});
 };

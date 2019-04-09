@@ -42,7 +42,7 @@ export class EditjobpostdetailsComponent implements OnInit {
     this.jobpostsService.getJobData(jobid)
       .subscribe(jobposts => {
           this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
-            jobposts.jobprocess = jobprocess
+            jobposts.jobprocesses = jobprocess
             if ( jobposts.job_type == 3 || jobposts.job_type == 4 ) {
                 this.data.push(jobposts)
                 this.companyService.getCompany(jobposts.company_id).subscribe(company => {
