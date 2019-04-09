@@ -16,12 +16,12 @@ const httpOptions = {
   providedIn: 'root'
 }) 
 export class StudentService {
-  private studentsUrl = 'http://localhost:4000/api/students'; 
-  private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
-  private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
-  private verifiedStudentsUrl = 'http://localhost:4000/api/students_verified'; 
-  private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
-  private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verified'; 
+  private studentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/students'; 
+  private educationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details'; 
+  private experienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details'; 
+  private verifiedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/students_verified'; 
+  private verifiedEducationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details_verified'; 
+  private verifiedExperienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details_verified'; 
 
   constructor( 
     private http: HttpClient

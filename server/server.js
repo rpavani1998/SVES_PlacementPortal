@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 const cors = require('cors')
 const corsOptions = {
-  origin: ['http://0.0.0.0:4200'],
+  origin: ['http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4200'],
   credentials: true
  }
 

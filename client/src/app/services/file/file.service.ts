@@ -15,7 +15,7 @@ export class UploadFileService {
     formdata.append('file', file);
     formdata.append('id', id);
     console.log("uploading img")
-    const req = new HttpRequest('POST', 'http://localhost:4000/api/file/upload', formdata, {
+    const req = new HttpRequest('POST', 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/upload', formdata, {
       responseType: 'text'
     });
 
@@ -23,10 +23,10 @@ export class UploadFileService {
   }
 
   getFiles(): Observable<any> {
-    return this.http.get('http://localhost:4000/api/file/all');
+    return this.http.get('http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/all');
   }
 
   getFileById(id: String): Observable<any>{
-    return this.http.get('http://localhost:4000/api/file/retrieve/'+id);
+    return this.http.get('http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/retrieve/'+id);
   }
 }
