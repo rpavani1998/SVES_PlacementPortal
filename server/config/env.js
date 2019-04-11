@@ -2,7 +2,7 @@ const env = {
   database: 'sves_db',
   username: 'root',
   password: 'root',
-  host: 'localhost',
+  host: 'ec2-3-14-3-49.us-east-2.compute.amazonaws.com',
   dialect: 'mysql',
   pool: {
 	  max: 5,
