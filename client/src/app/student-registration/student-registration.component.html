@@ -121,10 +121,51 @@
                                     <div [formGroupName]="i">
                                         <div class="row">
                                             <div class="col-md-4">
-                                              <mat-form-field class="example-full-width">
-                                                  <input matInput type="text" id="certificate_degree_name" placeholder="Certificate Degree Name Ex. B.Tech,12th,10th"
-                                            name="certificate_degree_name" formControlName="certificate_degree_name" required>
-                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-select id="certificate_degree_name" placeholder="Certificate Degree Name Ex. B.Tech,12th,10th"
+                                                    name="certificate_degree_name" formControlName="certificate_degree_name" required>
+                                                      <mat-option value="B.Tech">BE/B.Tech</mat-option>
+                                                      <mat-option value="M.Tech">ME/M.Tech</mat-option>
+                                                      <mat-option value="MCA/PGDCA">MCA/PGDCA</mat-option>
+                                                      <mat-option value="MBA/PGDAA">MBA/PGDAA</mat-option>
+                                                      <mat-option value="BCA">BCA</mat-option>
+                                                      <mat-option value="BBA">BBA</mat-option>
+                                                      <mat-option value="B.A.">B.A.</mat-option>
+                                                      <mat-option value="B.Com">B.Com</mat-option>
+                                                      <mat-option value="B.Pharm">B.Pharm</mat-option>
+                                                      <mat-option value="B.Sc">B.Sc</mat-option>
+                                                      <mat-option value="BL/LLB">BL/LLB</mat-option>
+                                                      <mat-option value="BDS">BDS</mat-option>
+                                                      <mat-option value="B.Ed">B.Ed</mat-option>
+                                                      <mat-option value="BHM">BHM</mat-option>
+                                                      <mat-option value="B.Arch">B.Arch</mat-option>
+                                                      <mat-option value="MBBS">MBBS</mat-option>
+                                                      <mat-option value="Diploma">Diploma</mat-option>
+                                                      <mat-option value="MA">MA</mat-option>
+                                                      <mat-option value="M.Com">M.Com</mat-option>
+                                                      <mat-option value="M.Pharm">M.Pharm</mat-option>
+                                                      <mat-option value="M.Sc">M.Sc</mat-option>
+                                                      <mat-option value="MD/MS">MD/MS</mat-option>
+                                                      <mat-option value="ML/LLM">ML/LLM</mat-option>
+                                                      <mat-option value="M.Phil">M.Phil</mat-option>
+                                                      <mat-option value="M.Ed">M.Ed</mat-option>
+                                                      <mat-option value="M.Arch">M.Arch</mat-option>
+                                                      <mat-option value="CA">CA</mat-option>
+                                                      <mat-option value="CS">CA</mat-option>
+                                                      <mat-option value="ICWA">ICWA</mat-option>
+                                                      <mat-option value="Others">Others</mat-option>
+                                                      <mat-option value="Aviation">Aviation</mat-option>
+                                                      <mat-option value="B.Plan">B.Plan</mat-option>
+                                                      <mat-option value="BGL">BGL</mat-option>
+                                                      <mat-option value="BVSC">BVSC</mat-option>
+                                                      <mat-option value="Doctrate(Phd)">Doctrate(Phd)</mat-option>
+                                                      <mat-option value="MDS">MDS</mat-option>
+                                                      <mat-option value="12th">12th</mat-option>
+                                                      <mat-option value="10th">10th</mat-option>
+                                                     
+                                                    </mat-select>
+                                                  </mat-form-field>
+                            
                                                 <!-- <div [hidden]="certificate_degree_name.valid || certificate_degree_name.pristine"
                                                 class="alert alert-danger">
                                               Degree is required
@@ -328,14 +369,6 @@
                                 <button mat-raised-button type="button" class="btn btn-danger"  (click)="addStudent()" [disabled]="!registrationForm.form.valid">Add</button>
                               </div>
 
-                              <div [hidden]="!submitted">
-                                <!-- <p>Submitted Successfully! -> <span class="badge badge-light">{{student.first_name}} {{student.last_name}}</span> -->
-                                <!-- </p> -->
-                                  <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-dark" [routerLink]="['/login']">Done</button> 
-                                </div>
-                              </div>
-                            
                             </form>
                             <br>
                           <div class="clearfix"></div>

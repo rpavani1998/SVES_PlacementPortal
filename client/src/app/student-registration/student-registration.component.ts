@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { UtilsService } from '../services/utils/utils.service';
 import { UploadFileService } from '../services/file/file.service';
 import { MailFormat } from '../models/mail-format';
+import { Router } from '@angular/router';
 // import { FILE } from 'dns';
 
 @Component({
@@ -55,7 +56,8 @@ export class RegisterStudentComponent{
     private utilService: UtilsService,
     private uploadService: UploadFileService,
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -86,6 +88,7 @@ export class RegisterStudentComponent{
  addStudent() {
    this.submitted = true;
    this.save();
+   this.router.navigate(['/message'])
  }
 
  setExperienceDetails() {

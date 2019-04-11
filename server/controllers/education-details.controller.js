@@ -7,7 +7,7 @@ const Student = db.students;
 const VerifiedStudents = db.students_verified;
 const Experience = db.experience_details;
 const VerifiedExperience = db.experience_details_verified;
-
+const util = require('../controllers/utils.controller')
 
 // Post a EducationDetails
 exports.create = (req, res) => {
@@ -41,6 +41,7 @@ exports.update = (req, res) => {
 					} }
 				   ).then(() => {
 						 res.status(200).json({msg:"updated successfully a education_detail with id = " + req.body.roll_no + " "+ req.body.certificate_degree_name + " " + req.body.major});
+						 util.mail(req.body.roll_no, 'profile_update_request', education_detail)
 				   });	
 };
  

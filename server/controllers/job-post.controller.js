@@ -6,6 +6,8 @@ const JobProcesses = db.jobprocess;
 const Company = db.company;
 const JobType = db.job_type;
 const AddJob = db.job_post;
+const util = require('../controllers/utils.controller')
+
 // Post a JobPost
 exports.create = (req, res) => {
 	let job_post = req.body;
@@ -19,6 +21,10 @@ exports.register = (req, res) => {
 	let job_post_activity = req.params;
 	JobPostActivity.create(job_post_activity).then(result => {	
 		res.json('X'+result.id);
+		JobPost.findById(req.post_id).then(post => {
+			util.mail(res.roll_no, 'event_registered', post)
+		})
+		
 	});
 };
  
