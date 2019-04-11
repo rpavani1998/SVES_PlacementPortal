@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { StudentEditComponent } from './student-edit/student-edit.component';
+//import { StudentEditComponent } from './student-edit/student-edit.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { RegisterStudentComponent } from './student-registration/student-registration.component';
 import { JobPostsComponent } from './job-posts/job-posts.component';
@@ -14,6 +14,7 @@ import { ViewRegisteredCompetitionsComponent } from './view-registered-competiti
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NotifyMessageComponent } from './notify-message/notify-message.component';
+import { StudentEditComponent } from './student-edit/student-edit.component';
 
 const routes: Routes = [
   { 
@@ -38,10 +39,14 @@ const routes: Routes = [
     path: 'message', 
     component: NotifyMessageComponent
   },
-  { 
-    path: 'student/edit', 
-    component: StudentEditComponent 
-  },
+  // { 
+  //   path: 'student/edit', 
+  //   component: StudentEditComponent 
+  // },
+  // { 
+  //   path: 'student/edit', 
+  //   component: StudentEditComponent 
+  // },
    {
     path: '',
     component: StudentLayoutComponent,

@@ -64,7 +64,7 @@ private authenticate(): void {
         }
       })
     } else {
-      console.log("Error:", data.msg)
+      console.log('Error:', data.msg)
       this.invalid = true;
       this.message = data.msg
       // window.alert(data.msg)

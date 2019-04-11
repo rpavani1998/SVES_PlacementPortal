@@ -6,6 +6,7 @@ import { InternshipsComponent } from '../../internships/internships.component';
 import { CompetitionsComponent } from '../../competitions/competitions.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { StudentProfileComponent } from 'src/app/student-profile/student-profile.component';
+import { StudentEditComponent } from '../../student-edit/student-edit.component';
 import { JobPostsComponent } from 'src/app/job-posts/job-posts.component';
 import { ViewCompetitionComponent } from 'src/app/view-competition/view-competition.component';
 import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-competitions/view-registered-competitions.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
       { 
     path: 'user-profile', 
     component: StudentProfileComponent 
+  },
+  { 
+    path: 'student/edit', 
+    component: StudentEditComponent 
   },
   { 
     path: '', 

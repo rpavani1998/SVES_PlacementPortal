@@ -21,8 +21,10 @@ import {
   MatExpansionModule,
   MatDatepickerModule,
   MatToolbarModule,
+  MatSlideToggleModule,
+  MatTabsModule,
   MatTableModule,
-  MatSlideToggleModule
+  MatCardModule
 } from '@angular/material';
 import { StudentProfileComponent } from 'src/app/student-profile/student-profile.component';
 import { StudentEditComponent } from 'src/app/student-edit/student-edit.component';
@@ -36,11 +38,14 @@ import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-com
 import { ViewCompetitionComponent } from 'src/app/view-competition/view-competition.component';
 import { UserAccountComponent } from 'src/app/user-account/user-account.component';
 import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied-internships.component';
+
 @NgModule({
   imports: [
     CommonModule,
     StudentLayoutRoutes,
     FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -51,7 +56,9 @@ import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied
     MatDatepickerModule,
     MatToolbarModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCardModule,
+    MatTabsModule
   ],
   declarations: [
     DashboardComponent,
@@ -61,6 +68,7 @@ import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied
     CompetitionsComponent,
     NotificationsComponent,
     StudentProfileComponent,
+    StudentEditComponent,
     UserAccountComponent,
     AppliedInternshipsComponent,
     JobPostsComponent,
@@ -71,7 +79,6 @@ import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied
     ViewRegisteredCompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
     ViewCompetitionComponent
-    
     //RegisterStudentComponent
   ]
 })
