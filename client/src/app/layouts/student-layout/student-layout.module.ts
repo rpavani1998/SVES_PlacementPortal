@@ -78,7 +78,6 @@ import { UserAccountComponent } from 'src/app/user-account/user-account.componen
     ViewRegisteredCompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
     ViewCompetitionComponent
-    
     //RegisterStudentComponent
   ]
 })
