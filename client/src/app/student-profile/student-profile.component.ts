@@ -25,13 +25,13 @@ export class StudentProfileComponent  implements OnInit {
 
   getStudentDetails() {
     const id = localStorage.getItem('currentUser');
-    console.log(this.studentService.getStudent(id)
+    console.log(this.studentService.getVerifiedStudent(id)
     .subscribe(student => {
       this.student = student
-      this.studentService.getStudentEducationalDetails(id)
+      this.studentService.getVerifiedStudentEducationalDetails(id)
       .subscribe(educationDetails => 
         this.student.education_details = educationDetails)
-      this.studentService.getStudentExperienceDetails(id)
+      this.studentService.getVerifiedStudentExperienceDetails(id)
         .subscribe(experienceDetails => {
           this.student.experience_details = experienceDetails
           console.log(experienceDetails)

@@ -43,10 +43,10 @@ export class UtilsService {
     return this.http.get<JobStage[]>(this.jobstageUrl);
   }
 
-  getJobProcess(jobid: number): Observable<JobProcess> {
+  getJobProcess(jobid: number): Observable<JobProcess[]> {
     const url = `${this.jobprocessurl}/${jobid}`;
     console.log("Job Processes URL : " , url);
-    return this.http.get<JobProcess>(url);
+    return this.http.get<JobProcess[]>(url);
   }
   
   getColleges (): Observable<College[]> {

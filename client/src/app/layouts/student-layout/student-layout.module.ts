@@ -21,8 +21,10 @@ import {
   MatExpansionModule,
   MatDatepickerModule,
   MatToolbarModule,
+  MatSlideToggleModule,
+  MatTabsModule,
   MatTableModule,
-  MatSlideToggleModule
+  MatCardModule
 } from '@angular/material';
 import { StudentProfileComponent } from 'src/app/student-profile/student-profile.component';
 import { StudentEditComponent } from 'src/app/student-edit/student-edit.component';
@@ -34,12 +36,14 @@ import { ViewAppliedJobsComponent } from 'src/app/view-applied-jobs/view-applied
 import { StudentLayoutComponent } from './student-layout.component';
 import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from 'src/app/view-competition/view-competition.component';
+import { UserAccountComponent } from 'src/app/user-account/user-account.component';
 @NgModule({
   imports: [
     CommonModule,
     StudentLayoutRoutes,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -50,7 +54,9 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     MatDatepickerModule,
     MatToolbarModule,
     MatTableModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCardModule,
+    MatTabsModule
   ],
   declarations: [
     DashboardComponent,
@@ -60,7 +66,8 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     CompetitionsComponent,
     NotificationsComponent,
     StudentProfileComponent,
-    // StudentEditComponent,
+    UserAccountComponent,
+    StudentEditComponent,
     // RegisterStudentComponent,
     // UserLoginComponent,
     JobPostsComponent,
@@ -70,8 +77,8 @@ import { ViewCompetitionComponent } from 'src/app/view-competition/view-competit
     CompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
     ViewRegisteredCompetitionsComponent,
-    ViewCompetitionComponent,
-    StudentEditComponent,
+    ViewCompetitionComponent
+    
     //RegisterStudentComponent
   ]
 })

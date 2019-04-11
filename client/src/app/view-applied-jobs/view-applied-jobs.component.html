@@ -1,17 +1,61 @@
-<h5>Applied Job Posts</h5>
+<!-- <h5>Applied Job Posts</h5>
 
 <table style="width:100%">
     <tr>
       <td>S.no </td>
       <td>Company</td> 
       <td>Profile</td>
+      <td>Drive Location</td>
+      <td>PPT Talk</td>
+      <td>Status</td>
     </tr>
 <tr *ngFor="let job_post of data; index as i" >
           <td>{{i+1}}</td>
-          <td>{{job_post.job_details.company.name}}</td> 
+          <td>{{job_post.job_details.company.company_name}}</td> 
           <td>{{job_post.job_details.job_profile}}</td>
+          <td>{{jobposts.drive_location}}</td>
+          <td>{{jobposts.ppt_talk}}</td>
+          <td>Registered</td>
 </tr>
-</table>
-<!-- <div><button class="btn btn-danger"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div> -->
+</table>-->
 
 
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+  <h1>Applied JobPosts</h1>
+  <div class="w3-row-padding">
+  <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>  
+    <div id = "new">
+        <div *ngFor="let job_post of data" >
+              <div class="card" >
+                
+                <!-- <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div> -->
+                <div class="content">
+                         <h3> {{job_post.job_details.company.company_name}} </h3>
+                          <h5>{{job_post.job_details.job_profile}}</h5>
+                          <h6>Status : Registered</h6>
+                          <table style="width:100%">
+                              <tr>
+                                <td>S.no </td>
+                                <td>Stage</td> 
+                                <td>Date</td>
+                                <td>Stage Status</td>
+                              </tr>
+                          <tr *ngFor="let stage of job_post.jobprocesses; index as i" >
+                                    <td>{{i+1}}</td>
+                                    <td>{{stages[stage.job_stage_id]}}</td> 
+                                    <td>{{stage.date}}</td>
+                                    <td>-</td>
+                          </tr>
+                          </table>
+                         
+
+                            </div>
+                    
+        </div>
+    </div>
+
+    
+  </div>
+</div>
+</div>

@@ -6,7 +6,7 @@ exports.create = (req, res) => {
 	let student = req.body;
 	Student.create(student).then(result => {	
 		res.json(result);
-		util.mail(result.roll_no)
+		util.mail(result.roll_no, 'profile_verfication_request', result)
 	});
 };
  
@@ -34,7 +34,7 @@ exports.update = (req, res) => {
 					 { where: {roll_no: id} }
 				   ).then(() => {
 						 res.status(200).json({msg:"updated successfully a student with id = " + id});
-				   });	
+					 });	
 };
  
 // Delete a Student by Id
@@ -46,3 +46,10 @@ exports.delete = (req, res) => {
 	  res.status(200).json({msg:'deleted successfully a student with id = ' + id});
 	});
 };
+
+exports.getstudentProfiles = (req , res) => {
+	Student.findAll({where : {branch : req.params.branchID , status : "Requested"} }).then(student => {
+		res.json(student);
+	})
+}
+

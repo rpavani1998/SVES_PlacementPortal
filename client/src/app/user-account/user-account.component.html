@@ -1,0 +1,28 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+
+<div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title"> User Account Settings</h4>
+            <!-- <p class="card-category">Complete your profile</p> -->
+        </div>
+        <div class="card-body">
+<!-- <h2>Profile</h2> -->
+<div>UserType: {{user.user_type_id}}</div>     
+<div>College : {{user.college_id}}</div>    
+<div>Branch : {{user.branch_id}}</div>     
+<hr>
+<div>Email:  {{user.email}}</div>          
+<div>MobileNo: {{user.contact_number}}</div> 
+<hr>
+<div>SMS Notifications: <a *ngIf="user.sms_notification_active; else templateName">on</a>
+<ng-template #templateName>off</ng-template></div>              
+<div>Email Notifications: <a *ngIf="user.email_notification_active; else templateName">on</a>
+  <ng-template #templateName>off</ng-template></div>  
+<hr>  
+</div>
+</div>
+</div>
+</div>
+

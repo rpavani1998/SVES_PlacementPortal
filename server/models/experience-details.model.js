@@ -29,6 +29,9 @@ module.exports = (sequelize, Sequelize) => {
         description: {
             type: Sequelize.STRING
         },
+        status : {
+            type : Sequelize.STRING
+        }
 		// is_verified: {
 		// 	type: Sequelize.STRING
 		// }

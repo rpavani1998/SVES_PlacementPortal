@@ -1,6 +1,7 @@
 var stream = require('stream');
 const db = require('../config/db.config.js');
 const EducationDetails = db.education_details_verified;
+const util = require('../controllers/utils.controller')
 
 // Post a EducationDetails
 exports.create = (req, res) => {
@@ -34,6 +35,7 @@ exports.update = (req, res) => {
 					} }
 				   ).then(() => {
 						 res.status(200).json({msg:"updated successfully a education_detail with id = " + req.body.roll_no + " "+ req.body.certificate_degree_name + " " + req.body.major});
+						 util.mail(req.body.roll_no, 'profile_update', education_detail)
 				   });	
 };
  

@@ -1,6 +1,6 @@
 var nodeMailer = require('nodemailer')
 
-exports.mail = (id) => {
+exports.mail = (id, status, values) => {
     console.log("In Mail", id)
     let transporter = nodeMailer.createTransport({
         host: 'smtp.gmail.com',
@@ -11,18 +11,47 @@ exports.mail = (id) => {
             pass: 'ryandee05'
         }
     });
-    let mailOptions = {
-        from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
-       
-     to :id+'@bvrithyderabad.edu.in',
-   subject : 'Placement Portal:Registrated Successfully.',
-    text : 'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you',
-    html :  'You have successfully submitted the initial Registration Form. Your profile will be updated after the details are verified by you',
-    //  to: req.body.to, // list of receivers
-    //     subject: req.body.subject, // Subject line
-    //     text: req.body.body, // plain text body
-    //     html: req.body.html // html body
-    };
+    if (status == 'profile_verfication_request') {
+        let mailOptions = {
+            from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
+        
+        to :id+'@bvrithyderabad.edu.in',
+    subject : 'Placement Portal:Registrated Successfully.',
+        html :  'You have successfully submitted your Form. You will be notified once your profile is verified. Please contact your placement co-ordinator if it takes more than 1-2 working days.',
+        };
+    }else if(status == 'initial_verification') {
+        let mailOptions = {
+            from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
+        
+        to :id+'@bvrithyderabad.edu.in',
+    subject : 'Placement Portal: Verified Profile',
+        html :  'Your profile is successfully verfiied. Now you will have access to the portal to apply for job posts. If you still have problem in accessing the profile please contact your placement co-ordinator.',
+        };
+    } else if(status == 'profile_update'){
+        let mailOptions = {
+            from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
+        
+        to :id+'@bvrithyderabad.edu.in',
+    subject : 'Placement Portal: Profile Updated',
+        html :  'Your profile is successfully updated. Please contact your placement co-ordinator if it takes more than 1-2 working days.',
+        };
+    }else if(status == 'event_registered'){
+        let mailOptions = {
+            from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
+        
+        to :id+'@bvrithyderabad.edu.in',
+    subject : 'Placement Portal: Registered for a Event',
+        html :  'You have sucessfully registered for a event',
+        };
+    }else if (status == 'profile_update_request') {
+        let mailOptions = {
+            from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
+        
+        to :id+'@bvrithyderabad.edu.in',
+    subject : 'Placement Portal:Registrated Successfully.',
+        html :  'You have requested for profile update submitted your Form. You will be notified once your profile updates are verified. Please contact your placement co-ordinator if it takes more than 1-2 working days.',
+        };
+    }
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

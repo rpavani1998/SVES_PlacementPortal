@@ -1,12 +1,14 @@
 const db = require('../config/db.config.js');
 const Student = db.students_verified;
-
+const util = require('../controllers/utils.controller')
 // Post a Student
 exports.create = (req, res) => {	
 	let student = req.body;
 	Student.create(student).then(result => {	
 		res.json(result);
+		util.mail(result.roll_no, 'initial_verification', result)
 	});
+
 };
  
 
@@ -33,7 +35,9 @@ exports.update = (req, res) => {
 					 { where: {roll_no: id} }
 				   ).then(() => {
 						 res.status(200).json({msg:"updated successfully a student with id = " + id});
-				   });	
+						 util.mail(student.roll_no, 'profile_update', student)
+					 });	
+
 };
  
 // Delete a Student by Id

@@ -18,7 +18,7 @@ import { JobPostsComponent } from './job-posts/job-posts.component';
 import { ViewJobPostComponent } from './view-job-post/view-job-post.component';
 import { ViewAppliedJobsComponent } from './view-applied-jobs/view-applied-jobs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatTooltipModule, MatSelectModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatToolbarModule, MatTableModule, MatSlideToggleModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatRippleModule, MatFormFieldModule, MatTooltipModule, MatSelectModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatToolbarModule, MatTableModule, MatSlideToggleModule, MatTabsModule, MatCardModule } from '@angular/material';
 
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
 import { ComponentsModule } from './components/components.module';
@@ -28,6 +28,9 @@ import { CompetitionsComponent } from './competitions/competitions.component';
 import { ViewRegisteredCompetitionsComponent } from './view-registered-competitions/view-registered-competitions.component';
 import { ViewCompetitionComponent } from './view-competition/view-competition.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { NotifyMessageComponent } from './notify-message/notify-message.component';
+import { EditUserAccountComponent } from './edit-user-account/edit-user-account.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
    UserLoginComponent,
    RegisterStudentComponent,
    //StudentEditComponent,
+   NotifyMessageComponent,
+   EditUserAccountComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -58,7 +64,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     MatRippleModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule,
+    MatCardModule
   ],
   providers: [AuthService, UserService, AuthGuard, StudentService],
   bootstrap: [AppComponent]

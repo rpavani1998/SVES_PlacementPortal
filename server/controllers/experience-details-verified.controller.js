@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const ExperienceDetails = db.experience_details_verified;
+const util = require('../controllers/utils.controller')
 
 // Post a ExperienceDetails
 exports.create = (req, res) => {
@@ -12,7 +13,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
 	ExperienceDetails.findAll({where:{roll_no:req.params.id}}).then(experience_details => {
-		console.log(experience_details);
+		console.log("INNNNN" , experience_details);
 	  res.json(experience_details);
 	});
 };
@@ -33,6 +34,7 @@ exports.update = (req, res) => {
 					 { where: {roll_no: req.body.roll_no, start_date: req.body.start_date, end_date: req.body.end_date} }
 				   ).then(() => {
 						 res.status(200).json({msg:"updated successfully a experience_detail with id = " + req.body.roll_no+ " "+ req.body.start_date + " " + req.body.end_date});
+						 util.mail(req.body.roll_no, 'profile_update', experience_detail)
 				   });	
 };
  

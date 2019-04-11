@@ -18,6 +18,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobPostsService } from '../services/job-posts/job-posts.service';
 import { JobPost } from '../models/job-post';
 import { CompanyService } from 'src/app/services/company/company.service';
+import { ViewAppliedJobsComponent } from '../view-applied-jobs/view-applied-jobs.component';
 
 @Component({
   selector: 'app-placements',
