@@ -13,7 +13,7 @@ export class StudentProfileComponent  implements OnInit {
 
   student: Student;
   data = [];
-  img_id = null
+  img_id = 'student'
   @Input() fileUpload: string;
 
   constructor(private studentService: StudentService,
@@ -25,6 +25,11 @@ export class StudentProfileComponent  implements OnInit {
 
   getStudentDetails() {
     const id = localStorage.getItem('currentUser');
+    this.uploadService.getFileById(id).subscribe(result =>{
+      if(result){
+        this.img_id = id;
+    }
+  });
     console.log(this.studentService.getVerifiedStudent(id)
     .subscribe(student => {
       this.student = student

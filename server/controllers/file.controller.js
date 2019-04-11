@@ -29,7 +29,7 @@ exports.updateFile = (req, res) => {
  
 exports.deleteFile = (req, res) => {
 	const id = req.params.id;
-	EducationDetails.destroy({
+	File.destroy({
 	  where: { id: id }
 	}).then(() => {
 	  res.status(200).json({msg:'deleted successfully a File with id = ' + req.body.roll_no + " "+ req.body.certificate_degree_name + " " + req.body.major});
@@ -45,8 +45,10 @@ exports.listAllFiles = (req, res) => {
 {/* <img src="data:image/png;base64,{{c.logo}}" class="rounded-circle" width="45" height="45"></td> */}
 
 exports.getFileById = (req, res) => {
+	console.log(req.params.id)
 	File.findById(req.params.id).then(file => {
-		res,json(file)
+		console.log('fileeeeeeee',req.params.id, file)
+		res.json(file)
 	})
 }
 

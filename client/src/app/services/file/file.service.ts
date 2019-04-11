@@ -27,6 +27,11 @@ export class UploadFileService {
   }
 
   getFileById(id: String): Observable<any>{
+    console.log('http://localhost:4000/api/file/retrieve/'+id)
     return this.http.get('http://localhost:4000/api/file/retrieve/'+id);
+  }
+  
+  deleteFile(id: String): Observable<any>{
+    return this.http.delete('http://localhost:4000/api/file/'+id);
   }
 }

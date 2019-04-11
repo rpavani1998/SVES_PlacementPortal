@@ -29,7 +29,7 @@ Eligibility Criteria
     <li>Should have >{{job_post.tenth_aggregate}} 10th Aggregate</li>
 
 </div>
-<div [hidden]="is_applied" ><button [class.button-disabled]="is_applied" [routerLink]="['/post', job_post.id]" class="btn btn-danger"><a href="http://localhost:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div>
+<div [hidden]="is_applied" ><button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button> </div>
 <div [hidden]="!is_applied" style= "color: red">You have already Registered for this event.</div>
 </div>
 

@@ -34,8 +34,9 @@ export class ViewAppliedJobsComponent implements OnInit {
     const id = localStorage.getItem('currentUser');
     this.jobPostsService.getAppliedJobDetails(id).subscribe(job_posts =>
       {
-        var job_post_activity = new JobPostActivity()
+
         job_posts.forEach(job_post => {
+          var job_post_activity = new JobPostActivity()
           console.log(job_post)
           job_post_activity  = job_post 
           this.jobPostsService.getJobDetails(job_post.job_post_id.toString()).subscribe(job_post_details =>{

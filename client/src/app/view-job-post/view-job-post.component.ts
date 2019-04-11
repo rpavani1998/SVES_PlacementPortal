@@ -56,15 +56,15 @@ export class ViewJobPostComponent implements OnInit {
     return this.student;
  }
 
+  id = localStorage.getItem('currentUser');
   ngOnInit() {
     this.getStudentDetails();
-    const id = localStorage.getItem('currentUser');
     const jobid = this.route.snapshot.params.id;
     console.log('id', jobid)
     this.jobPostsService.getJobData(jobid)
       .subscribe(jobdata =>  {
         this.jobdata = jobdata;
-        this.jobPostsService.getAppliedJobDetails(id).subscribe(job_posts =>
+        this.jobPostsService.getAppliedJobDetails(this.id).subscribe(job_posts =>
           {
             job_posts.forEach(job_post => {
               if(job_post.job_post_id== jobdata.id)
@@ -79,6 +79,11 @@ export class ViewJobPostComponent implements OnInit {
         })
         console.info( "Job Details : " , jobdata );
       });
+  }
+
+  applyJobPost(){
+    this.jobPostsService.registerJobPost(this.id,this.route.snapshot.params.id).subscribe();
+    this.router.navigate(['/internships/applied'])
   }
 
 

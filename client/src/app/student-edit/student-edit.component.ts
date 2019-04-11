@@ -8,6 +8,8 @@ import { Branch } from '../models/branch';
 import { UtilsService } from '../services/utils/utils.service';
 import { UploadFileService } from '../services/file/file.service';
 import { Observable } from 'rxjs';
+import { EducationDetails } from '../models/education-details';
+import { ExperienceDetails } from '../models/experience-details';
 
 @Component({
   selector: 'app-student-edit',
@@ -30,6 +32,8 @@ export class StudentEditComponent implements OnInit {
   myForm: FormGroup;
   edu_ids = [];
   exp_ids = []
+  prev_edu_details :EducationDetails[]
+  prev_exp_details: ExperienceDetails[]
 
   constructor(
     private studentService: StudentService,
@@ -95,6 +99,8 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       this.exp_ids.push(x.id)
     })
   });
+  this.prev_edu_details = this.myForm.value.education_details;
+  this.prev_exp_details = this.myForm.value.experience_details;
   this.setEducationDetails();
   this.setExperienceDetails();
   }
@@ -138,19 +144,22 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.studentService.addStudentProfile(this.student).subscribe();
-    this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
-    for(let i in this.student.education_details){
-       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+    // this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
+    for(let i=0; i < this.student.education_details.length; i++){
+      if(this.student.education_details[i] != this.prev_edu_details[i]) {
+        this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
          console.log("E", result)
         this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
-    
     })
   }
-    for(let i in this.student.experience_details){
+  }
+    for(let i=0; i < this.student.experience_details.length; i++){
+      if(this.student.experience_details[i] != this.prev_exp_details[i]) {
       this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
         console.log("E", result)
        this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
       });
+    }
     }
   }
 

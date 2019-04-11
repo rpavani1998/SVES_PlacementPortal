@@ -10,5 +10,8 @@ router.get('/api/file/all', fileWorker.listAllFiles);
  
 router.get('/api/file/:id', fileWorker.downloadFile);
 
-router.get('api/file/retrieve/:id', fileWorker.getFileById);
+// router.get('api/file/retrieve/:id', fileWorker.getFileById);
+
+router.delete('/api/file/:id', fileWorker.deleteFile);
+
 module.exports = router;

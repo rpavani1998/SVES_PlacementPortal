@@ -12,6 +12,7 @@ import { ViewRegisteredCompetitionsComponent } from 'src/app/view-registered-com
 import { ViewJobPostComponent } from 'src/app/view-job-post/view-job-post.component';
 import { ViewAppliedJobsComponent } from 'src/app/view-applied-jobs/view-applied-jobs.component';
 import { UserAccountComponent } from 'src/app/user-account/user-account.component';
+import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied-internships.component';
 
 const routes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -36,6 +37,11 @@ const routes: Routes = [
   path : 'internships',
   component : InternshipsComponent
 },
+{
+  path : 'internships/applied',
+  component : AppliedInternshipsComponent
+},
+
 {
   path : 'competitions/:id',
   component : ViewCompetitionComponent
