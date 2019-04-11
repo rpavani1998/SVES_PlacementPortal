@@ -45,7 +45,7 @@ export class StudentEditComponent implements OnInit {
       this.branches = branch;
     })
     const id = localStorage.getItem('currentUser');
-    this.studentService.getStudent(id)
+    this.studentService.getVerifiedStudent(id)
     .subscribe(student => {
       this.student = student
     });
@@ -57,7 +57,7 @@ export class StudentEditComponent implements OnInit {
 
 
 
-  this.studentService.getStudentEducationalDetails(id)
+  this.studentService.getVerifiedStudentEducationalDetails(id)
   .subscribe(educationDetails => {
     let control = <FormArray>this.myForm.controls.education_details;
     educationDetails.forEach(x => {
@@ -69,7 +69,6 @@ export class StudentEditComponent implements OnInit {
         institute_university_name : x.institute_university_name,
         passing_year : x.passing_year,
         percentage: x.percentage,
-        cgpa: x.cgpa,
         proof_document: x.proof_document
        }))
        this.edu_ids.push(x.id)
@@ -78,7 +77,7 @@ export class StudentEditComponent implements OnInit {
 
 
 
-this.studentService.getStudentExperienceDetails(id)
+this.studentService.getVerifiedStudentExperienceDetails(id)
   .subscribe(experienceDetails => {
     let control = <FormArray>this.myForm.controls.experience_details;
     experienceDetails.forEach(x => {
@@ -107,33 +106,52 @@ this.studentService.getStudentExperienceDetails(id)
   
   update(): void {
     this.submitted = true;
-    this.studentService.updateStudent(this.student)
-        .subscribe();
-    for(var i=0; i < this.myForm.value.education_details.length; i++){
-      if (this.myForm.value.educationDetails[i].id in this.edu_ids){
-      this.studentService.updateStudentEducationalDetails(this.myForm.value.education_details[i])
-      .subscribe();
-      }else{
-        this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
-          console.log("E", result)
-         this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    // this.studentService.updateStudent(this.student)
+    //     .subscribe();
+    // for(var i=0; i < this.myForm.value.education_details.length; i++){
+    //   if (this.myForm.value.educationDetails[i].id in this.edu_ids){
+    //   this.studentService.updateStudentEducationalDetails(this.myForm.value.education_details[i])
+    //   .subscribe();
+    //   }else{
+    //     this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+    //       console.log("E", result)
+    //      this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    //   });
+    // }
+    // }
+
+    // for(var i=0; i < this.myForm.value.experience_details.length; i++){
+    //   if (this.myForm.value.experience_details[i].id in this.exp_ids){
+    //     this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
+    //     .subscribe();
+    //   } else{
+    //     this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+    //       console.log("E", result)
+    //      this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+    //     });
+    //   }
+     
+    // }
+    console.info("student info", this.student);
+    console.log(localStorage.getItem('currentUser'))
+    this.student.roll_no = localStorage.getItem('currentUser');
+    this.student.education_details = this.myForm.value.education_details;
+    this.student.experience_details = this.myForm.value.experience_details;
+    this.studentService.addStudentProfile(this.student).subscribe();
+    this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
+    for(let i in this.student.education_details){
+       this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
+         console.log("E", result)
+        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+    
+    })
+  }
+    for(let i in this.student.experience_details){
+      this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
+        console.log("E", result)
+       this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
       });
     }
-    }
-
-    for(var i=0; i < this.myForm.value.experience_details.length; i++){
-      if (this.myForm.value.experience_details[i].id in this.exp_ids){
-        this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
-        .subscribe();
-      } else{
-        this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
-          console.log("E", result)
-         this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
-        });
-      }
-     
-    }
-   
   }
 
   addNewExperienceForm() {
