@@ -24,16 +24,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UtilsService {
-  private baseUrl = 'http://localhost:4000/api/mail';
-  private collegeUrl = 'http://localhost:4000/api/college';  // URL to web api
-  private branchUrl = 'http://localhost:4000/api/branch';  // URL to web api
-  private skillSetUrl = 'http://localhost:4000/api/skill_set';
-  private jobstageUrl = 'http://localhost:4000/api/job_stage';
-  private jobprocessurl = 'http://localhost:4000/api/addjob';
-  private jobprocessesurl = 'http://localhost:4000/api/jobprocess';
-  private eligiblestudents = 'http://localhost:4000/api/eligiblestudents';
-  private registeredstudents = 'http://localhost:4000/api/registeredstudents';
-  private notregisteredstudents = 'http://localhost:4000/api/notregisteredstudents';
+  private baseUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/mail';
+  private collegeUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/college';  // URL to web api
+  private branchUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/branch';  // URL to web api
+  private skillSetUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/skill_set';
+  private jobstageUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/job_stage';
+  private jobprocessurl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/addjob';
+  private jobprocessesurl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobprocess';
+  private eligiblestudents = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/eligiblestudents';
+  private registeredstudents = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/registeredstudents';
+  private notregisteredstudents = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notregisteredstudents';
   constructor( 
     private http: HttpClient
   ) { }
