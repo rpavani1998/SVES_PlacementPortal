@@ -8,6 +8,7 @@ export class JobPost {
     job_location : string;
     last_date_for_application : Date;
     salary_lpa : number;
+    is_active : number;
     drive_location : string;
     ppt_talk : Date;
     company_id : string;

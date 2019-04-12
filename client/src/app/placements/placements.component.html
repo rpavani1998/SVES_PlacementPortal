@@ -17,7 +17,7 @@
                   <div id = "new">
                       <div *ngFor="let job of data" >
                             <div class="card" >
-                              <div class="bg-img"><img src="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div>
+                              <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div>
                               <div class="content">
                                        <div> Company Name :   {{job.company.company_name}} </div>
                                         <div>Job Profile : {{job.job_profile}}</div>
@@ -35,6 +35,35 @@
               </div>
               </div>
               </mat-tab>
+              <mat-tab label="Closed Job Postings"> <br>
+                <div class="w3-content w3-margin-top" style="max-width:1400px;">
+                  <!-- <h1>Open JobPosts</h1> -->
+                          <div class="w3-row-padding">
+          
+                          <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>  
+          
+                            <div id = "new">
+                                <div *ngFor="let job of closeddata" >
+                                      <div class="card" >
+                                        <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div>
+                                        <div class="content">
+                                                 <div> Company Name :   {{job.company.company_name}} </div>
+                                                  <div>Job Profile : {{job.job_profile}}</div>
+                                                <div>Job Location : {{job.job_location}}</div>
+                                              <div>Salary : {{job.salary_lpa}}</div>
+                                                  <button [routerLink]="['/post', job.id]" class="btn btn-danger">View Details</button> </div>
+                                            </div>
+                                </div>
+                            <br><br><br><br>
+                            </div>
+                            <br><br><br>
+                        
+                            
+                          </div>
+                        </div>
+                        </div>
+        </mat-tab>
+
               <mat-tab label="Applied Job Postings"> <br>
                 <app-view-applied-jobs></app-view-applied-jobs>
               </mat-tab>

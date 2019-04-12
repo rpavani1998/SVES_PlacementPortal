@@ -40,6 +40,7 @@ export class PlacementsComponent implements OnInit {
 
   jobpost : JobPost;
   data = [];
+  closeddata = [];
   getJobPosts() {
     return this.jobPostsService.getJobPosts()
     .subscribe(
@@ -50,7 +51,11 @@ export class PlacementsComponent implements OnInit {
             company => {
             jobpost.company = company
             if(jobpost.job_type == 3 || jobpost.job_type == 4){
-              this.data.push(jobpost)
+              if (jobpost.is_active == 1) {
+                 this.data.push(jobpost)
+              } else{
+                this.closeddata.push(jobpost);
+              }
             }
 
           })
