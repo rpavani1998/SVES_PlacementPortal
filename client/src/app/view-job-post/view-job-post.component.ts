@@ -83,7 +83,7 @@ export class ViewJobPostComponent implements OnInit {
 
   applyJobPost(){
     this.jobPostsService.registerJobPost(this.id,this.route.snapshot.params.id).subscribe();
-    this.router.navigate(['/internships/applied'])
+    this.router.navigate(['/jobposts'])
   }
 
 

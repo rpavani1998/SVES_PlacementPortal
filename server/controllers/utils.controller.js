@@ -11,8 +11,9 @@ exports.mail = (id, status, values) => {
             pass: 'ryandee05'
         }
     });
+    let mailOptions = { };
     if (status == 'profile_verfication_request') {
-        let mailOptions = {
+        mailOptions = {
             from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
         
         to :id+'@bvrithyderabad.edu.in',
@@ -20,7 +21,7 @@ exports.mail = (id, status, values) => {
         html :  'You have successfully submitted your Form. You will be notified once your profile is verified. Please contact your placement co-ordinator if it takes more than 1-2 working days.',
         };
     }else if(status == 'initial_verification') {
-        let mailOptions = {
+        mailOptions = {
             from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
         
         to :id+'@bvrithyderabad.edu.in',
@@ -28,7 +29,7 @@ exports.mail = (id, status, values) => {
         html :  'Your profile is successfully verfiied. Now you will have access to the portal to apply for job posts. If you still have problem in accessing the profile please contact your placement co-ordinator.',
         };
     } else if(status == 'profile_update'){
-        let mailOptions = {
+        mailOptions = {
             from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
         
         to :id+'@bvrithyderabad.edu.in',
@@ -36,7 +37,7 @@ exports.mail = (id, status, values) => {
         html :  'Your profile is successfully updated. Please contact your placement co-ordinator if it takes more than 1-2 working days.',
         };
     }else if(status == 'event_registered'){
-        let mailOptions = {
+        mailOptions = {
             from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
         
         to :id+'@bvrithyderabad.edu.in',
@@ -44,7 +45,7 @@ exports.mail = (id, status, values) => {
         html :  'You have sucessfully registered for a event',
         };
     }else if (status == 'profile_update_request') {
-        let mailOptions = {
+        mailOptions = {
             from: '"TPO BVRIT Hyderabad" <xxxxx@bvrithyderabad.edu.in>', // sender address
         
         to :id+'@bvrithyderabad.edu.in',

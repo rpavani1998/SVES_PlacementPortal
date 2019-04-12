@@ -21,8 +21,10 @@ exports.register = (req, res) => {
 	let job_post_activity = req.params;
 	JobPostActivity.create(job_post_activity).then(result => {	
 		res.json('X'+result.id);
+		console.log('REGISTER', req.params.roll_no)
 		JobPost.findById(req.post_id).then(post => {
-			util.mail(res.roll_no, 'event_registered', post)
+			console.log('REGISTER', res.roll_no)
+			util.mail(req.params.roll_no, 'event_registered', post)
 		})
 		
 	});

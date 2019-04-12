@@ -30,6 +30,7 @@ export class JobPostsService {
 
   registerJobPost(roll_no: string, id: string): Observable<JobPost> {
     const url = `${this.jobPosActivitytUrl}/${roll_no}/${id}`;
+    console.log(url)
     return this.http.get<JobPost>(url);
   }
 
