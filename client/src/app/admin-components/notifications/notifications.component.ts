@@ -63,7 +63,7 @@ export class NotificationsComponent implements OnInit {
                   this.expdata.push(studexp);
                 }
               })
-            })
+            }) 
           }) 
           console.log("Experience Details : " , this.expdata);        
         } 

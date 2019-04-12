@@ -1,19 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-	const JobPostApplication = sequelize.define('student_job_application', {
+	const StudentPlacementStatus = sequelize.define('student_placement_status', {
 	  roll_no: {
             type: Sequelize.STRING,
             primaryKey: true
 	  },
-	  job_process_id: {
+	  job_post_id: {
             type: Sequelize.INTEGER,
-            primaryKey: true
+            foreignKey: true
       },
-      is_qualified: {
+      placement_status: {
           type: Sequelize.STRING
       }
 	},{
 			timestamps: false
 	});
 
-	return JobPostApplication;
+	return StudentPlacementStatus;
 }

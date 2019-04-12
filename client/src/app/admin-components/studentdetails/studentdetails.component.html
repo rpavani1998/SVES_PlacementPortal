@@ -2,95 +2,77 @@
 <div class="col-md-12">
   <mat-card class="example-card">
     <mat-card-header>
-      Student Analysis Corner
+      <h3><b>Performance Analysis Corner</b></h3>
     </mat-card-header>
     <mat-card-content>
-      <form>
-        <h2><label>Education Filters : </label></h2>
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field>
-              <mat-select placeholder="Select College" id="institute_university_name" required
-                [(ngModel)]="filters.institute_university_name" name="institute_university_name"
-                #institute_university_name="ngModel">
-                <mat-option *ngFor="let  institute_university_name of  institute_university_names"
-                  [value]="institute_university_name.id">
-                  {{ institute_university_name.college_name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="Student Reports">
+          <form>
+            <br>
+            <h4><b>Education filters:</b></h4>
 
-
-          <div class="col-md-4">
-            <mat-form-field>
-              <mat-select placeholder="Select Branch" id="major" required [(ngModel)]="filters.major" name="major"
-                #major="ngModel">
-                <mat-option *ngFor="let major of majors" [value]="major.id">
-                  {{major.branch_name}}
-                </mat-option>
-                <mat-option value="Any">
-                  Any
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-4">
-            <mat-form-field>
-              <input matInput placeholder="B.Tech Percentage" type="number" id="percentage" required
-                [(ngModel)]="filters.percentage" name="percentage" #percentage="ngModel">
-            </mat-form-field>
-          </div>
-
-        </div>
-
-        <h2><label>Advance filter</label></h2>
-        <div class="row">
-
-          <div class="col-md-4">
-            <mat-form-field>
-              <input matInput placeholder="Tenth Percentage" type="number" id="tenth_aggregate" required
-                [(ngModel)]="filters.tenth_aggregate" name="tenth_aggregate" #tenth_aggregate="ngModel">
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-4">
-            <mat-form-field>
-              <input matInput placeholder="Intern Percentage" type="number" id="inter_aggregate" required
-                [(ngModel)]="filters.inter_aggregate" name="inter_aggregate" #inter_aggregate="ngModel">
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-4">
-            <mat-form-field>
-              <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="filters.backlogs"
-                name="backlogs" #backlogs="ngModel">
-                <mat-option [value]="0">0</mat-option>
-                <mat-option [value]="1">1</mat-option>
-                <mat-option [value]="2">2</mat-option>
-                <mat-option [value]="3">3</mat-option>
-                <mat-option [value]="4">4</mat-option>
-                <mat-option [value]="5">5</mat-option>
-                <mat-option [value]="6">6</mat-option>
-                <mat-option [value]="7">7</mat-option>
-                <mat-option [value]="8">8</mat-option>
-                <mat-option [value]="9">9</mat-option>
-                <mat-option [value]="10">10</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-
-          <div class="col-md-6">
-            <mat-form-field>
-              <input matInput placeholder="Passing Year" type="number" id="passing_year" required
-                [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
-            </mat-form-field>
-          </div>
-
-          <!--
+            <div class="row" *ngIf="userdata.user_type_id == 'TPO' || userdata.user_type_id == 'PRI'" enable>
+              <div class="col-md-6" >
+                <mat-form-field >
+                  <mat-select placeholder="Select College" id="institute_university_name" required
+                    [(ngModel)]="filters.institute_university_name" name="institute_university_name"
+                    #institute_university_name="ngModel">
+                    <mat-option *ngFor="let  institute_university_name of  institute_university_names"
+                      [value]="institute_university_name.id">
+                      {{ institute_university_name.college_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
               <div class="col-md-6">
+                <mat-form-field >
+                  <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
+                    name="major" #major="ngModel">
+                    <mat-option *ngFor="let major of majors" [value]="major.id">
+                      {{major.branch_name}}
+                    </mat-option>
+                    <mat-option value="Any">
+                      Any
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+
+            <!-- <h4><b>Advance filter</b></h4> -->
+            <div class="row">
+
+              
+                <div class="col-md-4">
+                    <mat-form-field>
+                      <input matInput placeholder="B.Tech Percentage" type="number" id="percentage" required
+                        [(ngModel)]="filters.percentage" name="percentage" #percentage="ngModel">
+                    </mat-form-field>
+                  </div>
+    
+                  <div class="col-md-6">
+                      <mat-form-field>
+                        <input matInput placeholder="Passing Year" type="number" id="passing_year" required
+                          [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
+                      </mat-form-field>
+                    </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input matInput placeholder="Tenth Percentage" type="number" id="tenth_aggregate" required
+                    [(ngModel)]="filters.tenth_aggregate" name="tenth_aggregate" #tenth_aggregate="ngModel">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input matInput placeholder="Inter Percentage" type="number" id="inter_aggregate" required
+                    [(ngModel)]="filters.inter_aggregate" name="inter_aggregate" #inter_aggregate="ngModel">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
                 <mat-form-field>
                   <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="filters.backlogs"
                     name="backlogs" #backlogs="ngModel">
@@ -107,21 +89,160 @@
                     <mat-option [value]="10">10</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div> -->
-        </div>
+              </div>
+              
+            </div>
+            <!-- [routerLink]="['/manageaccount', filters.institute_university_name , filters.major , filters.percentage , filters.passing_year , filters.backlogs]" -->
+            <button mat-button class="btn btn-danger pull-right" (click)=Apply()> Apply </button> &nbsp;
+            <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp;
+            <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
+            <br><br>
+          </form>
+        </mat-tab>
+        <mat-tab label="Placement Reports">
+          <form>
+            <br>
+            <h4><b>Select companies:</b></h4> 
+            <div class="row">
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Company" id="company_name" required [(ngModel)]="job.company_name"
+                      name="company_name" #company_name="ngModel">
+                      <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
+                        {{comp.company_name}}
+                      </mat-option>
+                      <mat-option value="others">
+                        Others
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5" *ngIf = "job.company_name">
+                  <div>
+                      <!-- <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Passing Year" type="text" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                        </mat-form-field> -->
+                        <mat-select placeholder="Job Profile" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                            <mat-option [value]="companyprofiles[job.company_name]">
+                                {{companyprofiles[job.company_name]}}
+                            </mat-option>
+                            </mat-select>
+                      <!-- <mat-form-field>
+                            <mat-option matInput placeholder="job Profile" type="text" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel" [value] = "companyprofiles[job.company_name]" >
+                                {{companyprofiles[job.company_name]}} 
+                            </mat-option>
+                        </mat-form-field> -->
+                  </div> 
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Passing Year" type="text" id="passing_year" required
+                      [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5" >
+                    <mat-form-field>
+                        <mat-select placeholder="Select Branch" id="major" required
+                            [(ngModel)]="filters.major" name="major" #major="ngModel">
+                            <mat-option *ngFor="let major of majors" [value]="major.id">
+                                {{major.branch_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+              </div>
 
-        <!-- [routerLink]="['/manageaccount', filters.institute_university_name , filters.major , filters.percentage , filters.passing_year , filters.backlogs]" -->
-        <button class="btn-btn" (click)=Apply()> Search </button> &nbsp;
+              <div class="row">
+                <button class="btn btn-danger pull-right" (click) = "getfiltereddata()" >Show data </button> &nbsp;
+              </div>
 
-        <br><br>
-      </form>
+              <button class="btn btn-danger pull-right" (click) = "downloadPlacementData()" >Download Excel </button> &nbsp;
 
+          </form>
+        </mat-tab>
+        <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'" enable>
+          <form>
+            <br>
+            <h4><b>Select Colleges:</b></h4>
+            <div class="row">
+              <div class="col-md-5">
+                <mat-form-field>
+                  <mat-select placeholder="Select College" id="college_name" required
+                    [(ngModel)]="placementreport.college_name" name="college_name" #branch_name="ngModel">
+                    <mat-option *ngFor="let coll of collegedata" [value]="coll.college_name">
+                      {{coll.college_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-5">
+                <mat-form-field>
+                  <mat-select placeholder="Select Year" required>
+                    <mat-option [value]="0">2019</mat-option>
+                    <mat-option [value]="1">2018</mat-option>
+                    <mat-option [value]="2">2017</mat-option>
+                    <mat-option [value]="3">2016</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-5">
+                <mat-form-field>
+                  <mat-select placeholder="Select Department" id="branch_name" required
+                    [(ngModel)]="placementreport.branch_name" name="branch_name" #branch_name="ngModel">
+                    <mat-option *ngFor="let branch of branchdata" [value]="branch.branch_name">
+                      {{branch.branch_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <h4><b>Select Companies: </b></h4>
+
+            <div class="row">
+              <div class="col-md-5">
+                <mat-form-field>
+                  <mat-select placeholder="Select Company" id="company_name" required
+                    [(ngModel)]="placementreport.company_name" name="company_name" #branch_name="ngModel">
+                    <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
+                      {{comp.company_name}}
+                    </mat-option> 
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-5"> 
+                <mat-form-field>
+                    <mat-select placeholder="Job Profile" id="job_profile" required
+                    [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                    <mat-option [value]="companyprofiles[job.company_name]">
+                        {{companyprofiles[job.company_name]}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="btn btn-danger pull-right" (click) = "downloadPlacementExcel()" > Generate reports </button> &nbsp;
+            </div>
+
+          </form>
+
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+  <br>
+
+ <!-- <mat-card class="example-card">
+    <mat-card-content>
       <div>
-        <button (click)="downloadExcel()" class="btn-btn"> Download Excel </button>
-        <br><br>
-        Student Data :
-        <br><br>
-
+        <h4><b>Reports:</b></h4>
         <ng-container *ngIf="data">
           <table>
             <tr>
@@ -134,7 +255,6 @@
               <th>Email</th> &nbsp;
               <th>Contact Number</th> &nbsp;
             </tr>
-
             <tr *ngFor="let data of data">
               <td>{{data.roll_no}}</td> &nbsp;
               <td>{{data.certificate_degree_name}}</td> &nbsp;
@@ -145,11 +265,10 @@
               <td>{{data.user.email}}</td> &nbsp;
               <td>{{data.user.contact_number}}</td> &nbsp;
             </tr>
-
           </table>
-
         </ng-container>
       </div>
+      <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 </div>

@@ -7,6 +7,7 @@ import { SkillSet } from '../../models/skill-set';
 import { MailFormat } from 'src/app/models/mail-format';
 import { JobProcess } from 'src/app/models/jobprocess';
 import { JobStage } from 'src/app/models/jobstage';
+import { StudentJobApplications } from 'src/app/models/student-job-applications';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -29,6 +30,10 @@ export class UtilsService {
   private skillSetUrl = 'http://localhost:4000/api/skill_set';
   private jobstageUrl = 'http://localhost:4000/api/job_stage';
   private jobprocessurl = 'http://localhost:4000/api/addjob';
+  private jobprocessesurl = 'http://localhost:4000/api/jobprocess';
+  private eligiblestudents = 'http://localhost:4000/api/eligiblestudents';
+  private registeredstudents = 'http://localhost:4000/api/registeredstudents';
+  private notregisteredstudents = 'http://localhost:4000/api/notregisteredstudents';
   constructor( 
     private http: HttpClient
   ) { }
@@ -47,6 +52,26 @@ export class UtilsService {
     const url = `${this.jobprocessurl}/${jobid}`;
     console.log("Job Processes URL : " , url);
     return this.http.get<JobProcess[]>(url);
+  }
+
+  getJobProcesses() : Observable<JobProcess[]> {
+    console.log((this.jobprocessesurl));
+    return this.http.get<JobProcess[]>(this.jobprocessesurl);
+  }
+
+  getEligibleStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.eligiblestudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
+  }
+
+  getRegisteredStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.registeredstudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
+  }
+
+  getNotRegisteredStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.notregisteredstudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
   }
   
   getColleges (): Observable<College[]> {

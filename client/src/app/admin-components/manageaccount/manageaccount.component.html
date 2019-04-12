@@ -2,27 +2,45 @@
 <div class="col-md-12">
     <mat-card class="example-card">
         <mat-card-header>
-            <h3>Account Details</h3>
+            <h3><b>Account Details</b></h3>
         </mat-card-header>
         <mat-card-content>
-            <mat-tab-group dynamicHeight>
+            <mat-tab-group>
                 <mat-tab label="Profile">
-                        <div class="container-fluid">
-                            Email : {{userdata.email}}<br><br>
-                            Contact : {{userdata.contact_number}}
+                    <br>
+                    <div class="container-fluid">
+                        <h4><b>Personal details:</b></h4>
+                       
+                        <div class="bg-img"><img src='http://localhost:4000/api/file/student'
+                                style="width:160px; height : 160px" alt="Img"></div>
+                        <b>Email </b>: {{userdata.email}}<br>
+                        <b>Contact </b>: {{userdata.contact_number}}
+                    </div>
+                    <hr>
+                    <div class="container-fluid">
+                        <h4><b>Other Information:</b></h4>
+                        <div *ngIf="userdata.sms_notification_active == '1' && userdata.email_notification_active == '1'"
+                            enable>
+                            <b>SMS Notification status:</b> Active<br>
+                            <b>Mail Notification status: </b> Active
                         </div>
-
+                    </div>
+                    <hr>
+                    <div>
+                        <button mat-raised-button type="button" class="btn btn-danger pull-right">Edit Profile</button>
+                    </div>
                 </mat-tab>
-                <mat-tab label="Add Role" *ngIf="userdata.user_type_id == 'TPO' " enable>
+                <mat-tab label="Add Users" *ngIf="userdata.user_type_id == 'TPO' " enable>
+                    <br>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="User ID" type="text" id="id" required [(ngModel)]="user.id"
                                     name="id" #id="ngModel">
                             </mat-form-field>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <mat-form-field>
                                 <mat-select placeholder="Select Role" id="user_type_id" required
                                     [(ngModel)]="user.user_type_id" name="user_type_id" #major="ngModel">
@@ -33,8 +51,6 @@
                             </mat-form-field>
                         </div>
                     </div>
-
-
                     <div class="row">
                         <div class="col-md-4">
                             <mat-form-field>
@@ -50,8 +66,8 @@
 
                         <div class="col-md-4">
                             <mat-form-field>
-                                <mat-select placeholder="Select Branch" id="branch_id" required
-                                    [(ngModel)]="user.branch_id" name="branch_id" #branch_id="ngModel">
+                                <mat-select placeholder="Select Branch" id="id" required
+                                    [(ngModel)]="user.id" name="id" #id="ngModel">
                                     <mat-option *ngFor="let major of majors" [value]="major.id">
                                         {{major.branch_name}}
                                     </mat-option>
@@ -85,11 +101,63 @@
                         </div>
                     </div>
 
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                        (click)="addAdmin()">Add</button>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="addAdmin()">Add
+                        User</button>
                 </mat-tab>
+
+                <mat-tab label="Add Department" *ngIf="userdata.user_type_id=='TPO'" enable>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Department Code" type="text" id="id" required
+                                    [(ngModel)]="department.id" name="id" #id="ngModel">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Department Name" type="text" id="branch_name" required
+                                    [(ngModel)]="department.branch_name" name="branch_name" #branch_name="ngModel">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="addDept()">Add
+                                Department</button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Add College" *ngIf="userdata.user_type_id=='TPO'" enable>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                <input matInput placeholder="College Code" type="text" id="id" required
+                                    [(ngModel)]="college.id" name="id" #id="ngModel">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="College Name" type="text" id="college_name" required
+                                            [(ngModel)]="college.college_name" name="college_name" #college_name="ngModel">
+                                    </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-raised-button type="submit" (click) = "addCollege()" class="btn btn-danger pull-right">Add
+                                College</button>
+                        </div>
+                    </div>
+                </mat-tab>
+
+
             </mat-tab-group>
         </mat-card-content>
     </mat-card>
-
 </div>

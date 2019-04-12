@@ -27,7 +27,7 @@ export class ViewAppliedJobsComponent implements OnInit {
   ngOnInit() {
     this.utilService.getJobStages().subscribe(stages =>{
         stages.forEach(stage => {
-        this.stages[stage.id] = stage.stage_name
+        this.stages[stage.id] = stage.stage_name 
       })
     })
     console.log('11111',this.stages, this.stages['1'])

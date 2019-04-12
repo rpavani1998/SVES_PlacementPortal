@@ -1,6 +1,18 @@
 const db = require('../config/db.config.js');
 const Student = db.students;
 const util = require('../controllers/utils.controller')
+const VerifiedEducationDetail = db.verified_education_detail;
+const StudentPlacementStatus = db.studentplacementstatus;
+const AddJob = db.job_post;
+const Branch = db.branch;
+const JobProcess = db.jobprocess;
+const StudentJobApp = db.studentjobapp;
+const sequelize = db.sequelize;
+const Op = sequelize.Op;
+
+
+
+
 // Post a Student
 exports.create = (req, res) => {	
 	let student = req.body;
@@ -49,7 +61,41 @@ exports.delete = (req, res) => {
 
 exports.getstudentProfiles = (req , res) => {
 	Student.findAll({where : {branch : req.params.branchID , status : "Requested"} }).then(student => {
-		res.json(student);
+		res.json(student); 
 	})
 }
+ 
 
+exports.getVerifiedStudentDetails = (req , res) => {
+	VerifiedEducationDetail.findAll({where : {  major : req.params.branchid}}).then(details => {
+		res.json(details)
+	})	  
+}   
+
+exports.getFilteredData = (req , res) => {
+		VerifiedEducationDetail.findAll({where : {  passing_year : req.params.passing_year , major : req.params.branchid}}).then(details => {
+			res.json(details)
+		})
+}   
+
+
+exports.getPlacedStudents = (req , res) => {
+	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id}}).then(details => {
+		res.json(details) 
+	})	  
+}    
+
+exports.getJobProfile = (req , res) => {
+	AddJob.findAll({where : {job_profile : req.params.jobprofile} }).then(jobprofile => {
+		console.log(jobprofile)
+		res.json(jobprofile)
+	})
+}
+exports.getJobProcessPlacedStudents = (req, res) => {
+	StudentJobApp.findAll({ 
+		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }}
+	}).then(appliedstudents => {
+		// console.log(appliedstudents)
+		res.json(appliedstudents)
+	})
+};  

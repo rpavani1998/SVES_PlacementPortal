@@ -3,12 +3,21 @@ const User = db.users;
 const md5 = require('md5')
 
 // Post a User
-exports.create = (req, res) => {
-	let User = req.body;
-	User.create(User).then(result => {
+// exports.create = (req, res) => {
+// 	let User = req.body;
+// 	User.create(User).then(result => {
+// 		res.json(result);
+// 	}); 
+// };
+
+exports.User = (req, res) => {
+	let user = req.body;
+	User.password = md5(req.body.password)
+	User.create(user).then(result => {
 		res.json(result);
-	});
+	}); 
 };
+
 
 exports.authenticate = (req, res) => {
 	console.log("id", req.body.id, req.body.password)

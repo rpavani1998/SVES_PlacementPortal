@@ -64,7 +64,7 @@ export class EditjobpostdetailsComponent implements OnInit {
     console.log( " Job Data :  " , this.jobdata );
     this.editjobpostService.updateJobPost(this.data)
         .subscribe(result => this.message = "Job Post Updated Successfully!");
-    this.router.navigateByUrl('/user-profile');
+    this.router.navigateByUrl('/placements');
     window.location.reload()
   }
 

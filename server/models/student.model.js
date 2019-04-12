@@ -22,9 +22,9 @@ module.exports = (sequelize, Sequelize) => {
 		aadhar_no: {
 			type: Sequelize.STRING
 		},
-		status: {
-			type: Sequelize.STRING
-		}
+		status : {
+			type : Sequelize.STRING,
+		},
 		
 	},{
 			timestamps: false

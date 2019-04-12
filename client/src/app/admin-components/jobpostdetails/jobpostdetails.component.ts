@@ -8,6 +8,13 @@ import { UtilsService } from 'src/app/services/utils/utils.service';
 import { CompanyService } from 'src/app/services/company_/company.service';
 import { JobTypeService } from 'src/app/services/jobtype/jobtype.service';
 import { JobPosts } from 'src/app/models/jobposts';
+import { UserService } from '../../services/user/user.service';
+import { User } from '../../models/user';
+import { Student } from 'src/app/models/student';
+import { StudentService } from '../../services/student/student.service';
+import { EducationDetails } from 'src/app/models/education-details';
+
+
 // import { JobpostsService } from '../services/jobposts/jobposts.service';
 // import { JobPosts } from '../models/jobposts';
 // import { JobType } from '../models/jobtype';
@@ -24,6 +31,7 @@ export class JobpostdetailsComponent implements OnInit {
   submitted = false;
   message : string;
   jt = new JobType();
+  
 
 
   constructor(
@@ -33,7 +41,9 @@ export class JobpostdetailsComponent implements OnInit {
     private utilService : UtilsService,    
     private companyService : CompanyService,
     private jobtypeService : JobTypeService,
-    private location: Location
+    private location: Location,
+    private userService: UserService,
+    private studentService : StudentService
   ) { }
 
   ngOnInit() {
@@ -55,8 +65,25 @@ export class JobpostdetailsComponent implements OnInit {
 
   data = [];
   jobdata : JobPosts;
-
+  jobstages = {};
+  registered = [];
+  notregistered = [];
+  eligiblestudents = {};
+  userdata: User;
+  verifiedstudents : EducationDetails[];
+  
   getJobDetails() {
+
+    var uid = localStorage.getItem('currentUser');
+    this.userService.getUser(uid)
+      .subscribe(
+        userdata => {
+          console.log("User Data : ", userdata.branch_id);
+          this.userdata = userdata;
+        });
+
+
+ 
     const jobid = this.route.snapshot.params.jobid; 
     console.log("Job Posts Data : " , this.route.snapshot.params.jobid)
     this.jobpostsService.getJobData(jobid).subscribe(jobdata => {
@@ -67,12 +94,48 @@ export class JobpostdetailsComponent implements OnInit {
         })
         this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
           this.jobdata.jobprocesses = jobprocess; 
-        }) 
+        })
+
+        // this.studentService.getVerifiedStudentDetails(this.userdata.branch_id).subscribe(verfiedstudents => {
+        //   this.verifiedstudents = verfiedstudents
+        // })
+
+        this.utilService.getEligibleStudents(jobid).subscribe(eligiblestudents => {
+          eligiblestudents.forEach(student => {
+            if (student.is_qualified == "Not Registered" ) {
+              this.notregistered.push(eligiblestudents)
+            } else {
+              this.registered.push(eligiblestudents)
+            }
+          })
+        })
+
+        var keys = Object.keys(this.registered);
+        var len = keys.length;
+        this.eligiblestudents['registered'] = len;
+
+
+        var keys = Object.keys(this.notregistered);
+        var nrlen = keys.length;
+        this.eligiblestudents['notregistered'] = nrlen;
+      
+        // console.log("Registered Students : " , this.registered);
+        // console.log("Not Registered Students : " , this.notregistered);
+        console.log("Eligible Students : " , this.eligiblestudents)
+
         this.jobtypeService.getJobType(jobdata.job_type).subscribe(jobtype => {
           this.jobdata.jobtype = jobtype
           this.data.push(this.jobdata)
           console.log("Job Data : " , this.data )
         })
+
+        this.utilService.getJobStages().subscribe(jobstages => {
+          jobstages.forEach(jobstage => {
+            this.jobstages[jobstage.id] = jobstage.stage_name;
+          })
+        })
+
+        console.log("Job Stages : " , this.jobstages);
  
     })
   }
@@ -84,7 +147,7 @@ export class JobpostdetailsComponent implements OnInit {
     this.router.navigateByUrl('/placements');
     window.location.reload();
   }
-
+ 
 
   closeJobPost(): void {
     this.jobpostsService.closeJobPost(this.data[0].id).subscribe(result => {
@@ -98,3 +161,38 @@ export class JobpostdetailsComponent implements OnInit {
     this.location.back();
   }
 }
+
+
+// this.utilService.getRegisteredStudents(jobid).subscribe(registeredstudents => {
+        //   console.log("Registered Students : " , registeredstudents)
+        //   if ( this.userdata.branch_id == "Any" ) {
+        //     var len = registeredstudents.length;
+        //     this.eligiblestudents['registered'] = len
+        //   } else {
+        //     registeredstudents.forEach(rstudents => {
+        //       this.studentService.getVerifiedStudentDetails(this.userdata.branch_id).subscribe(student => {
+        //         if ( rstudents.roll_no == student.roll_no ) {
+        //           this.registered.push(rstudents)
+        //         }
+        //       })
+        //     })
+        //     this.eligiblestudents['registered'] = this.notregistered.length;
+        //   }
+        // })
+
+        // this.utilService.getNotRegisteredStudents(jobid).subscribe(notregisteredstudents => {
+        //   console.log("Not registeredstudents : " , notregisteredstudents)
+        //   if ( this.userdata.branch_id == "TPO" ) {
+        //     var len = notregisteredstudents.length;
+        //     this.eligiblestudents['notregistered'] = len
+        //   } else {
+        //     notregisteredstudents.forEach(nrstudents => {
+        //       this.studentService.getVerifiedStudentDetails(this.userdata.branch_id).subscribe(student => {
+        //         if ( nrstudents.roll_no == student.roll_no ) {
+        //           this.notregistered.push(nrstudents)
+        //         }
+        //       })
+        //     })
+        //     this.eligiblestudents['notregistered'] = this.notregistered.length;
+        //   }
+        // })

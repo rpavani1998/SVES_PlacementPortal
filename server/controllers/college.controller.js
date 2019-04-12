@@ -2,12 +2,12 @@ const db = require("../config/db.config")
 const College = db.college;
 
 exports.create = (req, res) => {	
-	let college = req.body;
+	let college = req.body; 
+	console.log("College : " , college)
 	College.create(college).then(result => {	
 		res.json(result);
 	});
 };
- 
 
 exports.findAll = (req, res) => {
 	College.findAll().then(colleges => {

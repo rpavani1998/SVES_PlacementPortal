@@ -1,13 +1,21 @@
 const db = require("../config/db.config")
 const Branch = db.branch;
+const UserType = db.usertype;
 
 exports.create = (req, res) => {	
 	let branch = req.body;
+	console.log("Branch : " , branch)
 	Branch.create(branch).then(result => {	
 		res.json(result);
 	});
 };
- 
+
+exports.getUsers = (req, res) => {
+	UserType.findAll().then(result => {
+		res.json(result);
+	});
+}; 
+  
 
 exports.findAll = (req, res) => {
 	Branch.findAll().then(branchs => {

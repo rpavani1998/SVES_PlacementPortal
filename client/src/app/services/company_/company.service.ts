@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from './company';
+import { AddJob } from '../../models/addjob';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -17,6 +18,7 @@ const httpOptions = {
 export class CompanyService {
 
   private companyUrl = 'http://localhost:4000/api/company';
+  private companyProfilesUrl = 'http://localhost:4000/api/companyprofiles';
 
   constructor(
     private http: HttpClient
@@ -27,9 +29,14 @@ export class CompanyService {
     return this.http.post<Company>(this.companyUrl, company, httpOptions);
   }
   
-  getCompany (id: string): Observable<Company> {
+  getCompany (id: number): Observable<Company> {
     console.log((`${this.companyUrl}/${id}`))
     return this.http.get<Company>(`${this.companyUrl}/${id}`);
+  }
+ 
+  getCompanyProfiles (companyid: number): Observable<AddJob> {
+    console.log((`${this.companyProfilesUrl}/${companyid}`))
+    return this.http.get<AddJob>(`${this.companyProfilesUrl}/${companyid}`);
   }
 
   getCompanyData (): Observable<Company[]> {

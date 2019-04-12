@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     app.post('/api/students', students.create);
  
-    app.get('/api/students', students.findAll);
+    app.get('/api/students', students.findAll); 
  
     app.get('/api/students/:studentId', students.findById);
  
@@ -20,7 +20,21 @@ module.exports = function(app) {
  
     app.delete('/api/students/:studentId', students.delete);
 
+    app.get('/api/jobprocessplacedstudents/:jobid' , students.getJobProcessPlacedStudents);
+
+    app.get('/api/filtereddata/:passing_year/:branchid' , students.getFilteredData);
+
+    app.get('/api/placedstudents/:roll_no/:job_id' , students.getPlacedStudents)  
+
+    app.get('/api/jobprofile/:jobprofile' , students.getJobProfile);
+
     app.get('/api/student/education_details/:branchID' , students.getstudentProfiles);
+
+    app.get('/api/students_verified/:branchid' , students.getVerifiedStudentDetails );
+
+    app.get('/api/registeredstudents/:jobid', education_details.getRegisteredStudents);
+
+    app.get('/api/notregisteredstudents/:jobid', education_details.getNotRegisteredStudents);
  
     app.post('/api/student/education_details', education_details.create);
  
@@ -82,9 +96,9 @@ module.exports = function(app) {
 
     app.get('/api/notifications/:branchID',  education_details.findByBranchId);
 
-    app.put('/api/notifications',  education_details.approveRequest);
-
-    app.get('/api/placements/:percentage' , education_details.getEligibleStudents);
+    app.put('/api/notifications',  education_details.approveRequest); 
+ 
+    app.get('/api/eligiblestudents/:jobid' , education_details.getJobAppliedStudents);
 
     app.get('/api/studentdetails/:college/:major/:passing_year/:percentage/:backlogs' , education_details.getData);
 

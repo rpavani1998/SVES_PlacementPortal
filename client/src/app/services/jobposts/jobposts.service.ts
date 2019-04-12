@@ -21,10 +21,14 @@ export class JobpostsService {
 
   private jobpostsUrl = 'http://localhost:4000/api/jobposts';
 
+  private closejobpostsUrl = 'http://localhost:4000/api/closejobposts';
+
   private internshipjobposts = 'http://localhost:4000/api/internshipjobposts';
 
+  private jobprofileUrl = 'http://localhost:4000/api/jobprofile';
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient 
   ) { }
    
   getJobPosts (): Observable<JobPosts[]> {
@@ -35,6 +39,11 @@ export class JobpostsService {
   getInternshipJobPosts (): Observable<JobPosts[]> {
     console.log((this.internshipjobposts));
     return this.http.get<JobPosts[]>(this.jobpostsUrl);
+  }
+
+  getJobProfile(jobprofile : string) : Observable<JobPosts> {
+    const url = `${this.jobprofileUrl}/${jobprofile}`;
+    return this.http.get<JobPosts>(url);
   }
 
   getJobDetails(companyid: string): Observable<JobPosts> {
@@ -55,7 +64,7 @@ export class JobpostsService {
   } 
 
   closeJobPost( jobid : number): Observable<JobPosts> {
-    const url = `${this.jobpostsUrl}/${jobid}`;
+    const url = `${this.closejobpostsUrl}/${jobid}`; 
     return this.http.put<JobPosts>(url , httpOptions);
   }
   

@@ -43,6 +43,7 @@ db.job_type = require('../models/job-type.model.js')(sequelize , Sequelize);
 db.jobstage = require('../models/job-stage.model.js')(sequelize, Sequelize);
 db.verified_education_detail = require ('../models/education-details-verified.model')(sequelize , Sequelize);
 db.verified_experience_detail = require ('../models/experience-details-verified.model')(sequelize , Sequelize);
-
+db.studentjobapp = require('../models/student-job-application.model.js')(sequelize, Sequelize);
+db.studentplacementstatus = require('../models/student-placement-status.model.js')(sequelize, Sequelize);
+db.usertype = require('../models/user-type.model.js')(sequelize, Sequelize);
 module.exports = db;
-  

@@ -16,7 +16,7 @@ export class JobPosts {
     ppt_talk : Date;
     is_active : number;
     company_name: string;
-    company_id : string;
+    company_id : number;
     profile_description: string;
     company_website_url : string;
     company_image : File;

@@ -9,15 +9,51 @@
         <mat-card-content>
                 <b> <label> Company Name : </label> </b> {{data[0].company.company_name}} <br><br>
                 <b> <label> Company URL : </label> </b> <a (click) = "onNavigate()" >  {{data[0].company.company_website_url}} </a> <br><br>
+                <b> <label> Company Description : </label> </b>   {{data[0].company.profile_description}}  <br><br>
                 <b> <label> Job Type : </label> </b> {{data[0].jobtype.job_type_name}} <br><br> 
                 <b> <label> Job Profile : </label> </b> {{data[0].job_profile}} <br><br>
                 <b> <label> Job Description : </label> </b> {{data[0].job_description}} <br><br>
                 <b> <label> Job Location : </label> </b> {{data[0].job_location}} <br><br>
                 <b> <label> Salary : </label> </b> {{data[0].salary_lpa}} <br><br>
-                <button class="btn btn-danger pull-right" (click)="back()"> Back </button>
+                <b> <label> Last Date To Apply : </label> </b> {{data[0].last_date_for_application}} <br><br>
+                <b> <label> Drive Location : </label> </b> {{data[0].drive_location}} <br><br>
+                <b> <label> PPT Talk : </label> </b> {{data[0].ppt_talk}} <br><br>
+
+                <mat-card-header>
+                    <h3>Interview Process</h3>
+                </mat-card-header>
+                <mat-card-content>
+                        <div class="content">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td>R.no </td>
+                                        <td>Stage</td>
+                                    </tr>
+                                    <tr *ngFor="let stage of data[0].jobprocesses index as i">
+                                        <td>{{i+1}}</td>
+                                        <td>{{jobstages[stage.job_stage_id]}}</td>
+                                    </tr>
+                                </table>
+                            </div>                    
+                </mat-card-content>
+                <mat-card-header>
+                        <h3>Student Application Status</h3>
+                </mat-card-header>
+                <mat-card-content>
+                        <h5>Eligible Students : </h5> &nbsp; {{eligiblestudents['eligiblestudents']}}
+                        <h5>Registered Students : </h5> &nbsp; {{eligiblestudents['registered']}}
+                        <h5>Not Registered Students : </h5> &nbsp; {{eligiblestudents['notregistered']}}
+                </mat-card-content>
+                <div *ngIf="userdata.user_type_id == 'TPO' ">
+                        <button class="btn btn-danger pull-right" (click)="back()"> Back </button>
                 <button class="btn btn-danger " *ngIf = " data[0].is_active == 1; " [routerLink]="['/editjobposts', data[0].id]" enabled > Edit </button><br>
                 <button class="btn btn-danger " *ngIf = " data[0].is_active == 1; " (click)="closeJobPost()" enabled> Close Job Post </button>
                 <button class="btn btn-danger pull-right" (click)="delete()"> Delete </button><br>
+                    </div>
+                     
+                    <div *ngIf=" userdata.user_type_id != 'TPO' ">
+                        <button class="btn btn-danger" (click)="back()"> Back </button><br><br>
+                    </div>
         </mat-card-content>
     </mat-card>
 </div>

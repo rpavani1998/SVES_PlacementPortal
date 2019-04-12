@@ -2,7 +2,9 @@ module.exports = function(app) {
  
     const users = require('../controllers/user.controller.js');
  
-    app.post('/api/users', users.create);
+    // app.post('/api/users', users.create);
+
+    app.post('/api/users', users.User);
  
     app.get('/api/users', users.findAll);
  

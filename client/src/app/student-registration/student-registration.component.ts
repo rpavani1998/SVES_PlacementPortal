@@ -16,10 +16,10 @@ import { MailFormat } from '../models/mail-format';
 })
 
 export class RegisterStudentComponent{
-  student = new Student();
+  student = new Student(); 
   submitted = false;
   myForm: FormGroup;
-  branches: Branch[]
+  branches: Branch[] 
  
   backlogs = ["Never had any backlog", "Cleared All", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "More than 10"];
   data = {
@@ -49,7 +49,7 @@ export class RegisterStudentComponent{
       proof_document: null
       }
     ]
-  }
+  } 
   constructor(
     private studentService: StudentService,
     private utilService: UtilsService,
@@ -170,7 +170,7 @@ addNewEducationForm() {
       passing_year: [2019, Validators.required],
       percentage: [100, Validators.required],
       // cgpa: 10,
-      proof_document: null    
+      proof_document: null     
       })
   )
 }
