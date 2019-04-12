@@ -66,15 +66,15 @@ module.exports = function(app) {
 
     app.get('/api/student/experience_details', experience_details.getExperiences);
  
-    app.post('/api/students_verified', students_verified.create);
+    app.post('/api/student_verified', students_verified.create);
  
-    app.get('/api/students_verified', students_verified.findAll);
+    app.get('/api/student_verified', students_verified.findAll);
  
-    app.get('/api/students_verified/:studentId', students_verified.findById);
+    app.get('/api/student_verified/:studentId', students_verified.findById);
  
-    app.put('/api/students_verified', students_verified.update);
+    app.put('/api/student_verified', students_verified.update);
  
-    app.delete('/api/students_verified/:studentId', students_verified.delete);
+    app.delete('/api/student_verified/:studentId', students_verified.delete);
  
     app.post('/api/student/education_details_verified', education_details_verified.create);
  

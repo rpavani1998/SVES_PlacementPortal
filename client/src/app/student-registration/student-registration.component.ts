@@ -149,6 +149,7 @@ setEducationDetails() {
 
 selectAadharProof(event) {
   this.student.id_proof = event.target.files[0];
+  // this.uploadService.pushFileToStorage('student', this.student.id_proof).subscribe();
 }
 
 selectEduProofs(event,i){

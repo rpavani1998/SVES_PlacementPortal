@@ -29,9 +29,22 @@ Eligibility Criteria
     <li>Should have >{{job_post.tenth_aggregate}} 10th Aggregate</li>
 
 </div>
-<div [hidden]="is_applied" ><button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button> </div>
-<div [hidden]="!is_applied" style= "color: red">You have already Registered for this event.</div>
+
+<div *ngIf = "is_eligible == true && is_applied == false">
+        <button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button>
 </div>
+<div *ngIf = 'is_eligible == false'>
+        <div style= "color: red">You are not eligible for this job profile.</div>
+</div>
+<div *ngIf = 'is_applied == true'>
+        <div style= "color: red">You have already Registered for this event.</div>
+</div>
+
+
+<!-- <div [hidden]="is_eligible == true" style= "color: red">You are not eligible for this job profile.</div>
+<div [hidden]="is_applied" *ngIf="is_eligible == false" ><button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button> </div>
+<div [hidden]="!is_applied" style= "color: red">You have already Registered for this event.</div> -->
+<!-- </div> -->
 
 </div>
 </div>

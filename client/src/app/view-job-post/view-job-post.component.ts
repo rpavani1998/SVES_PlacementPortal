@@ -20,13 +20,14 @@ import { Student } from '../models/student';
 export class ViewJobPostComponent implements OnInit {
 
   data = []
+  is_eligible = false
   is_applied = false
   student_data = []
   jobdata = new JobPost();
   submitted = false;
   message: string;
   roll_no = localStorage.getItem('currentUser');
-  student: Student;
+  student= new Student();
   
   constructor(
     private jobPostsService : JobPostsService,
@@ -38,16 +39,29 @@ export class ViewJobPostComponent implements OnInit {
     private location: Location
   ) { }
 
-  // checkEligibility(job_data, )
+  checkEligibility(job_data, student){
+    console.log('1111111',student , student.education_details[0].certificate_degree_name =="B.Tech", parseInt(student.education_details[0].percentage) >= parseInt(job_data.overall_aggregate))
+    for(let i in student.education_details){
+      console.log('12345678', student.education_details[i], job_data)
+      if (student.education_details[i].certificate_degree_name =="B.Tech" &&  parseInt(student.education_details[i].percentage) >= parseInt(job_data.overall_aggregate)){
+          this.is_eligible = true
+          console.log('Eligible!!!')
+          break;
+      }
+    }
+    student.educationDetails
+  }
+
+
   getStudentDetails() {
     const id = localStorage.getItem('currentUser');
     console.log(this.studentService.getStudent(id)
     .subscribe(student => {
       this.student = student
-      this.studentService.getStudentEducationalDetails(id)
+      this.studentService.getVerifiedStudentEducationalDetails(id)
       .subscribe(educationDetails => 
         this.student.education_details = educationDetails)
-      this.studentService.getStudentExperienceDetails(id)
+      this.studentService.getVerifiedStudentExperienceDetails(id)
         .subscribe(experienceDetails => 
           this.student.experience_details = experienceDetails)
       this.student_data.push(student);
@@ -58,7 +72,19 @@ export class ViewJobPostComponent implements OnInit {
 
   id = localStorage.getItem('currentUser');
   ngOnInit() {
-    this.getStudentDetails();
+    this.studentService.getVerifiedStudent(this.id)
+    .subscribe(student => {
+      this.student = student
+      this.studentService.getVerifiedStudentEducationalDetails(this.id)
+      .subscribe(educationDetails => 
+        this.student.education_details = educationDetails)
+      this.studentService.getVerifiedStudentExperienceDetails(this.id)
+        .subscribe(experienceDetails => {
+          this.student.experience_details = experienceDetails
+          console.log(experienceDetails)
+        })
+      // this.data.push(student);
+    })
     const jobid = this.route.snapshot.params.id;
     console.log('id', jobid)
     this.jobPostsService.getJobData(jobid)
@@ -75,7 +101,7 @@ export class ViewJobPostComponent implements OnInit {
         this.companyService.getCompany(jobdata.company_id).subscribe(company => {
           this.jobdata.company = company;
           this.data.push(this.jobdata)
-          // this.checkEligibility(this.jobdata, this.student)
+          this.checkEligibility(this.jobdata, this.student)
         })
         console.info( "Job Details : " , jobdata );
       });
@@ -83,7 +109,7 @@ export class ViewJobPostComponent implements OnInit {
 
   applyJobPost(){
     this.jobPostsService.registerJobPost(this.id,this.route.snapshot.params.id).subscribe();
-    this.router.navigate(['/jobposts'])
+    this.router.navigate(['/placements'])
   }
 
 
