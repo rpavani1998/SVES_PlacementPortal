@@ -11,3 +11,4 @@ export class EducationDetails {
   proof_document: File = null
   is_verfied: string = 'False'
 }
+ 

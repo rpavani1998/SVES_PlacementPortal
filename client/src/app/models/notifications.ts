@@ -15,7 +15,7 @@ export class EducationDetails {
     tenth_aggregate : number;
     inter_aggregate : number;
     first_name : string;
-    last_name: string;
+    last_name: string; 
     branch : string;
     dob : Date;
     aadhar_no : string;

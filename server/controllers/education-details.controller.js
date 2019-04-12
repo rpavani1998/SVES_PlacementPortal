@@ -8,6 +8,11 @@ const VerifiedStudents = db.students_verified;
 const Experience = db.experience_details;
 const VerifiedExperience = db.experience_details_verified;
 const util = require('../controllers/utils.controller')
+const StudentJobApp = db.studentjobapp;
+const sequelize = db.sequelize;
+const Op = sequelize.Op;
+
+
 
 // Post a EducationDetails
 exports.create = (req, res) => {
@@ -15,8 +20,44 @@ exports.create = (req, res) => {
 	EducationDetails.create(education_details).then(result => {	
 		res.json('E'+result.id);
 	});
-};
+}; 
 
+exports.getJobAppliedStudents = (req, res) => {
+	StudentJobApp.findAll({
+		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
+		distinct : true,
+		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }}
+	}).then(appliedstudents => {
+		console.log(appliedstudents)
+		res.json(appliedstudents)
+	})
+};  
+
+exports.getRegisteredStudents = (req , res) => {
+	StudentJobApp.findAll({ 
+		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
+		distinct : true,
+		where : { is_qualified : 'Registered' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
+	}).then(nrstudents => {
+		console.log("Retrieved Registered students");
+		res.json(nrstudents);
+	})
+}
+
+
+exports.getNotRegisteredStudents = (req , res) => {
+	StudentJobApp.findAll({
+		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+        [sequelize.literal('`is_qualified`'),'is_qualified'] ],
+		distinct : true,
+		where : { is_qualified : 'Not Registered' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
+	}).then(nrstudents => {
+		console.log("Retrieved Not registered students");
+		res.json(nrstudents);
+	})
+}
 
 exports.findAll = (req, res) => {
 	EducationDetails.findAll({where:{roll_no:req.params.id}}).then(education_details => {
@@ -64,17 +105,6 @@ exports.findByBranchId = (req, res) => {
 	});
 };
 
-exports.getEligibleStudents = (req, res) => {
-	console.log("Percentage : ", req.params.percentage)
-	VerifiedEducationDetail.findAll({ where: { percentage : req.params.percentage } }).then(eligibleuserdata => {
-		console.log(eligibleuserdata);
-		res.json(eligibleuserdata); 
-		util.mail(eligibleuserdata)
-	});
-};
-
-
-
 exports.getData = (req, res) => {
 	console.log("College : ", req.params.college);
 	console.log("Major : ", req.params.major);
@@ -97,14 +127,14 @@ exports.getData = (req, res) => {
 				console.log("Branch : ", branch[i].id)
 				data.push(branch[i].id)
 			}
-			con = { where: { institute_university_name: college, percentage: percentage, passing_year: passing_year, backlogs: backlogs, major: data } }
+			con = { where: { institute_university_name: college, percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: data } }
 			VerifiedEducationDetail.findAll(con).then(filtereddata => {
 				console.log("Filtered Data : ", filtereddata);
 				res.json(filtereddata)
 			})
 		})
 	} else {
-		con = { where: { institute_university_name: college, percentage: percentage, passing_year: passing_year, backlogs: backlogs, major: major } }
+		con = { where: { institute_university_name: college, percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: major } }
 		VerifiedEducationDetail.findAll(con).then(filtereddata => {
 			console.log("Filtered Data : ", filtereddata);
 			res.json(filtereddata)

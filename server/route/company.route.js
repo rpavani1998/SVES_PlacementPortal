@@ -7,4 +7,6 @@ module.exports = function(app) {
     app.get('/api/company', company.findAll);
 
     app.get('/api/company/:id', company.findById);
+
+    app.get('/api/companyprofiles/:companyid' , company.getCompanyProfiles); 
 }

@@ -10,7 +10,7 @@ export class AddJob {
     is_active : string;
     ppt_talk : Date;
     degree : string;
-    overall_aggregate : string;
+    overall_aggregate : string; 
     backlogs : number;
     inter_aggregate : string;
     tenth_aggregate : string;

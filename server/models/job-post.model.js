@@ -1,15 +1,16 @@
 module.exports = (sequelize, Sequelize) => {
-	const JobPosts = sequelize.define('job_post', {
+	const AddJob = sequelize.define('job_post', {
 	  id: {
 			type: Sequelize.INTEGER,
 			primaryKey: true,
+			autoIncrement : true,
 	  },
 	  job_type: {
 			type: Sequelize.STRING,
 	  },
 	  job_profile: {
 			type: Sequelize.STRING,
-	  },
+	  }, 
 	  job_description : {
 		  type : Sequelize.STRING,
 	  },
@@ -33,26 +34,26 @@ module.exports = (sequelize, Sequelize) => {
 		  foreignKey : true
 	  },
 	  ppt_talk : {
-          type : Sequelize.DATE,
-			},
-		degree: {
-			type : Sequelize.STRING,
-		},
-		overall_aggregate : {
-			type : Sequelize.FLOAT,
-		},
-		backlogs: {
-			type: Sequelize.STRING,
-		},
-		inter_aggregate: {
-			type: Sequelize.STRING,
-		},
-		tenth_aggregate: {
-			type: Sequelize.STRING,
-		}
+		  type : Sequelize.DATE,
+	  },
+	  degree : {
+		  type : Sequelize.STRING,
+	  },
+	  backlogs : {
+		  type : Sequelize.STRING,
+	  },
+	  overall_aggregate : {
+		  type : Sequelize.STRING
+	  },
+	  inter_aggregate : {
+		  type : Sequelize.STRING,
+	  },
+	  tenth_aggregate : {
+		  type :Sequelize.STRING,
+	  },
 	},{
 			timestamps: false
 	});
-
-	return JobPosts;
+	
+	return AddJob;
 }

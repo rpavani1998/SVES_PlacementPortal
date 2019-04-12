@@ -46,6 +46,8 @@ export class ManageaccountComponent implements OnInit {
   usertype: UserType[];
   institute_university_names: College[];
   majors: Branch[];
+  department = new Branch();
+  college = new College();
 
   ngOnInit() {
     var uid = localStorage.getItem('currentUser');
@@ -88,5 +90,21 @@ export class ManageaccountComponent implements OnInit {
   addAdmin () {
     this.userService.addUser(this.user) 
       .subscribe();
+      this.router.navigateByUrl('/manageaccount');
+    window.location.reload();
+  }
+
+  addDept(){
+    this.utilService.addBranch(this.department)
+    .subscribe();
+    this.router.navigateByUrl('/manageaccount');
+    window.location.reload();
+  }
+
+  addCollege() {
+    this.utilService.addCollege(this.college)
+    .subscribe();
+    this.router.navigateByUrl('/manageaccount');
+    window.location.reload();
   }
 }

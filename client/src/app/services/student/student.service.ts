@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Student } from '../../models/student';
 import { EducationDetails } from '../../models/education-details';
 import { ExperienceDetails } from '../../models/experience-details';
+import { StudentPlacementStatus } from '../../models/student-placement-status';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -20,11 +21,13 @@ export class StudentService {
   private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
   private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
   private verifiedStudentsUrl = 'http://localhost:4000/api/students_verified'; 
+  private filtereddataUrl = 'http://localhost:4000/api/filtereddata'; 
   private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
   private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verified'; 
-
+  private placedStudentsUrl = 'http://localhost:4000/api/placedstudents'; 
+  private jobprocessplacedStudentsUrl = 'http://localhost:4000/api/jobprocessplacedstudents'; 
   constructor( 
-    private http: HttpClient
+    private http: HttpClient 
   ) { }
 
   approveRequest (studdata : Student): Observable<any> {
@@ -45,6 +48,33 @@ export class StudentService {
   getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
     return this.http.get<Student>(url);
+  } 
+
+  getFilteredData ( passingyear : number , major : string ) : Observable<EducationDetails[]> {
+    const url = `${this.filtereddataUrl}/${passingyear}/${major}`;
+    return this.http.get<EducationDetails[]>(url);
+  }
+
+  getVerifiedS(branch : string) :Observable<EducationDetails> {
+    const url = `${this.verifiedStudentsUrl}/${branch}`;
+    return this.http.get<EducationDetails>(url);
+  }
+
+  getJobProcessPlacedStudents(jobid : number) : Observable<StudentPlacementStatus[]> {
+    const url = `${this.jobprocessplacedStudentsUrl}/${jobid}`;
+    return this.http.get<StudentPlacementStatus[]>(url);
+  }
+
+  getPlacedStudents(roll_no : string , jobid : number) : Observable<StudentPlacementStatus[]> {
+    const url = `${this.placedStudentsUrl}/${roll_no}/${jobid}`;
+    return this.http.get<StudentPlacementStatus[]>(url);
+  }
+
+
+  getVerifiedStudentDetails(branch : string) :Observable<EducationDetails[]> {
+    const url = `${this.verifiedStudentsUrl}/${branch}`;
+    console.log("URL : " , url)
+    return this.http.get<EducationDetails[]>(url);
   }
 
   addStudentProfile (student: Student): Observable<Student> {

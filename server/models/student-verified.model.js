@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.DATEONLY
 		},
 		backlogs: {
-			type: Sequelize.STRING
+			type: Sequelize.STRING 
 		},
 		aadhar_no: {
 			type: Sequelize.STRING
