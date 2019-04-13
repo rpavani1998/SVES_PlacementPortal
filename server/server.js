@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 const cors = require('cors')
 const corsOptions = {
-  origin: ['http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4200'],
+  origin: ['http://localhost:4200'],
   credentials: true
  }
 
@@ -30,7 +30,7 @@ app.all('/*', function(req, res, next) {
 require('./route/student.route.js')(app);
 require('./route/user.route.js')(app);
 require('./route/utils.route')(app);
-// require('./route/addjob.route.js')(app);  
+require('./route/achievement.route.js')(app);  
 require('./route/job-type.route')(app);  
 require('./route/job-post.route.js')(app); 
 require('./route/company.route')(app)

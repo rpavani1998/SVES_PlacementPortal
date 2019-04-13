@@ -19,7 +19,7 @@ const httpOptions = {
 })
 export class AddjobService {
 
-  private addjobUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/addjob';
+  private addjobUrl = 'http://localhost:4000/api/addjob';
 
   constructor(
     private http: HttpClient

@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { CompanyService } from 'src/app/services/company/company.service';
 import { StudentService } from '../services/student/student.service';
 import { Student } from '../models/student';
+import { UtilsService } from '../services/utils/utils.service';
 
 
 @Component({
@@ -28,11 +29,13 @@ export class ViewJobPostComponent implements OnInit {
   message: string;
   roll_no = localStorage.getItem('currentUser');
   student= new Student();
-  
+  jobstages = {};
+
   constructor(
     private jobPostsService : JobPostsService,
     private companyService : CompanyService,
     private studentService: StudentService,
+    private utilService : UtilsService,  
     // private editjobpostService : EditjobpostService,
     private router: Router,
     private route: ActivatedRoute,
@@ -100,10 +103,18 @@ export class ViewJobPostComponent implements OnInit {
             });
         this.companyService.getCompany(jobdata.company_id).subscribe(company => {
           this.jobdata.company = company;
-          this.data.push(this.jobdata)
           this.checkEligibility(this.jobdata, this.student)
         })
-        console.info( "Job Details : " , jobdata );
+        this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
+          this.jobdata.jobprocesses = jobprocess; 
+          this.data.push(this.jobdata)
+        })
+        this.utilService.getJobStages().subscribe(jobstages => {
+          jobstages.forEach(jobstage => {
+            this.jobstages[jobstage.id] = jobstage.stage_name;
+          })
+        })
+        console.info( "Job Details : " , this.jobdata, this.jobstages);
       });
   }
 
@@ -111,14 +122,4 @@ export class ViewJobPostComponent implements OnInit {
     this.jobPostsService.registerJobPost(this.id,this.route.snapshot.params.id).subscribe();
     this.router.navigate(['/placements'])
   }
-
-
-  // updateJobPost(): void {
-  //   this.submitted = true;
-  //   console.log( " Job Data :  " , this.jobdata );
-  //   // this.editjobpostService.updateJobPost(this.jobdata)
-  //   //     .subscribe(result => this.message = "Job Post Updated Successfully!");
-  //   this.router.navigateByUrl('/jobposts');
-  //   window.location.reload()
-  // }
 }

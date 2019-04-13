@@ -99,3 +99,12 @@ exports.getJobProcessPlacedStudents = (req, res) => {
 		res.json(appliedstudents)
 	})
 };  
+
+exports.getJobProcessStudent= (req, res) => {
+	StudentJobApp.findAll({ 
+		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }, roll_no: req.params.roll_no}
+	}).then(appliedstudents => {
+		// console.log(appliedstudents)
+		res.json(appliedstudents)
+	})
+};  

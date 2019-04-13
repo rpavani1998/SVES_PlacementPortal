@@ -5,6 +5,7 @@ import { Student } from '../../models/student';
 import { EducationDetails } from '../../models/education-details';
 import { ExperienceDetails } from '../../models/experience-details';
 import { StudentPlacementStatus } from '../../models/student-placement-status';
+import { Achievement } from 'src/app/models/achievement';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -17,15 +18,17 @@ const httpOptions = {
   providedIn: 'root'
 }) 
 export class StudentService {
-  private studentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/students'; 
-  private educationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details'; 
-  private experienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details'; 
-  private verifiedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student_verified'; 
-  private filtereddataUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/filtereddata'; 
-  private verifiedEducationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details_verified'; 
-  private verifiedExperienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details_verified'; 
-  private placedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/placedstudents'; 
-  private jobprocessplacedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobprocessplacedstudents'; 
+  private studentsUrl = 'http://localhost:4000/api/students'; 
+  private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
+  private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
+  private verifiedStudentsUrl = 'http://localhost:4000/api/student_verified'; 
+  private filtereddataUrl = 'http://localhost:4000/api/filtereddata'; 
+  private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
+  private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verified'; 
+  private placedStudentsUrl = 'http://localhost:4000/api/placedstudents'; 
+  private jobprocessplacedStudentsUrl = 'http://localhost:4000/api/jobprocessplacedstudents'; 
+  private achievementUrl = 'http://localhost:4000/api/achievement';  // URL to web api// URL to web api
+
   constructor( 
     private http: HttpClient 
   ) { }
@@ -62,6 +65,11 @@ export class StudentService {
 
   getJobProcessPlacedStudents(jobid : number) : Observable<StudentPlacementStatus[]> {
     const url = `${this.jobprocessplacedStudentsUrl}/${jobid}`;
+    return this.http.get<StudentPlacementStatus[]>(url);
+  }
+
+  getJobProcessStudent(jobid : number, roll_no: string) : Observable<StudentPlacementStatus[]> {
+    const url = `${this.jobprocessplacedStudentsUrl}/${jobid}/${roll_no}`;
     return this.http.get<StudentPlacementStatus[]>(url);
   }
 
@@ -169,4 +177,32 @@ export class StudentService {
   updateVerifiedStudentExperienceDetails (experienceDetails: ExperienceDetails): Observable<any> {
     return this.http.put(this.studentsUrl, experienceDetails, httpOptions);
   }
+
+
+  getAchievements (roll_no: string): Observable<Achievement[]> {
+    console.log(`${this.achievementUrl}s/${roll_no}`);
+    return this.http.get<Achievement[]>(`${this.achievementUrl}/${roll_no}`);
+  }
+
+  getAchievement(id: string): Observable<Achievement[]> {
+    const url = `${this.achievementUrl}/${id}`;
+    return this.http.get<Achievement[]>(url);
+  }
+
+  addAchievement (Achievement: Achievement): Observable<Achievement> {
+    console.log(this.http.post<Achievement>(this.achievementUrl, Achievement, httpOptions))
+    return this.http.post<Achievement>(this.achievementUrl, Achievement, httpOptions);
+  }
+
+  deleteAchievement (Achievement: Achievement | string): Observable<Achievement> {
+    const id = typeof Achievement === 'string' ? Achievement :Achievement.id;
+    const url = `${this.achievementUrl}/${id}`;
+
+    return this.http.delete<Achievement>(url, httpOptions);
+  }
+
+  updateAchievement (Achievement: Achievement): Observable<any> {
+    return this.http.put(this.achievementUrl, Achievement, httpOptions);
+  }
+
 }

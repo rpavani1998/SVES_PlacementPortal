@@ -16,7 +16,7 @@
     <h3> Personal Details</h3>
 
 <div>
-        <div class="bg-img"><img src='http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/{{img_id}}' style="width:160px; height : 160px"  alt="Img"></div>
+        <div class="bg-img"><img src='http://localhost:4000/api/file/{{img_id}}' style="width:160px; height : 160px"  alt="Img"></div>
    
    <br>
     <div>Roll No: {{student.roll_no}}</div>
@@ -40,7 +40,7 @@
         <div>Passing Year: {{edu_details.passing_year}}</div>
         <div>Percentage: {{edu_details.percentage}}</div>
         <div>CGPA: {{edu_details.cgpa}}</div>
-        <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/E{{edu_details.id}}">Proof Document</a></div>
+        <div>Proof Document: <a href="http://localhost:4000/api/file/E{{edu_details.id}}">Proof Document</a></div>
         <hr>
     </div>
 </div>
@@ -56,7 +56,17 @@
             <div>End Date: {{exp_details.end_date}}</div>
             <div>Job Location: {{exp_details.job_location_city}}</div>
             <div>Description: {{exp_details.description}}</div>
-            <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/X{{exp_details.id}}">Proof Document</a></div>
+            <div>Proof Document: <a href="http://localhost:4000/api/file/X{{exp_details.id}}">Proof Document</a></div>
+            <hr>
+    </div>
+</div>
+<h3>Achievements</h3>
+<br>
+<div>
+    <div *ngFor= "let achievement of student.achievements">
+            <div>Title : {{achievement.title}}</div>
+            <div>Description: {{achievement.description}}</div>
+            <div>Proof Document: <a href="http://localhost:4000/api/file/Ach{{achievement.id}}">Proof Document</a></div>
             <hr>
     </div>
 </div>

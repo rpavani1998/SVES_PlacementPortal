@@ -154,6 +154,8 @@ exports.approveRequest = (req, res) => {
 	var con = { where: { roll_no: roll_no } };
 	console.log("Roll Number : ", roll_no);
 
+
+
 	VerifiedEducationDetail.create(values, con).then(() => {
 		res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 	});

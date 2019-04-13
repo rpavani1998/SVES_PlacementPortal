@@ -22,6 +22,8 @@ module.exports = function(app) {
 
     app.get('/api/jobprocessplacedstudents/:jobid' , students.getJobProcessPlacedStudents);
 
+    app.get('/api/jobprocessplacedstudents/:jobid/:roll_no' , students.getJobProcessStudent);
+
     app.get('/api/filtereddata/:passing_year/:branchid' , students.getFilteredData);
 
     app.get('/api/placedstudents/:roll_no/:job_id' , students.getPlacedStudents)  

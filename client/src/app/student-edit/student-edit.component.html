@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <mat-label for="backlogs">Aadhaar Proof</mat-label>
-                                     <div> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/A{{student.roll_no}}">Aadhar Card</a></div>
+                                     <div> <a href="http://localhost:4000/api/file/A{{student.roll_no}}">Aadhar Card</a></div>
                                 </div>
                               </div>
   
@@ -198,7 +198,7 @@
 
                                                 <div [hidden]="!edu_ids[i]" class="col-md-4">
                                                     <mat-label for="backlogs">Proof Document</mat-label>
-                                                     <div> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/E{{edu_ids[i]}}">Document Attached</a></div>
+                                                     <div> <a href="http://localhost:4000/api/file/E{{edu_ids[i]}}">Document Attached</a></div>
                                                 </div>
                                         </div>
                                           <div class="clearfix"></div>
@@ -283,7 +283,7 @@
                                               </div>
                                               <div [hidden]="!exp_ids[i]" class="col-md-4">
                                                   <mat-label for="backlogs">Proof Document</mat-label>
-                                                   <div> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/X{{exp_ids[i]}}">Document Attached</a></div>
+                                                   <div> <a href="http://localhost:4000/api/file/X{{exp_ids[i]}}">Document Attached</a></div>
                                               </div>
   
                                           </div>
@@ -293,6 +293,61 @@
                                     </fieldset>
                                   </div>
                                 </div>
+                                <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
+                                (click)="addNewAchievementForm()">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Achievement
+                              </button>
+                              <div formArrayName="achievements">
+                                <div style="margin-top:5px; margin-bottom:5px;"
+                                  *ngFor="let edu_details of myForm.get('achievements').controls; let i=index">
+                                  <fieldset>
+                                    <legend>
+                                      <h4>Achievements {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
+                                          (click)="deleteAchchievemnt(i)">
+                                          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Delete Achievement
+                                        </button>
+                                      </h4>
+                                    </legend>
+                                    <div [formGroupName]="i">
+                                      <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput type="text" id="title" placeholder="Title" name="title"
+                                            formControlName="title" required>
+                                            </mat-form-field>
+                                            <!-- <div [hidden]="job_title.valid || job_title.pristine"
+                                            class="alert alert-danger">
+                                          Job Title is required
+                                       </div> -->
+                                        </div>
+                              
+                                          <mat-form-field class="example-full-width">
+                                              <textarea matInput type="text" id="description" placeholder="Description" name="description"
+                                              formControlName="description" required></textarea>
+                                          </mat-form-field>
+                                          <!-- <div [hidden]="description.valid || description.pristine"
+                                          class="alert alert-danger">
+                                        Job Description is required
+                                     </div> -->
+
+                                      <div class="col-md-4">
+                                        <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                          <input class="ng-hide" type="file" (change)="selectAchievementProofs($event,i)">
+                                      </div>
+                                      </div>
+                                      
+                                      <div [hidden]="!ach_ids[i]" class="col-md-4">
+                                        <mat-label for="backlogs">Proof Document</mat-label>
+                                         <div> <a href="http://localhost:4000/api/file/Ach{{ach_ids[i]}}">Document Attached</a></div>
+                                    </div>
+                                        </div>
+
+                                       
+                                    </div>
+                                    <hr>
+                                  </fieldset>
+                                </div>
+                              </div>
                                 <div class="btn-group btn-group-sm">
                                   <!-- <button mat-raised-button type="button" class="btn btn-danger" (click)="goBack()">Back</button> -->
                                   <button mat-raised-button type="button" class="btn btn-danger" [routerLink]="['/user-profile']" (click)="update()">Update</button>

@@ -17,8 +17,8 @@ const httpOptions = {
 })
 export class CompanyService {
 
-  private companyUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/company';
-  private companyProfilesUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/companyprofiles';
+  private companyUrl = 'http://localhost:4000/api/company';
+  private companyProfilesUrl = 'http://localhost:4000/api/companyprofiles';
 
   constructor(
     private http: HttpClient

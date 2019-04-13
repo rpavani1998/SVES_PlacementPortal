@@ -6,6 +6,8 @@ import { JobPosts } from '../models/jobposts';
 import { UtilsService } from '../services/utils/utils.service';
 import { JobStage } from '../models/jobstage';
 import {MatTableModule} from '@angular/material/table';
+import { StudentPlacementStatus } from '../models/student-placement-status';
+import { StudentService } from '../services/student/student.service';
 
 @Component({
   selector: 'app-view-applied-jobs',
@@ -16,13 +18,15 @@ export class ViewAppliedJobsComponent implements OnInit {
 
   constructor( private jobPostsService : JobPostsService,
     private  companyService: CompanyService,
-    private utilService: UtilsService) { 
+    private utilService: UtilsService,
+    private studentService : StudentService) { 
   }
 
   data = []
   jobposts = new JobPosts()
   jobstages : JobStage[]
   stages = {}
+  status = {}
 
   ngOnInit() {
     this.utilService.getJobStages().subscribe(stages =>{
@@ -34,7 +38,6 @@ export class ViewAppliedJobsComponent implements OnInit {
     const id = localStorage.getItem('currentUser');
     this.jobPostsService.getAppliedJobDetails(id).subscribe(job_posts =>
       {
-
         job_posts.forEach(job_post => {
           var job_post_activity = new JobPostActivity()
           console.log(job_post)
@@ -43,6 +46,11 @@ export class ViewAppliedJobsComponent implements OnInit {
             if(job_post_details.job_type == 3 || job_post_details.job_type == 4){
               job_post_activity.job_details = job_post_details
             }
+            this.studentService.getJobProcessStudent(job_post.job_post_id, id).subscribe(processes => {
+              processes.forEach(process => {
+                  this.status[process.job_post_id] = process.placement_status
+              })
+            })
             console.log("jpd", job_post_details)
               this.utilService.getJobProcess(job_post.job_post_id).subscribe(jobprocess => {
                 console.log(jobprocess)

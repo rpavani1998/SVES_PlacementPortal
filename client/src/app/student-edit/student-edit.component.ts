@@ -10,6 +10,7 @@ import { UploadFileService } from '../services/file/file.service';
 import { Observable } from 'rxjs';
 import { EducationDetails } from '../models/education-details';
 import { ExperienceDetails } from '../models/experience-details';
+import { Achievement } from '../models/achievement';
 
 @Component({
   selector: 'app-student-edit',
@@ -26,12 +27,15 @@ export class StudentEditComponent implements OnInit {
 
   data = {
     education_details : [],
-    experience_details : []
+    experience_details : [],
+    achievements : [
+    ]
   }
   
   myForm: FormGroup;
-  edu_ids = [];
+  edu_ids = []
   exp_ids = []
+  ach_ids = []
   prev_edu_details :EducationDetails[]
   prev_exp_details: ExperienceDetails[]
 
@@ -56,7 +60,8 @@ export class StudentEditComponent implements OnInit {
 
   this.myForm = this.fb.group({
     education_details: this.fb.array([]),
-    experience_details: this.fb.array([])
+    experience_details: this.fb.array([]),
+    achievements: this.fb.array([])
   })
 
 
@@ -99,10 +104,25 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       this.exp_ids.push(x.id)
     })
   });
+
+  this.studentService.getAchievement(id)
+  .subscribe(achievement => {
+    let control = <FormArray>this.myForm.controls.experience_details;
+    achievement.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: localStorage.getItem('currentUser'),
+        title: x.title,
+        description: x.description,
+        proof_document: x.proof_document
+       }))
+      this.exp_ids.push(x.id)
+    })
+  });
   this.prev_edu_details = this.myForm.value.education_details;
   this.prev_exp_details = this.myForm.value.experience_details;
   this.setEducationDetails();
   this.setExperienceDetails();
+  this.setAchievements();
   }
 
   deleteEducationDetails(index) {
@@ -143,6 +163,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     this.student.roll_no = localStorage.getItem('currentUser');
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
+    this.student.achievements = this.myForm.value.achievements;
     this.studentService.addStudentProfile(this.student).subscribe();
     // this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i=0; i < this.student.education_details.length; i++){
@@ -161,7 +182,55 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       });
     }
     }
+     for(var i=0; i < this.myForm.value.achievements.length; i++){
+      if (this.myForm.value.achievements[i].id in this.ach_ids){
+        this.studentService.updateAchievement(this.myForm.value.experience_details[i])
+        .subscribe();
+      } else{
+        this.studentService.addAchievement(this.student.achievements[i]).subscribe(result => {
+          // console.log("E", result)
+         this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+        });
+      }
+     
+    }
   }
+
+  addNewAchievementForm() {
+    let control = <FormArray>this.myForm.controls.achievements;
+    control.push(
+      this.fb.group({
+        roll_no: localStorage.getItem('currentUser'),
+        description:'',
+        title:'',
+        proof_document: null     
+        })
+    )
+  }
+
+  setAchievements(){
+    let control = <FormArray>this.myForm.controls.achievements;
+    this.data.achievements.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        description: x.description,
+        title: x.title,
+        proof_document: x.proof_document
+       }))
+    })
+  }
+
+
+  deleteAchievements(index) {
+    let control = <FormArray>this.myForm.controls.education_details;
+    control.removeAt(index)
+  }
+  
+
+  selectAchievementProofs(event, i){
+    this.myForm.value.achievements[i].proof_document =  event.target.files[0];
+  }
+  
 
   addNewExperienceForm() {
     let control = <FormArray>this.myForm.controls.experience_details;

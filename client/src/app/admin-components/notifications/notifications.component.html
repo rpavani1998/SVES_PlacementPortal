@@ -59,7 +59,7 @@
                                     <b> <label> Degree : </label> </b> {{ed.certificate_degree_name}} <br><br>
                                     <b> <label> Major : </label> </b> {{ed.major}} <br><br>
                                     <b> <label> Percentage : </label> </b> {{ed.percentage}} <br><br>
-                                    <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/E{{ed.id}}">Proof Document</a></div>
+                                    <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof Document</a></div>
                                     <button #elem (click)="approveRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectRequest(ed)" class="btn-btn"> Reject </button>
                                     <hr>
@@ -97,7 +97,7 @@
                                     <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
                                     <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
                                     <b> <label> Description : </label> </b> {{ed.description}} <br><br>
-                                    <b> <label> Proof Document: </label> </b> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/X{{ed.id}}">Proof
+                                    <b> <label> Proof Document: </label> </b> <a href="http://localhost:4000/api/file/X{{ed.id}}">Proof
                                         Document</a><br><br>
                                     <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>

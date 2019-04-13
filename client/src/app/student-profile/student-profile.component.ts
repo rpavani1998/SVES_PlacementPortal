@@ -2,6 +2,7 @@ import { Component, OnInit , Input} from '@angular/core';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student/student.service';
 import { UploadFileService } from '../services/file/file.service';
+import { Achievement } from '../models/achievement';
 
 @Component({
   selector: 'app-student-profile',
@@ -40,6 +41,10 @@ export class StudentProfileComponent  implements OnInit {
         .subscribe(experienceDetails => {
           this.student.experience_details = experienceDetails
           console.log(experienceDetails)
+        })
+        this.studentService.getAchievement(id)
+        .subscribe(achievement => {
+          this.student.achievements = achievement
         })
       this.data.push(student);
     }))

@@ -49,6 +49,14 @@ export class RegisterStudentComponent{
       description: ['', Validators.required],
       proof_document: null
       }
+    ],
+    achievements : [
+      {
+      roll_no : localStorage.getItem('currentUser'),
+      title : '',
+      description : '',
+      proof_document: null
+      }
     ]
   } 
   constructor(
@@ -67,14 +75,21 @@ export class RegisterStudentComponent{
     })
     this.myForm = this.fb.group({
       education_details: this.fb.array([]),
-      experience_details: this.fb.array([])
+      experience_details: this.fb.array([]),
+      achievements: this.fb.array([])
     })
     
     this.setEducationDetails();
     this.setExperienceDetails();
+    this.setAchievements();
   }
 
   deleteEducationDetails(index) {
+    let control = <FormArray>this.myForm.controls.education_details;
+    control.removeAt(index)
+  }
+
+  deleteAchievements(index) {
     let control = <FormArray>this.myForm.controls.education_details;
     control.removeAt(index)
   }
@@ -90,6 +105,18 @@ export class RegisterStudentComponent{
    this.save();
    this.router.navigate(['/message'])
  }
+
+setAchievements(){
+  let control = <FormArray>this.myForm.controls.achievements;
+  this.data.achievements.forEach(x => {
+    control.push(this.fb.group({ 
+      roll_no: x.roll_no,
+      description: x.description,
+      title: x.title,
+      proof_document: x.proof_document
+     }))
+  })
+}
 
  setExperienceDetails() {
   let control = <FormArray>this.myForm.controls.experience_details;
@@ -147,6 +174,10 @@ setEducationDetails() {
   })
 }
 
+selectAchievementProofs(event, i){
+  this.myForm.value.achievements[i].proof_document =  event.target.files[0];
+}
+
 selectAadharProof(event) {
   this.student.id_proof = event.target.files[0];
   // this.uploadService.pushFileToStorage('student', this.student.id_proof).subscribe();
@@ -179,6 +210,18 @@ addNewEducationForm() {
   )
 }
 
+addNewAchievementForm() {
+  let control = <FormArray>this.myForm.controls.achievements;
+  control.push(
+    this.fb.group({
+      roll_no: localStorage.getItem('currentUser'),
+      description:'',
+      title:'',
+      proof_document: null     
+      })
+  )
+}
+
   goBack(): void {
     this.location.back();
   }
@@ -189,6 +232,7 @@ addNewEducationForm() {
     this.student.roll_no = localStorage.getItem('currentUser');
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
+    this.student.achievements = this.myForm.value.achievements;
     this.studentService.addStudentProfile(this.student).subscribe();
     this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i in this.student.education_details){
@@ -204,5 +248,11 @@ addNewEducationForm() {
        this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
       });
     }
+    for(let i in this.student.achievements){
+      this.studentService.addAchievement(this.student.achievements[i]).subscribe(result => {
+       this.uploadService.pushFileToStorage(result.toString(), this.student.achievements[i].proof_document).subscribe();
+   
+   })
+ }
   }
 }

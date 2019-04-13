@@ -1,4 +1,5 @@
 import { Company } from './company';
+import { JobProcess } from './jobprocess';
 
 export class JobPost {
     id : number;
@@ -18,5 +19,5 @@ export class JobPost {
     backlogs: string
     inter_aggregate: number
     tenth_aggregate:number
-
+    jobprocesses: JobProcess[]
 }
