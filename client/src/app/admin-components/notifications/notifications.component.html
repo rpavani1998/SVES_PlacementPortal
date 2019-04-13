@@ -17,7 +17,7 @@
                     </mat-expansion-panel-header>
 
                     <mat-tab-group dynamicHeight>
-                        <mat-tab label="Pending requests">
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable >
                             <div *ngFor="let ed of studentdata ; let i = index ">
                                 <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
                                 <b> <label> First Name : </label> </b> {{ed.first_name}} <br><br>
@@ -26,7 +26,7 @@
                                 <b> <label> DOB : </label> </b> {{ed.dob}} <br><br>
                                 <b> <label> Aadhar Number : </label> </b> {{ed.aadhar_no}} <br><br>
                                 <b> <label> Backlogs : </label> </b> {{ed.backlogs}} <br><br>
-                                <!-- <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                <!-- <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
                                 <button #elem (click)="approveProfileRequest(ed)" class="btn-btn"> Approve </button>
                                 &nbsp;
                                 <button (click)="rejectProfileRequest(ed)" class="btn-btn"> Reject </button>
@@ -54,25 +54,15 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-tab-group dynamicHeight>
-                        <mat-tab label="Pending requests">
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable>
                                 <div *ngFor="let ed of edudata ; let i = index ">
-<<<<<<< HEAD
-                                    <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
-                                    <b> <label> Degree : </label> </b> {{ed.certificate_degree_name}} <br><br>
-                                    <b> <label> Major : </label> </b> {{ed.major}} <br><br>
-                                    <b> <label> Percentage : </label> </b> {{ed.percentage}} <br><br>
-                                    <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof Document</a></div>
-                                    <button #elem (click)="approveRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
-                                    <button (click)="rejectRequest(ed)" class="btn-btn"> Reject </button>
-=======
                                     <b> <label> Roll Number : </label> </b> {{ed[i].roll_no}} <br><br>
                                     <b> <label> Degree : </label> </b> {{ed[i].certificate_degree_name}} <br><br>
                                     <b> <label> Major : </label> </b> {{ed[i].major}} <br><br> 
                                     <b> <label> Percentage : </label> </b> {{ed[i].percentage}} <br><br>
-                                    <!-- <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                    <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4200/api/file/E{{ed.id}}">Proof Document</a></div>
                                     <button #elem (click)="approveRequest(ed[i])" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectRequest(ed[i])" class="btn-btn"> Reject </button>
->>>>>>> b5ca768abbf0ffe9c5e152c013972371e7b7f93f
                                     <hr>
                                 </div>
                         </mat-tab>
@@ -98,7 +88,7 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-tab-group dynamicHeight>
-                        <mat-tab label="Pending requests">
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable   >
                                 <div *ngFor="let ed of expdata ; let i = index ">
                                     <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
                                     <b> <label> Currently Working : </label> </b> {{ed.is_current_job}} <br><br>
@@ -108,7 +98,7 @@
                                     <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
                                     <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
                                     <b> <label> Description : </label> </b> {{ed.description}} <br><br>
-                                    <b> <label> Proof Document: </label> </b> <a href="http://localhost:4000/api/file/X{{ed.id}}">Proof
+                                    <b> <label> Proof Document: </label> </b> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/X{{ed.id}}">Proof
                                         Document</a><br><br>
                                     <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>

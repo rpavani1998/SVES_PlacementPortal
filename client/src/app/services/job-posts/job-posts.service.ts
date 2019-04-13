@@ -16,8 +16,8 @@ const httpOptions = {
 })
 export class JobPostsService {
 
-  private jobpostsUrl = 'http://localhost:4000/api/jobposts';
-  private jobPosActivitytUrl = 'http://localhost:4000/api/jobpost';
+  private jobpostsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobposts';
+  private jobPosActivitytUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobpost';
 
   constructor(
     private http: HttpClient

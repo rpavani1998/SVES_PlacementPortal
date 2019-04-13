@@ -48,10 +48,12 @@ export class ViewAppliedJobsComponent implements OnInit {
             }
             this.studentService.getJobProcessStudent(job_post.job_post_id, id).subscribe(processes => {
               processes.forEach(process => {
-                  this.status[process.job_post_id] = process.placement_status
+                  console.log('PPP', process, process.job_process_id)
+                  this.status[process.job_process_id.toString()] = process.is_qualified
+                  console.log('status', this.status)
               })
             })
-            console.log("jpd", job_post_details)
+            console.log("jpd", job_post_details, this.status)
               this.utilService.getJobProcess(job_post.job_post_id).subscribe(jobprocess => {
                 console.log(jobprocess)
                 job_post_activity.jobprocesses = jobprocess

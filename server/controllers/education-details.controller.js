@@ -157,15 +157,6 @@ exports.approveRequest = (req, res) => {
 	console.log("Update")
 	var values = req.body
 	var con = { where: { roll_no: roll_no } };
-<<<<<<< HEAD
-	console.log("Roll Number : ", roll_no);
-
-
-
-	VerifiedEducationDetail.create(values, con).then(() => {
-		res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
-	});
-=======
 	console.log("Roll Number : ", roll_no); 
 
 	VerifiedEducationDetail.findAll({where : { roll_no : req.body.roll_no } }).then(data => {
@@ -180,7 +171,6 @@ exports.approveRequest = (req, res) => {
 			});
 		}
 	})
->>>>>>> b5ca768abbf0ffe9c5e152c013972371e7b7f93f
  
 	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage, cgpa: cgpa , status : "Accepted" }
 	var con = { where: { roll_no: roll_no , certificate_degree_name: degree, major: major, percentage: percentage, cgpa: cgpa } };

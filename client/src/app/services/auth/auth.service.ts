@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthService {
 
   private loggedInStatus = false
-  private usersUrl = 'http://localhost:4000/api/users'; 
+  private usersUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/users'; 
   constructor(private http: HttpClient) { }
 
   setLoggedIn(value: boolean) {

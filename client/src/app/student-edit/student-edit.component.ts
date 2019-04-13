@@ -170,7 +170,9 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       if(this.student.education_details[i] != this.prev_edu_details[i]) {
         this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
          console.log("E", result)
-        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+         if(this.student.education_details[i].proof_document){
+           this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+         }
     })
   }
   }
@@ -178,7 +180,9 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       if(this.student.experience_details[i] != this.prev_exp_details[i]) {
       this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
         console.log("E", result)
-       this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+        if(this.student.experience_details[i].proof_document){
+            this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+        }
       });
     }
     }

@@ -11,7 +11,7 @@
                     <div class="container-fluid">
                         <h4><b>Personal details:</b></h4>
                        
-                        <!-- <div class="bg-img"><img src='http://localhost:4000/api/file/student'
+                        <!-- <div class="bg-img"><img src='http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/student'
                                 style="width:160px; height : 160px" alt="Img"></div> -->
                         <b>Email </b>: {{userdata.email}}<br>
                         <b>Contact </b>: {{userdata.contact_number}}
@@ -30,7 +30,7 @@
                         <button mat-raised-button type="button" class="btn btn-danger pull-right">Edit Profile</button>
                     </div>
                 </mat-tab>
-                <mat-tab label="Add Users" *ngIf="userdata.user_type_id == 'TPO' " enable>
+                <mat-tab label="Add Users" *ngIf="userdata.user_type_id == 'TPO'  " enable>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="Add College" *ngIf="userdata.user_type_id=='TPO'" enable>
+                <mat-tab label="Add College" *ngIf="userdata.user_type_id=='OPC'" enable>
                     <br>
                     <div class="row">
                         <div class="col-md-4">

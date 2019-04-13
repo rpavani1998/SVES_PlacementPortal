@@ -29,9 +29,10 @@ exports.register = (req, res) => {
 	let job_post_activity = req.params;
 	JobPostActivity.create(job_post_activity).then(result => {	
 		res.json('X'+result.id);
-		console.log('REGISTER', req.params.roll_no)
 		JobPost.findById(req.post_id).then(post => {
-			console.log('REGISTER', res.roll_no)
+			StudentJobApp.update(
+				{ is_qualified : 'Registered' },
+				{where : {roll_no : req.params.roll_no , job_process_id : { [Op.like] : req.params.job_post_id+'%' }}}).then(result => {});
 			util.mail(req.params.roll_no, 'event_registered', post)
 		})
 		
@@ -142,7 +143,7 @@ exports.create = (req, res) => {
 								}
 							}
 							for ( data in eligibleuserdata) {
-								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id , placement_status : 'NotSelected'}).then(data =>{})
+								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id , placement_status : 'NotSelected'}).then(data =>{})
 							}
 						});
 					});

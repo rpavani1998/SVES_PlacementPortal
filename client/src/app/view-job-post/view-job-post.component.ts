@@ -21,7 +21,7 @@ import { UtilsService } from '../services/utils/utils.service';
 export class ViewJobPostComponent implements OnInit {
 
   data = []
-  is_eligible = false
+  placement_status = false
   is_applied = false
   student_data = []
   jobdata = new JobPost();
@@ -47,7 +47,7 @@ export class ViewJobPostComponent implements OnInit {
     for(let i in student.education_details){
       console.log('12345678', student.education_details[i], job_data)
       if (student.education_details[i].certificate_degree_name =="B.Tech" &&  parseInt(student.education_details[i].percentage) >= parseInt(job_data.overall_aggregate)){
-          this.is_eligible = true
+          this.placement_status = true
           console.log('Eligible!!!')
           break;
       }
