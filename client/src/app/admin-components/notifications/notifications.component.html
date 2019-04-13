@@ -26,6 +26,7 @@
                                 <b> <label> DOB : </label> </b> {{ed.dob}} <br><br>
                                 <b> <label> Aadhar Number : </label> </b> {{ed.aadhar_no}} <br><br>
                                 <b> <label> Backlogs : </label> </b> {{ed.backlogs}} <br><br>
+                                <!-- <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
                                 <button #elem (click)="approveProfileRequest(ed)" class="btn-btn"> Approve </button>
                                 &nbsp;
                                 <button (click)="rejectProfileRequest(ed)" class="btn-btn"> Reject </button>
@@ -55,12 +56,13 @@
                     <mat-tab-group dynamicHeight>
                         <mat-tab label="Pending requests">
                                 <div *ngFor="let ed of edudata ; let i = index ">
-                                    <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
-                                    <b> <label> Degree : </label> </b> {{ed.certificate_degree_name}} <br><br>
-                                    <b> <label> Major : </label> </b> {{ed.major}} <br><br>
-                                    <b> <label> Percentage : </label> </b> {{ed.percentage}} <br><br>
-                                    <button #elem (click)="approveRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
-                                    <button (click)="rejectRequest(ed)" class="btn-btn"> Reject </button>
+                                    <b> <label> Roll Number : </label> </b> {{ed[i].roll_no}} <br><br>
+                                    <b> <label> Degree : </label> </b> {{ed[i].certificate_degree_name}} <br><br>
+                                    <b> <label> Major : </label> </b> {{ed[i].major}} <br><br> 
+                                    <b> <label> Percentage : </label> </b> {{ed[i].percentage}} <br><br>
+                                    <!-- <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                    <button #elem (click)="approveRequest(ed[i])" class="btn-btn"> Approve </button> &nbsp;
+                                    <button (click)="rejectRequest(ed[i])" class="btn-btn"> Reject </button>
                                     <hr>
                                 </div>
                         </mat-tab>

@@ -22,7 +22,7 @@ module.exports = function(app) {
 
     app.get('/api/jobprocessplacedstudents/:jobid' , students.getJobProcessPlacedStudents);
 
-    app.get('/api/filtereddata/:passing_year/:branchid' , students.getFilteredData);
+    app.get('/api/filtereddata/:passing_year/:branchid' , students.getFilteredData); 
 
     app.get('/api/placedstudents/:roll_no/:job_id' , students.getPlacedStudents)  
 
@@ -56,7 +56,7 @@ module.exports = function(app) {
 
     app.put('/api/notifications/reject',  education_details.rejectRequest);
 
-    app.put('/api/notifications/profileaccept',  education_details.approveProfileRequest);
+    app.put('/api/notifications/profileaccept',  education_details.approveProfileRequest); 
 
     app.put('/api/notifications/profilereject',  education_details.rejectProfileRequest);
 
@@ -97,6 +97,8 @@ module.exports = function(app) {
     app.get('/api/notifications/:branchID',  education_details.findByBranchId);
 
     app.put('/api/notifications',  education_details.approveRequest); 
+
+    app.get('/api/notifications' , education_details.getEducationDetails);
  
     app.get('/api/eligiblestudents/:jobid' , education_details.getJobAppliedStudents);
 

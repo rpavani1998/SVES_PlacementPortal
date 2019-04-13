@@ -34,7 +34,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   userdata: User;
-  edudata: EducationDetails;
+  edudata = [];
   experiencedetails : ExperienceDetails;
   studentdata : Student;
   data = [];
@@ -49,14 +49,19 @@ export class NotificationsComponent implements OnInit {
             this.studentdata = studentdata
             console.log("Student Data : " , studentdata);
           });
-          this.educationservice.getEducationData(userdata.branch_id)
-            .subscribe(
-              edudata => {
-                console.log("Educational Data : ", edudata);
-                this.edudata = edudata
-                this.data.push(edudata);
-              });
+          this.educationservice.getEducationDetails().subscribe(studentsedu => {
+            console.log("Edu : " , studentsedu )
+              studentsedu.forEach(studentedu => {
+                this.studentService.getStudent(studentedu.roll_no).subscribe(edudata => {
+                  if ( edudata.branch == userdata.branch_id ) {
+                    this.edudata.push(studentsedu);
+                  }
+                })
+              })
+            })
+            console.log("Education Details : " , this.edudata);        
           this.studentService.getStudentexperiences().subscribe(studexps => {
+            console.log("Exp : " , studexps)
             studexps.forEach(studexp => {
               this.studentService.getStudent(studexp.roll_no).subscribe(expdata => {
                 if ( expdata.branch == userdata.branch_id ) {
@@ -65,7 +70,8 @@ export class NotificationsComponent implements OnInit {
               })
             }) 
           }) 
-          console.log("Experience Details : " , this.expdata);        
+          console.log("Experience Details : " , this.expdata);  
+          console.log("Education Details : " , this.edudata)      
         } 
       ); 
       
@@ -76,8 +82,8 @@ export class NotificationsComponent implements OnInit {
     console.log("Id of particular student : ", data);
     this.educationservice.approveRequest(data)
       .subscribe(result => this.message = "Job Post Updated Successfully!");
-    this.router.navigateByUrl('/notifications');
-    window.location.reload()
+    // this.router.navigateByUrl('/notifications');
+    // window.location.reload()
   }
 
   rejectRequest(data): void {

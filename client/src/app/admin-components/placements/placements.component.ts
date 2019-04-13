@@ -275,7 +275,7 @@ export class AdminPlacementsComponent implements OnInit {
    } else {
     this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
       console.log("Job : " , jobid)
-      this.studentService.getFilteredData( this.filters.passing_year , this.filters.major).subscribe(filtereddata => {
+      this.studentService.getFilteredData( this.filters.passing_year , this.userdata.branch_id).subscribe(filtereddata => {
         filtereddata.forEach(student => {
           this.studentService.getJobProcessPlacedStudents(jobid[0].id).subscribe(student => {
             student.forEach(s => {
@@ -288,6 +288,7 @@ export class AdminPlacementsComponent implements OnInit {
       })      
   })
   }
+  window.alert("Data has been retrieved please download the excel to view data!!")
   }
 
 
