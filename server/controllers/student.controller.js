@@ -80,7 +80,7 @@ exports.getFilteredData = (req , res) => {
 
 
 exports.getPlacedStudents = (req , res) => {
-	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id}}).then(details => {
+	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id , placement_status : 'Selected'}}).then(details => {
 		res.json(details) 
 	})	  
 }    

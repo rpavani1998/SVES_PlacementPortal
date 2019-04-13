@@ -339,24 +339,47 @@
               </div>
 
               <div class="row">
-                <button class="btn btn-danger pull-right" (click) = "getfiltereddata()" >Show data </button> &nbsp;
-                <button class="btn btn-danger pull-right" (click) = "refresh()" > Apply another filter </button> &nbsp;
+                <button class="btn btn-danger pull-right" (click) = "getfiltereddata()" >Apply</button> &nbsp;
+                <button  (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
+                <!-- <button class="btn btn-danger pull-right" (click) = "refresh()" > Apply another filter </button> &nbsp; -->
               </div>
 
-              <div *ngIf="students">
+              <br><br><br>
+              <!-- <div *ngIf="students">
                   <mat-card class="example-card"> 
                       <mat-card-content> 
                         <div>
                           <h4><b>Reports:</b></h4>
-                          <ng-container>
-                            
-                              <button  (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
+                          <ng-container> 
+                               <table>
+                                  <tr>
+                                    <th>Roll Number</th> &nbsp;
+                                    <th>Degree</th> &nbsp;
+                                    <th>Major</th> &nbsp;
+                                    <th>University</th> &nbsp;
+                                    <th>Percentage</th> &nbsp;
+                                    <th>Backlogs</th> &nbsp;
+                                    <th>Email</th> &nbsp;
+                                    <th>Contact Number</th> &nbsp;
+                                  </tr>
+                                  <tr *ngFor="let data of students">
+                                    <td>{{data[0].roll_no}}</td> &nbsp;
+                                    <td>{{data[0].certificate_degree_name}}</td> &nbsp;
+                                    <td>{{data[0].major}}</td> &nbsp;
+                                    <td>{{data[0].institute_university_name}}</td> &nbsp;
+                                    <td>{{data[0].percentage}}</td> &nbsp;
+                                    <td>{{data[0].backlogs}}</td> &nbsp;
+                                    <td>{{data[0].user.email}}</td> &nbsp;
+                                    <td>{{data[0].user.contact_number}}</td> &nbsp;
+                                  </tr>
+                                </table>
+                            <button  (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
                             </ng-container>
                         </div>
                       </mat-card-content>
                     </mat-card>
             
-              </div>
+              </div> -->
             
 
             </form>

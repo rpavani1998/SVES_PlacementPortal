@@ -50,6 +50,7 @@ export class StudentService {
 
   getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
+    console.log("Student URL : " , url)
     return this.http.get<Student>(url);
   } 
 

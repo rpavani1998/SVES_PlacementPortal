@@ -229,8 +229,8 @@ export class AdminInternshipsComponent implements OnInit {
       })
       console.log("Eligible student data : ", eligibleuserdata);
     })
-    // this.router.navigateByUrl('/placements');
-    // window.location.reload();
+    this.router.navigateByUrl('/placements');
+    window.location.reload();
 
   }
 

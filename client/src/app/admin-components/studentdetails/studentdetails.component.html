@@ -143,7 +143,7 @@
                       [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
                   </mat-form-field>
                 </div>
-                <div class="col-md-5" >
+                <div class="col-md-5" *ngIf = "userdata.user_type_id == 'TPO' || userdata.user_type_id == 'CHAIR'  " enable>
                     <mat-form-field>
                         <mat-select placeholder="Select Branch" id="major" required
                             [(ngModel)]="filters.major" name="major" #major="ngModel">
@@ -225,7 +225,7 @@
                     </mat-select>
                 </mat-form-field>
               </div>
-            </div>
+            </div> 
 
             <div class="row">
               <button class="btn btn-danger pull-right" (click) = "downloadPlacementData()" > Generate reports </button> &nbsp;
