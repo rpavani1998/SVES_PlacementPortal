@@ -190,8 +190,8 @@ addNewEducationForm() {
     for(let i in this.student.education_details){
        this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
          console.log("E", result)
-        this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
-    
+        // this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
+        this.uploadService.pushFileToStorage('C1', this.student.education_details[i].proof_document).subscribe();
     })
   }
     for(let i in this.student.experience_details){

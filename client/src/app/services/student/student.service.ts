@@ -16,11 +16,11 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 }) 
-export class StudentService {
+export class StudentService { 
   private studentsUrl = 'http://localhost:4000/api/students'; 
   private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
   private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
-  private verifiedStudentsUrl = 'http://localhost:4000/api/students_verified'; 
+  private verifiedStudentsUrl = 'http://localhost:4000/api/student_verified'; 
   private filtereddataUrl = 'http://localhost:4000/api/filtereddata'; 
   private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
   private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verified'; 

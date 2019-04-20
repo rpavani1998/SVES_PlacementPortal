@@ -1,5 +1,5 @@
 const env = {
-  database: 'sves_db',
+  database: 'svesdb',
   username: 'root',
   password: '',
   host: 'localhost',

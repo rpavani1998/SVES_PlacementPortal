@@ -59,6 +59,7 @@ export class JobpostsService {
   
   deleteJobPost ( jobid : JobPosts | number): Observable<JobPosts> {
     const id = typeof jobid === 'number' ? jobid : jobid.id;
+    console.log("ID from service : " , id)
     const url = `${this.jobpostsUrl}/${id}`;
     return this.http.delete<JobPosts>(url, httpOptions);
   } 

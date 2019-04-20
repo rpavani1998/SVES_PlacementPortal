@@ -142,9 +142,10 @@ export class JobpostdetailsComponent implements OnInit {
 
   delete(): void { 
     this.submitted = true;
+    console.log("Job ID : " , this.data[0].id);
     this.jobpostsService.deleteJobPost(this.data[0].id)
         .subscribe(result => this.message = "Student Deleted Successfully!");
-    this.router.navigateByUrl('/placements');
+    this.router.navigateByUrl('/admin/placements');
     window.location.reload();
   }
  
@@ -154,7 +155,7 @@ export class JobpostdetailsComponent implements OnInit {
       console.log("Closed Job Post Successfully" , result);
     })
     this.router.navigateByUrl('/placements');
-    window.location.reload();
+    window.location.reload(); 
   }
    
   back(): void {
