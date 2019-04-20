@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class JobTypeService {
 
-  private jobtypeUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobtype';
+  private jobtypeUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/jobtype';
 
   constructor(
     private http: HttpClient

@@ -18,13 +18,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NotificationsService {
-  private notificationsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications';
-  private rejectnotificationUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications/reject';
-  private filterdataUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/studentdetails';
-  private acceptprofilenotificationsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications/profileaccept';
-  private rejectprofilenotificationUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications/profilereject';
-  private acceptexpnotificationsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications/expaccept';
-  private rejecexptnotificationUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/notifications/expreject';
+  private notificationsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications';
+  private rejectnotificationUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications/reject';
+  private filterdataUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/studentdetails';
+  private acceptprofilenotificationsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications/profileaccept';
+  private rejectprofilenotificationUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications/profilereject';
+  private acceptexpnotificationsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications/expaccept';
+  private rejecexptnotificationUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/notifications/expreject';
    
 
   constructor(

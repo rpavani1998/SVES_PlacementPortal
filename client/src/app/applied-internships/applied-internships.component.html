@@ -28,7 +28,7 @@
           <div *ngFor="let job_post of data" >
                 <div class="card" [routerLink]="['/post', job_post.job_details.id]">
                   
-                  <!-- <div class="bg-img"><img src="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div> -->
+                  <!-- <div class="bg-img"><img src="http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/file/C{{job.company.company_id}}" style="width:244px; height : 140px"  alt="Img"></div> -->
                   <div class="content">
                            <h3> {{job_post.job_details.company.company_name}} </h3>
                             <h5>{{job_post.job_details.job_profile}}</h5>

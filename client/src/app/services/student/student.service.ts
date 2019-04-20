@@ -18,16 +18,16 @@ const httpOptions = {
   providedIn: 'root'
 }) 
 export class StudentService {
-  private studentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/students'; 
-  private educationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details'; 
-  private experienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details'; 
-  private verifiedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student_verified'; 
-  private filtereddataUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/filtereddata'; 
-  private verifiedEducationDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/education_details_verified'; 
-  private verifiedExperienceDetailsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/student/experience_details_verified'; 
-  private placedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/placedstudents'; 
-  private jobprocessplacedStudentsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobprocessplacedstudents'; 
-  private achievementUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/achievement';  // URL to web api// URL to web api
+  private studentsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/students'; 
+  private educationDetailsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/student/education_details'; 
+  private experienceDetailsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/student/experience_details'; 
+  private verifiedStudentsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/student_verified'; 
+  private filtereddataUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/filtereddata'; 
+  private verifiedEducationDetailsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/student/education_details_verified'; 
+  private verifiedExperienceDetailsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/student/experience_details_verified'; 
+  private placedStudentsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/placedstudents'; 
+  private jobprocessplacedStudentsUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/jobprocessplacedstudents'; 
+  private achievementUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/achievement';  // URL to web api// URL to web api
 
   constructor( 
     private http: HttpClient 

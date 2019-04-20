@@ -26,7 +26,7 @@
                                 <b> <label> DOB : </label> </b> {{ed.dob}} <br><br>
                                 <b> <label> Aadhar Number : </label> </b> {{ed.aadhar_no}} <br><br>
                                 <b> <label> Backlogs : </label> </b> {{ed.backlogs}} <br><br>
-                                <!-- <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                <!-- <div>Proof Document: <a href="http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
                                 <button #elem (click)="approveProfileRequest(ed)" class="btn-btn"> Approve </button>
                                 &nbsp;
                                 <button (click)="rejectProfileRequest(ed)" class="btn-btn"> Reject </button>
@@ -60,7 +60,7 @@
                                     <b> <label> Degree : </label> </b> {{ed[i].certificate_degree_name}} <br><br>
                                     <b> <label> Major : </label> </b> {{ed[i].major}} <br><br> 
                                     <b> <label> Percentage : </label> </b> {{ed[i].percentage}} <br><br>
-                                    <div>Proof Document: <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4200/api/file/E{{ed.id}}">Proof Document</a></div>
+                                    <div>Proof Document: <a href="http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4200/api/file/E{{ed.id}}">Proof Document</a></div>
                                     <button #elem (click)="approveRequest(ed[i])" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectRequest(ed[i])" class="btn-btn"> Reject </button>
                                     <hr>
@@ -98,7 +98,7 @@
                                     <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
                                     <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
                                     <b> <label> Description : </label> </b> {{ed.description}} <br><br>
-                                    <b> <label> Proof Document: </label> </b> <a href="http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/file/X{{ed.id}}">Proof
+                                    <b> <label> Proof Document: </label> </b> <a href="http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/file/X{{ed.id}}">Proof
                                         Document</a><br><br>
                                     <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>

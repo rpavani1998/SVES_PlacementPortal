@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class EditjobpostService {
 
-  private editjobpostUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/editjobposts';  // URL to web api
+  private editjobpostUrl = 'http://ec2-3-16-147-224.us-east-2.compute.amazonaws.com:4000/api/editjobposts';  // URL to web api
 
   constructor( 
     private http: HttpClient
