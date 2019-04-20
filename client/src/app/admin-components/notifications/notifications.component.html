@@ -76,6 +76,17 @@
 
                 </mat-expansion-panel>
 
+                <!-- <div *ngIf = "rejectRequest()" >
+                    <form>
+                            <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Reason" type="text" id="reason" required
+                                      [(ngModel)]="ed.reason" name="reason" #reason="ngModel">
+                                  </mat-form-field>
+                    </form>
+                        
+                </div> -->
+
+
                 <br>
 
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

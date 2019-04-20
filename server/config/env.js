@@ -1,5 +1,5 @@
 const env = {
-  database: 'sves_db',
+  database: 'svesdb',
   username: 'root',
   password: 'root',
   host: 'ec2-3-16-147-224.us-east-2.compute.amazonaws.com',

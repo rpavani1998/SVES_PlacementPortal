@@ -184,7 +184,7 @@ exports.approveRequest = (req, res) => {
 
 exports.rejectRequest = (req, res) => {
 	let roll_no = req.body.roll_no;
-	let degree = req.body.degree;
+	let degree = req.body.certificate_degree_name;
 	let major = req.body.major;
 	let percentage = req.body.percentage; 
 	let cgpa = req.body.cgpa;
@@ -192,8 +192,8 @@ exports.rejectRequest = (req, res) => {
 	console.log("Update Reject Request")
 	console.log("Roll Number : " , roll_no);
 
-	var value = { roll_no: roll_no, degree: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs , status : "Rejected" }
-	var con = { where: { roll_no: roll_no ,  degree: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs } };
+	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage, cgpa: cgpa, backlogs: backlogs , status : "Rejected" }
+	var con = { where: { roll_no: roll_no ,  certificate_degree_name: degree, major: major, percentage: percentage } };
 
 	EducationDetails.update(value, con).then(() => {
 		res.status(200).json({ msg: "Rejected verification of education details with roll num = " + roll_no });

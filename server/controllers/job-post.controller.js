@@ -77,8 +77,17 @@ exports.update = (req, res) => {
  
 exports.delete = (req, res) => {
 	const id = req.params.id;
+	StudentPlacementStatus.destroy({
+		where : { job_post_id : req.params.id }
+	})
+	StudentJobApp.destroy({
+		where : { job_process_id : { [Op.like] : req.params.id+'%' } }
+	})
+	JobProcess.destroy({
+		where : { job_post_id : req.params.id }
+	})
 	JobPost.destroy({
-	  where: { where: {id: req.body.id} }
+	   where: {id: req.params.id} 
 	}).then(() => {
 	  res.status(200).json({msg:'deleted successfully a post with id = ' + req.body.id});
 	});
@@ -103,7 +112,7 @@ exports.create = (req, res) => {
 	let job = req.body;
 	console.log("Job : ", job)
 	if (job.company_name == 'others') {
-		job.company_name = job.cn;
+		job.company_name = job.cn;  
 	} else {
 		job.company_name = job.company_name;
 	}
@@ -111,7 +120,8 @@ exports.create = (req, res) => {
 
 	Company.findAll({ where: { company_name: job.company_name } })
 		.spread((company, created) => {
-			job.company_id = company.company_id
+			console.log("Company : " , company)
+			job.company_id = company.company_id 
 			console.log("Company from Add Job Controller : ", company)
 			job.company_id = company.company_id
 			JobType.findAll({ where: { job_type_name: req.body.job_type_name } })
@@ -129,7 +139,7 @@ exports.create = (req, res) => {
 						job_id = result.id;
 						res.json(result) 
 						let jobprocess = req.body;
-						// util.jobData(result);  
+						// util.jobData(result);   
 						console.log(" Add Job : Job ID : ", job_id);
 						// addjob.addJobprocesses(result, jobprocess) 
 						var keys = Object.keys(jobprocess.job_stage_id);
@@ -143,7 +153,8 @@ exports.create = (req, res) => {
 								}
 							}
 							for ( data in eligibleuserdata) {
-								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id , placement_status : 'NotSelected'}).then(data =>{})
+								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id , placement_status : 'NotSelected'}).then(data =>{})
+								console.log("Entered data in SPS")
 							}
 						});
 					});

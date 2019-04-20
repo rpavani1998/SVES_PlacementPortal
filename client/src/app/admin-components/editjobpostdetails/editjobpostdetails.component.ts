@@ -61,7 +61,7 @@ export class EditjobpostdetailsComponent implements OnInit {
 
   updateJobPost(): void { 
     this.submitted = true;
-    console.log( " Job Data :  " , this.jobdata );
+    console.log( " Job Data :  " , this.data[0]  ); 
     this.editjobpostService.updateJobPost(this.data)
         .subscribe(result => this.message = "Job Post Updated Successfully!");
     this.router.navigateByUrl('/placements');
