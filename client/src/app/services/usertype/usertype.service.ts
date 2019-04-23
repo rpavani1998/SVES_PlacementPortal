@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class UsertypeService { 
 
-  private usertypeUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/usertype';  // URL to web api
+  private usertypeUrl = 'http://0.0.0.0:4000/api/usertype';  // URL to web api
 
 
   constructor(

@@ -16,8 +16,8 @@ const httpOptions = {
 })
 export class CompetitionService {
 
-  private competitionsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/competitions';
-  private jobPosActivitytUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/competition';
+  private competitionsUrl = 'http://0.0.0.0:4000/api/competitions';
+  private jobPosActivitytUrl = 'http://0.0.0.0:4000/api/competition';
 
   constructor(
     private http: HttpClient

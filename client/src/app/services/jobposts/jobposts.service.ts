@@ -19,13 +19,13 @@ const httpOptions = {
 })
 export class JobpostsService {
 
-  private jobpostsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobposts';
+  private jobpostsUrl = 'http://0.0.0.0:4000/api/jobposts';
 
-  private closejobpostsUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/closejobposts';
+  private closejobpostsUrl = 'http://0.0.0.0:4000/api/closejobposts';
 
-  private internshipjobposts = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/internshipjobposts';
+  private internshipjobposts = 'http://0.0.0.0:4000/api/internshipjobposts';
 
-  private jobprofileUrl = 'http://ec2-3-14-3-49.us-east-2.compute.amazonaws.com:4000/api/jobprofile';
+  private jobprofileUrl = 'http://0.0.0.0:4000/api/jobprofile';
 
   constructor(
     private http: HttpClient 
