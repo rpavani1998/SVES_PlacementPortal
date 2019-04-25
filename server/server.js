@@ -42,11 +42,10 @@ app.use('/', router);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var server = app.listen(4000, function () {
+var server = app.listen(4000,'0.0.0.0', function () {
  
     let host = server.address().address
     let port = server.address().port
   
     console.log("App listening at http://%s:%s", host, port);
   })
-
