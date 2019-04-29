@@ -1,0 +1,18 @@
+<h5>Applied Job Posts</h5>
+
+<table style="width:100%">
+    <tr>
+      <td>S.no </td>
+      <td>Contest Name</td> 
+      <td>Team Name</td>
+      <td>Status</td>
+    </tr>
+<tr *ngFor="let comp of data; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{comp.comp_id}}</td> 
+          <td>{{jcomo.job_details.job_profile}}</td>
+</tr>
+</table>
+<!-- <div><button class="btn btn-danger"><a href="http://0.0.0.0:4000/api/jobpost/{{roll_no}}/{{job_post.id}}">Register</a></button> </div> -->
+
+

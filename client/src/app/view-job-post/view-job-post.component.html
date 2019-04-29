@@ -1,0 +1,71 @@
+
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h4 class="card-title">Job Post</h4>
+    </div>
+    <div class="card-body">
+<div *ngFor="let job_post of data">
+ 
+<div >
+    <div class="bg-img"><img src="http://0.0.0.0:4000/api/file/C{{job_post.company.company_id}}" style="width:246px; height : 140px"  alt="Img"></div>
+    <div>Company Name: {{job_post.company.company_name}}</div>
+    <div>Comapny Description: {{job_post.company.profile_description}}</div>
+    <div>Establish Date : {{job_post.company.establish_date}}</div>
+    <div>Company Website: {{job_post.company.website_url}}</div>
+ <br>   
+    <div>Job Profile : {{job_post.job_profile}}</div>
+    <div>Job Location: {{job_post.job_location}}</div>
+    <div>Salary: {{job_post.salary_lpa}}</div>
+    <div>Drive Location: {{job_post.drive_location}}</div>
+    <div>Last Date For Applying: {{job_post.last_date_for_application}}</div>
+    <div>Job Description : {{job_post.job_description}}</div>
+    <div>Job Description Document: <a href="http://0.0.0.0:4000/api/file/J{{job_post.id}}">Proof Document</a></div>
+<br>
+Eligibility Criteria
+<li> {{job_post.degree}}</li>
+    <li>Overall Agregate >{{job_post.overall_aggregate}}</li>
+    <li>Should have {{job_post.backlogs}} backlogs</li>
+    <li>Should have >{{job_post.inter_aggregate}} Intermediate Aggregate</li>
+    <li>Should have >{{job_post.tenth_aggregate}} 10th Aggregate</li>
+
+</div>
+
+<mat-card-header>
+    <h3>Interview Process</h3>
+</mat-card-header>
+<mat-card-content>
+        <div class="content">
+                <table style="width:100%">
+                    <tr>
+                        <td>R.no </td>
+                        <td>Stage</td>
+                    </tr>
+                    <tr *ngFor="let stage of job_post.jobprocesses; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{jobstages[stage.job_stage_id]}}</td>
+                    </tr>
+                </table>
+            </div>                    
+</mat-card-content>
+
+
+<div *ngIf = "placement_status == true && is_applied == false">
+        <button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button>
+</div>
+<div *ngIf = 'placement_status == false'>
+        <div style= "color: red">You are not eligible for this job profile.</div>
+</div>
+<div *ngIf = 'is_applied == true'>
+        <div style= "color: red">You have already Registered for this event.</div>
+</div>
+
+
+
+
+<!-- <div [hidden]="placement_status == true" style= "color: red">You are not eligible for this job profile.</div>
+<div [hidden]="is_applied" *ngIf="placement_status == false" ><button mat-raised-button type="button" class="btn btn-danger" (click)="applyJobPost()">Register</button> </div>
+<div [hidden]="!is_applied" style= "color: red">You have already Registered for this event.</div> -->
+<!-- </div> -->
+
+</div>
+</div>

@@ -1,27 +1,45 @@
-# ADMIM
+# SVES Placement Portal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
+SVES Placement Gateway is a platform which mainly focuses on automating the training and placement process for all the colleges within the society. When conducted manually, this process involves tedious paperwork and is also likely to have some inconsistency and ambiguity on the operations. This project automates the process of collecting student information, notifying the students about the ongoing events(placement drive/internship/competitions) via email and SMS to accessing and tracking of placement records by TPO, thus providing a better understanding of the performance of a student. TPO can keep track of the student’s performance, post various kinds of events, job notifications and so on. Students can apply for any placement drive based on their skillset and preferences. Also, they can keep track of the various hackathons, competitions and internships of their choice of interest. The technology stack used is M*EAN stack abbreviating to be MySQL,  Express,Angular6,NodeJS,D3(DataDrivenDocuments).
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### M*EAN Stack
+  
+* ### MySQL
+Database System
+* ### Express
+Back-End web Framework
+* ### Angular 
+Front-End Framework
+* ### NodeJS
+Back-End Runtime Environment
 
-## Code scaffolding
+### Setup 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  * Node and npm installation [Link](https://www.npmjs.com/get-npm)
 
-## Build
+  * Mysql installation [Link](https://overiq.com/installing-mysql-windows-linux-and-mac/)
+  
+  * Dump Database
+  
+    `mysql -u root -p sves_db < sves_db.sql`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  * Update `env.js` file 
+  
+  * Client - Setup
+ 
+    `cd client`
 
-## Running unit tests
+    `npm install`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    `ng serve --host 0.0.0.0 --disable-host-check`
 
-## Running end-to-end tests
+  * Server - Setup
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    `cd server`
 
-## Further help
+    `npm install`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    `npm run dev`
+    

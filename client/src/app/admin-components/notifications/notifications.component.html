@@ -1,0 +1,121 @@
+<br>
+<div class="col-md-12">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <h3><b>Notifications Corner</b></h3>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Profile Requests
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Click here to view profile requests!
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <mat-tab-group dynamicHeight>
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable >
+                            <div *ngFor="let ed of studentdata ; let i = index ">
+                                <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
+                                <b> <label> First Name : </label> </b> {{ed.first_name}} <br><br>
+                                <b> <label> Last Name : </label> </b> {{ed.last_name}} <br><br>
+                                <b> <label> Branch : </label> </b> {{ed.branch}} <br><br>
+                                <b> <label> DOB : </label> </b> {{ed.dob}} <br><br>
+                                <b> <label> Aadhar Number : </label> </b> {{ed.aadhar_no}} <br><br>
+                                <b> <label> Backlogs : </label> </b> {{ed.backlogs}} <br><br>
+                                <!-- <div>Proof Document: <a href="http://0.0.0.0:4000/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                <button #elem (click)="approveProfileRequest(ed)" class="btn-btn"> Approve </button>
+                                &nbsp;
+                                <button (click)="rejectProfileRequest(ed)" class="btn-btn"> Reject </button>
+                                <hr>
+                            </div> 
+                        </mat-tab>
+                        <mat-tab label="Approved requests">
+
+                        </mat-tab>
+                        <mat-tab label="Rejected requests">
+
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-expansion-panel>
+
+                <br>
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Education Requests
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Click here to view education requests!
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-tab-group dynamicHeight>
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable>
+                                <div *ngFor="let ed of edudata ; let i = index ">
+                                    <b> <label> Roll Number : </label> </b> {{ed[i].roll_no}} <br><br>
+                                    <b> <label> Degree : </label> </b> {{ed[i].certificate_degree_name}} <br><br>
+                                    <b> <label> Major : </label> </b> {{ed[i].major}} <br><br> 
+                                    <b> <label> Percentage : </label> </b> {{ed[i].percentage}} <br><br>
+                                    <div>Proof Document: <a href="http://0.0.0.0:4200/api/file/E{{ed.id}}">Proof Document</a></div>
+                                    <button #elem (click)="approveRequest(ed[i])" class="btn-btn"> Approve </button> &nbsp;
+                                    <button (click)="rejectRequest(ed[i])" class="btn-btn"> Reject </button>
+                                    <hr>
+                                </div>
+                        </mat-tab>
+                        <mat-tab label="Approved requests">
+
+                        </mat-tab>
+                        <mat-tab label="Rejected requests">
+
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </mat-expansion-panel>
+
+                <br>
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Experience Requests
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Click here to view experience requests!
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-tab-group dynamicHeight>
+                        <mat-tab label="Pending requests" *ngIf="userdata.user_type_id=='DC'" enable   >
+                                <div *ngFor="let ed of expdata ; let i = index ">
+                                    <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
+                                    <b> <label> Currently Working : </label> </b> {{ed.is_current_job}} <br><br>
+                                    <b> <label> Start Date : </label> </b> {{ed.start_date}} <br><br>
+                                    <b> <label> End Date : </label> </b> {{ed.end_date}} <br><br>
+                                    <b> <label> Job Title : </label> </b> {{ed.job_title}} <br><br>
+                                    <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
+                                    <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
+                                    <b> <label> Description : </label> </b> {{ed.description}} <br><br>
+                                    <b> <label> Proof Document: </label> </b> <a href="http://0.0.0.0:4000/api/file/X{{ed.id}}">Proof
+                                        Document</a><br><br>
+                                    <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
+                                    <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>
+                                    <hr>
+                                </div>
+                        </mat-tab>
+                        <mat-tab label="Approved requests">
+
+                        </mat-tab>
+                        <mat-tab label="Rejected requests">
+
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+
+</div>

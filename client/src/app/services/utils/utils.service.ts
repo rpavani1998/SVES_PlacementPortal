@@ -1,0 +1,163 @@
+import { Injectable } from '@angular/core';
+import { College } from '../../models/college';
+import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Branch } from '../../models/branch';
+import { SkillSet } from '../../models/skill-set';
+import { MailFormat } from 'src/app/models/mail-format';
+import { JobProcess } from 'src/app/models/jobprocess';
+import { JobStage } from 'src/app/models/jobstage';
+import { StudentJobApplications } from 'src/app/models/student-job-applications';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin' : '*',
+    
+    // 'Access-Control-Allow-Methods' : 'GET, POST, PUT, OPTIONS',
+    // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+  })
+};
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UtilsService {
+  private baseUrl = 'http://0.0.0.0:4000/api/mail';
+  private collegeUrl = 'http://0.0.0.0:4000/api/college';  
+  private branchUrl = 'http://0.0.0.0:4000/api/branch';  // URL to web api
+  private skillSetUrl = 'http://0.0.0.0:4000/api/skill_set';
+  private jobstageUrl = 'http://0.0.0.0:4000/api/job_stage';
+  private jobprocessurl = 'http://0.0.0.0:4000/api/addjob';
+  private jobprocessesurl = 'http://0.0.0.0:4000/api/jobprocess';
+  private eligiblestudents = 'http://0.0.0.0:4000/api/eligiblestudents';
+  private registeredstudents = 'http://0.0.0.0:4000/api/registeredstudents';
+  private notregisteredstudents = 'http://0.0.0.0:4000/api/notregisteredstudents';
+  constructor( 
+    private http: HttpClient
+  ) { }
+
+  addJobProcess (JobProcess : JobProcess): Observable<JobProcess> {
+    console.log(this.http.post<JobProcess>(this.jobprocessurl, JobProcess, httpOptions))
+    return this.http.post<JobProcess>(this.jobprocessurl, JobProcess, httpOptions);
+  }
+
+  getJobStages() : Observable<JobStage[]> {
+    console.log((this.jobstageUrl));
+    return this.http.get<JobStage[]>(this.jobstageUrl);
+  }
+
+  getJobProcess(jobid: number): Observable<JobProcess[]> {
+    const url = `${this.jobprocessurl}/${jobid}`;
+    console.log("Job Processes URL : " , url);
+    return this.http.get<JobProcess[]>(url);
+  }
+
+  getJobProcesses() : Observable<JobProcess[]> {
+    console.log((this.jobprocessesurl));
+    return this.http.get<JobProcess[]>(this.jobprocessesurl);
+  }
+
+  getEligibleStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.eligiblestudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
+  }
+
+  getRegisteredStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.registeredstudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
+  }
+
+  getNotRegisteredStudents(jobid : number) : Observable<StudentJobApplications[]> {
+    const url = `${this.notregisteredstudents}/${jobid}`; 
+    return this.http.get<StudentJobApplications[]>(url);
+  }
+  
+  getColleges (): Observable<College[]> {
+    console.log((this.collegeUrl));
+    return this.http.get<College[]>(this.collegeUrl);
+  }
+
+  getCollege(id: string): Observable<College> {
+    const url = `${this.collegeUrl}/${id}`;
+    return this.http.get<College>(url);
+  }
+
+  addCollege (College: College): Observable<College> {
+    console.log(this.http.post<College>(this.collegeUrl, College, httpOptions))
+    return this.http.post<College>(this.collegeUrl, College, httpOptions);
+  }
+
+  deleteCollege (College: College | string): Observable<College> {
+    const id = typeof College === 'string' ? College : College.id;
+    const url = `${this.collegeUrl}/${id}`;
+
+    return this.http.delete<College>(url, httpOptions);
+  }
+
+  updateCollege (College: College): Observable<any> {
+    return this.http.put(this.collegeUrl, College, httpOptions);
+  }
+
+  getBranches (): Observable<Branch[]> {
+    console.log((this.branchUrl));
+    return this.http.get<Branch[]>(this.branchUrl);
+  }
+
+  getBranch(id: string): Observable<Branch> {
+    const url = `${this.branchUrl}/${id}`;
+    return this.http.get<Branch>(url);
+  }
+
+  addBranch (Branch: Branch): Observable<Branch> {
+    console.log(this.http.post<Branch>(this.branchUrl, Branch, httpOptions))
+    return this.http.post<Branch>(this.branchUrl, Branch, httpOptions);
+  }
+
+  deleteBranch (Branch: Branch | string): Observable<Branch> {
+    const id = typeof Branch === 'string' ? Branch : Branch.id;
+    const url = `${this.branchUrl}/${id}`;
+
+    return this.http.delete<Branch>(url, httpOptions);
+  }
+
+  updateBranch (Branch: Branch): Observable<any> {
+    return this.http.put(this.branchUrl, Branch, httpOptions);
+  }
+
+  getSkillSets (): Observable<SkillSet[]> {
+    console.log((this.skillSetUrl));
+    return this.http.get<SkillSet[]>(this.skillSetUrl);
+  }
+
+  getSkillSet(id: string): Observable<SkillSet> {
+    const url = `${this.skillSetUrl}/${id}`;
+    return this.http.get<SkillSet>(url);
+  }
+
+  addSkillSet (SkillSet: SkillSet): Observable<SkillSet> {
+    console.log(this.http.post<SkillSet>(this.skillSetUrl, SkillSet, httpOptions))
+    return this.http.post<SkillSet>(this.skillSetUrl, SkillSet, httpOptions);
+  }
+
+  deleteSkillSet (SkillSet: SkillSet | string): Observable<SkillSet> {
+    const id = typeof SkillSet === 'string' ? SkillSet : SkillSet.id;
+    const url = `${this.skillSetUrl}/${id}`;
+
+    return this.http.delete<SkillSet>(url, httpOptions);
+  }
+
+  updateSkillSet (SkillSet: SkillSet): Observable<any> {
+    return this.http.put<any>(this.skillSetUrl, SkillSet, httpOptions);
+  }
+
+  sendMail(MailFormat : MailFormat): Observable<string> {
+    console.log(this.baseUrl, MailFormat, httpOptions)
+    console.log(this.http.post<string>(this.baseUrl, MailFormat, httpOptions))
+    return this.http.post<string> (this.baseUrl, MailFormat, httpOptions);
+
+  }
+
+
+}

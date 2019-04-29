@@ -1,0 +1,112 @@
+.header img {
+    float: left;
+    width: 150px;
+    height: 120px;
+    top: 50px;
+    background: #555;
+  }
+  
+  .header h2 {
+    position: relative;
+    top: 40px;
+    color: purple;
+    right: 0px;
+  }
+  
+  .cssmenu i {
+    font-size: 25px;
+    padding:10px;
+    float:right;
+    color: black;
+    margin-right: 30px;
+  }
+  
+  .navbar {
+    background: #f44336;
+    border: 0px;
+    top: 60px;
+    height: 2%;
+  }
+  
+  .navbar ul li {
+    margin-right: 160px;
+  }
+  
+  .flex-container{
+      width: 100%;
+      min-height: 400px;
+      margin: 0 auto;
+      display: -webkit-flex; /* Safari */     
+      display: flex; /* Standard syntax */
+  }
+  .flex-container .column{
+      padding: 10px;
+      background: #dbdfe5;
+      -webkit-flex: 1; /* Safari */
+      -ms-flex: 1; /* IE 10 */
+      flex: 1; /* Standard syntax */
+  }
+  .flex-container .column.bg-alt{
+      background: #b4bac0;
+  }
+  
+  
+  .popup_header {
+      height: 10%;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+  
+  .card {
+    border: 1px solid #d3d3d3;
+    width: 246px;
+    float: left;
+    margin: 8px;
+    border-radius: .20rem;
+  }
+  
+  .bg-img {
+    background-size: cover;
+    min-height: 140px;
+    min-width:246px;
+    background-position: center;
+    background-color: #ccc;
+  }
+  
+  .content {
+    padding: 15px;
+  }
+ 
+  .search-container{
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  input#search-bar{
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #D0CFCE;
+    outline: none;
+  }
+
+ 
+  
+  

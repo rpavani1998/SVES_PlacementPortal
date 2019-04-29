@@ -1,0 +1,434 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title"> Student Registration</h4>
+                      <p class="card-category">Complete your profile</p>
+                  </div>
+                  <div class="card-body">
+                          <form [formGroup]="myForm" (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm" novalidate>
+                              <div class="row">                          
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput type="text" id="first_name" placeholder="First Name" required
+                                    [(ngModel)]="student.first_name" name="first_name" #first_name="ngModel" [ngModelOptions]="{standalone: true}">
+                                    <div [hidden]="first_name.valid || first_name.pristine"
+                                    class="alert alert-danger">
+                                  First Name is required
+                               </div>
+                                </mat-form-field>
+                              </div>
+                            
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                <input matInput type="text" id="last_name" placeholder="Last Name" required
+                                  [(ngModel)]="student.last_name" name="last_name" #last_name="ngModel" [ngModelOptions]="{standalone: true}">
+                                        </mat-form-field>
+                                        <div [hidden]="last_name.valid || last_name.pristine"
+                                        class="alert alert-danger">
+                                      Last Name is required
+                                   </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-label for="branches">Branch</mat-label>
+                                  <select matNativeControl id="branches" name="branches" required [(ngModel)]="student.branch" name="branch" #branch="ngModel"
+                                  [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let branch of branches" [value]="branch.id">{{branch.branch_name}}</option>
+                               </select>
+                                </mat-form-field>
+                                <div [hidden]="branch.valid || branch.pristine"
+                                class="alert alert-danger">
+                              Branch is required
+                           </div>
+                              </div>
+                              </div>
+                            
+                              <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field>
+                                <mat-label for="backlogs">Backlog</mat-label>
+                                <select matNativeControl id="backlogs" name="backlogs" required [(ngModel)]="student.backlogs" name="backlogs" #backlog="ngModel"
+                                  [ngModelOptions]="{standalone: true}">
+                                  <option *ngFor="let backlog of backlogs" [value]="backlog">{{backlog}}</option>
+                                </select>
+            
+                              </mat-form-field>
+                              <div [hidden]="backlog.valid || backlog.pristine"
+                              class="alert alert-danger">
+                            Backlogs is required
+                         </div>
+                              </div>
+                            
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                <input matInput type="text" data-type="adhaar-number" maxLength="19" id="aadhar_no" placeholder="Aadhar Number" required 
+                                  [(ngModel)]="student.aadhar_no" name="aadhar_no" #aadhar_no="ngModel" [ngModelOptions]="{standalone: true}" maxlength='12'>
+      
+                              </mat-form-field>
+                              <div [hidden]="aadhar_no.valid || aadhar_no.pristine"
+                              class="alert alert-danger">
+                            Aadhar Number is required
+                         </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-label for="backlogs">Aadhar Proof</mat-label>
+                              <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                <input class="ng-hide" type="file" (change)="selectAadharProof($event)" required>
+                            </div>
+                            </div>
+
+                            </div>
+
+                            <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="date" id="dob" placeholder="Date of Birth" required [(ngModel)]="student.dob"
+                                    name="dob" #dob="ngModel" [ngModelOptions]="{standalone: true}">
+                                    <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                                    <mat-datepicker #date></mat-datepicker>
+                                  </mat-form-field>
+                                  <div [hidden]="dob.valid || dob.pristine"
+                                  class="alert alert-danger">
+                                DOB is required
+                             </div>
+                              </div>
+                            </div>
+
+                            <hr>
+                                                                                     
+                              <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
+                                (click)="addNewEducationForm()">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Degree
+                              </button>
+
+                              <div formArrayName="education_details">
+                                <div style="margin-top:5px; margin-bottom:5px;"
+                                  *ngFor="let edu_details of myForm.get('education_details').controls; let i=index">
+                                  <fieldset>
+                                    <legend>
+                                      <h4>Education Details {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
+                                          (click)="deleteEducationDetails(i)">
+                                          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove Degree
+                                        </button>
+                                      </h4>
+                                    </legend>
+                                    <div [formGroupName]="i">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <mat-form-field>
+                                                    <mat-select id="certificate_degree_name" placeholder="Certificate Degree Name Ex. B.Tech,12th,10th"
+                                                    name="certificate_degree_name" formControlName="certificate_degree_name" required>
+                                                      <mat-option value="B.Tech">BE/B.Tech</mat-option>
+                                                      <mat-option value="M.Tech">ME/M.Tech</mat-option>
+                                                      <mat-option value="MCA/PGDCA">MCA/PGDCA</mat-option>
+                                                      <mat-option value="MBA/PGDAA">MBA/PGDAA</mat-option>
+                                                      <mat-option value="BCA">BCA</mat-option>
+                                                      <mat-option value="BBA">BBA</mat-option>
+                                                      <mat-option value="B.A.">B.A.</mat-option>
+                                                      <mat-option value="B.Com">B.Com</mat-option>
+                                                      <mat-option value="B.Pharm">B.Pharm</mat-option>
+                                                      <mat-option value="B.Sc">B.Sc</mat-option>
+                                                      <mat-option value="BL/LLB">BL/LLB</mat-option>
+                                                      <mat-option value="BDS">BDS</mat-option>
+                                                      <mat-option value="B.Ed">B.Ed</mat-option>
+                                                      <mat-option value="BHM">BHM</mat-option>
+                                                      <mat-option value="B.Arch">B.Arch</mat-option>
+                                                      <mat-option value="MBBS">MBBS</mat-option>
+                                                      <mat-option value="Diploma">Diploma</mat-option>
+                                                      <mat-option value="MA">MA</mat-option>
+                                                      <mat-option value="M.Com">M.Com</mat-option>
+                                                      <mat-option value="M.Pharm">M.Pharm</mat-option>
+                                                      <mat-option value="M.Sc">M.Sc</mat-option>
+                                                      <mat-option value="MD/MS">MD/MS</mat-option>
+                                                      <mat-option value="ML/LLM">ML/LLM</mat-option>
+                                                      <mat-option value="M.Phil">M.Phil</mat-option>
+                                                      <mat-option value="M.Ed">M.Ed</mat-option>
+                                                      <mat-option value="M.Arch">M.Arch</mat-option>
+                                                      <mat-option value="CA">CA</mat-option>
+                                                      <mat-option value="CS">CA</mat-option>
+                                                      <mat-option value="ICWA">ICWA</mat-option>
+                                                      <mat-option value="Others">Others</mat-option>
+                                                      <mat-option value="Aviation">Aviation</mat-option>
+                                                      <mat-option value="B.Plan">B.Plan</mat-option>
+                                                      <mat-option value="BGL">BGL</mat-option>
+                                                      <mat-option value="BVSC">BVSC</mat-option>
+                                                      <mat-option value="Doctrate(Phd)">Doctrate(Phd)</mat-option>
+                                                      <mat-option value="MDS">MDS</mat-option>
+                                                      <mat-option value="12th">12th</mat-option>
+                                                      <mat-option value="10th">10th</mat-option>
+                                                     
+                                                    </mat-select>
+                                                  </mat-form-field>
+                            
+                                                <!-- <div [hidden]="certificate_degree_name.valid || certificate_degree_name.pristine"
+                                                class="alert alert-danger">
+                                              Degree is required
+                                           </div> -->
+                                            </div>
+                                            <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="text" id="board" placeholder="Board/Affliated University" name="board" formControlName="board" required>
+                                                    </mat-form-field>
+                                                    <!-- <div [hidden]="board.valid || board.pristine"
+                                                    class="alert alert-danger">
+                                                  Board is required
+                                               </div> -->
+                                              </div>
+                                            <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="text" id="institute_university_namer"
+                                                    placeholder="Institute University Name" name="major" formControlName="institute_university_name"
+                                                    required>
+                                                    <!-- <div [hidden]="institute_university_name.valid || institute_university_name.pristine"
+                                                    class="alert alert-danger">
+                                                  Institute is required
+                                               </div> -->
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                              <mat-form-field class="example-full-width">
+                                                  <input matInput type="text" id="major" placeholder="Major" name="major"
+                                                  formControlName="major" required>
+                                  
+                                              </mat-form-field>
+                                              <!-- <div [hidden]="major.valid || major.pristine"
+                                              class="alert alert-danger">
+                                            Major is required
+                                         </div> -->
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="number" class="form-control" id="passing_year" placeholder="Passing Year" name="passing_year"
+                                                    formControlName="passing_year"   min="1000" max="9999" required>
+                                                </mat-form-field>
+                                                <!-- <div [hidden]="passing_year.valid || passing_year.pristine"
+                                                class="alert alert-danger">
+                                             Passing Year is required
+                                           </div> -->
+                                              </div>
+
+                                              <div class="col-md-4">
+                                                  <mat-form-field class="example-full-width">
+                                                      <input matInput type="number" id="percentage" placeholder="Percentage" name="percentage"
+                                                      formControlName="percentage"  min="1" max="100" required>
+                                                  </mat-form-field>
+                                                  <!-- <div [hidden]="percentage.valid || percentage.pristine"
+                                                  class="alert alert-danger">
+                                                Percentage is required
+                                                </div> -->
+                          
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                           
+                                              <!-- <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="number" id="number" placeholder="CGPA" name="cgpa"  min="1" max="10"
+                                                    formControlName="cgpa" required>
+                                                </mat-form-field>
+                                              </div> -->
+                                            <div class="col-md-4">
+                                                <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                                  <input class="ng-hide" type="file" (change)="selectEduProofs($event,i)">
+                                              </div>
+                                              </div>
+                                      </div>
+                                        <div class="clearfix"></div>
+
+                                    </div>
+                                    <hr>
+                                  </fieldset>
+                                </div>
+                              </div>
+
+                              <hr>
+                              <hr>
+
+                              <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
+                                (click)="addNewExperienceForm()">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Experience
+                              </button>
+                              <div formArrayName="experience_details">
+                                <div style="margin-top:5px; margin-bottom:5px;"
+                                  *ngFor="let edu_details of myForm.get('experience_details').controls; let i=index">
+                                  <fieldset>
+                                    <legend>
+                                      <h4>Experience Details {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
+                                          (click)="deleteExperienceDetails(i)">
+                                          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove Experience 
+                                        </button>
+                                      </h4>
+                                    </legend>
+                                    <div [formGroupName]="i">
+                                      <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput type="text" id="job_title" placeholder="Job Title" name="job_title"
+                                            formControlName="job_title" required>
+                                            </mat-form-field>
+                                            <!-- <div [hidden]="job_title.valid || job_title.pristine"
+                                            class="alert alert-danger">
+                                          Job Title is required
+                                       </div> -->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput type="text" id="company_name" placeholder="Company/Organization Name"
+                                                name="company_name" formControlName="company_name" required>
+                                            </mat-form-field>
+                                            <!-- <div [hidden]="company_name.valid || company_name.pristine"
+                                            class="alert alert-danger">
+                                          Company Name is required
+                                       </div> -->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput type="text" id="job_location_city" placeholder="Job Location City" name="job_location_city"
+                                                formControlName="job_location_city" required>
+                                            </mat-form-field>
+                                            <!-- <div [hidden]="job_location_city.valid || job_location_city.pristine"
+                                            class="alert alert-danger">
+                                          Job Location is required
+                                       </div> -->
+                                        </div>
+                                      </div>
+                                      <p>
+                                          <mat-form-field class="example-full-width">
+                                              <textarea matInput type="text" id="description" placeholder="Description" name="description"
+                                              formControlName="description" required></textarea>
+                                          </mat-form-field>
+                                          <!-- <div [hidden]="description.valid || description.pristine"
+                                          class="alert alert-danger">
+                                        Job Description is required
+                                     </div> -->
+                                
+                                      </p>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                            <br>
+                                                  <mat-label> <input type="checkbox" [value]="true" id="is_current_job"
+                                                    name="is_current_job" formControlName="is_current_job" [(ngModel)]="currentJob" > Is Current Job</mat-label>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <!-- <mat-form-field>
+                                                  <input matInput [matDatepicker]="start_date2" id="start_date" placeholder="Start Date" required [(ngModel)]="start_date"
+                                                  name="start_date" #start_date="ngModel" [ngModelOptions]="{standalone: true}">
+                                                  <mat-datepicker-toggle matSuffix [for]="start_date2"></mat-datepicker-toggle>
+                                                  <mat-datepicker #start_date2></mat-datepicker>
+                                                </mat-form-field> -->
+   
+                                                <mat-form-field>
+                                                    <input matInput [matDatepicker]="start_date" placeholder="Start Date" formControlName="start_date">
+                                                    <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+                                                    <mat-datepicker #start_date></mat-datepicker>
+                                                  </mat-form-field>
+                                                  
+                                                <!-- <div [hidden]="start_date.valid || start_date.pristine"
+                                   class="alert alert-danger">
+                                 Start Date is required
+                              </div> -->
+                                          </div>
+
+                              
+                                          <div class="col-md-4" [hidden]="currentJob" >
+                                              <mat-form-field>
+                                                  <input matInput [matDatepicker]="end_date" placeholder="End Date" formControlName="end_date">
+                                                  <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+                                                  <mat-datepicker #end_date></mat-datepicker>
+                                                </mat-form-field>
+                                                
+                                          </div>
+
+                                          <div class="col-md-4">
+                                              <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                                <input class="ng-hide" type="file" (change)="selectExpProofs($event,i)">
+                                            </div>
+                                            </div>
+
+                                        </div>
+
+                                       
+                                    </div>
+                                    <hr>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <hr>
+                              <hr>
+
+                              <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
+                                (click)="addNewAchievementForm()">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Achievement
+                              </button>
+                              <div formArrayName="achievements">
+                                <div style="margin-top:5px; margin-bottom:5px;"
+                                  *ngFor="let edu_details of myForm.get('achievements').controls; let i=index">
+                                  <fieldset>
+                                    <legend>
+                                      <h4>Achievements {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
+                                          (click)="deleteAchchievemnts(i)">
+                                          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove Achievement
+                                        </button>
+                                      </h4>
+                                    </legend>
+                                    <div [formGroupName]="i">
+                                      <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput type="text" id="title" placeholder="Title" name="title"
+                                            formControlName="title" required>
+                                            </mat-form-field>
+                                            <!-- <div [hidden]="job_title.valid || job_title.pristine"
+                                            class="alert alert-danger">
+                                          Job Title is required
+                                       </div> -->
+                                        </div>
+                              
+                                          <mat-form-field class="example-full-width">
+                                              <textarea matInput type="text" id="description" placeholder="Description" name="description"
+                                              formControlName="description" required></textarea>
+                                          </mat-form-field>
+                                          <!-- <div [hidden]="description.valid || description.pristine"
+                                          class="alert alert-danger">
+                                        Job Description is required
+                                     </div> -->
+
+                                      <div class="col-md-4">
+                                        <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                          <input class="ng-hide" type="file" (change)="selectAchievementProofs($event,i)">
+                                      </div>
+                                      </div>
+                                      
+                                        </div>
+
+                                       
+                                    </div>
+                                    <hr>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <div class="btn-group btn-group-sm">
+                                <button mat-raised-button type="button" class="btn btn-danger"[routerLink]="['/login']">Cancel</button>
+                                <button mat-raised-button type="button" class="btn btn-danger"  (click)="addStudent()" [disabled]="!registrationForm.form.valid">Add</button>
+                              </div>
+
+                            </form>
+                            <br>
+                          <div class="clearfix"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- <pre>{{myForm.value | json}}</pre> -->
