@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class EditjobpostService {
 
-  private editjobpostUrl = 'http://0.0.0.0:4000/api/editjobposts';  // URL to web api
+  private editjobpostUrl = 'http://localhost:4000/api/editjobposts';  // URL to web api
 
   constructor( 
     private http: HttpClient

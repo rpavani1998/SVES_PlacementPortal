@@ -17,8 +17,8 @@ const httpOptions = {
 })
 export class CompanyService {
 
-  private companyUrl = 'http://0.0.0.0:4000/api/company';
-  private companyProfilesUrl = 'http://0.0.0.0:4000/api/companyprofiles';
+  private companyUrl = 'http://localhost:4000/api/company';
+  private companyProfilesUrl = 'http://localhost:4000/api/companyprofiles';
 
   constructor(
     private http: HttpClient

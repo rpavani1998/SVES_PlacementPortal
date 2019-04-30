@@ -18,16 +18,16 @@ const httpOptions = {
   providedIn: 'root'
 }) 
 export class StudentService {
-  private studentsUrl = 'http://0.0.0.0:4000/api/students'; 
-  private educationDetailsUrl = 'http://0.0.0.0:4000/api/student/education_details'; 
-  private experienceDetailsUrl = 'http://0.0.0.0:4000/api/student/experience_details'; 
-  private verifiedStudentsUrl = 'http://0.0.0.0:4000/api/student_verified'; 
-  private filtereddataUrl = 'http://0.0.0.0:4000/api/filtereddata'; 
-  private verifiedEducationDetailsUrl = 'http://0.0.0.0:4000/api/student/education_details_verified'; 
-  private verifiedExperienceDetailsUrl = 'http://0.0.0.0:4000/api/student/experience_details_verified'; 
-  private placedStudentsUrl = 'http://0.0.0.0:4000/api/placedstudents'; 
-  private jobprocessplacedStudentsUrl = 'http://0.0.0.0:4000/api/jobprocessplacedstudents'; 
-  private achievementUrl = 'http://0.0.0.0:4000/api/achievement';  // URL to web api// URL to web api
+  private studentsUrl = 'http://localhost:4000/api/students'; 
+  private educationDetailsUrl = 'http://localhost:4000/api/student/education_details'; 
+  private experienceDetailsUrl = 'http://localhost:4000/api/student/experience_details'; 
+  private verifiedStudentsUrl = 'http://localhost:4000/api/student_verified'; 
+  private filtereddataUrl = 'http://localhost:4000/api/filtereddata'; 
+  private verifiedEducationDetailsUrl = 'http://localhost:4000/api/student/education_details_verified'; 
+  private verifiedExperienceDetailsUrl = 'http://localhost:4000/api/student/experience_details_verified'; 
+  private placedStudentsUrl = 'http://localhost:4000/api/placedstudents'; 
+  private jobprocessplacedStudentsUrl = 'http://localhost:4000/api/jobprocessplacedstudents'; 
+  private achievementUrl = 'http://localhost:4000/api/achievement';  // URL to web api// URL to web api
 
   constructor( 
     private http: HttpClient 
@@ -54,18 +54,25 @@ export class StudentService {
     return this.http.get<Student>(url);
   } 
 
-  getFilteredData ( passingyear : number , major : string ) : Observable<EducationDetails[]> {
+  getFilteredData( passingyear : number , major : string ) : Observable<EducationDetails[]> {
     const url = `${this.filtereddataUrl}/${passingyear}/${major}`;
+    console.log(url)
     return this.http.get<EducationDetails[]>(url);
   }
+
+  getFilteredDataList ( roll_no : string , passingyear : number , major : string ) : Observable<EducationDetails[]> {
+    const url = `${this.filtereddataUrl}/${roll_no}/${passingyear}/${major}`;
+    console.log(url)
+    return this.http.get<EducationDetails[]>(url);
+  } 
 
   getVerifiedS(branch : string) :Observable<EducationDetails> {
     const url = `${this.verifiedStudentsUrl}/${branch}`;
     return this.http.get<EducationDetails>(url);
   }
 
-  getJobProcessPlacedStudents(jobid : number) : Observable<StudentPlacementStatus[]> {
-    const url = `${this.jobprocessplacedStudentsUrl}/${jobid}`;
+  getJobProcessPlacedStudents( roll_no : string ,  jobid : number) : Observable<StudentPlacementStatus[]> {
+    const url = `${this.jobprocessplacedStudentsUrl}/${jobid}/${roll_no}`;
     return this.http.get<StudentPlacementStatus[]>(url);
   }
 
@@ -79,6 +86,10 @@ export class StudentService {
     return this.http.get<StudentPlacementStatus[]>(url);
   }
 
+  getPlacedStudentsList( jobid : number) : Observable<StudentPlacementStatus[]> {
+    const url = `${this.placedStudentsUrl}/${jobid}`;
+    return this.http.get<StudentPlacementStatus[]>(url);
+  } 
 
   getVerifiedStudentDetails(branch : string) :Observable<EducationDetails[]> {
     const url = `${this.verifiedStudentsUrl}/${branch}`;

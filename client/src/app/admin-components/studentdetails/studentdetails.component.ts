@@ -61,7 +61,7 @@ export class StudentdetailsComponent implements OnInit {
     this.userService.getUser(uid)
       .subscribe(
         userdata => {
-          console.log("User Data : ", userdata.user_type_id);
+          console.log("User Data : ", userdata);
           this.userdata = userdata;
         });
 
@@ -105,7 +105,7 @@ export class StudentdetailsComponent implements OnInit {
       companydata => {
         console.log("Company Data" , companydata) 
         this.companydata = companydata;
-        companydata.forEach(cd => {
+        companydata.forEach(cd => { 
           console.log(cd.company_id)
           this.companyService.getCompanyProfiles(cd.company_id).subscribe(result => {
             console.log("Company Profile : " , result)
@@ -116,7 +116,6 @@ export class StudentdetailsComponent implements OnInit {
       }
      );
    }
-
    branchdata : Branch[];
    getDepartment() {
      return this.utilService.getBranches()
@@ -140,25 +139,24 @@ export class StudentdetailsComponent implements OnInit {
     var major = this.filters.major;
     var percentage = this.filters.percentage;
     var passing_year = this.filters.passing_year; 
-    var backlogs = this.filters.backlogs;
-    var tenth_aggregate = this.filters.tenth_aggregate;
-    var inter_aggregate = this.filters.inter_aggregate;
-
+    var backlogs = this.filters.backlogs;  
+    
     this.placementreport;
-    this.notificationsService.getFilterData(college, major, percentage, passing_year, backlogs)
+    this.notificationsService.getFilterData( major, percentage, passing_year, backlogs)
       .subscribe(
         filtereddata => {
           console.log("Filtered Data : ", filtereddata);
-          filtereddata.forEach(data=> {
+          filtereddata.forEach(data => {
             this.userService.getUser(data.roll_no).subscribe(user => {
-              data.user = user
+            data.email = user.email
+            data.contact_number = user.contact_number
             this.data.push(data)
             console.log("Data : " , data )
           }); 
         }
       );
-  } 
-      )}
+  })
+}
 
   downloadExcel() {
     var options = {
@@ -170,7 +168,7 @@ export class StudentdetailsComponent implements OnInit {
       title: 'Student Data',
       useBom: true,
       noDownload: false,
-      headers: ["ID", "Roll Number", "Degree", "Major", "University", "Board", "passing_year", "Percentage", "CGPA", "Backlogs" , "Email" , "Contact Number"]
+      headers: ["ID", "Roll Number", "Degree", "University", "Major", "Board", "passing_year", "Percentage", "CGPA" , "Email" , "Contact Number"]
     };
 
     new ngxCsv(this.data, 'StudentData', options);
@@ -179,37 +177,33 @@ export class StudentdetailsComponent implements OnInit {
   students = [];
   getfiltereddata() {
     
-    if ( this.userdata.user_type_id == 'TPO' ) {
+    if ( this.userdata.user_type_id == 'TPO' ) { 
       this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
         console.log("Job : " , jobid)
-        this.studentService.getFilteredData( this.filters.passing_year , this.filters.major).subscribe(filtereddata => {
-          filtereddata.forEach(student => {
-            this.studentService.getPlacedStudents( student.roll_no, jobid[0].id).subscribe(student => {
-              student.forEach(s => {
-                // console.log(s)
-                if (s.roll_no) { 
-                  this.students.push(s)
-                }
-              })
+        this.studentService.getPlacedStudentsList(jobid[0].id).subscribe(student => {
+          student.forEach(student => {
+            this.studentService.getFilteredDataList( student.roll_no , this.filters.passing_year , this.filters.major).subscribe(filtereddata => {
+            filtereddata.forEach(data => {
+              this.students.push(student)
             })
-          })
-        })      
-    })
-    console.log("Students : " , this.students) 
-   } else {
-    this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
-      console.log("Job : " , jobid)
-      this.studentService.getFilteredData( this.filters.passing_year , this.userdata.branch_id).subscribe(filtereddata => {
-        filtereddata.forEach(student => {
-          this.studentService.getPlacedStudents( student.roll_no, jobid[0].id).subscribe(student => {
-            student.forEach(s => {
-              if (s.roll_no) {
-                this.students.push(s)
-              }
+            console.log("Data : " , filtereddata)
             })
           })
         })
-      })      
+        console.log("Students : " , this.students) 
+    })
+   } else {
+    this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
+      console.log("Job : " , jobid)
+      this.studentService.getPlacedStudentsList(jobid[0].id).subscribe(student => {
+        student.forEach(student => {
+          this.studentService.getFilteredDataList( student.roll_no , this.filters.passing_year , this.userdata.branch_id).subscribe(filtereddata => {
+          // this.students.push(filtereddata)
+          console.log("Data : " , filtereddata)
+          })
+        })
+        console.log("Data : " , this.students)
+      })    
   })
   }
   }
@@ -222,7 +216,7 @@ export class StudentdetailsComponent implements OnInit {
       decimalseparator: '.', 
       showLabels: true,
       showTitle: true,
-      title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile + ' - 01 - ' + this.jobprocess['01'] ,
+      title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile ,
       useBom: true,
       noDownload: false,
       headers: ["Roll Number", "Job ID", "Status"]

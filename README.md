@@ -33,7 +33,7 @@ Back-End Runtime Environment
 
     `npm install`
 
-    `ng serve --host 0.0.0.0 --disable-host-check`
+    `ng serve --host localhost --disable-host-check`
 
   * Server - Setup
 

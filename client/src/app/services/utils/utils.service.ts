@@ -24,16 +24,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UtilsService {
-  private baseUrl = 'http://0.0.0.0:4000/api/mail';
-  private collegeUrl = 'http://0.0.0.0:4000/api/college';  
-  private branchUrl = 'http://0.0.0.0:4000/api/branch';  // URL to web api
-  private skillSetUrl = 'http://0.0.0.0:4000/api/skill_set';
-  private jobstageUrl = 'http://0.0.0.0:4000/api/job_stage';
-  private jobprocessurl = 'http://0.0.0.0:4000/api/addjob';
-  private jobprocessesurl = 'http://0.0.0.0:4000/api/jobprocess';
-  private eligiblestudents = 'http://0.0.0.0:4000/api/eligiblestudents';
-  private registeredstudents = 'http://0.0.0.0:4000/api/registeredstudents';
-  private notregisteredstudents = 'http://0.0.0.0:4000/api/notregisteredstudents';
+  private baseUrl = 'http://localhost:4000/api/mail';
+  private collegeUrl = 'http://localhost:4000/api/college';  
+  private branchUrl = 'http://localhost:4000/api/branch';  // URL to web api
+  private skillSetUrl = 'http://localhost:4000/api/skill_set';
+  private jobstageUrl = 'http://localhost:4000/api/job_stage';
+  private jobprocessurl = 'http://localhost:4000/api/addjob';
+  private jobprocessesurl = 'http://localhost:4000/api/jobprocess';
+  private eligiblestudents = 'http://localhost:4000/api/eligiblestudents';
+  private registeredstudents = 'http://localhost:4000/api/registeredstudents';
+  private notregisteredstudents = 'http://localhost:4000/api/notregisteredstudents';
   constructor( 
     private http: HttpClient
   ) { }

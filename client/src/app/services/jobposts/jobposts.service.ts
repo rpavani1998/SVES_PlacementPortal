@@ -19,13 +19,13 @@ const httpOptions = {
 })
 export class JobpostsService {
 
-  private jobpostsUrl = 'http://0.0.0.0:4000/api/jobposts';
+  private jobpostsUrl = 'http://localhost:4000/api/jobposts';
 
-  private closejobpostsUrl = 'http://0.0.0.0:4000/api/closejobposts';
+  private closejobpostsUrl = 'http://localhost:4000/api/closejobposts';
 
-  private internshipjobposts = 'http://0.0.0.0:4000/api/internshipjobposts';
+  private internshipjobposts = 'http://localhost:4000/api/internshipjobposts';
 
-  private jobprofileUrl = 'http://0.0.0.0:4000/api/jobprofile';
+  private jobprofileUrl = 'http://localhost:4000/api/jobprofile';
 
   constructor(
     private http: HttpClient 

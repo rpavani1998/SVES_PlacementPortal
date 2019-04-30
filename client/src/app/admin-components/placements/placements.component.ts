@@ -59,7 +59,7 @@ export class AdminPlacementsComponent implements OnInit {
       perecentage : ['' , Validators.required],
       backlogs : ['' , Validators.required]
       }
-    ]
+    ] 
   }
 
 
@@ -224,43 +224,37 @@ export class AdminPlacementsComponent implements OnInit {
     console.info("company info", this.job);
     this.companyService.addCompany(this.job)
       .subscribe(company => {
-        this.uploadService.pushFileToStorage('C'+company.company_id, this.company.company_image).subscribe()
+        console.log("Comapny ID : " , company[0].company_id)
+        this.uploadService.pushFileToStorage('C'+company[0].company_id, this.company.company_image).subscribe()
       })
-    this.router.navigateByUrl('/placements');
-    window.location.reload();
-
-  }
+    // this.router.navigateByUrl('/placements');
+    window.location.reload(); 
+    }
 
  
   private saveJob(): void {
     console.info("job info", this.job);
     console.info("job id", this.job.id);
     this.addjobService.addJob(this.job )
-      .subscribe(job => {
+      .subscribe(job => { 
       })
     this.jobprocess.job_post_id = this.job.id;
-    this.utilService.addJobProcess(this.jobprocess).subscribe();
+    this.utilService.addJobProcess(this.jobprocess).subscribe(); 
 
-    // this.userService.getUsersData(this.job.overall_aggregate , this.job.backlogs , this.job.degree).subscribe(eligibleuserdata => {
-    //   eligibleuserdata.forEach(data => {
-    //     console.log("Roll Number : ", data.roll_no)
-    //   })
-    //   console.log("Eligible student data : ", eligibleuserdata);
-    // })
     this.router.navigateByUrl('/placements');
     window.location.reload(); 
 
   }
 
   students = [];
-  getfiltereddata() {
+  getfiltereddata() { 
     
     if ( this.userdata.user_type_id == 'TPO' ) {
       this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
         console.log("Job : " , jobid)
         this.studentService.getFilteredData( this.filters.passing_year , this.filters.major).subscribe(filtereddata => {
           filtereddata.forEach(student => {
-            this.studentService.getJobProcessPlacedStudents( jobid[0].id).subscribe(student => {
+            this.studentService.getJobProcessPlacedStudents( student.roll_no , jobid[0].id).subscribe(student => {
               student.forEach(s => {
                 // console.log(s)
                 if (s.roll_no) {
@@ -277,15 +271,16 @@ export class AdminPlacementsComponent implements OnInit {
       console.log("Job : " , jobid)
       this.studentService.getFilteredData( this.filters.passing_year , this.userdata.branch_id).subscribe(filtereddata => {
         filtereddata.forEach(student => {
-          this.studentService.getJobProcessPlacedStudents(jobid[0].id).subscribe(student => {
+          this.studentService.getJobProcessPlacedStudents( student.roll_no , jobid[0].id).subscribe(student => {
             student.forEach(s => {
               if (s.roll_no) {
                 this.students.push(s)
               }
             })
-          })
+          }) 
         })
-      })      
+      })
+      console.log("Students Data : " , this.students);      
   })
   }
   window.alert("Data has been retrieved please download the excel to view data!!")
@@ -305,7 +300,7 @@ export class AdminPlacementsComponent implements OnInit {
       headers: ["Roll Number", "Job Process ID", "Status"]
     };
 
-    new ngxCsv(this.students, 'StudentData', options);
+    new ngxCsv(this.students, 'StudentData', options); 
   }
 
   private saveJobProcess() {

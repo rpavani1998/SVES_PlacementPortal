@@ -19,7 +19,7 @@ const httpOptions = {
 })
 export class AddjobService {
 
-  private addjobUrl = 'http://0.0.0.0:4000/api/addjob';
+  private addjobUrl = 'http://localhost:4000/api/addjob';
 
   constructor(
     private http: HttpClient

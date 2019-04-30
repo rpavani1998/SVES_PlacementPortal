@@ -3,7 +3,8 @@ module.exports = (sequelize, Sequelize) => {
 	const Company = sequelize.define('company', {
 	  company_id: {
 			type: Sequelize.INTEGER,
-			primaryKey: true
+			primaryKey: true,
+			auto_increment : true,
 	  },
 	 company_name: {
 			type: Sequelize.STRING

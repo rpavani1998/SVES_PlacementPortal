@@ -19,7 +19,7 @@ const httpOptions = {
 export class InternshipsService {
 
   
-  private internshipjobposts = 'http://0.0.0.0:4000/api/internshipjobposts';
+  private internshipjobposts = 'http://localhost:4000/api/internshipjobposts';
 
   constructor(
     private http: HttpClient
