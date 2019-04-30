@@ -1,4 +1,5 @@
 <br>
+<br><br>
 <div class="col-md-12">
   <mat-card class="example-card">
     <mat-card-header>
@@ -12,8 +13,8 @@
             <h4><b>Education filters:</b></h4>
 
             <div class="row" *ngIf="userdata.user_type_id == 'TPO' || userdata.user_type_id == 'PRI'" enable>
-              <div class="col-md-6" >
-                <mat-form-field >
+              <div class="col-md-6" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'VC'" enable >
+                <!-- <mat-form-field >
                   <mat-select placeholder="Select College" id="institute_university_name" required
                     [(ngModel)]="filters.institute_university_name" name="institute_university_name"
                     #institute_university_name="ngModel">
@@ -22,7 +23,7 @@
                       {{ institute_university_name.college_name}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
               </div>
               <div class="col-md-6">
                 <mat-form-field >
@@ -31,9 +32,7 @@
                     <mat-option *ngFor="let major of majors" [value]="major.id">
                       {{major.branch_name}}
                     </mat-option>
-                    <mat-option value="Any">
-                      Any
-                    </mat-option>
+                    
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -58,20 +57,7 @@
                           [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
                       </mat-form-field>
                     </div>
-              <div class="col-md-4">
-                <mat-form-field>
-                  <input matInput placeholder="Tenth Percentage" type="number" id="tenth_aggregate" required
-                    [(ngModel)]="filters.tenth_aggregate" name="tenth_aggregate" #tenth_aggregate="ngModel">
-                </mat-form-field>
-              </div>
-
-              <div class="col-md-4">
-                <mat-form-field>
-                  <input matInput placeholder="Inter Percentage" type="number" id="inter_aggregate" required
-                    [(ngModel)]="filters.inter_aggregate" name="inter_aggregate" #inter_aggregate="ngModel">
-                </mat-form-field>
-              </div>
-
+            
               <div class="col-md-4">
                 <mat-form-field>
                   <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="filters.backlogs"
@@ -94,10 +80,10 @@
             </div>
             <!-- [routerLink]="['/manageaccount', filters.institute_university_name , filters.major , filters.percentage , filters.passing_year , filters.backlogs]" -->
             <button mat-button class="btn btn-danger pull-right" (click)=Apply()> Apply </button> &nbsp;
-            <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp;
+            <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
             <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
             <br><br>
-          </form>
+          </form> 
         </mat-tab>
         <mat-tab label="Placement Reports">
           <form>
@@ -111,10 +97,7 @@
                       <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
                         {{comp.company_name}}
                       </mat-option>
-                      <mat-option value="others">
-                        Others
-                      </mat-option>
-                    </mat-select>
+                    </mat-select> 
                   </mat-form-field>
                 </div>
                 <div class="col-md-5" *ngIf = "job.company_name">
@@ -144,23 +127,23 @@
                   </mat-form-field>
                 </div>
                 <div class="col-md-5" *ngIf = "userdata.user_type_id == 'TPO' || userdata.user_type_id == 'CHAIR'  " enable>
-                    <mat-form-field>
-                        <mat-select placeholder="Select Branch" id="major" required
-                            [(ngModel)]="filters.major" name="major" #major="ngModel">
-                            <mat-option *ngFor="let major of majors" [value]="major.id">
-                                {{major.branch_name}}
-                            </mat-option>
+                    <mat-form-field >
+                        <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
+                          name="major" #major="ngModel">
+                          <mat-option *ngFor="let major of majors" [value]="major.id">
+                            {{major.branch_name}}
+                          </mat-option>
+                          
                         </mat-select>
-                    </mat-form-field>
+                      </mat-form-field>
                 </div>
               </div>
 
-              <div class="row">
-                <button class="btn btn-danger pull-right" (click) = "getfiltereddata()" >Show data </button> &nbsp;
-              </div>
+              <button mat-button class="btn btn-danger pull-right" (click)=getfiltereddata()> Apply </button> &nbsp;
+            <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
+            <button (click)="downloadPlacementData()" class="btn btn-danger pull-right"> Download Excel </button>
 
-              <button class="btn btn-danger pull-right" (click) = "downloadPlacementData()" >Download Excel </button> &nbsp;
-
+              
           </form>
         </mat-tab>
         <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'" enable>
@@ -228,7 +211,7 @@
             </div> 
 
             <div class="row">
-              <button class="btn btn-danger pull-right" (click) = "downloadPlacementData()" > Generate reports </button> &nbsp;
+              <button class="btn btn-danger pull-right" (click) = "downloadPlacementExcel()" > Generate reports </button> &nbsp;
             </div>
 
           </form>

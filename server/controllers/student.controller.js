@@ -33,6 +33,7 @@ exports.findAll = (req, res) => {
 // Find a Student by Id
 exports.findById = (req, res) => {	
 	Student.findById(req.params.studentId).then(student => {
+		console.log("Student : " , student)
 		res.json(student);
 	})
 };
@@ -60,7 +61,7 @@ exports.delete = (req, res) => {
 };
 
 exports.getstudentProfiles = (req , res) => {
-	Student.findAll({where : {branch : req.params.branchID , status : "Requested"} }).then(student => {
+	Student.findAll({where : {branch : req.params.branchID ,  status : 'requested'} }).then(student => {
 		res.json(student); 
 	})
 }
@@ -73,17 +74,58 @@ exports.getVerifiedStudentDetails = (req , res) => {
 }   
 
 exports.getFilteredData = (req , res) => {
+	if (len != 1) {
+		var data = []
+		var obj = req.params.branchid.split(",")
+		var keys = Object.keys(obj); 
+		var len = keys.length;
+		for ( var i = 0 ; i < len ; i++) {
+			data.push(obj[i])
+		}
+		VerifiedEducationDetail.findAll({where : {  passing_year : req.params.passing_year , major : data}}).then(details => {
+			res.json(details)
+		})
+	} else {
 		VerifiedEducationDetail.findAll({where : {  passing_year : req.params.passing_year , major : req.params.branchid}}).then(details => {
 			res.json(details)
 		})
+	}
+		
 }   
 
+
+exports.getFilteredDataList = (req , res) => {
+	if (len != 1) {
+		var data = []
+		var obj = req.params.branchid.split(",")
+		var keys = Object.keys(obj); 
+		var len = keys.length;
+		for ( var i = 0 ; i < len ; i++) {
+			data.push(obj[i])
+		}
+		VerifiedEducationDetail.findAll({where : { roll_no : req.params.roll_no ,  passing_year : req.params.passing_year , major : data}}).then(details => {
+			res.json(details)
+		})
+	} else {
+		VerifiedEducationDetail.findAll({where : { roll_no : req.params.roll_no , passing_year : req.params.passing_year , major : req.params.branchid}}).then(details => {
+			res.json(details)
+		})
+	}
+		
+}
 
 exports.getPlacedStudents = (req , res) => {
 	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id , placement_status : 'Selected'}}).then(details => {
 		res.json(details) 
 	})	  
-}    
+}
+
+exports.getPlacedStudentsList = (req , res) => {
+	StudentPlacementStatus.findAll({where : {job_post_id : req.params.job_id , placement_status : 'Selected'}}).then(details => {
+		res.json(details) 
+		console.log("Students : " , details)
+	})	  
+}
 
 exports.getJobProfile = (req , res) => {
 	AddJob.findAll({where : {job_profile : req.params.jobprofile} }).then(jobprofile => {
@@ -93,14 +135,14 @@ exports.getJobProfile = (req , res) => {
 }
 exports.getJobProcessPlacedStudents = (req, res) => {
 	StudentJobApp.findAll({ 
-		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }}
+		where : { roll_no : req.params.roll_no ,  job_process_id : { [Op.like] : req.params.jobid+'%' }}
 	}).then(appliedstudents => {
 		// console.log(appliedstudents)
 		res.json(appliedstudents)
 	})
 };  
 
-exports.getJobProcessStudent= (req, res) => {
+exports.getJobProcessStudent= (req, res) => { 
 	StudentJobApp.findAll({ 
 		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }, roll_no: req.params.roll_no}
 	}).then(appliedstudents => {

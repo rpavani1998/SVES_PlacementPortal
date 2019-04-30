@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthService {
 
   private loggedInStatus = false
-  private usersUrl = 'http://0.0.0.0:4000/api/users'; 
+  private usersUrl = 'http://localhost:4000/api/users'; 
   constructor(private http: HttpClient) { }
 
   setLoggedIn(value: boolean) {

@@ -2,13 +2,13 @@ const env = {
   database: 'sves_db',
   username: 'root',
   password: 'root',
-  host: '0.0.0.0',
+  host: 'localhost',
   dialect: 'mysql',
   pool: {
-	  max: 5,
+	  max: 30,
 	  min: 0,
-	  acquire: 30000,
-	  idle: 10000
+	  acquire: 90000,
+	  idle: 28888
   }
 };
 

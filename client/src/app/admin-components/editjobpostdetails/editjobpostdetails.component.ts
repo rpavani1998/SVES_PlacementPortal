@@ -43,7 +43,6 @@ export class EditjobpostdetailsComponent implements OnInit {
       .subscribe(jobposts => {
           this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
             jobposts.jobprocesses = jobprocess
-            if ( jobposts.job_type == 3 || jobposts.job_type == 4 ) {
                 this.data.push(jobposts)
                 this.companyService.getCompany(jobposts.company_id).subscribe(company => {
                   jobposts.company = company
@@ -51,7 +50,6 @@ export class EditjobpostdetailsComponent implements OnInit {
                 this.jobtypeService.getJobType(jobposts.job_type).subscribe(jobtype => {
                   jobposts.jobtype = jobtype
                 })
-            }
           })
 
         console.log("Job Posts : " , this.data) 
