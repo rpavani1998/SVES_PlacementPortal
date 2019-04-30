@@ -105,9 +105,9 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     })
   });
 
-  this.studentService.getAchievement(id)
+  this.studentService.getAchievements(id)
   .subscribe(achievement => {
-    let control = <FormArray>this.myForm.controls.experience_details;
+    let control = <FormArray>this.myForm.controls.achievements;
     achievement.forEach(x => {
       control.push(this.fb.group({ 
         roll_no: localStorage.getItem('currentUser'),
@@ -115,7 +115,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
         description: x.description,
         proof_document: x.proof_document
        }))
-      this.exp_ids.push(x.id)
+      this.ach_ids.push(x.id)
     })
   });
   this.prev_edu_details = this.myForm.value.education_details;
@@ -167,6 +167,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     this.studentService.addStudentProfile(this.student).subscribe();
     // this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i=0; i < this.student.education_details.length; i++){
+      console.log('test', this.student.education_details[i], this.prev_edu_details[i])
       if(this.student.education_details[i] != this.prev_edu_details[i]) {
         this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
          console.log("E", result)
@@ -187,6 +188,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     }
     }
      for(var i=0; i < this.myForm.value.achievements.length; i++){
+       console.log(this.myForm.value.achievements[i].id, this.ach_ids)
       if (this.myForm.value.achievements[i].id in this.ach_ids){
         this.studentService.updateAchievement(this.myForm.value.experience_details[i])
         .subscribe();

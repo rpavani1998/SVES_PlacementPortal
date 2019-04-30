@@ -6,7 +6,7 @@ module.exports = function(app) {
  
     app.get('/api/achievement', achievement.findAll);
  
-    app.get('/api/achievements/:roll_no', achievement.findById);
+    app.get('/api/achievements/:roll_no', achievement.findAll);
  
     app.put('/api/achievement', achievement.update);
 

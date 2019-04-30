@@ -182,7 +182,7 @@ export class StudentService {
 
   getAchievements (roll_no: string): Observable<Achievement[]> {
     console.log(`${this.achievementUrl}s/${roll_no}`);
-    return this.http.get<Achievement[]>(`${this.achievementUrl}/${roll_no}`);
+    return this.http.get<Achievement[]>(`${this.achievementUrl}s/${roll_no}`);
   }
 
   getAchievement(id: string): Observable<Achievement[]> {
