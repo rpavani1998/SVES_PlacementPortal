@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
     // this.getEducationDetails();
   }
 
-  userdata: User;
+  userdata = new User();
   edudata = [];
   experiencedetails : ExperienceDetails;
   studentdata : Student;
@@ -43,7 +43,7 @@ export class NotificationsComponent implements OnInit {
     var uid = localStorage.getItem('currentUser');
     return this.userService.getUser(uid)
       .subscribe(userdata => {
-          console.log("User Data : ", userdata);
+          console.log("User Data : ", userdata.branch_id);
           this.userdata = userdata;
           this.studentService.getStudentProfiles(userdata.branch_id).subscribe(studentdata => {
             this.studentdata = studentdata
@@ -64,6 +64,7 @@ export class NotificationsComponent implements OnInit {
             console.log("Exp : " , studexps)
             studexps.forEach(studexp => {
               this.studentService.getStudent(studexp.roll_no).subscribe(expdata => {
+                
                 if ( expdata.branch == userdata.branch_id ) {
                   this.expdata.push(studexp);
                 }
@@ -74,7 +75,6 @@ export class NotificationsComponent implements OnInit {
           console.log("Education Details : " , this.edudata)      
         } 
       ); 
-      
   }
 
   approveRequest(data): void {

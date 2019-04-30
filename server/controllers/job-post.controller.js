@@ -31,7 +31,7 @@ exports.register = (req, res) => {
 		res.json('X'+result.id);
 		JobPost.findById(req.post_id).then(post => {
 			StudentJobApp.update(
-				{ is_qualified : 'Registered' },
+				{ is_qualified : 'Applied' },
 				{where : {roll_no : req.params.roll_no , job_process_id : { [Op.like] : req.params.job_post_id+'%' }}}).then(result => {});
 			util.mail(req.params.roll_no, 'event_registered', post)
 		})
@@ -68,17 +68,31 @@ exports.findAllApplied = (req, res) => {
 exports.update = (req, res) => {
 	let post = req.body;
 	console.log("Update",post)
-	JobPost.update(post, 
-					 { where: {id: req.body.id} }
-				   ).then(() => {
-						 res.status(200).json({msg:"updated successfully a post with id = " + req.body.id});
-				   });	
+	JobPost.update(post, { where: {id: req.body.id} }).then(() => {
+		res.status(200).json({msg:"updated successfully a post with id = " + req.body.id});
+	});	 
 };
  
+// exports.delete = (req, res) => {
+// 	const id = req.params.id;
+// 	JobPost.destroy({  where: {id: req.params.id}  }).then(() => {
+// 	  res.status(200).json({msg:'deleted successfully a post with id = ' + req.body.id});
+// 	});
+// }; 
+
 exports.delete = (req, res) => {
 	const id = req.params.id;
+	StudentPlacementStatus.destroy({
+		where : { job_post_id : req.params.id }
+	})
+	StudentJobApp.destroy({
+		where : { job_process_id : { [Op.like] : req.params.id+'%' } }
+	})
+	JobProcess.destroy({
+		where : { job_post_id : req.params.id }
+	})
 	JobPost.destroy({
-	  where: { where: {id: req.body.id} }
+	   where: {id: req.params.id} 
 	}).then(() => {
 	  res.status(200).json({msg:'deleted successfully a post with id = ' + req.body.id});
 	});
@@ -102,11 +116,7 @@ exports.jobProcesses = (req , res) => {
 exports.create = (req, res) => {
 	let job = req.body;
 	console.log("Job : ", job)
-	if (job.company_name == 'others') {
-		job.company_name = job.cn;
-	} else {
-		job.company_name = job.company_name;
-	}
+	
 	console.log("Company Name from Add Job Controller : ", job.company_name)
 
 	Company.findAll({ where: { company_name: job.company_name } })
@@ -139,11 +149,11 @@ exports.create = (req, res) => {
 							for (var i = 0; i < len; i++) {
 								JobProcess.create({ job_process_id: job_id.toString() + 0 + jobprocess.job_stage_id[i], job_post_id: job_id, job_stage_id: jobprocess.job_stage_id[i] }).then(jobprocess => {});
 								for ( var data in eligibleuserdata ) {
-									StudentJobApp.create({ roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id.toString() + 0 + jobprocess.job_stage_id[i] , is_qualified : 'Not Registered' }).then(result => {});
+									StudentJobApp.create({ roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id.toString() + 0 + jobprocess.job_stage_id[i] , is_qualified : 'Not applied' }).then(result => {});
 								}
 							}
 							for ( data in eligibleuserdata) {
-								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id , placement_status : 'NotSelected'}).then(data =>{})
+								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id.toString() , placement_status : 'NotSelected'}).then(data =>{})
 							}
 						});
 					});

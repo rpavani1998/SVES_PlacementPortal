@@ -62,7 +62,7 @@ export class AdminInternshipsComponent implements OnInit {
   majors: Branch[]
   institute_university_names: College[]
   filters = new EducationDetails();
-  userdata: User;
+  userdata = new User();
 
   data = [];
   closeddata = []
@@ -109,6 +109,14 @@ export class AdminInternshipsComponent implements OnInit {
     this.getJobType();
     this.getJobPosts();
     this.getCompany();
+
+    var uid = localStorage.getItem('currentUser');
+    this.userService.getUser(uid)
+      .subscribe(
+        userdata => {
+          console.log("User Data : ", userdata.user_type_id);
+          this.userdata = userdata;
+        });
 
     this.utilService.getBranches().subscribe(major => {
       this.majors = major;

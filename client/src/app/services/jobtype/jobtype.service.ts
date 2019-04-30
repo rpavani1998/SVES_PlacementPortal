@@ -19,7 +19,7 @@ const httpOptions = {
 })
 export class JobTypeService {
 
-  private jobtypeUrl = 'http://0.0.0.0:4000/api/jobtype';
+  private jobtypeUrl = 'http://localhost:4000/api/jobtype';
 
   constructor(
     private http: HttpClient

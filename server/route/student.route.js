@@ -20,13 +20,17 @@ module.exports = function(app) {
  
     app.delete('/api/students/:studentId', students.delete);
 
-    app.get('/api/jobprocessplacedstudents/:jobid' , students.getJobProcessPlacedStudents);
+    app.get('/api/jobprocessplacedstudents/:jobid/:roll_no ' , students.getJobProcessPlacedStudents);
 
     app.get('/api/jobprocessplacedstudents/:jobid/:roll_no' , students.getJobProcessStudent);
 
     app.get('/api/filtereddata/:passing_year/:branchid' , students.getFilteredData); 
 
+    app.get('/api/filtereddata/:roll_no/:passing_year/:branchid' , students.getFilteredDataList); 
+
     app.get('/api/placedstudents/:roll_no/:job_id' , students.getPlacedStudents)  
+
+    app.get('/api/placedstudents/:job_id' , students.getPlacedStudentsList)  
 
     app.get('/api/jobprofile/:jobprofile' , students.getJobProfile);
 
@@ -34,9 +38,9 @@ module.exports = function(app) {
 
     app.get('/api/students_verified/:branchid' , students.getVerifiedStudentDetails );
 
-    app.get('/api/registeredstudents/:jobid', education_details.getRegisteredStudents);
+    // app.get('/api/registeredstudents/:jobid', education_details.getRegisteredStudents);
 
-    app.get('/api/notregisteredstudents/:jobid', education_details.getNotRegisteredStudents);
+    // app.get('/api/notregisteredstudents/:jobid', education_details.getNotRegisteredStudents);
  
     app.post('/api/student/education_details', education_details.create);
  
@@ -102,8 +106,8 @@ module.exports = function(app) {
 
     app.get('/api/notifications' , education_details.getEducationDetails);
  
-    app.get('/api/eligiblestudents/:jobid' , education_details.getJobAppliedStudents);
+    // app.get('/api/eligiblestudents/:jobid' , education_details.getJobAppliedStudents);
 
-    app.get('/api/studentdetails/:college/:major/:passing_year/:percentage/:backlogs' , education_details.getData);
+    app.get('/api/studentdetails/:major/:passing_year/:percentage/:backlogs' , education_details.getData);
 
-}
+} 

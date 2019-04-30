@@ -18,13 +18,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class NotificationsService {
-  private notificationsUrl = 'http://0.0.0.0:4000/api/notifications';
-  private rejectnotificationUrl = 'http://0.0.0.0:4000/api/notifications/reject';
-  private filterdataUrl = 'http://0.0.0.0:4000/api/studentdetails';
-  private acceptprofilenotificationsUrl = 'http://0.0.0.0:4000/api/notifications/profileaccept';
-  private rejectprofilenotificationUrl = 'http://0.0.0.0:4000/api/notifications/profilereject';
-  private acceptexpnotificationsUrl = 'http://0.0.0.0:4000/api/notifications/expaccept';
-  private rejecexptnotificationUrl = 'http://0.0.0.0:4000/api/notifications/expreject';
+  private notificationsUrl = 'http://localhost:4000/api/notifications';
+  private rejectnotificationUrl = 'http://localhost:4000/api/notifications/reject';
+  private filterdataUrl = 'http://localhost:4000/api/studentdetails';
+  private acceptprofilenotificationsUrl = 'http://localhost:4000/api/notifications/profileaccept';
+  private rejectprofilenotificationUrl = 'http://localhost:4000/api/notifications/profilereject';
+  private acceptexpnotificationsUrl = 'http://localhost:4000/api/notifications/expaccept';
+  private rejecexptnotificationUrl = 'http://localhost:4000/api/notifications/expreject';
    
 
   constructor(
@@ -72,9 +72,8 @@ export class NotificationsService {
     return this.http.put(this.rejecexptnotificationUrl , expdata , httpOptions); 
   }
 
-  getFilterData (college : string , major : string , percentage : number , passing_year: number ,  backlogs : number): Observable<EducationDetails[]> {
-    console.log((`${this.filterdataUrl}/${college}/${major}/${passing_year}/${percentage}/${backlogs}`))
-    console.log("College : " , college);
-    return this.http.get<EducationDetails[]>(`${this.filterdataUrl}/${college}/${major}/${passing_year}/${percentage}/${backlogs}`);
+  getFilterData ( major : string , percentage : number , passing_year: number ,  backlogs : number): Observable<EducationDetails[]> {
+    console.log((`${this.filterdataUrl}/${major}/${passing_year}/${percentage}/${backlogs}`))
+    return this.http.get<EducationDetails[]>(`${this.filterdataUrl}/${major}/${passing_year}/${percentage}/${backlogs}`);
   }
 }

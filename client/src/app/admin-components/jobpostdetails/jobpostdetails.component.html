@@ -1,6 +1,7 @@
 <!-- <label> {{data[0].id}} </label> -->
 
 <br>
+<br><br>
 <div class="col-md-12">
     <mat-card class="example-card">
         <mat-card-header>
@@ -48,7 +49,7 @@
                         <button class="btn btn-danger pull-right" (click)="back()"> Back </button>
                 <button class="btn btn-danger " *ngIf = " data[0].is_active == 1; " [routerLink]="['/editjobposts', data[0].id]" enabled > Edit </button><br>
                 <button class="btn btn-danger " *ngIf = " data[0].is_active == 1; " (click)="closeJobPost()" enabled> Close Job Post </button>
-                <button class="btn btn-danger pull-right" (click)="delete()"> Delete </button><br>
+                <button class="btn btn-danger pull-right" *ngIf = " data[0].is_active == 1" (click)="delete()" enabled> Delete </button><br>
                     </div>
                      
                     <div *ngIf=" userdata.user_type_id != 'TPO' ">

@@ -3,12 +3,10 @@ const Company = db.company;
 const AddJob = db.job_post;
 exports.create = (req, res) => {	
 	let company = req.body;
-	if ( company.company_name == "others" ) {
-		company.company_name = company.cn
-		console.log( "Company Name from controller" , company.company_name)
-	}		
 	Company.create(company).then(result => {
-		res.json(result)
+		Company.findAll({ where : { company_name : result.company_name } }).then(company => {
+			res.json(company)
+		})
 	});
 };
 

@@ -1,6 +1,7 @@
 module.exports = function(app) {
  
     const jobposts = require('../controllers/job-post.controller');
+    const editjobpost = require('../controllers/editjobposts.controller');
  
     app.post('/api/jobposts', jobposts.create);
  
@@ -9,6 +10,8 @@ module.exports = function(app) {
     app.get('/api/jobposts/applied/:id', jobposts.findAllApplied);
 
     app.put('/api/closejobposts/:jobID', jobposts.closeJobPost);
+
+    app.put('/api/editjobposts' , editjobpost.updateJP);
  
     app.get('/api/jobposts/:id', jobposts.findById);
  

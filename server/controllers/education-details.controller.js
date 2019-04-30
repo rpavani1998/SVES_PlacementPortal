@@ -22,45 +22,45 @@ exports.create = (req, res) => {
 	});
 }; 
 
-exports.getJobAppliedStudents = (req, res) => {
-	StudentJobApp.findAll({
-		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
-		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
-		distinct : true,
-		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }}
-	}).then(appliedstudents => {
-		console.log(appliedstudents)
-		res.json(appliedstudents)
-	})
-};  
+// exports.getJobAppliedStudents = (req, res) => {
+// 	StudentJobApp.findAll({
+// 		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+// 		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
+// 		distinct : true,
+// 		where : {  job_process_id : { [Op.like] : req.params.jobid+'%' }}
+// 	}).then(appliedstudents => {
+// 		console.log(appliedstudents)
+// 		res.json(appliedstudents)
+// 	})
+// };  
 
-exports.getRegisteredStudents = (req , res) => {
-	StudentJobApp.findAll({ 
-		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
-		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
-		distinct : true,
-		where : { is_qualified : 'Registered' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
-	}).then(nrstudents => {
-		console.log("Retrieved Registered students");
-		res.json(nrstudents);
-	})
-}
+// exports.getRegisteredStudents = (req , res) => {
+// 	StudentJobApp.findAll({ 
+// 		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+// 		[sequelize.literal('`is_qualified`'),'is_qualified'] ],
+// 		distinct : true,
+// 		where : { is_qualified : 'Applied' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
+// 	}).then(nrstudents => {
+// 		console.log("Retrieved Applied students");
+// 		res.json(nrstudents);
+// 	})
+// }
 
 
-exports.getNotRegisteredStudents = (req , res) => {
-	StudentJobApp.findAll({
-		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
-        [sequelize.literal('`is_qualified`'),'is_qualified'] ],
-		distinct : true,
-		where : { is_qualified : 'Not Registered' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
-	}).then(nrstudents => {
-		console.log("Retrieved Not registered students");
-		res.json(nrstudents);
-	})
-}
+// exports.getNotRegisteredStudents = (req , res) => {
+// 	StudentJobApp.findAll({
+// 		attributes :[ [sequelize.literal('distinct `roll_no`'),'roll_no'],
+//         [sequelize.literal('`is_qualified`'),'is_qualified'] ],
+// 		distinct : true,
+// 		where : { is_qualified : 'Not Applied' , job_process_id : { [Op.like] : req.params.jobid+'%' }}
+// 	}).then(nrstudents => {
+// 		console.log("Retrieved Not Applied students");
+// 		res.json(nrstudents);
+// 	})
+// }	
 
 exports.findAll = (req, res) => {
-	EducationDetails.findAll({where:{major : req.body.id , status : 'requested' }}).then(education_details => {
+	EducationDetails.findAll({where:{major : req.body.id  }}).then(education_details => {
 		console.log(education_details);
 	  res.json(education_details);  
 	});
@@ -74,7 +74,7 @@ exports.findById = (req, res) => {
 };
 
 exports.getEducationDetails = (req, res) => {
-	EducationDetails.findAll({where : { status : 'Requested' }}).then(education_detail => {
+	EducationDetails.findAll().then(education_detail => {
 		res.json(education_detail);
 	})
 }
@@ -105,42 +105,42 @@ exports.delete = (req, res) => {
 exports.findByBranchId = (req, res) => {
 	let userdata = req.body;
 	console.log("Branch : ", req.params.branchID)
-	EducationDetails.findAll({ where: { major: req.params.branchID , status : "Requested"} }).then(educationdetail => {
+	EducationDetails.findAll({ where: { major: req.params.branchID , status : 'requested' } }).then(educationdetail => {
 		console.log('ed',educationdetail);
 		res.json(educationdetail);
 	});
 };
 
 exports.getData = (req, res) => {
-	console.log("College : ", req.params.college);
 	console.log("Major : ", req.params.major);
 	console.log("Passing Year : ", req.params.passing_year);
 	console.log("Percentage : ", req.params.percentage);
 	console.log("Backlogs : ", req.params.backlogs);
 
-	let college = req.params.college;
+	// let college = req.params.college;
 	let major = req.params.major;
 	let percentage = req.params.percentage;
 	let passing_year = req.params.passing_year;
 	let backlogs = req.params.backlogs;
 
-	if (major == "Any") {
+	
+	
+	if (len != 1) {
 		var data = []
+		var obj = major.split(",")
+		var keys = Object.keys(obj); 
+		var len = keys.length;
+		for ( var i = 0 ; i < len ; i++) {
+			data.push(obj[i])
+		}
 		var con
-		Branch.findAll({ raw: true }).then(branch => {
-			console.log("Branches : ", branch);	
-			for (var i = 0; i < branch.length; i++) { 
-				console.log("Branch : ", branch[i].id)
-				data.push(branch[i].id)
-			}
-			con = { where: { institute_university_name: college, percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: data } }
+		con = { where: {  percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: data } }
 			VerifiedEducationDetail.findAll(con).then(filtereddata => {
 				console.log("Filtered Data : ", filtereddata);
 				res.json(filtereddata)
 			})
-		})
 	} else {
-		con = { where: { institute_university_name: college, percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: major } }
+		con = { where: {  percentage : { [Op.gte] : percentage } , passing_year: passing_year, backlogs: backlogs, major: major } }
 		VerifiedEducationDetail.findAll(con).then(filtereddata => {
 			console.log("Filtered Data : ", filtereddata);
 			res.json(filtereddata)

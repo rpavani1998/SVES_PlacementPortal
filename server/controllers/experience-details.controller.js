@@ -48,7 +48,7 @@ exports.delete = (req, res) => {
 };
 
 exports.getExperiences = (req, res) => {
-	ExperienceDetails.findAll({where : {status : 'Requested'}}).then(experience_details => {
+	ExperienceDetails.findAll().then(experience_details => {
 		console.log(experience_details);
 	  res.json(experience_details);
 	});

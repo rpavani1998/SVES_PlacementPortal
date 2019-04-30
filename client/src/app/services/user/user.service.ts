@@ -24,8 +24,8 @@ interface logoutStatus {
   providedIn: 'root'
 })
 export class UserService {
-  private usersUrl = 'http://0.0.0.0:4000/api/users';  // URL to web api
-  private eligiblestudentsUrl = 'http://0.0.0.0:4000/api/placements';
+  private usersUrl = 'http://localhost:4000/api/users';  // URL to web api
+  private eligiblestudentsUrl = 'http://localhost:4000/api/placements';
   
   constructor( 
     private http: HttpClient

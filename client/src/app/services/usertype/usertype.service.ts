@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class UsertypeService { 
 
-  private usertypeUrl = 'http://0.0.0.0:4000/api/usertype';  // URL to web api
+  private usertypeUrl = 'http://localhost:4000/api/usertype';  // URL to web api
 
 
   constructor(

@@ -1,4 +1,5 @@
 <br>
+<br><br>
 <div class="col-md-12">
   <mat-card class="example-card">
     <mat-card-header>
@@ -16,6 +17,7 @@
                       <mat-card-title>{{d.company.company_name}}</mat-card-title>
                       <mat-card-subtitle>{{d.job_profile}}</mat-card-subtitle>
                     </mat-card-header>
+                    <div class="bg-img"><img src="http://localhost:4000/api/file/C{{d.company.company_id}}" style="width:200px; height : 100px"  alt="Img"></div>
                     <mat-card-content>
                       <p>Job Type : {{d.jobtype.job_type_name}}</p>
                       <p>Location : {{d.job_location}}</p>
@@ -35,13 +37,14 @@
           
             <mat-tab label="Closed Job Postings"> <br>
               <div class="col-md-12 row">
-                <div class="col-md-3" *ngFor="let data_ of closeddata ; let i = index">
+                <div class="col-md-3" *ngFor="let data_ of closeddata ; let i = index"> 
                   <mat-card class="example-card">
                     <mat-card-header>
                       <div mat-card-avatar class="example-header-image"></div>
                       <mat-card-title>{{data_.company.company_name}}</mat-card-title>
                       <mat-card-subtitle>{{data_.job_profile}}</mat-card-subtitle>
                     </mat-card-header>
+                    <div class="bg-img"><img src="http://localhost:4000/api/file/C{{data_.company.company_id}}" style="width:200px; height : 100px"  alt="Img"></div>
                     <mat-card-content>
                       <p>Job Type : {{data_.jobtype.job_type_name}}</p>
                       <p>Location : {{data_.job_location}}</p>

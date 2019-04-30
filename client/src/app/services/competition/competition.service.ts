@@ -16,8 +16,8 @@ const httpOptions = {
 })
 export class CompetitionService {
 
-  private competitionsUrl = 'http://0.0.0.0:4000/api/competitions';
-  private jobPosActivitytUrl = 'http://0.0.0.0:4000/api/competition';
+  private competitionsUrl = 'http://localhost:4000/api/competitions';
+  private jobPosActivitytUrl = 'http://localhost:4000/api/competition';
 
   constructor(
     private http: HttpClient
