@@ -110,7 +110,7 @@ export class NotificationsComponent implements OnInit {
     this.educationservice.rejectProfileRequest(data)
       .subscribe(result => this.message = "Job Post Updated Successfully!");
     this.router.navigateByUrl('/notifications');
-    window.location.reload()
+    window.location.reload() 
   }
 
   approveExperienceRequest(data): void {

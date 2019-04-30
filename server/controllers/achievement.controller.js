@@ -10,7 +10,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-	Achievement.findAll({where:{roll_no:req.params.id}}).then(achievements => {
+	Achievement.findAll({where:{roll_no:req.params.roll_no}}).then(achievements => {
 		console.log(achievements);
 	  res.json(achievements);
 	});
@@ -18,7 +18,7 @@ exports.findAll = (req, res) => {
 
 // Find a Achievement by Id
 exports.findById = (req, res) => {	
-	Achievement.findById(req.params.id).then(achievement => {
+	Achievement.findById(req.params.rollno).then(achievement => {
 		res.json(achievement);
 	})
 };

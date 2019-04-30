@@ -43,6 +43,7 @@ private authenticate(): void {
         localStorage.setItem('college', user.college_id)
         if(user.user_type_id == "STUD"){
           this.studentService.getVerifiedStudent(id).subscribe(student => {
+            console.log("std",student)
           if (student) {
             console.log("STUD", student)
             this.router.navigate(['/user-profile'])

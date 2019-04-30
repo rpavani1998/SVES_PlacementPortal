@@ -42,7 +42,7 @@ export class StudentProfileComponent  implements OnInit {
           this.student.experience_details = experienceDetails
           console.log(experienceDetails)
         })
-        this.studentService.getAchievement(id)
+        this.studentService.getAchievements(id)
         .subscribe(achievement => {
           this.student.achievements = achievement
         })
