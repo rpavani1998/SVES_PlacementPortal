@@ -47,4 +47,5 @@ db.studentjobapp = require('../models/student-job-application.model.js')(sequeli
 db.studentplacementstatus = require('../models/student-placement-status.model.js')(sequelize, Sequelize);
 db.usertype = require('../models/user-type.model.js')(sequelize, Sequelize);
 db.achievement = require('../models/achievement.model.js')(sequelize, Sequelize);
+db.project = require('../models/project.model.js')(sequelize, Sequelize);
 module.exports = db;

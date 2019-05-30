@@ -35,7 +35,7 @@ require('./route/job-type.route')(app);
 require('./route/job-post.route.js')(app); 
 require('./route/company.route')(app)
 require('./route/competition.route')(app)
-// require('./route/editjobpost.route.js')(app); 
+require('./route/project.route')(app); 
 
 let router = require('./route/file.router.js');
 app.use('/', router);
