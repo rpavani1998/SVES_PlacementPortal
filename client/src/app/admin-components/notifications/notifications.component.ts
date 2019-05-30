@@ -46,14 +46,16 @@ export class NotificationsComponent implements OnInit {
           console.log("User Data : ", userdata.branch_id);
           this.userdata = userdata;
           this.studentService.getStudentProfiles(userdata.branch_id).subscribe(studentdata => {
+            if (studentdata.status == "Requested"){
             this.studentdata = studentdata
+            }
             console.log("Student Data : " , studentdata);
           });
           this.educationservice.getEducationDetails().subscribe(studentsedu => {
-            console.log("Edu : " , studentsedu )
               studentsedu.forEach(studentedu => {
+                console.log("Edu Details", studentedu.status)
                 this.studentService.getStudent(studentedu.roll_no).subscribe(edudata => {
-                  if ( edudata.branch == userdata.branch_id ) {
+                  if ( edudata.branch == userdata.branch_id && studentedu.status == "Requested") {
                     this.edudata.push(studentsedu);
                   }
                 })
@@ -64,8 +66,7 @@ export class NotificationsComponent implements OnInit {
             console.log("Exp : " , studexps)
             studexps.forEach(studexp => {
               this.studentService.getStudent(studexp.roll_no).subscribe(expdata => {
-                
-                if ( expdata.branch == userdata.branch_id ) {
+                if ( expdata.branch == userdata.branch_id && studexp.status == "Requested") {
                   this.expdata.push(studexp);
                 }
               })

@@ -70,7 +70,7 @@
                       <h4 class="card-title">Job Post</h4>
                       <p class="card-category">Add Company Details</p>
                     </div>
-          
+          <br>
                     <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
@@ -80,13 +80,17 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
+                          <!-- <mat-form-field class="example-full-width">
                             <input matInput placeholder="Profile Description" type="text" id="profile_description"
                               required [(ngModel)]="job.profile_description" name="profile_description"
                               #profile_description="ngModel">
-                          </mat-form-field>
-                        </div>
+                          </mat-form-field> -->
+                          <app-ngx-editor editor = "basic" minHeight="9cm" placeholder="Profile Description" type="text" id="profile_description"
+                          required [(ngModel)]="job.profile_description" name="profile_description"
+                          #profile_description="ngModel" style=" height:12cm;
+                          "></app-ngx-editor>
+                      </div>
+                      <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
                             <input matInput placeholder="Company URL" type="text" id="company_website_url" required
@@ -180,20 +184,28 @@
 
                           </mat-form-field>
                         </div>
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
+                        <!-- <div class="col-md-6"> -->
+                            <app-ngx-editor minHeight="9cm" placeholder="Job Description" type="text" id="job_description" required
+                            [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel" style=" height:12cm;
+                            "></app-ngx-editor>
+                          <!-- <mat-form-field class="example-full-width">
+                             
+                              <app-ngx-editor type="text" class="form-control" id="job_description"  [spellcheck]="true" required [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel" style="resize:vertical; height:12cm;
+                              min-height: 12cm"></app-ngx-editor>
                             <input matInput placeholder="Job Description" type="text" id="job_description" required
                               [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel">
 
-                          </mat-form-field>
-                        </div>
+                          </mat-form-field> -->
+                        <!-- </div> -->
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Apply Before" type="date" id="last_date_for_application"
+                            <input matInput [matDatepicker]="date_" placeholder="Apply Before" type="date" id="last_date_for_application"
                               required [(ngModel)]="job.last_date_for_application" name="last_date_for_application"
                               #last_date_for_application="ngModel">
+                              <mat-datepicker-toggle matSuffix [for]="date_"></mat-datepicker-toggle>
+                              <mat-datepicker #date_></mat-datepicker>
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -207,8 +219,10 @@
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput placeholder="PPT Talk" type="date" id="ppt_talk" required
+                            <input matInput [matDatepicker]="date" placeholder="PPT Talk" type="date" id="ppt_talk" required
                               [(ngModel)]="job.ppt_talk" name="ppt_talk" #ppt_talk="ngModel">
+                              <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                              <mat-datepicker #date></mat-datepicker>
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">

@@ -6,6 +6,7 @@ import { EducationDetails } from '../../models/education-details';
 import { ExperienceDetails } from '../../models/experience-details';
 import { StudentPlacementStatus } from '../../models/student-placement-status';
 import { Achievement } from 'src/app/models/achievement';
+import {Project} from 'src/app/models/project'
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -28,7 +29,8 @@ export class StudentService {
   private placedStudentsUrl = 'http://localhost:4000/api/placedstudents'; 
   private jobprocessplacedStudentsUrl = 'http://localhost:4000/api/jobprocessplacedstudents'; 
   private achievementUrl = 'http://localhost:4000/api/achievement';  // URL to web api// URL to web api
-
+  private projectUrl = 'http://localhost:4000/api/project';
+  private profileUrl = "http://localhost:4000/api/profile";
   constructor( 
     private http: HttpClient 
   ) { }
@@ -190,7 +192,6 @@ export class StudentService {
     return this.http.put(this.studentsUrl, experienceDetails, httpOptions);
   }
 
-
   getAchievements (roll_no: string): Observable<Achievement[]> {
     console.log(`${this.achievementUrl}s/${roll_no}`);
     return this.http.get<Achievement[]>(`${this.achievementUrl}s/${roll_no}`);
@@ -217,4 +218,39 @@ export class StudentService {
     return this.http.put(this.achievementUrl, Achievement, httpOptions);
   }
 
+  getProjects (roll_no: string): Observable<Project[]> {
+    console.log(`${this.projectUrl}s/${roll_no}`);
+    return this.http.get<Project[]>(`${this.projectUrl}s/${roll_no}`);
+  }
+
+  getProject(id: string): Observable<Project[]> {
+    const url = `${this.projectUrl}/${id}`;
+    return this.http.get<Project[]>(url);
+  }
+
+  addProject (Project: Project): Observable<Project> {
+    console.log(this.http.post<Project>(this.projectUrl, Project, httpOptions))
+    return this.http.post<Project>(this.projectUrl, Project, httpOptions);
+  }
+
+  deleteProject (Project: Project | string): Observable<Project> {
+    const id = typeof Project === 'string' ? Project :Project.id;
+    const url = `${this.projectUrl}/${id}`;
+
+    return this.http.delete<Project>(url, httpOptions);
+  }
+  updateProject (Project: Project): Observable<any> {
+    return this.http.put(this.projectUrl, Project, httpOptions);
+  }
+
+  generateTex(Student : Student): Observable<any> {
+    const url = `${this.profileUrl}/tex`;
+    console.log(url)
+    return this.http.post(url, Student, httpOptions);
+  }
+
+  generatePdf(Student: Student): Observable<any> {
+    const url = `${this.profileUrl}/pdf`;
+    return this.http.post(url, Student, httpOptions);
+  }
 }

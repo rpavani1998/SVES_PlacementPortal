@@ -70,6 +70,21 @@
             <hr>
     </div>
 </div>
+<h3>Projects</h3>
+<br>
+<div>
+    <div *ngFor= "let project of student.projects">
+            <div>Title : {{project.title}}</div>
+            <div>Description: {{project.description}}</div>
+            <div>Project Url: {{project.description}} </div>
+            <div>Start_Date: {{project.start_date}}</div>
+            <div>End Date: {{project.end_date}}</div>
+            <hr>
+    </div>
+</div>
+</div>
+<div class="btn-group btn-group-sm">
+    <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="generatePDF()">Generate PDF</button>
 </div>
 </div>
 </div>

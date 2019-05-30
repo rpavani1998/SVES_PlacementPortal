@@ -24,6 +24,9 @@ export class StudentProfileComponent  implements OnInit {
     this.getStudentDetails();
   }
 
+  generatePDF(){
+      this.studentService.generateTex(this.student)
+  }
   getStudentDetails() {
     const id = localStorage.getItem('currentUser');
     this.uploadService.getFileById(id).subscribe(result =>{
@@ -45,6 +48,10 @@ export class StudentProfileComponent  implements OnInit {
         this.studentService.getAchievements(id)
         .subscribe(achievement => {
           this.student.achievements = achievement
+        })
+        this.studentService.getProjects(id)
+        .subscribe(projects => {
+          this.student.projects = projects
         })
       this.data.push(student);
     }))

@@ -57,6 +57,16 @@ export class RegisterStudentComponent{
       description : '',
       proof_document: null
       }
+    ],
+    projects : [
+      {
+      roll_no : localStorage.getItem('currentUser'),
+      title : '',
+      description : '',
+      url : '',
+      start_date: ['', Validators.required],
+      end_date: null,
+      }
     ]
   } 
   constructor(
@@ -76,12 +86,14 @@ export class RegisterStudentComponent{
     this.myForm = this.fb.group({
       education_details: this.fb.array([]),
       experience_details: this.fb.array([]),
-      achievements: this.fb.array([])
+      achievements: this.fb.array([]),
+      projects: this.fb.array([])
     })
     
     this.setEducationDetails();
     this.setExperienceDetails();
     this.setAchievements();
+    this.setProjects();
   }
 
   deleteEducationDetails(index) {
@@ -90,7 +102,12 @@ export class RegisterStudentComponent{
   }
 
   deleteAchievements(index) {
-    let control = <FormArray>this.myForm.controls.education_details;
+    let control = <FormArray>this.myForm.controls.achievements;
+    control.removeAt(index)
+  }
+
+  deleteProjects(index) {
+    let control = <FormArray>this.myForm.controls.projects;
     control.removeAt(index)
   }
 
@@ -114,6 +131,20 @@ setAchievements(){
       description: x.description,
       title: x.title,
       proof_document: x.proof_document
+     }))
+  })
+}
+
+setProjects(){
+  let control = <FormArray>this.myForm.controls.projects;
+  this.data.projects.forEach(x => {
+    control.push(this.fb.group({ 
+      roll_no: x.roll_no,
+      description: x.description,
+      title: x.title,
+      url: x.url,
+      start_date: x.start_date,
+      end_date: x.end_date,
      }))
   })
 }
@@ -180,7 +211,7 @@ selectAchievementProofs(event, i){
 
 selectAadharProof(event) {
   this.student.id_proof = event.target.files[0];
-  // this.uploadService.pushFileToStorage('student', this.student.id_proof).subscribe();
+  // this.uploadService.pushFileToStorage('C6', this.student.id_proof).subscribe();
 }
 
 selectEduProofs(event,i){
@@ -222,6 +253,21 @@ addNewAchievementForm() {
   )
 }
 
+addNewProjectForm() {
+  let control = <FormArray>this.myForm.controls.projects;
+  control.push(
+    this.fb.group({
+      roll_no : localStorage.getItem('currentUser'),
+      title : '',
+      description : '',
+      url : '',
+      start_date: ['', Validators.required],
+      end_date: null,
+      })
+  )
+}
+
+
   goBack(): void {
     this.location.back();
   }
@@ -233,6 +279,7 @@ addNewAchievementForm() {
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.student.achievements = this.myForm.value.achievements;
+    this.student.projects = this.myForm.value.projects;
     this.studentService.addStudentProfile(this.student).subscribe();
     this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i in this.student.education_details){
@@ -254,5 +301,6 @@ addNewAchievementForm() {
    
    })
  }
+ 
   }
 }

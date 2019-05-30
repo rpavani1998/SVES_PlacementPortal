@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import { UtilsService } from '../../services/utils/utils.service';
 import { CompanyService } from '../../services/company_/company.service';
 import { JobType } from '../../models/jobtype';
-
+// import { NgxEditorModule } from 'ngx-editor';
 
 
 import { ActivatedRoute, Params } from '@angular/router';

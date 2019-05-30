@@ -20,8 +20,11 @@
         
             <div class="form-group">
               <label for="job_description">Job Description</label>
-              <input type="text" class="form-control" id="job_description" required
-              [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel">
+              <app-ngx-editor type="text" minHeight="9cm" class="form-control" id="job_description"  [spellcheck]="true" required [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel" style="resize:vertical; height:12cm;
+                min-height: 12cm"></app-ngx-editor>
+              <!-- <input type="text" class="form-control" id="job_description" required -->
+              <!-- [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel"> -->
+            
               <div [hidden]="job_description.valid || job_description.pristine"
                    class="alert alert-danger">
                   Job Description is required
@@ -51,8 +54,10 @@
         
             <div class="form-group">
               <label for="last_date_for_application">Apply Before</label>
-              <input type="date" class="form-control" id="last_date_for_application" required
+              <input type="date" [matDatepicker]="date_" class="form-control" id="last_date_for_application" required
               [(ngModel)]="data[0].last_date_for_application" name="last_date_for_application" #last_date_for_application="ngModel">
+              <mat-datepicker-toggle matSuffix [for]="date_"></mat-datepicker-toggle>
+              <mat-datepicker #date_></mat-datepicker>
               <div [hidden]="last_date_for_application.valid || last_date_for_application.pristine"
                    class="alert alert-danger">
                   Apply Before is required

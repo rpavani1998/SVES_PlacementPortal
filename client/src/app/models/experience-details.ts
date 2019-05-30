@@ -10,4 +10,5 @@ export class ExperienceDetails {
     description: string = ''
     proof_document: any = null
     is_verfied: string = 'False'
+    status: string
 }

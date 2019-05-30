@@ -303,7 +303,7 @@
                                   <fieldset>
                                     <legend>
                                       <h4>Achievements {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
-                                          (click)="deleteAchchievemnt(i)">
+                                          (click)="deleteAchievements(i)">
                                           <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Delete Achievement
                                         </button>
                                       </h4>
@@ -342,7 +342,61 @@
                                     </div>
                                         </div>
 
-                                       
+                                      </div>
+                                      <hr>
+                                    </fieldset>
+                                  </div>
+                                </div>
+  
+                                  <button style="margin-top:5px; margin-bottom:5px;" type="button" class="btn btn-primary btn-sm"
+                                  (click)="addNewProjectForm()">
+                                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Project
+                                </button>
+                                <div formArrayName="projects">
+                                  <div style="margin-top:5px; margin-bottom:5px;"
+                                    *ngFor="let edu_details of myForm.get('projects').controls; let i=index">
+                                    <fieldset>
+                                      <legend>
+                                        <h4>Projects {{i+1}}:<button style="margin-left:35px;" type="button" class="btn btn-danger"
+                                            (click)="deleteProjects(i)">
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove Project
+                                          </button>
+                                        </h4>
+                                      </legend>
+                                      <div [formGroupName]="i">
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                              <mat-form-field class="example-full-width">
+                                              <input matInput type="text" id="title" placeholder="Title" name="title"
+                                              formControlName="title" required>
+                                              </mat-form-field>
+  
+                                              <mat-form-field class="example-full-width">
+                                                <textarea matInput type="text" id="url" placeholder="Url" name="description"
+                                                formControlName="url" required></textarea>
+                                            </mat-form-field>
+             
+                                          </div>
+                                
+                                            <mat-form-field class="example-full-width">
+                                                <textarea matInput type="text" id="description" placeholder="Description" name="description"
+                                                formControlName="description" required></textarea>
+                                            </mat-form-field>
+  
+  
+                                       <div class="col-md-4">
+                                          <mat-form-field>
+                                              <input matInput [matDatepicker]="start_date" placeholder="Start Date" formControlName="start_date">
+                                              <mat-datepicker-toggle matSuffix [for]="start_date"></mat-datepicker-toggle>
+                                              <mat-datepicker #start_date></mat-datepicker>
+                                            </mat-form-field>
+                                    </div>
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="end_date" placeholder="End Date" formControlName="end_date">
+                                            <mat-datepicker-toggle matSuffix [for]="end_date"></mat-datepicker-toggle>
+                                            <mat-datepicker #end_date></mat-datepicker>
+                                          </mat-form-field>
+                                          </div>   
                                     </div>
                                     <hr>
                                   </fieldset>

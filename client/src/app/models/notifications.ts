@@ -11,6 +11,7 @@ export class EducationDetails {
     passing_year: number;
     percentage : number;
     cgpa : number;
+    status: string;
     backlogs : number;
     tenth_aggregate : number;
     inter_aggregate : number;

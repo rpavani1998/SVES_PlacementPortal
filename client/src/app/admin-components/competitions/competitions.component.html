@@ -38,12 +38,13 @@
                                     name="name" #name="ngModel">
                                 </mat-form-field>
                               </div>
-          
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
+                              <div class="row">
+                                  <!-- <mat-form-field class="example-full-width">
                                     <input matInput placeholder="Competition Description" type="text" id="description" required [(ngModel)]="competition.description"
                                       name="description" #description="ngModel">
-                                  </mat-form-field>
+                                  </mat-form-field> -->
+                                  <app-ngx-editor type="text" minHeight="9cm" [spellcheck]="true" style="resize:vertical; height:12cm; min-height: 12cm" placeholder="Competition Description" type="text" id="description" required [(ngModel)]="competition.description"
+                                  name="description" #description="ngModel"></app-ngx-editor>
                                 </div>
           
                                 <div class="col-md-4">

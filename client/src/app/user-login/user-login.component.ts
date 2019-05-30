@@ -30,11 +30,13 @@ export class UserLoginComponent {
 login(){
   this.submitted = true;
   this.authenticate();
+  // this.studentService.generateTex(null)
 }
 
 private authenticate(): void {
   
   this.Auth.getUserDetails(this.user.id, this.user.password).subscribe(data => {
+    console.log(data.success)
     if(data.success) {
       localStorage.setItem('currentUser', this.user.id);
       const id = localStorage.getItem('currentUser');
@@ -58,19 +60,20 @@ private authenticate(): void {
               }
             })
           }});
-        } else{
+        }else{
           this.router.navigate(['/admin/dashboard'])
-          console.log("LoggedIn Admin")
+          // console.log("LoggedIn Admin")
           this.Auth.setLoggedIn(true)
         }
       })
     } else {
-      console.log('Error:', data.msg)
+      console.log('Error:', data.msg);
       this.invalid = true;
       this.message = data.msg
       // window.alert(data.msg)
     }
   })
+  // this.studentService.generateTex()
   // console.log(username, password)
   // this.userService.authenticate(this.user.id, this.user.password)
   //       .subscribe();

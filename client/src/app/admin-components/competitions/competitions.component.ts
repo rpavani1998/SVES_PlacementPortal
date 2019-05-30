@@ -29,7 +29,7 @@ export class AdminCompetitionsComponent implements OnInit {
     this.competitonService.addCompetition(this.competition).subscribe(Competition => {
     });
     this.router.navigateByUrl('/competitions');
-    window.location.reload();
+    // window.location.reload();
 
   }
 

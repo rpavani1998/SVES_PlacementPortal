@@ -20,7 +20,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Student } from 'src/app/models/student';
 import { StudentService } from '../../services/student/student.service';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
-
+import { NgxEditorModule } from 'ngx-editor';
 
 import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 
@@ -224,11 +224,12 @@ export class AdminPlacementsComponent implements OnInit {
     console.info("company info", this.job);
     this.companyService.addCompany(this.job)
       .subscribe(company => {
-        console.log("Comapny ID : " , company[0].company_id)
+        console.log("Company ID : " , company[0].company_id, this.company.company_image)
         this.uploadService.pushFileToStorage('C'+company[0].company_id, this.company.company_image).subscribe()
       })
     // this.router.navigateByUrl('/placements');
-    window.location.reload(); 
+      for(let i = 0; i < 1000; i++){}
+ window.location.reload(); 
     }
 
  

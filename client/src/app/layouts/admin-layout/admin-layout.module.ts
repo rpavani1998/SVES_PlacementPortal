@@ -7,6 +7,7 @@ import { AdminDashboardComponent } from '../../admin-components/dashboard/dashbo
 import { AdminPlacementsComponent } from '../../admin-components/placements/placements.component';
 import { AdminInternshipsComponent } from '../../admin-components/internships/internships.component';
 import { AdminCompetitionsComponent } from '../../admin-components/competitions/competitions.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 import {
   MatButtonModule,
@@ -55,6 +56,7 @@ import { ManageaccountComponent } from 'src/app/admin-components/manageaccount/m
     MatTabsModule,
     MatTableModule,
     MatCardModule,
+    NgxEditorModule
   ]
 })
 

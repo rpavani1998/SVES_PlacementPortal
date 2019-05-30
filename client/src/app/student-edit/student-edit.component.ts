@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
 import { StudentService } from '../services/student/student.service';
-import {FormGroup, FormArray, FormBuilder} from '@angular/forms';
+import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Branch } from '../models/branch';
@@ -28,14 +28,15 @@ export class StudentEditComponent implements OnInit {
   data = {
     education_details : [],
     experience_details : [],
-    achievements : [
-    ]
+    achievements : [],
+    projects : []
   }
   
   myForm: FormGroup;
   edu_ids = []
   exp_ids = []
   ach_ids = []
+  proj_ids = []
   prev_edu_details :EducationDetails[]
   prev_exp_details: ExperienceDetails[]
 
@@ -61,7 +62,8 @@ export class StudentEditComponent implements OnInit {
   this.myForm = this.fb.group({
     education_details: this.fb.array([]),
     experience_details: this.fb.array([]),
-    achievements: this.fb.array([])
+    achievements: this.fb.array([]),
+    projects: this.fb.array([])
   })
 
 
@@ -118,46 +120,47 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       this.ach_ids.push(x.id)
     })
   });
+
+  this.studentService.getProjects(id)
+  .subscribe(achievement => {
+    let control = <FormArray>this.myForm.controls.achievements;
+    achievement.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: localStorage.getItem('currentUser'),
+        title: x.title,
+        description: x.description,
+        url: x.url,
+        start_date: x.start_date,
+        end_date: x.end_date
+       }))
+      this.proj_ids.push(x.id)
+    })
+  });
   this.prev_edu_details = this.myForm.value.education_details;
   this.prev_exp_details = this.myForm.value.experience_details;
   this.setEducationDetails();
   this.setExperienceDetails();
   this.setAchievements();
+  this.setProjects();
   }
 
   deleteEducationDetails(index) {
     let control = <FormArray>this.myForm.controls.education_details;
     control.removeAt(index)
   }
+
+  deleteExperienceDetails(index) {
+    let control = <FormArray>this.myForm.controls.experience_details;
+    control.removeAt(index)
+  }
+
+  deleteProjects(index) {
+    let control = <FormArray>this.myForm.controls.projects;
+    control.removeAt(index)
+  }
   
   update(): void {
     this.submitted = true;
-    // this.studentService.updateStudent(this.student)
-    //     .subscribe();
-    // for(var i=0; i < this.myForm.value.education_details.length; i++){
-    //   if (this.myForm.value.educationDetails[i].id in this.edu_ids){
-    //   this.studentService.updateStudentEducationalDetails(this.myForm.value.education_details[i])
-    //   .subscribe();
-    //   }else{
-    //     this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
-    //       console.log("E", result)
-    //      this.uploadService.pushFileToStorage(result.toString(), this.student.education_details[i].proof_document).subscribe();
-    //   });
-    // }
-    // }
-
-    // for(var i=0; i < this.myForm.value.experience_details.length; i++){
-    //   if (this.myForm.value.experience_details[i].id in this.exp_ids){
-    //     this.studentService.updateStudentExperienceDetails(this.myForm.value.experience_details[i])
-    //     .subscribe();
-    //   } else{
-    //     this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
-    //       console.log("E", result)
-    //      this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
-    //     });
-    //   }
-     
-    // }
     console.info("student info", this.student);
     console.log(localStorage.getItem('currentUser'))
     this.student.roll_no = localStorage.getItem('currentUser');
@@ -168,7 +171,11 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     // this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i=0; i < this.student.education_details.length; i++){
       console.log('test', this.student.education_details[i], this.prev_edu_details[i])
-      if(this.student.education_details[i] != this.prev_edu_details[i]) {
+      let check1   = this.student.education_details[i];
+      check1.id = null;
+      let check2   = this.prev_edu_details[i];
+      check2.id = null;
+      if(check1 != check2) {
         this.studentService.addStudentEducationDetails(this.student.education_details[i]).subscribe(result => {
          console.log("E", result)
          if(this.student.education_details[i].proof_document){
@@ -178,7 +185,12 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
   }
   }
     for(let i=0; i < this.student.experience_details.length; i++){
-      if(this.student.experience_details[i] != this.prev_exp_details[i]) {
+      var check1   = this.student.experience_details[i];
+      check1.id = null;
+      var check2   = this.prev_exp_details[i];
+      check2.id = null;
+      if(check1 != check2) {
+      // if(this.student.experience_details[i] != this.prev_exp_details[i]) {
       this.studentService.addStudentExperienceDetails(this.student.experience_details[i]).subscribe(result => {
         console.log("E", result)
         if(this.student.experience_details[i].proof_document){
@@ -190,7 +202,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
      for(var i=0; i < this.myForm.value.achievements.length; i++){
        console.log(this.myForm.value.achievements[i].id, this.ach_ids)
       if (this.myForm.value.achievements[i].id in this.ach_ids){
-        this.studentService.updateAchievement(this.myForm.value.experience_details[i])
+        this.studentService.updateAchievement(this.myForm.value.achievement[i])
         .subscribe();
       } else{
         this.studentService.addAchievement(this.student.achievements[i]).subscribe(result => {
@@ -200,6 +212,20 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
       }
      
     }
+
+    for(var i=0; i < this.myForm.value.projects.length; i++){
+      console.log(this.myForm.value.projects[i].id, this.proj_ids)
+     if (this.myForm.value.projects[i].id in this.proj_ids){
+       this.studentService.updateProject(this.myForm.value.experience_details[i])
+       .subscribe();
+     } else{
+       this.studentService.addProject(this.student.projects[i]).subscribe(result => {
+         // console.log("E", result)
+        // this.uploadService.pushFileToStorage(result.toString(), this.student.experience_details[i].proof_document).subscribe();
+       });
+     }
+    
+   }
   }
 
   addNewAchievementForm() {
@@ -228,7 +254,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
 
 
   deleteAchievements(index) {
-    let control = <FormArray>this.myForm.controls.education_details;
+    let control = <FormArray>this.myForm.controls.achievements;
     control.removeAt(index)
   }
   
@@ -272,6 +298,19 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     )
   }
   
+  addNewProjectForm() {
+    let control = <FormArray>this.myForm.controls.projects;
+    control.push(
+      this.fb.group({
+        roll_no : localStorage.getItem('currentUser'),
+        title : '',
+        description : '',
+        url : '',
+        start_date: ['', Validators.required],
+        end_date: null,
+        })
+    )
+  }
 
   setExperienceDetails() {
     let control = <FormArray>this.myForm.controls.experience_details;
@@ -320,6 +359,20 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
         percentage: x.percentage,
         cgpa: x.cgpa,
         proof_document: x.proof_document
+       }))
+    })
+  }
+
+  setProjects(){
+    let control = <FormArray>this.myForm.controls.projects;
+    this.data.projects.forEach(x => {
+      control.push(this.fb.group({ 
+        roll_no: x.roll_no,
+        description: x.description,
+        title: x.title,
+        url: x.url,
+        start_date: x.start_date,
+        end_date: x.end_date,
        }))
     })
   }

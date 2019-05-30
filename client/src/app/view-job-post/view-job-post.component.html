@@ -9,7 +9,7 @@
 <div >
     <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job_post.company.company_id}}" style="width:246px; height : 140px"  alt="Img"></div>
     <div>Company Name: {{job_post.company.company_name}}</div>
-    <div>Comapny Description: {{job_post.company.profile_description}}</div>
+    <div>Company Description:</div><div [innerHTML]="job_post.company.profile_description"></div>
     <div>Establish Date : {{job_post.company.establish_date}}</div>
     <div>Company Website: {{job_post.company.website_url}}</div>
  <br>   
@@ -18,7 +18,7 @@
     <div>Salary: {{job_post.salary_lpa}}</div>
     <div>Drive Location: {{job_post.drive_location}}</div>
     <div>Last Date For Applying: {{job_post.last_date_for_application}}</div>
-    <div>Job Description : {{job_post.job_description}}</div>
+    <div>Job Description : </div> <div [innerHTML] ="job_post.job_description"></div>
     <div>Job Description Document: <a href="http://localhost:4000/api/file/J{{job_post.id}}">Proof Document</a></div>
 <br>
 Eligibility Criteria

@@ -34,12 +34,12 @@
                                 <hr>
                             </div> 
                         </mat-tab>
-                        <mat-tab label="Approved requests">
+                        <!-- <mat-tab label="Approved requests">
 
                         </mat-tab>
                         <mat-tab label="Rejected requests">
 
-                        </mat-tab>
+                        </mat-tab> -->
                     </mat-tab-group>
                 </mat-expansion-panel>
 
@@ -61,18 +61,18 @@
                                     <b> <label> Degree : </label> </b> {{ed[i].certificate_degree_name}} <br><br>
                                     <b> <label> Major : </label> </b> {{ed[i].major}} <br><br> 
                                     <b> <label> Percentage : </label> </b> {{ed[i].percentage}} <br><br>
-                                    <!-- <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof Document</a></div> -->
+                                    <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof Document</a></div>
                                     <button #elem (click)="approveRequest(ed[i])" class="btn-btn"> Approve </button> &nbsp;
                                     <button (click)="rejectRequest(ed[i])" class="btn-btn"> Reject </button>
                                     <hr>
                                 </div> 
                         </mat-tab>
-                        <mat-tab label="Approved requests">
+                        <!-- <mat-tab label="Approved requests">
 
                         </mat-tab>
                         <mat-tab label="Rejected requests">
 
-                        </mat-tab>
+                        </mat-tab> -->
                     </mat-tab-group>
 
                 </mat-expansion-panel>
@@ -117,12 +117,12 @@
                                     <hr>
                                 </div>
                         </mat-tab>
-                        <mat-tab label="Approved requests">
+                        <!-- <mat-tab label="Approved requests">
 
                         </mat-tab>
                         <mat-tab label="Rejected requests">
 
-                        </mat-tab>
+                        </mat-tab> -->
                     </mat-tab-group>
 
                 </mat-expansion-panel>

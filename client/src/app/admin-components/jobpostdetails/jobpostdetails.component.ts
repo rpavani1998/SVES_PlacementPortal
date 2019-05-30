@@ -14,7 +14,6 @@ import { Student } from 'src/app/models/student';
 import { StudentService } from '../../services/student/student.service';
 import { EducationDetails } from 'src/app/models/education-details';
 
-
 // import { JobpostsService } from '../services/jobposts/jobposts.service';
 // import { JobPosts } from '../models/jobposts';
 // import { JobType } from '../models/jobtype';

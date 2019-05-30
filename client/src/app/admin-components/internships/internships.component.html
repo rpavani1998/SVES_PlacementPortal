@@ -151,12 +151,15 @@
                                     [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
                                 </mat-form-field>
                               </div>
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
+                              <!-- <div class="col-md-6"> -->
+                                  <app-ngx-editor minHeight="9cm" placeholder="Job Description" type="text" id="job_description" required
+                                  [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel" style=" height:12cm;
+                                  "></app-ngx-editor>
+                                <!-- <mat-form-field class="example-full-width">
                                   <input matInput placeholder="Job Description" type="text" id="job_description" required
                                     [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel">
-                                </mat-form-field>
-                              </div>
+                                </mat-form-field> -->
+                              <!-- </div> -->
                             </div>
                             <div class="row">
                               <div class="col-md-6">
