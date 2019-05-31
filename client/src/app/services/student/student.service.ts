@@ -36,35 +36,35 @@ export class StudentService {
   ) { }
 
   approveRequest (studdata : Student): Observable<any> {
-    console.log( " In Service Education Details :  " , studdata );
+    // console.log( " In Service Education Details :  " , studdata );
     return this.http.put(this.studentsUrl, studdata , httpOptions); 
   }
  
   rejectRequest (studdata : Student): Observable<any> {
-    console.log( " In Service Education Details :  " , studdata );
+    // console.log( " In Service Education Details :  " , studdata );
     return this.http.put(this.studentsUrl, studdata , httpOptions); 
   }
 
   getStudents (): Observable<Student[]> {
-    console.log((this.studentsUrl));
+    // console.log((this.studentsUrl));
     return this.http.get<Student[]>(this.studentsUrl);
   }
 
   getStudent(id: string): Observable<Student> {
     const url = `${this.studentsUrl}/${id}`;
-    console.log("Student URL : " , url)
+    // console.log("Student URL : " , url)
     return this.http.get<Student>(url);
   } 
 
   getFilteredData( passingyear : number , major : string ) : Observable<EducationDetails[]> {
     const url = `${this.filtereddataUrl}/${passingyear}/${major}`;
-    console.log(url)
+    // console.log(url)
     return this.http.get<EducationDetails[]>(url);
   }
 
   getFilteredDataList ( roll_no : string , passingyear : number , major : string ) : Observable<EducationDetails[]> {
     const url = `${this.filtereddataUrl}/${roll_no}/${passingyear}/${major}`;
-    console.log(url)
+    // console.log(url)
     return this.http.get<EducationDetails[]>(url);
   } 
 
@@ -95,12 +95,12 @@ export class StudentService {
 
   getVerifiedStudentDetails(branch : string) :Observable<EducationDetails[]> {
     const url = `${this.verifiedStudentsUrl}/${branch}`;
-    console.log("URL : " , url)
+    // console.log("URL : " , url)
     return this.http.get<EducationDetails[]>(url);
   }
 
   addStudentProfile (student: Student): Observable<Student> {
-    console.log(this.http.post<Student>(this.studentsUrl, student, httpOptions))
+    // console.log(this.http.post<Student>(this.studentsUrl, student, httpOptions))
     return this.http.post<Student>(this.studentsUrl, student, httpOptions);
   }
 
@@ -117,18 +117,18 @@ export class StudentService {
   }
 
   getStudentexperiences (): Observable<ExperienceDetails[]> {
-    console.log((this.experienceDetailsUrl));
+    // console.log((this.experienceDetailsUrl));
     return this.http.get<ExperienceDetails[]>(this.experienceDetailsUrl);
   }
 
   getStudentEducationalDetails (id: string): Observable<EducationDetails[]> {
-    console.log((`${this.educationDetailsUrl}/${id}`))
+    // console.log((`${this.educationDetailsUrl}/${id}`))
     return this.http.get<EducationDetails[]>(`${this.educationDetailsUrl}/${id}`);
   }
 
   getStudentProfiles(branchid: string): Observable<Student> {
     const url = `${this.educationDetailsUrl}/${branchid}`;
-    console.log("Student Profiles : " , url);
+    // console.log("Student Profiles : " , url);
     return this.http.get<Student>(url);
   } 
 
@@ -151,7 +151,7 @@ export class StudentService {
 
 
   getVerifiedStudents (): Observable<Student[]> {
-    console.log((this.verifiedStudentsUrl));
+    // console.log((this.verifiedStudentsUrl));
     return this.http.get<Student[]>(this.studentsUrl);
   }
 
@@ -161,7 +161,7 @@ export class StudentService {
   }
 
   addVerifiedStudentProfile (student: Student): Observable<Student> {
-    console.log(this.http.post<Student>(this.verifiedStudentsUrl, student, httpOptions))
+    // console.log(this.http.post<Student>(this.verifiedStudentsUrl, student, httpOptions))
     return this.http.post<Student>(this.verifiedStudentsUrl, student, httpOptions);
   }
 
@@ -178,7 +178,7 @@ export class StudentService {
   }
 
   getVerifiedStudentEducationalDetails (id: string): Observable<EducationDetails[]> {
-    console.log((`${this.verifiedEducationDetailsUrl}/${id}`))
+    // console.log((`${this.verifiedEducationDetailsUrl}/${id}`))
     return this.http.get<EducationDetails[]>(`${this.verifiedEducationDetailsUrl}/${id}`);
   }
 
@@ -193,7 +193,7 @@ export class StudentService {
   }
 
   getAchievements (roll_no: string): Observable<Achievement[]> {
-    console.log(`${this.achievementUrl}s/${roll_no}`);
+    // console.log(`${this.achievementUrl}s/${roll_no}`);
     return this.http.get<Achievement[]>(`${this.achievementUrl}s/${roll_no}`);
   }
 
@@ -203,7 +203,7 @@ export class StudentService {
   }
 
   addAchievement (Achievement: Achievement): Observable<Achievement> {
-    console.log(this.http.post<Achievement>(this.achievementUrl, Achievement, httpOptions))
+    // console.log(this.http.post<Achievement>(this.achievementUrl, Achievement, httpOptions))
     return this.http.post<Achievement>(this.achievementUrl, Achievement, httpOptions);
   }
 
@@ -219,7 +219,7 @@ export class StudentService {
   }
 
   getProjects (roll_no: string): Observable<Project[]> {
-    console.log(`${this.projectUrl}s/${roll_no}`);
+    // console.log(`${this.projectUrl}s/${roll_no}`);
     return this.http.get<Project[]>(`${this.projectUrl}s/${roll_no}`);
   }
 
@@ -229,7 +229,7 @@ export class StudentService {
   }
 
   addProject (Project: Project): Observable<Project> {
-    console.log(this.http.post<Project>(this.projectUrl, Project, httpOptions))
+    // console.log(this.http.post<Project>(this.projectUrl, Project, httpOptions))
     return this.http.post<Project>(this.projectUrl, Project, httpOptions);
   }
 
@@ -245,7 +245,7 @@ export class StudentService {
 
   generateTex(Student : Student): Observable<any> {
     const url = `${this.profileUrl}/tex`;
-    console.log(url)
+    // console.log(url)
     return this.http.post(url, Student, httpOptions);
   }
 

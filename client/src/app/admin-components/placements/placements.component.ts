@@ -99,7 +99,7 @@ export class AdminPlacementsComponent implements OnInit {
     this.saveJob();
     this.saveJobProcess();
   }
-
+  jobstages = {}
   ngOnInit(): void { 
     this.getJobType();
     this.getJobPosts();
@@ -107,6 +107,12 @@ export class AdminPlacementsComponent implements OnInit {
 
     this.myForm = this.fb.group({
       eligibility_criteria : this.fb.array([]),
+    })
+
+    this.utilService.getJobStages().subscribe(jobstages => {
+      jobstages.forEach(jobstage => {
+        this.jobstages[jobstage.id] = jobstage.stage_name;
+      })
     })
 
     this.utilService.getBranches().subscribe(major => {
@@ -287,21 +293,62 @@ export class AdminPlacementsComponent implements OnInit {
   window.alert("Data has been retrieved please download the excel to view data!!")
   }
 
+exceldata = {};
+formatedData = []
+changeDataFormat(){
+  this.exceldata[this.students[0].roll_no] = []
+  for(let i = 0; i < this.students.length - 1 ; i++){
+    if(this.students[i].roll_no == this.students[i+1].roll_no ){
+      this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
+    }else if( this.students[i].roll_no == this.students[i+1].roll_no && i+1 > this.students.length - 1){
+      this.exceldata[this.students[i+1].roll_no].push(this.students[i+1].is_qualified)
+    }
+    else{
+      this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
+      this.exceldata[this.students[i+1].roll_no] = []
+    }
+  }
+  for (var key in this.exceldata) {
+    if (this.exceldata.hasOwnProperty(key)) {
+        this.formatedData.push( [ key.replace(/"/g,""), this.exceldata[key] ] );
+    }
+}
+  console.log(this.exceldata)
+}
 
+getHeaders(){
+  this.changeDataFormat()
+  let headers = ['Roll Number']
+  // this.exceldata[this.students[0].roll_no] = []
+  for(let i = 0; i < this.students.length; i++){
+    if(this.students[i].roll_no == this.students[i+1].roll_no){
+      // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
+      console.log(this.students[i].job_process_id.toString().slice(-1))
+      headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
+    }else{
+      // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
+      headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
+      // this.exceldata[this.students[i+1].roll_no] = []
+      console.log(headers)
+      return headers
+    }
+  }
+
+}
   downloadExcel() {
     var options = {
       fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalseparator: '.',
-      showLabels: true,
-      showTitle: true,
+      // quoteStrings: '"',
+      // decimalseparator: '.',
+      // showLabels: true,
+      // showTitle: true,
       title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile ,
-      useBom: true,
-      noDownload: false,
-      headers: ["Roll Number", "Job Process ID", "Status"]
+      // useBom: true,
+      // noDownload: false,
+      headers: this.getHeaders()
     };
 
-    new ngxCsv(this.students, 'StudentData', options); 
+    new ngxCsv(this.formatedData, 'StudentData', options); 
   }
 
   private saveJobProcess() {

@@ -32,12 +32,12 @@ export class JobpostsService {
   ) { }
    
   getJobPosts (): Observable<JobPosts[]> {
-    console.log((this.jobpostsUrl));
+    // console.log((this.jobpostsUrl));
     return this.http.get<JobPosts[]>(this.jobpostsUrl);
   }
 
   getInternshipJobPosts (): Observable<JobPosts[]> {
-    console.log((this.internshipjobposts));
+    // console.log((this.internshipjobposts));
     return this.http.get<JobPosts[]>(this.jobpostsUrl);
   }
 
@@ -53,7 +53,7 @@ export class JobpostsService {
 
   getJobData(companyid: number): Observable<JobPosts> {
     const url = `${this.jobpostsUrl}/${companyid}`;
-    console.log("Job Data : " , url)
+    // console.log("Job Data : " , url)
     return this.http.get<JobPosts>(url);
   }
   

@@ -24,19 +24,19 @@ export class JobPostsService {
   ) { }
   
   getJobPosts (): Observable<JobPost[]> {
-    console.log((this.jobpostsUrl));
+    // console.log((this.jobpostsUrl));
     return this.http.get<JobPost[]>(this.jobpostsUrl);
   }
 
   registerJobPost(roll_no: string, id: string): Observable<JobPost> {
     const url = `${this.jobPosActivitytUrl}/${roll_no}/${id}`;
-    console.log(url)
+    // console.log(url)
     return this.http.get<JobPost>(url);
   }
 
   getAppliedJobDetails(roll_no: string): Observable<JobPostActivity[]> {
     const url = `${this.jobpostsUrl}/applied/${roll_no}`;
-    console.log(url)
+    // console.log(url)
     return this.http.get<JobPostActivity[]>(url);
   }
 
