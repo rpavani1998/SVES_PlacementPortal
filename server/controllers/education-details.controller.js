@@ -121,7 +121,7 @@ exports.getData = (req, res) => {
 	let major = req.params.major;
 	let percentage = req.params.percentage;
 	let passing_year = req.params.passing_year;
-	let backlogs = req.params.backlogs;
+	let backlogs = req.params.backlogs; 
 
 	
 	
@@ -154,6 +154,7 @@ exports.approveRequest = (req, res) => {
 	let major = req.body.major;
 	let percentage = req.body.percentage;
 	let cgpa = req.body.cgpa;
+	let comment = req.body.comment;
 	console.log("Update")
 	var values = req.body
 	var con = { where: { roll_no: roll_no } };
@@ -161,21 +162,21 @@ exports.approveRequest = (req, res) => {
 
 	VerifiedEducationDetail.findAll({where : { roll_no : req.body.roll_no } }).then(data => {
 		console.log("ID : " , data)
-		// if(data.length > 0) {
+		if(data.length > 0 && data.certificate_degree_name == degree ) {
 			VerifiedEducationDetail.update({ id : data[0].id , roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage, cgpa: cgpa } , { where : { id : data[0].id , roll_no: roll_no, certificate_degree_name: degree, major: major } } ).then(() => {
-				res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
+				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 			}); 
-		// } else {
+		} else {
 			VerifiedEducationDetail.create(values, con).then(() => {
-				res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
+				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 			});
-		// }
+		} 
 	})
  
-	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage , status : "Accepted" }
+	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage , status : "Verified" }
 	var con = { where: { roll_no: roll_no , certificate_degree_name: degree, major: major, percentage: percentage } };
 
-	EducationDetails.update(value, con).then(() => {
+	EducationDetails.update({ roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage , status : "Verified" , comment : comment } , {where : { roll_no: roll_no , certificate_degree_name: degree, major: major, percentage: percentage }} ).then(() => {
 		// res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 	});
 	
@@ -193,7 +194,7 @@ exports.rejectRequest = (req, res) => {
 	console.log("Update Reject Request")
 	console.log("Roll Number : " , roll_no);
 
-	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage, status : "Rejected" }
+	var value = { roll_no: roll_no, certificate_degree_name: degree, major: major, percentage: percentage, status : "Rejected" , comment : comment }
 	var con = { where: { roll_no: roll_no ,  certificate_degree_name: degree, major: major, percentage: percentage } };
 
 	EducationDetails.update(value, con).then(() => {
@@ -202,50 +203,52 @@ exports.rejectRequest = (req, res) => {
 	
 }
 
+exports.approveProfileRequest = (req , res) => {
+	let roll_no = req.body.roll_no;
+	let first_name = req.body.first_name;
+	let last_name = req.body.last_name;
+	let branch = req.body.branch;
+	let dob = req.body.dob;
+	let backlogs = req.body.backlogs;
+	let aadhar_no = req.body.aadhar_no;
+	let pan_no = req.body.pan_no;
 
-exports.approveProfileRequest = (req, res) => {
-	console.log("Update")
-	var values = req.body
-	var con = { where: { roll_no: req.body.roll_no , first_name : req.body.first_name , last_name : req.body.last_name , branch : req.body.branch , dob : req.body.dob , backlogs: req.body.backlogs , aadhar_no : req.body.aadhar_no , pan_no : req.body.pan_no } };
-	console.log("Roll Number : ", req.body.roll_no);
-
-	VerifiedStudents.findAll({where : { roll_no: req.body.roll_no }}).then(data => {
-		console.log('dataaa', data)
-		if(data.length > 0) {
-			VerifiedStudents.update(values, con).then(() => {
-				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
+	VerifiedStudents.findAll({ where : { roll_no : roll_no } }).then(student => {
+		if ( student.length > 0  ) {
+		VerifiedStudents.update({  roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no } , { where : { roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no } } ).then(() => {
+			// res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
+		}); 
+		}
+		else {
+			VerifiedStudents.create({  roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no }  ).then(() => {
+				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + roll_no });
 			});
-		} else {
-			console.log("Innnnnnn1")
-			VerifiedStudents.create(values, con).then(() => {
-				console.log("Innnnnnn")
-				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
-			});		
 		}
 	})
 
-	 
-	var value = { roll_no: req.body.roll_no , first_name : req.body.first_name , last_name : req.body.last_name , branch : req.body.branch , dob : req.body.dob , backlogs: req.body.backlogs , aadhar_no : req.body.aadhar_no , status : "Verified" }
-	var con = { where: { roll_no: req.body.roll_no , first_name : req.body.first_name , last_name : req.body.last_name , branch : req.body.branch , dob : req.body.dob , backlogs: req.body.backlogs , aadhar_no : req.body.aadhar_no} };
+	var values = { roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no , status : "Verified" , comment : req.body.comment };
+	var condition = { where : { roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no } }
+	Student.update({ roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no , status : "Verified" , comment : req.body.comment } , { where : { roll_no: roll_no, branch : branch , dob : dob , aadhar_no : aadhar_no , } }).then(result => {
+		console.log("Accepted profile request")
+	})
+}
 
-	Student.update(value, con).then(() => {
-		res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
-	});
-	
-} 
-
-
-exports.rejectProfileRequest = (req, res) => {
+exports.rejectProfileRequest = (req , res) => {
 	let roll_no = req.body.roll_no;
-	console.log("Update Reject Request")
-	console.log("Roll Number : " , roll_no);
+	let first_name = req.body.first_name;
+	let last_name = req.body.last_name;
+	let branch = req.body.branch;
+	let dob = req.body.dob;
+	let backlogs = req.body.backlogs;
+	let aadhar_no = req.body.aadhar_no;
+	let pan_no = req.body.pan_no;
+	let comment = req.body.comment;
 
-	var value = { roll_no: req.body.roll_no , first_name : req.body.first_name , last_name : req.body.last_name , branch : req.body.branch , dob : req.body.dob , backlogs: req.body.backlogs , aadhar_no : req.body.aadhar_no , pan_no : req.body.pan_no , status : "Rejected" }
-	var con = { where: { roll_no: roll_no , first_name : req.body.first_name , last_name : req.body.last_name , branch : req.body.branch , dob : req.body.dob , backlogs: req.body.backlogs , aadhar_no : req.body.aadhar_no , pan_no : req.body.pan_no} };
-
-	Student.update(value, con).then(() => {
-		res.status(200).json({ msg: "Rejected verification of education details with roll num = " + roll_no });
-	});
+	var values = { roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no , status : "Rejected" , comment : req.body.comment };
+	var condition = { where : { roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no } }
+	Student.update({ roll_no: roll_no, first_name : first_name , last_name : last_name , branch : branch , dob : dob , backlogs : backlogs , aadhar_no : aadhar_no , pan_no : pan_no , status : "Rejected" , comment : req.body.comment } , { where : { roll_no: roll_no , branch : branch , dob : dob  , aadhar_no : aadhar_no  } }).then(result => {
+		console.log("Rejected profile request")
+	})
 	
 }
 
@@ -257,21 +260,23 @@ exports.approveExperienceRequest = (req, res) => {
 	console.log("Roll Number : ", req.body.roll_no);
 
 	VerifiedExperience.findAll({where : {roll_no : req.body.roll_no }  }).then(data => {
+		if ( data.length > 0 && data.job_title == req.body.job_title ) {
 			VerifiedExperience.update(values, con).then(() => {
 				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
 			});
+		} else {
 			VerifiedExperience.create(values, con).then(() => {
 				// res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
 			});
-		
+		}
 	})
 
 	 
-	var value = { roll_no: req.body.roll_no , is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description , status : "Verified" }
+	var value = { roll_no: req.body.roll_no , is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description , status : "Verified" , comment : req.body.comment }
 	var con = { where: { roll_no: req.body.roll_no ,  is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description } };
 
 	Experience.update(value, con).then(() => {
-		res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
+		// res.status(200).json({ msg: "successfully update verified education details with roll num = " + req.body.roll_no });
 	});
 	
 } 
@@ -282,10 +287,10 @@ exports.rejectExperienceRequest = (req, res) => {
 	console.log("Update Reject Request")
 	console.log("Roll Number : " , roll_no);
 
-	var value = { roll_no: req.body.roll_no , is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description , status : "Rejected" }
+	var value = { roll_no: req.body.roll_no , is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description , status : "Rejected" , comment : req.body.comment }
 	var con = { where: { roll_no: roll_no , is_current_job : req.body.is_current_job , start_date : req.body.start_date , end_date : req.body.end_date , job_title : req.body.job_title , company_name : req.body.company_name , job_location_city : req.body.job_location_city , description : req.body.description} };
 
 	Experience.update(value, con).then(() => {
-		res.status(200).json({ msg: "Rejected verification of education details with roll num = " + roll_no });
+		// res.status(200).json({ msg: "Rejected verification of education details with roll num = " + roll_no });
 	});	
 }

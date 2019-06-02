@@ -26,7 +26,7 @@ export class CompanyService {
 
   addCompany (company: Company): Observable<Company> {
     console.log(this.http.post<Company>(this.companyUrl, company, httpOptions))
-    return this.http.post<Company>(this.companyUrl, company, httpOptions);
+    return this.http.post<Company>(this.companyUrl, company, httpOptions);  
   }
   
   getCompany (id: number): Observable<Company> {

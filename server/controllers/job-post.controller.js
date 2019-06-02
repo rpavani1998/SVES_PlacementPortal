@@ -135,7 +135,7 @@ exports.create = (req, res) => {
 					job.job_type = user.job_type_id
 					job.college_id = user.college_id
 
-					AddJob.create(job).then(result => {
+					AddJob.create(job).then(result => { 
 						job_id = result.id;
 						res.json(result) 
 						let jobprocess = req.body;
@@ -146,14 +146,15 @@ exports.create = (req, res) => {
 						var len = keys.length;
 						// var jobid = result.id;
 						VerifiedEducationDetail.findAll({ where: { percentage : { [Op.gte] : req.body.overall_aggregate }  , backlogs : req.body.backlogs , certificate_degree_name : req.body.degree} }).then(eligibleuserdata => {
+							console.log( Object.keys(eligibleuserdata).length )
 							for (var i = 0; i < len; i++) {
 								JobProcess.create({ job_process_id: job_id.toString() + 0 + jobprocess.job_stage_id[i], job_post_id: job_id, job_stage_id: jobprocess.job_stage_id[i] }).then(jobprocess => {});
 								for ( var data in eligibleuserdata ) {
-									StudentJobApp.create({ roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id.toString() + 0 + jobprocess.job_stage_id[i] , is_qualified : 'Not applied' }).then(result => {});
+									StudentJobApp.create({ roll_no : eligibleuserdata[data].roll_no , job_process_id : job_id.toString() + 0 + jobprocess.job_stage_id[i] , is_qualified : 'Not Applied' }).then(result => {});
 								}
 							}
 							for ( data in eligibleuserdata) {
-								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id.toString() , placement_status : 'NotSelected'}).then(data =>{})
+								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id.toString() , placement_status : 'Not Selected'}).then(data =>{})
 							}
 						});
 					});

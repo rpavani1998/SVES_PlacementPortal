@@ -47,9 +47,16 @@ export class AdminPlacementsComponent implements OnInit {
   filters = new EducationDetails();
   userdata: User;
   myForm: FormGroup;
+  selectedAll: any;
   data = [];
   closeddata = [];
   companyprofiles = {};
+
+
+  isTrade: boolean = false
+  isNonTrade: boolean = false
+  checkAllNonTrades: boolean = false
+  checkAllTrades: boolean = false
 
   eligibility = {
     eligibility_criteria : [
@@ -83,7 +90,7 @@ export class AdminPlacementsComponent implements OnInit {
     this.company = new Company();
   }
 
-  addCompany() {
+  addCompany() { 
     this.submitted = true;
     this.saveCompany();
   }
@@ -117,6 +124,11 @@ export class AdminPlacementsComponent implements OnInit {
 
     this.utilService.getBranches().subscribe(major => {
       this.majors = major;
+      this.majors.forEach(m => {
+        m.selected = false;
+      })
+      
+      
       console.log("Branches : ", major); 
 
       this.utilService.getColleges().subscribe(institute_university_name => {
@@ -172,7 +184,7 @@ export class AdminPlacementsComponent implements OnInit {
    refresh () {
      window.location.reload();
    }
-
+ 
 
   user: User;
   student: Student;
@@ -227,7 +239,7 @@ export class AdminPlacementsComponent implements OnInit {
 
 
   private saveCompany(): void {
-    console.info("company info", this.job);
+    console.info("company info", this.job); 
     this.companyService.addCompany(this.job)
       .subscribe(company => {
         console.log("Company ID : " , company[0].company_id, this.company.company_image)
@@ -235,7 +247,7 @@ export class AdminPlacementsComponent implements OnInit {
       })
     // this.router.navigateByUrl('/placements');
       for(let i = 0; i < 1000; i++){}
- window.location.reload(); 
+ window.location.reload();  
     }
 
  
@@ -248,8 +260,8 @@ export class AdminPlacementsComponent implements OnInit {
     this.jobprocess.job_post_id = this.job.id;
     this.utilService.addJobProcess(this.jobprocess).subscribe(); 
 
-    this.router.navigateByUrl('/placements');
-    window.location.reload(); 
+    // this.router.navigateByUrl('/placements');
+    // window.location.reload(); 
 
   }
 
@@ -273,6 +285,7 @@ export class AdminPlacementsComponent implements OnInit {
         })      
     })
     console.log("Students : " , this.students) 
+    console.log("Students : " , typeof(this.students) ) 
    } else {
     this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
       console.log("Job : " , jobid)
@@ -287,14 +300,17 @@ export class AdminPlacementsComponent implements OnInit {
           }) 
         })
       })
-      console.log("Students Data : " , this.students);      
+      console.log("Students Data : " , this.students);     
+      console.log("Students : " , typeof(this.students) )  
   })
-  }
+}
   window.alert("Data has been retrieved please download the excel to view data!!")
   }
 
 exceldata = {};
 formatedData = []
+filteredData = []
+dataheaders = []
 changeDataFormat(){
   this.exceldata[this.students[0].roll_no] = []
   for(let i = 0; i < this.students.length - 1 ; i++){
@@ -312,8 +328,9 @@ changeDataFormat(){
     if (this.exceldata.hasOwnProperty(key)) {
         this.formatedData.push( [ key.replace(/"/g,""), this.exceldata[key] ] );
     }
-}
-  console.log(this.exceldata)
+  }
+  console.log("Formated Data : " , this.formatedData)
+  console.log("Excel Data : " + this.exceldata)
 }
 
 getHeaders(){
@@ -329,7 +346,7 @@ getHeaders(){
       // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
       headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
       // this.exceldata[this.students[i+1].roll_no] = []
-      console.log(headers)
+      console.log("Headers : " , headers)
       return headers
     }
   }
@@ -338,13 +355,13 @@ getHeaders(){
   downloadExcel() {
     var options = {
       fieldSeparator: ',',
-      // quoteStrings: '"',
-      // decimalseparator: '.',
-      // showLabels: true,
-      // showTitle: true,
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
       title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile ,
-      // useBom: true,
-      // noDownload: false,
+      useBom: true,
+      noDownload: false,
       headers: this.getHeaders()
     };
 

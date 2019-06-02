@@ -69,7 +69,7 @@
                     <div class="card-header card-header-danger">
                       <h4 class="card-title">Job Post</h4>
                       <p class="card-category">Add Company Details</p>
-                    </div>
+                    </div> 
           <br>
                     <div class="row">
                         <div class="col-md-6">
@@ -201,11 +201,10 @@
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput [matDatepicker]="date_" placeholder="Apply Before" type="date" id="last_date_for_application"
+                            <input matInput  placeholder="Apply Before" type="date" id="last_date_for_application"
                               required [(ngModel)]="job.last_date_for_application" name="last_date_for_application"
                               #last_date_for_application="ngModel">
-                              <mat-datepicker-toggle matSuffix [for]="date_"></mat-datepicker-toggle>
-                              <mat-datepicker #date_></mat-datepicker>
+                              
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -219,10 +218,9 @@
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput [matDatepicker]="date" placeholder="PPT Talk" type="date" id="ppt_talk" required
+                            <input matInput  placeholder="PPT Talk" type="date" id="ppt_talk" required
                               [(ngModel)]="job.ppt_talk" name="ppt_talk" #ppt_talk="ngModel">
-                              <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-                              <mat-datepicker #date></mat-datepicker>
+                              
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -358,12 +356,12 @@
                   </mat-form-field>
                 </div>
                 <div class="col-md-5" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'TPO' " enable>
-                    <mat-form-field >
+                    <mat-form-field>
                         <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
                           name="major" #major="ngModel">
                           <mat-option *ngFor="let major of majors" [value]="major.id">
-                            {{major.branch_name}}
-                          </mat-option>
+                            {{major.branch_name}} 
+                          </mat-option> 
                           
                         </mat-select>
                       </mat-form-field> 
@@ -377,45 +375,34 @@
               </div>
 
               <br><br><br>
-              <!-- <div *ngIf="students">
+                         
+
+            </form>
+          </div>
+
+
+          <!-- <div *ngIf="students">
                   <mat-card class="example-card"> 
                       <mat-card-content> 
                         <div>
                           <h4><b>Reports:</b></h4>
                           <ng-container> 
                                <table>
-                                  <tr>
-                                    <th>Roll Number</th> &nbsp;
-                                    <th>Degree</th> &nbsp;
-                                    <th>Major</th> &nbsp;
-                                    <th>University</th> &nbsp;
-                                    <th>Percentage</th> &nbsp;
-                                    <th>Backlogs</th> &nbsp;
-                                    <th>Email</th> &nbsp;
-                                    <th>Contact Number</th> &nbsp;
-                                  </tr>
-                                  <tr *ngFor="let data of students">
+                                  <tr *ngFor = "let h of dataheaders; let i = index;" >
+                                    <th> {{h[i]}} </th>
+                                  </tr> -->
+                                  <!-- <tr *ngFor="let data of formatedData">
                                     <td>{{data[0].roll_no}}</td> &nbsp;
-                                    <td>{{data[0].certificate_degree_name}}</td> &nbsp;
-                                    <td>{{data[0].major}}</td> &nbsp;
-                                    <td>{{data[0].institute_university_name}}</td> &nbsp;
-                                    <td>{{data[0].percentage}}</td> &nbsp;
-                                    <td>{{data[0].backlogs}}</td> &nbsp;
-                                    <td>{{data[0].user.email}}</td> &nbsp;
-                                    <td>{{data[0].user.contact_number}}</td> &nbsp;
-                                  </tr>
-                                </table>
-                            <button  (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
-                            </ng-container>
+                                    
+                                  </tr> -->
+                                <!-- </table>
+                              </ng-container>
                         </div>
                       </mat-card-content>
                     </mat-card>
             
               </div> -->
-            
 
-            </form>
-          </div>
           <br>
         </mat-tab>
       </mat-tab-group>

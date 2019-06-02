@@ -75,5 +75,5 @@ export class NotificationsService {
   getFilterData ( major : string , percentage : number , passing_year: number ,  backlogs : number): Observable<EducationDetails[]> {
     console.log((`${this.filterdataUrl}/${major}/${passing_year}/${percentage}/${backlogs}`))
     return this.http.get<EducationDetails[]>(`${this.filterdataUrl}/${major}/${passing_year}/${percentage}/${backlogs}`);
-  }
+  }  
 }

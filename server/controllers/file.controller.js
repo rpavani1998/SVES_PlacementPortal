@@ -2,6 +2,8 @@ var stream = require('stream');
 
 const db = require('../config/db.config.js');
 const File = db.files;
+const UserAccounts = db.users;
+const StudentProfiles = db.students;
 const latex = require('node-latex')
 const fs = require('fs')
 var tostream = require('string-to-stream')
@@ -9,7 +11,7 @@ var tostream = require('string-to-stream')
 exports.uploadFile = (req, res) => {
 	console.log(req, req.body.id)
 	console.log(req.body.id, req.file.mimetype, req.file.originalname, req.file.buffer)
-	File.create({
+	File.create({ 
 		id: req.body.id,
 		type: req.file.mimetype,
 		name: req.file.originalname,
@@ -18,6 +20,39 @@ exports.uploadFile = (req, res) => {
 		res.json({msg:'File uploaded successfully! -> filename = ' + req.file.originalname});
 	})
 }
+
+// exports.uploadStudentProfiles = (req , res) => {
+// 	// console.log(req, req.body.id)
+// 	// console.log(req.body.id, req.file.mimetype, req.file.originalname, req.file.buffer)
+// 	StudentProfiles.create({ 
+// 			 attributes : [
+// 				"LOAD DATA LOCAL INFILE" + req.file.originalname + "INTO TABLE boatdb.boats",
+// "FIELDS TERMINATED BY" + ',',
+// "LINES TERMINATED BY" + '\n',
+// "IGNORE 1 LINES",
+// "(roll_no , first_name . last_name , branch , dob , backlogs , aadhar_no , pan_no , status)",
+// "set date_made = STR_TO_DATE(@datevar,'%m/%d/%Y');"
+// 			]
+		
+
+// 	}).then(() => {
+// 		res.json({msg:'File uploaded successfully! -> filename = ' + req.file.originalname});
+// 	})
+// }
+
+
+// exports.uploadUserAaccounts = (req , res) => {
+// 	console.log(req, req.body.id)
+// 	console.log(req.body.id, req.file.mimetype, req.file.originalname, req.file.buffer)
+// 	UserAccounts.create({ 
+// 		id: req.body.id,
+// 		type: req.file.mimetype,
+// 		name: req.file.originalname,
+// 		data: req.file.buffer
+// 	}).then(() => {
+// 		res.json({msg:'File uploaded successfully! -> filename = ' + req.file.originalname});
+// 	})
+// }
 
 exports.updateFile = (req, res) => {
 	const id = req.params.id;

@@ -70,6 +70,36 @@ exports.findById = (req, res) => {
 	})
 };
 
+// Add Students 
+
+exports.addStudents = (req , res) => {
+	let data = req.body;
+	// console.log("Data : " , data)
+	User.findAll({ where : { id : req.body.id } }).then( result => {
+		var len = Object.keys(result).length;
+		User.create({ id : req.body.id , user_type_id : req.body.user_type_id , college_id : req.body.college_id , branch_id : req.body.branch_id , email : req.body.email , password : md5(req.body.password) , contact_number : req.body.contact_number , sms_notification_active : req.body.sms_notification_active , email_notification_active : req.body.email_notification_active , user_image : req.body.user_image }).then(data => {
+			console.log("Inserted Data");
+			res.json(data)
+		})
+	})
+}
+
+//Change Password
+
+// exports.changePassword = (req , res) => {
+// 	let password = req.params.password;
+// 	let id = req.params.id; 
+// 	console.log("Password : " , password);
+// 	console.log("ID : " , id); 
+	
+// 	User.findAll( { where : {  id : id } } ).then(data => {
+// 		User.update({ password : password } , {id : id} ).then(result => {
+// 			console.log("Updated password for id : " + id)
+// 		})
+// 		res.json(data)
+// 	}) 
+// }
+
 // Update a User
 exports.update = (req, res) => {
 	let User = req.body;

@@ -19,7 +19,7 @@ export class ViewAppliedJobsComponent implements OnInit {
   constructor( private jobPostsService : JobPostsService,
     private  companyService: CompanyService,
     private utilService: UtilsService,
-    private studentService : StudentService) { 
+    private studentService : StudentService) {  
   }
 
   data = []

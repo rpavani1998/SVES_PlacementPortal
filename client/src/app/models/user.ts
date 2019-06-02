@@ -10,3 +10,4 @@ export class User {
     email_notification_active: boolean = true;
     user_image: string = '';
 }
+ 

@@ -14,9 +14,15 @@ module.exports = function(app) {
  
     app.put('/api/users', users.update);
 
+    app.post('/api/students_data' , users.addStudents);
+
+    // app.post('/api/password/:password/:id', users.changePassword);
+
     app.post('/api/users/isLoggedIn', users.isLoggedIn);
 
     app.post('/api/users/logout', users.logout);
 
     app.delete('/api/users/:userId', users.delete);
+
+    app.put
 }

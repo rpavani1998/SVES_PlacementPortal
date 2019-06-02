@@ -32,4 +32,5 @@ export class EducationDetails {
     email_notification_active: boolean = true;
     user_image: string = '';
     branch_id : string ;
+    comment : string;
 }

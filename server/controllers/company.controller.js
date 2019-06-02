@@ -1,5 +1,5 @@
 const db = require('../config/db.config.js');
-const Company = db.company;
+const Company = db.company; 
 const AddJob = db.job_post;
 exports.create = (req, res) => {	
 	let company = req.body;
@@ -8,7 +8,7 @@ exports.create = (req, res) => {
 			res.json(company)
 		})
 	});
-};
+}; 
 
 exports.findById = (req, res) => {	
 	Company.findById(req.params.id).then(company => {

@@ -8,6 +8,8 @@ import { MailFormat } from 'src/app/models/mail-format';
 import { JobProcess } from 'src/app/models/jobprocess';
 import { JobStage } from 'src/app/models/jobstage';
 import { StudentJobApplications } from 'src/app/models/student-job-applications';
+import { ExcelFile } from 'src/app/models/files';
+import { User } from 'src/app/models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -34,6 +36,8 @@ export class UtilsService {
   private eligiblestudents = 'http://localhost:4000/api/eligiblestudents';
   private registeredstudents = 'http://localhost:4000/api/registeredstudents';
   private notregisteredstudents = 'http://localhost:4000/api/notregisteredstudents';
+  private passwordurl = 'http://localhost:4000/api/password';
+  private studentsUrl = 'http://localhost:4000/api/students_data';
   constructor( 
     private http: HttpClient
   ) { }
@@ -84,9 +88,19 @@ export class UtilsService {
     return this.http.get<College>(url);
   }
 
+  // changePassword(password : string , id : string) : Observable<any> {
+  //   const passwordUrl = `${this.passwordurl}/${password}/${id}`
+  //   return this.http.get(passwordUrl , httpOptions);
+  // } 
+
   addCollege (College: College): Observable<College> {
     console.log(this.http.post<College>(this.collegeUrl, College, httpOptions))
     return this.http.post<College>(this.collegeUrl, College, httpOptions);
+  }
+
+  addStudents(Students : User ) : Observable<User> {
+    console.log(this.http.post<User>(this.studentsUrl, Students, httpOptions))
+    return this.http.post<User>(this.studentsUrl, Students, httpOptions);
   }
 
   deleteCollege (College: College | string): Observable<College> {

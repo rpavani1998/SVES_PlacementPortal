@@ -9,6 +9,32 @@ export class UploadFileService {
 
   constructor(private http: HttpClient) { }
 
+  // saveStudentProfilesDataToDB(id: string, file: File): Observable<HttpEvent<{}>> {
+  //   const formdata: FormData = new FormData();
+
+  //   formdata.append('file', file);
+  //   formdata.append('id', id);
+  //   console.log("uploading data")
+  //   const req = new HttpRequest('POST', 'http://localhost:4000/api/savestudentprofiledata/uploadspdata', formdata, {
+  //     responseType: 'text'
+  //   });
+
+  //   return this.http.request(req);
+  // }
+
+  // saveUserAccountsDataToDB(id: string, file: File): Observable<HttpEvent<{}>> {
+  //   const formdata: FormData = new FormData();
+
+  //   formdata.append('file', file);
+  //   formdata.append('id', id);
+  //   console.log("uploading data")
+  //   const req = new HttpRequest('POST', 'http://localhost:4000/api/saveuseraccountdata/uploaduadata', formdata, {
+  //     responseType: 'text'
+  //   });
+
+  //   return this.http.request(req);
+  // }
+
   pushFileToStorage(id: string, file: File): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
 
@@ -17,7 +43,7 @@ export class UploadFileService {
     console.log("uploading img")
     const req = new HttpRequest('POST', 'http://localhost:4000/api/file/upload', formdata, {
       responseType: 'text'
-    });
+    }); 
 
     return this.http.request(req);
   }

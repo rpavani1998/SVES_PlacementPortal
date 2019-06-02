@@ -31,6 +31,9 @@ module.exports = (sequelize, Sequelize) => {
 		},
 		status: {
 			type: Sequelize.STRING
+		},
+		comment : {
+			type : Sequelize.STRING
 		}
 		
 

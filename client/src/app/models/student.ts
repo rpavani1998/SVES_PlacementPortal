@@ -18,4 +18,5 @@ export class Student {
     id_proof: any
     is_verfied: string = 'False'
     status:string
+    comment : string;
 }

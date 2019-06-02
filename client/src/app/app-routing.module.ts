@@ -57,7 +57,7 @@ const routes: Routes = [
   }]} ,
   {
     path: '',
-    component: AdminLayoutComponent,
+    component: AdminLayoutComponent, 
     children: [
         {
       path: '',

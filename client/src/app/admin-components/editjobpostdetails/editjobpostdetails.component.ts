@@ -37,8 +37,8 @@ export class EditjobpostdetailsComponent implements OnInit {
     jobpost: JobPosts[];
 
 
-  ngOnInit() {
-    const jobid = this.route.snapshot.params.id;
+  ngOnInit() { 
+    const jobid = this.route.snapshot.params.id; 
     this.jobpostsService.getJobData(jobid)
       .subscribe(jobposts => {
           this.utilService.getJobProcess(jobid).subscribe(jobprocess => {

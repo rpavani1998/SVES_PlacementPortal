@@ -14,7 +14,7 @@
 
             <div class="row" *ngIf="userdata.user_type_id == 'TPO' || userdata.user_type_id == 'PRI'" enable>
               <div class="col-md-6" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'VC'" enable >
-                <!-- <mat-form-field >
+                <mat-form-field >
                   <mat-select placeholder="Select College" id="institute_university_name" required
                     [(ngModel)]="filters.institute_university_name" name="institute_university_name"
                     #institute_university_name="ngModel">
@@ -23,7 +23,7 @@
                       {{ institute_university_name.college_name}}
                     </mat-option>
                   </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field >
@@ -83,7 +83,45 @@
             <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
             <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
             <br><br>
-          </form> 
+          </form>  
+
+
+          <div *ngIf="data">
+                  <mat-card class="example-card"> 
+                      <mat-card-content> 
+                        <div>
+                          <h4><b>Reports:</b></h4>
+                          <ng-container> 
+                               <table>
+                                  <tr>
+                                    <th>Roll Number</th> &nbsp;
+                                    <th>Degree</th> &nbsp;
+                                    <th>Major</th> &nbsp;
+                                    <th>University</th> &nbsp;
+                                    <th>Percentage</th> &nbsp;
+                                    <th>Backlogs</th> &nbsp;
+                                    <th>Email</th> &nbsp;
+                                    <th>Contact Number</th> &nbsp;
+                                  </tr>
+                                  <tr *ngFor="let data of data; let i = index">
+                                    <td>{{data.roll_no}}</td> &nbsp;
+                                    <td>{{data.certificate_degree_name}}</td> &nbsp;
+                                    <td>{{data.major}}</td> &nbsp;
+                                    <td>{{data.institute_university_name}}</td> &nbsp;
+                                    <td>{{data.percentage}}</td> &nbsp;
+                                    <td>{{data.backlogs}}</td> &nbsp;
+                                    <td>{{data.email}}</td> &nbsp;
+                                    <td>{{data.contact_number}}</td> &nbsp;
+                                  </tr>
+                                </table>
+                              </ng-container>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+            
+              </div>
+
+
         </mat-tab>
         <mat-tab label="Placement Reports">
           <form>
@@ -145,6 +183,29 @@
 
               
           </form>
+
+          <div *ngIf="students">
+              <mat-card class="example-card"> 
+                  <mat-card-content> 
+                    <div>
+                      <h4><b>Reports:</b></h4>
+                      <ng-container> 
+                           <table>
+                              <tr>
+                                <th>Roll Number</th> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <th>Status</th> &nbsp;
+                              </tr>
+                              <tr *ngFor="let data of students; let i = index">
+                                <td>{{data.roll_no}}</td> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <td>{{data.placement_status}}</td> &nbsp;
+                              </tr>
+                            </table>
+                          </ng-container>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+        
+          </div>
         </mat-tab>
         <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'" enable>
           <form>
@@ -226,27 +287,15 @@
     <mat-card-content>
       <div>
         <h4><b>Reports:</b></h4>
-        <ng-container *ngIf="data">
+        <ng-container *ngIf="Students">
           <table>
             <tr>
               <th>Roll Number</th> &nbsp;
-              <th>Degree</th> &nbsp;
-              <th>Major</th> &nbsp;
-              <th>University</th> &nbsp;
-              <th>Percentage</th> &nbsp;
-              <th>Backlogs</th> &nbsp;
-              <th>Email</th> &nbsp;
-              <th>Contact Number</th> &nbsp;
+              <th>Placement Status</th> &nbsp;
             </tr>
-            <tr *ngFor="let data of data">
+            <tr *ngFor="let data of students">
               <td>{{data.roll_no}}</td> &nbsp;
-              <td>{{data.certificate_degree_name}}</td> &nbsp;
-              <td>{{data.major}}</td> &nbsp;
-              <td>{{data.institute_university_name}}</td> &nbsp;
-              <td>{{data.percentage}}</td> &nbsp;
-              <td>{{data.backlogs}}</td> &nbsp;
-              <td>{{data.user.email}}</td> &nbsp;
-              <td>{{data.user.contact_number}}</td> &nbsp;
+              <td>{{data.status}}</td> &nbsp;
             </tr>
           </table>
         </ng-container>

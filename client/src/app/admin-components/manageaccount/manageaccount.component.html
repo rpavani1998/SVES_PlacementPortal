@@ -26,6 +26,28 @@
                             <b>Mail Notification status: </b> Active
                         </div>
                     </div>
+                    <!-- <hr> -->
+                    <!-- <div class="container-fluid">
+                        <h4><b>Change Password</b></h4>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="New Password" type="password" id="new_password" required [(ngModel)]="file.new_password"
+                                                    name="new_password" #new_password="ngModel">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Re-Type Password" type="password" id="retype_password" required [(ngModel)]="file.retype_password"
+                                                        name="retype_password" #retype_password="ngModel">
+                                                </mat-form-field>
+                                            </div>
+                                </div>
+
+                            <button type="submit" id = "changepassword" (click) = "changePassword()" >Change Password</button>
+                    </div>  -->
+
                     <hr>
                     <div>
                         <button mat-raised-button type="button" class="btn btn-danger pull-right">Edit Profile</button>
@@ -157,7 +179,26 @@
                     </div>
                 </mat-tab>
 
-
+                <mat-tab label="Add Students" *ngIf="userdata.user_type_id=='TPO'" enable>
+                    <br>
+                    <div class = "contaier-fluid">
+                        <h4><b>Select an xlsx file to upload students data</b></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                                    <input mat-raised-button class="ng-hide" id="students_data" type="file"
+                                        (change)="selectExcelFile($event)" accept=".xlsx">
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button mat-raised-button type="submit" (click) = "upload()" class="btn btn-danger pull-right">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
             </mat-tab-group>
         </mat-card-content>
     </mat-card>
