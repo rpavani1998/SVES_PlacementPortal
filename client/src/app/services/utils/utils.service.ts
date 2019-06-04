@@ -10,6 +10,7 @@ import { JobStage } from 'src/app/models/jobstage';
 import { StudentJobApplications } from 'src/app/models/student-job-applications';
 import { ExcelFile } from 'src/app/models/files';
 import { User } from 'src/app/models/user';
+import { StudentPlacementStatus } from 'src/app/models/student-placement-status';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -38,6 +39,7 @@ export class UtilsService {
   private notregisteredstudents = 'http://localhost:4000/api/notregisteredstudents';
   private passwordurl = 'http://localhost:4000/api/password';
   private studentsUrl = 'http://localhost:4000/api/students_data';
+  private updatePlacementStatusUrl = 'http://localhost:4000/api/updateplacementstatus';
   constructor( 
     private http: HttpClient
   ) { }
@@ -170,7 +172,10 @@ export class UtilsService {
     console.log(this.baseUrl, MailFormat, httpOptions)
     console.log(this.http.post<string>(this.baseUrl, MailFormat, httpOptions))
     return this.http.post<string> (this.baseUrl, MailFormat, httpOptions);
+  }
 
+  updatePlacementStatus (PlacementData : StudentPlacementStatus ): Observable<any> {
+    return this.http.put<any>(this.updatePlacementStatusUrl , PlacementData, httpOptions);
   }
 
 

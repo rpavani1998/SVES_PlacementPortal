@@ -207,6 +207,103 @@
         
           </div>
         </mat-tab>
+
+
+        <mat-tab label="Update Placement Status">
+          <form>
+            <br>
+            <h4><b>Select companies:</b></h4> 
+            <div class="row">
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Company" id="company_name" required [(ngModel)]="job.company_name"
+                      name="company_name" #company_name="ngModel">
+                      <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
+                        {{comp.company_name}}
+                      </mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5" *ngIf = "job.company_name">
+                  <div>
+                      <!-- <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Passing Year" type="text" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                        </mat-form-field> -->
+                        <mat-select placeholder="Job Profile" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                            <mat-option [value]="companyprofiles[job.company_name]">
+                                {{companyprofiles[job.company_name]}}
+                            </mat-option>
+                            </mat-select>
+                      <!-- <mat-form-field>
+                            <mat-option matInput placeholder="job Profile" type="text" id="job_profile" required
+                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel" [value] = "companyprofiles[job.company_name]" >
+                                {{companyprofiles[job.company_name]}} 
+                            </mat-option>
+                        </mat-form-field> -->
+                  </div> 
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Passing Year" type="text" id="passing_year" required
+                      [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5" *ngIf = "userdata.user_type_id == 'TPO' || userdata.user_type_id == 'CHAIR'  " enable>
+                    <mat-form-field >
+                        <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
+                          name="major" #major="ngModel">
+                          <mat-option *ngFor="let major of majors" [value]="major.id">
+                            {{major.branch_name}}
+                          </mat-option>
+                          
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+              </div>
+
+              <button mat-button class="btn btn-danger pull-right" (click)=getfiltereddata()> Apply </button> &nbsp;
+            <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
+            <!-- <button (click)="downloadPlacementData()" class="btn btn-danger pull-right"> Download Excel </button> -->
+
+              
+          </form>
+
+          <div *ngIf="students">
+              <mat-card class="example-card"> 
+                  <mat-card-content> 
+                    <div class = "row" >
+                      <div class = "col-md-5" >
+                        <h5>Selected : </h5>
+                        <mat-form-field>
+                            <mat-select multiple placeholder="Selected" id="placed" required
+                              [(ngModel)]="placement_status.placed" name="placed" #placed="ngModel">
+                              <mat-option *ngFor="let student of eligibleStudents" [value]="student.roll_no">
+                                {{student.roll_no}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                      </div>
+                      <div class = "col-md-5" >
+                          <h5>Not Selected : </h5>
+                          <mat-form-field>
+                              <mat-select multiple placeholder="Not Selected" id="not_placed" required
+                                [(ngModel)]="placement_status.not_placed" name="not_placed" #not_placed="ngModel">
+                                <mat-option *ngFor="let student of eligibleStudents" [value]="student.roll_no">
+                                  {{student.roll_no}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <button mat-button class="btn btn-danger pull-right" (click)=updateStatus()> Update </button> &nbsp;
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+        
+          </div>
+        </mat-tab>
+
         <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'" enable>
           <form>
             <br>

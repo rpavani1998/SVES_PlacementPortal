@@ -113,6 +113,20 @@ exports.jobProcesses = (req , res) => {
 }
 
 
+exports.updatePlacementStatus = (req , res) => {
+	console.log("data : " , req.body );
+	console.log("Placed Students Length : " , req.body.placed.length );
+	console.log("Not Placed Students Length : " , req.body.not_placed.length );
+	for (var i = 0 ; i < req.body.placed.length ; i++ ) {
+		StudentPlacementStatus.update({roll_no : req.body.placed[i] , job_post_id : req.body.job_post_id , placement_status : "Selected" } , { where : { roll_no : req.body.placed[i] , job_post_id : req.body.job_post_id } } ).then(result => {})
+		console.log("Updated Selected Status")
+	}
+	for (var i = 0 ; i < req.body.not_placed.length ; i++ ) {
+		StudentPlacementStatus.update({roll_no : req.body.not_placed[i] , job_post_id : req.body.job_post_id , placement_status : "Not Selected" } , { where : { roll_no : req.body.not_placed[i] , job_post_id : req.body.job_post_id } } ).then(result => {})
+		console.log("Updated Not Selected Status")
+	}
+}
+
 exports.create = (req, res) => {
 	let job = req.body;
 	console.log("Job : ", job)
@@ -154,7 +168,7 @@ exports.create = (req, res) => {
 								}
 							}
 							for ( data in eligibleuserdata) {
-								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id.toString() , placement_status : 'Not Selected'}).then(data =>{})
+								StudentPlacementStatus.create({roll_no : eligibleuserdata[data].roll_no , job_post_id : job_id.toString() , placement_status : 'Eligible'}).then(data =>{})
 							}
 						});
 					});

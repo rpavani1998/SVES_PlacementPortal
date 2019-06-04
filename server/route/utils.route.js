@@ -43,7 +43,6 @@ module.exports = function(app) {
     app.get('/api/file/retrieve/:id', file.getFileById);
 
     // app.get('/api/usertype' , usertype.findAll);
-
- 
+     
     app.get('/api/usertype' , branch.getUsers);
 }

@@ -26,4 +26,6 @@ module.exports = function(app) {
     app.post('/api/addjob', jobposts.create); 
 
     app.get('/api/addjob/:jobId', jobposts.jobProcesses);
+
+    app.put('/api/updateplacementstatus' , jobposts.updatePlacementStatus);
 } 
