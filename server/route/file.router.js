@@ -14,8 +14,8 @@ router.get('/api/file/all', fileWorker.listAllFiles);
   
 router.get('/api/file/:id', fileWorker.downloadFile);
 
-router.post('/api/profile/tex', fileWorker.downloadTex) 
-
+router.post('/api/profile/pdf', fileWorker.generateTex) 
+router.get('/api/profile/:id', fileWorker.downloadPdf) 
 // router.put('api/profile/pdf', fileWorker.downloadPdf)
 // router.get('api/file/retrieve/:id', fileWorker.getFileById);
 

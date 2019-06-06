@@ -13,7 +13,7 @@ exports.create = (req, res) => {
 
 
 exports.findAll = (req, res) => {
-	EducationDetails.findAll({where:{roll_no:req.params.id}}).then(education_details => {
+	EducationDetails.findAll({where:{roll_no:req.params.id},order:[['passing_year', 'DESC']]}).then(education_details => {
 		console.log(education_details);
 	  res.json(education_details);
 	});

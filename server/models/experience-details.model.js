@@ -29,18 +29,12 @@ module.exports = (sequelize, Sequelize) => {
         description: {
             type: Sequelize.STRING
         },
-        status : {
-            type : Sequelize.STRING
-        },
-        comment : {
-            type : Sequelize.STRING
-        }
-		// is_verified: {
-		// 	type: Sequelize.STRING
-		// }
-        // proof_document: {
-		// 	type: Sequelize.BLOB('long')
-		// }
+		status: {
+			type: Sequelize.STRING
+		},
+		comment : {
+			type : Sequelize.STRING
+		}
 
     }, {
             timestamps: false
