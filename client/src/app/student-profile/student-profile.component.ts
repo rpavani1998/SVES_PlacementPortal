@@ -3,6 +3,8 @@ import { Student } from '../models/student';
 import { StudentService } from '../services/student/student.service';
 import { UploadFileService } from '../services/file/file.service';
 import { Achievement } from '../models/achievement';
+import { Branch } from '../models/branch';
+import { UtilsService } from '../services/utils/utils.service';
 
 @Component({
   selector: 'app-student-profile',
@@ -14,18 +16,29 @@ export class StudentProfileComponent  implements OnInit {
 
   student: Student;
   data = [];
+  branches = {};
   img_id = 'student'
   @Input() fileUpload: string;
 
   constructor(private studentService: StudentService,
-    private uploadService: UploadFileService) {}
+    private uploadService: UploadFileService,
+    private utilService: UtilsService) {}
 
   ngOnInit(): void {
+    this.utilService.getBranches().subscribe(branches => {
+      branches.forEach(branch => {
+        this.branches[branch.id] = branch.branch_name;
+        console.log(branch.id, branch.branch_name)
+        })
+      })
     this.getStudentDetails();
   }
 
   generatePDF(){
-      this.studentService.generateTex(this.student)
+      this.uploadService.generateTex(this.student).subscribe();
+      for(let i = 0; i < 1000; i++){}
+      // this.uploadService.downloadPdf(this.student.roll_no).subscribe();
+      window.location.href = 'http://localhost:4000/api/profile/'+this.student.roll_no;
   }
   getStudentDetails() {
     const id = localStorage.getItem('currentUser');
