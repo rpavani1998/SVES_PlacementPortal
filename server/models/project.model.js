@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-	const Achievement = sequelize.define('project', {
+	const Project = sequelize.define('project', {
 	  id: {
             type: Sequelize.STRING,
             autoIncrement: true,
@@ -28,5 +28,5 @@ module.exports = (sequelize, Sequelize) => {
 			timestamps: false
     });
     
-	return Achievement;
+	return Project;
 }

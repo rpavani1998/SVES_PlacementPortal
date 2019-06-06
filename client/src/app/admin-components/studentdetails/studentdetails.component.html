@@ -13,8 +13,8 @@
             <h4><b>Education filters:</b></h4>
 
             <div class="row" *ngIf="userdata.user_type_id == 'TPO' || userdata.user_type_id == 'PRI'" enable>
-              <div class="col-md-6" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'VC'" enable >
-                <mat-form-field >
+              <div class="col-md-6" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'VC'" enable>
+                <mat-form-field>
                   <mat-select placeholder="Select College" id="institute_university_name" required
                     [(ngModel)]="filters.institute_university_name" name="institute_university_name"
                     #institute_university_name="ngModel">
@@ -26,13 +26,13 @@
                 </mat-form-field>
               </div>
               <div class="col-md-6">
-                <mat-form-field >
+                <mat-form-field>
                   <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
                     name="major" #major="ngModel">
                     <mat-option *ngFor="let major of majors" [value]="major.id">
                       {{major.branch_name}}
                     </mat-option>
-                    
+
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -43,21 +43,21 @@
             <!-- <h4><b>Advance filter</b></h4> -->
             <div class="row">
 
-              
-                <div class="col-md-4">
-                    <mat-form-field>
-                      <input matInput placeholder="B.Tech Percentage" type="number" id="percentage" required
-                        [(ngModel)]="filters.percentage" name="percentage" #percentage="ngModel">
-                    </mat-form-field>
-                  </div>
-    
-                  <div class="col-md-6">
-                      <mat-form-field>
-                        <input matInput placeholder="Passing Year" type="number" id="passing_year" required
-                          [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
-                      </mat-form-field>
-                    </div>
-            
+
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input matInput placeholder="B.Tech Percentage" type="number" id="percentage" required
+                    [(ngModel)]="filters.percentage" name="percentage" #percentage="ngModel">
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field>
+                  <input matInput placeholder="Passing Year" type="number" id="passing_year" required
+                    [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
+                </mat-form-field>
+              </div>
+
               <div class="col-md-4">
                 <mat-form-field>
                   <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="filters.backlogs"
@@ -76,138 +76,139 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              
+
             </div>
             <!-- [routerLink]="['/manageaccount', filters.institute_university_name , filters.major , filters.percentage , filters.passing_year , filters.backlogs]" -->
             <button mat-button class="btn btn-danger pull-right" (click)=Apply()> Apply </button> &nbsp;
             <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
             <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
             <br><br>
-          </form>  
+          </form>
 
 
           <div *ngIf="data">
-                  <mat-card class="example-card"> 
-                      <mat-card-content> 
-                        <div>
-                          <h4><b>Reports:</b></h4>
-                          <ng-container> 
-                               <table>
-                                  <tr>
-                                    <th>Roll Number</th> &nbsp;
-                                    <th>Degree</th> &nbsp;
-                                    <th>Major</th> &nbsp;
-                                    <th>University</th> &nbsp;
-                                    <th>Percentage</th> &nbsp;
-                                    <th>Backlogs</th> &nbsp;
-                                    <th>Email</th> &nbsp;
-                                    <th>Contact Number</th> &nbsp;
-                                  </tr>
-                                  <tr *ngFor="let data of data; let i = index">
-                                    <td>{{data.roll_no}}</td> &nbsp;
-                                    <td>{{data.certificate_degree_name}}</td> &nbsp;
-                                    <td>{{data.major}}</td> &nbsp;
-                                    <td>{{data.institute_university_name}}</td> &nbsp;
-                                    <td>{{data.percentage}}</td> &nbsp;
-                                    <td>{{data.backlogs}}</td> &nbsp;
-                                    <td>{{data.email}}</td> &nbsp;
-                                    <td>{{data.contact_number}}</td> &nbsp;
-                                  </tr>
-                                </table>
-                              </ng-container>
-                        </div>
-                      </mat-card-content>
-                    </mat-card>
-            
-              </div>
+            <mat-card class="example-card">
+              <mat-card-content>
+                <div>
+                  <h4><b>Reports:</b></h4>
+                  <ng-container>
+                    <table>
+                      <tr>
+                        <th>Roll Number</th> &nbsp;
+                        <th>Degree</th> &nbsp;
+                        <th>Major</th> &nbsp;
+                        <th>University</th> &nbsp;
+                        <th>Percentage</th> &nbsp;
+                        <th>Backlogs</th> &nbsp;
+                        <th>Email</th> &nbsp;
+                        <th>Contact Number</th> &nbsp;
+                      </tr>
+                      <tr *ngFor="let data of data; let i = index">
+                        <td>{{data.roll_no}}</td> &nbsp;
+                        <td>{{data.certificate_degree_name}}</td> &nbsp;
+                        <td>{{data.major}}</td> &nbsp;
+                        <td>{{data.institute_university_name}}</td> &nbsp;
+                        <td>{{data.percentage}}</td> &nbsp;
+                        <td>{{data.backlogs}}</td> &nbsp;
+                        <td>{{data.email}}</td> &nbsp;
+                        <td>{{data.contact_number}}</td> &nbsp;
+                      </tr>
+                    </table>
+                  </ng-container>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
 
 
         </mat-tab>
         <mat-tab label="Placement Reports">
           <form>
             <br>
-            <h4><b>Select companies:</b></h4> 
+            <h4><b>Select companies:</b></h4>
             <div class="row">
-                <div class="col-md-5">
-                  <mat-form-field>
-                    <mat-select placeholder="Select Company" id="company_name" required [(ngModel)]="job.company_name"
-                      name="company_name" #company_name="ngModel">
-                      <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
-                        {{comp.company_name}}
-                      </mat-option>
-                    </mat-select> 
-                  </mat-form-field>
-                </div>
-                <div class="col-md-5" *ngIf = "job.company_name">
-                  <div>
-                      <!-- <mat-form-field class="example-full-width">
+              <div class="col-md-5">
+                <mat-form-field>
+                  <mat-select placeholder="Select Company" id="company_name" required [(ngModel)]="job.company_name"
+                    name="company_name" #company_name="ngModel">
+                    <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
+                      {{comp.company_name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-5" *ngIf="job.company_name">
+                <div>
+                  <!-- <mat-form-field class="example-full-width">
                           <input matInput placeholder="Passing Year" type="text" id="job_profile" required
                             [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
                         </mat-form-field> -->
-                        <mat-select placeholder="Job Profile" id="job_profile" required
-                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
-                            <mat-option [value]="companyprofiles[job.company_name]">
-                                {{companyprofiles[job.company_name]}}
-                            </mat-option>
-                            </mat-select>
-                      <!-- <mat-form-field>
+                  <mat-select placeholder="Job Profile" id="job_profile" required [(ngModel)]="job.job_profile"
+                    name="job_profile" #job_profile="ngModel">
+                    <mat-option [value]="companyprofiles[job.company_name]">
+                      {{companyprofiles[job.company_name]}}
+                    </mat-option>
+                  </mat-select>
+                  <!-- <mat-form-field>
                             <mat-option matInput placeholder="job Profile" type="text" id="job_profile" required
                             [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel" [value] = "companyprofiles[job.company_name]" >
                                 {{companyprofiles[job.company_name]}} 
                             </mat-option>
                         </mat-form-field> -->
-                  </div> 
-                </div>
-                <div class="col-md-5">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Passing Year" type="text" id="passing_year" required
-                      [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
-                  </mat-form-field>
-                </div>
-                <div class="col-md-5" *ngIf = "userdata.user_type_id == 'TPO' || userdata.user_type_id == 'CHAIR'  " enable>
-                    <mat-form-field >
-                        <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
-                          name="major" #major="ngModel">
-                          <mat-option *ngFor="let major of majors" [value]="major.id">
-                            {{major.branch_name}}
-                          </mat-option>
-                          
-                        </mat-select>
-                      </mat-form-field>
                 </div>
               </div>
+              <div class="col-md-5">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Passing Year" type="text" id="passing_year" required
+                    [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
+                </mat-form-field>
+              </div>
+              <div class="col-md-5" *ngIf="userdata.user_type_id == 'TPO' || userdata.user_type_id == 'CHAIR'  " enable>
+                <mat-form-field>
+                  <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
+                    name="major" #major="ngModel">
+                    <mat-option *ngFor="let major of majors" [value]="major.id">
+                      {{major.branch_name}}
+                    </mat-option>
 
-              <button mat-button class="btn btn-danger pull-right" (click)=getfiltereddata()> Apply </button> &nbsp;
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <button mat-button class="btn btn-danger pull-right" (click)=getfiltereddata()> Apply </button> &nbsp;
             <!-- <button mat-button class="btn btn-danger" (click)=refresh()> Apply another filter </button> &nbsp; -->
             <button (click)="downloadPlacementData()" class="btn btn-danger pull-right"> Download Excel </button>
 
-              
+
           </form>
 
           <div *ngIf="students">
-              <mat-card class="example-card"> 
-                  <mat-card-content> 
-                    <div>
-                      <h4><b>Reports:</b></h4>
-                      <ng-container> 
-                           <table>
-                              <tr>
-                                <th>Roll Number</th> &nbsp;&nbsp;&nbsp;&nbsp;
-                                <th>Status</th> &nbsp;
-                              </tr>
-                              <tr *ngFor="let data of students; let i = index">
-                                <td>{{data.roll_no}}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-                                <td>{{data.placement_status}}</td> &nbsp;
-                              </tr>
-                            </table>
-                          </ng-container>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
-        
+            <mat-card class="example-card">
+              <mat-card-content>
+                <div>
+                  <h4><b>Reports:</b></h4>
+                  <ng-container>
+                    <table>
+                      <tr>
+                        <th>Roll Number</th> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <th>Status</th> &nbsp;
+                      </tr>
+                      <tr *ngFor="let data of students; let i = index">
+                        <td>{{data.roll_no}}</td> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <td>{{data.placement_status}}</td> &nbsp;
+                      </tr>
+                    </table>
+                  </ng-container>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
           </div>
         </mat-tab>
-        <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'" enable>
+        <mat-tab label="College Reports" *ngIf=" userdata.user_type_id == 'CHAIR' ||  userdata.user_type_id == 'VC'"
+          enable>
           <form>
             <br>
             <h4><b>Select Colleges:</b></h4>
@@ -255,24 +256,25 @@
                     [(ngModel)]="placementreport.company_name" name="company_name" #branch_name="ngModel">
                     <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
                       {{comp.company_name}}
-                    </mat-option> 
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-5"> 
+              <div class="col-md-5">
                 <mat-form-field>
-                    <mat-select placeholder="Job Profile" id="job_profile" required
-                    [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
+                  <mat-select placeholder="Job Profile" id="job_profile" required [(ngModel)]="job.job_profile"
+                    name="job_profile" #job_profile="ngModel">
                     <mat-option [value]="companyprofiles[job.company_name]">
-                        {{companyprofiles[job.company_name]}}
+                      {{companyprofiles[job.company_name]}}
                     </mat-option>
-                    </mat-select>
+                  </mat-select>
                 </mat-form-field>
               </div>
-            </div> 
+            </div>
 
             <div class="row">
-              <button class="btn btn-danger pull-right" (click) = "downloadPlacementExcel()" > Generate reports </button> &nbsp;
+              <button class="btn btn-danger pull-right" (click)="downloadPlacementExcel()"> Generate reports </button>
+              &nbsp;
             </div>
 
           </form>
@@ -283,7 +285,7 @@
   </mat-card>
   <br>
 
- <!-- <mat-card class="example-card">
+  <!-- <mat-card class="example-card">
     <mat-card-content>
       <div>
         <h4><b>Reports:</b></h4>

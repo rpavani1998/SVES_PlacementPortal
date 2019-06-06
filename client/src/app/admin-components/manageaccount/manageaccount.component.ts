@@ -20,14 +20,14 @@ import * as XLSX from 'ts-xlsx';
 })
 export class ManageaccountComponent implements OnInit {
 
-  educationdetails = new EducationDetails(); 
+  educationdetails = new EducationDetails();
   user = new User();
   submitted = false;
   message: string;
   file = new ExcelFile();
-  
-  arrayBuffer:any;
-  studentsData:File;
+
+  arrayBuffer: any;
+  studentsData: File;
 
 
   constructor(
@@ -54,33 +54,33 @@ export class ManageaccountComponent implements OnInit {
       .subscribe(
         userdata => {
           this.userdata = userdata;
-          console.log("User Data : " , userdata);
+          console.log("User Data : ", userdata);
         });
 
     this.usertypeService.getUserTypes()
       .subscribe(
         usertype => {
           this.usertype = usertype;
-          console.log("USer Type : " , usertype);
+          console.log("USer Type : ", usertype);
         });
 
-        this.utilService.getColleges().subscribe(institute_university_name => {
-          this.institute_university_names = institute_university_name;
-          console.log("Colleges : ", institute_university_name);
-        })
-   
-        this.utilService.getBranches().subscribe(major => {
-          this.majors = major;
-          console.log("Branches : ", major);
-        });
+    this.utilService.getColleges().subscribe(institute_university_name => {
+      this.institute_university_names = institute_university_name;
+      console.log("Colleges : ", institute_university_name);
+    })
 
-        var uid = localStorage.getItem('currentUser');
+    this.utilService.getBranches().subscribe(major => {
+      this.majors = major;
+      console.log("Branches : ", major);
+    });
+
+    var uid = localStorage.getItem('currentUser');
     this.userService.getUser(uid)
       .subscribe(
         userdata => {
           console.log("User Data : ", userdata.user_type_id);
           this.userdata = userdata;
-        });     
+        });
   }
 
   selectExcelFile(event) {
@@ -93,51 +93,51 @@ export class ManageaccountComponent implements OnInit {
       this.arrayBuffer = fileReader.result;
       var data = new Uint8Array(this.arrayBuffer);
       var arr = new Array();
-      for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
       var bstr = arr.join("");
-      var workbook = XLSX.read(bstr, {type:"binary"});
+      var workbook = XLSX.read(bstr, { type: "binary" });
       var first_sheet_name = workbook.SheetNames[0];
       var worksheet = workbook.Sheets[first_sheet_name];
       // console.log( "Excel : " , XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-      XLSX.utils.sheet_to_json(worksheet,{raw:true}).forEach(student => {
+      XLSX.utils.sheet_to_json(worksheet, { raw: true }).forEach(student => {
         this.user.id = student['id']
         this.user.user_type_id = student['user_type_id']
         this.user.college_id = student['college_id']
         this.user.branch_id = student['branch_id']
-        this.user.email = student['email'] ;
-        this.user.password = student['password'] ;
-        this.user.contact_number = student['contact_number'] ;
-        this.user.sms_notification_active = student['sms_notification_active'] ;
-        this.user.email_notification_active = student['email_notification_active'] ;
+        this.user.email = student['email'];
+        this.user.password = student['password'];
+        this.user.contact_number = student['contact_number'];
+        this.user.sms_notification_active = student['sms_notification_active'];
+        this.user.email_notification_active = student['email_notification_active'];
         this.user.user_image = student['user_image']
         this.utilService.addStudents(this.user).subscribe(students => {
-          console.log("Students : " , students);
+          console.log("Students : ", students);
         })
       })
     }
     fileReader.readAsArrayBuffer(this.studentsData);
   }
 
-  addAdmin () {
-    this.userService.addUser(this.user) 
+  addAdmin() {
+    this.userService.addUser(this.user)
       .subscribe();
-      this.router.navigateByUrl('/manageaccount');
+    this.router.navigateByUrl('/manageaccount');
     window.location.reload();
   }
 
-  addDept(){
+  addDept() {
     this.utilService.addBranch(this.department)
-    .subscribe();
+      .subscribe();
     this.router.navigateByUrl('/manageaccount');
     window.location.reload();
   }
 
   addCollege() {
     this.utilService.addCollege(this.college)
-    .subscribe();
+      .subscribe();
     this.router.navigateByUrl('/manageaccount');
     window.location.reload();
-  } 
+  }
 
   // changePassword() { 
   //   var id = localStorage.getItem('currentUser');
@@ -147,5 +147,5 @@ export class ManageaccountComponent implements OnInit {
   //     console.log("Changed Password" , result)
   //   })
   // }
-  
+
 }

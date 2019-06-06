@@ -8,9 +8,9 @@ describe('AdminCompetitionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminCompetitionsComponent ]
+      declarations: [AdminCompetitionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

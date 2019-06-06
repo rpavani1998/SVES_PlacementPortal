@@ -4,11 +4,11 @@ module.exports = function(app) {
 
     app.post('/api/project', project.create);
  
-    app.get('/api/project', project.findAll);
+    // app.get('/api/project', project.findAll);             
  
     app.get('/api/projects/:roll_no', project.findAll);
  
     app.put('/api/project', project.update);
 
-    app.delete('/api/project/:userId', project.delete);
-}
+    app.delete('/api/project/:userId',  project.delete);
+}    

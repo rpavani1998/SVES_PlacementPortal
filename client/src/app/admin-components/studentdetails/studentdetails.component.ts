@@ -142,7 +142,7 @@ export class StudentdetailsComponent implements OnInit {
 
     // this.placementreport;
     if (this.userdata.user_type_id == "DC") {
-      this.notificationsService.getFilterData( this.userdata.branch_id , percentage, passing_year, backlogs).subscribe(
+      this.notificationsService.getFilterData(this.userdata.branch_id, percentage, passing_year, backlogs).subscribe(
         filtereddata => {
           console.log("Filtered Data : ", filtereddata);
           filtereddata.forEach(data => {
@@ -156,7 +156,7 @@ export class StudentdetailsComponent implements OnInit {
           );
         })
     }
-     else {
+    else {
       this.notificationsService.getFilterData(major, percentage, passing_year, backlogs).subscribe(
         filtereddata => {
           console.log("Filtered Data : ", filtereddata);
@@ -170,7 +170,7 @@ export class StudentdetailsComponent implements OnInit {
           }
           );
         })
-      }
+    }
   }
 
   downloadExcel() {

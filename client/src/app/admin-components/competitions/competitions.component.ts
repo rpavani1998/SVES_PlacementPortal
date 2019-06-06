@@ -14,14 +14,14 @@ export class AdminCompetitionsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private competitonService : CompetitionService
+    private competitonService: CompetitionService
   ) { }
 
-  competitions : Competition[];
+  competitions: Competition[];
   ngOnInit() {
     this.competitonService.getCompetitions().subscribe(competitions => {
       this.competitions = competitions
-      console.log("Competitions : " , competitions);
+      console.log("Competitions : ", competitions);
     })
   }
 

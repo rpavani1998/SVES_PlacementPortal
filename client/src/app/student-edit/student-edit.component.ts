@@ -167,7 +167,7 @@ this.studentService.getVerifiedStudentExperienceDetails(id)
     this.student.education_details = this.myForm.value.education_details;
     this.student.experience_details = this.myForm.value.experience_details;
     this.student.achievements = this.myForm.value.achievements;
-    this.studentService.addStudentProfile(this.student).subscribe();
+    this.studentService.updateStudent(this.student).subscribe();
     // this.uploadService.pushFileToStorage('A'+this.student.roll_no, this.student.id_proof).subscribe();
     for(let i=0; i < this.student.education_details.length; i++){
       console.log('test', this.student.education_details[i], this.prev_edu_details[i])

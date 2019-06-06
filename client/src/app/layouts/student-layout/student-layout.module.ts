@@ -83,4 +83,4 @@ import { AppliedInternshipsComponent } from 'src/app/applied-internships/applied
   ]
 })
 
-export class StudentLayoutModule {}
+export class StudentLayoutModule { }

@@ -13,34 +13,34 @@ export class InternshipsComponent implements OnInit {
   jobposts = new JobPost();
 
   constructor(
-    private jobPostsService : JobPostsService,
-    private companyService : CompanyService
+    private jobPostsService: JobPostsService,
+    private companyService: CompanyService
   ) { }
 
   ngOnInit() {
     this.getJobPosts()
   }
 
-  jobpost : JobPost;
+  jobpost: JobPost;
   data = [];
   getJobPosts() {
     return this.jobPostsService.getJobPosts()
-    .subscribe(
-      jobposts => {
-        jobposts.forEach(jobpost =>{
-          console.log(';',this.jobpost)
-          this.companyService.getCompany(jobpost.company_id).subscribe(
-            company => {
-            jobpost.company = company
-            if(jobpost.job_type == 1 || jobpost.job_type == 2){
-              this.data.push(jobpost)
-            }
+      .subscribe(
+        jobposts => {
+          jobposts.forEach(jobpost => {
+            console.log(';', this.jobpost)
+            this.companyService.getCompany(jobpost.company_id).subscribe(
+              company => {
+                jobpost.company = company
+                if (jobpost.job_type == 1 || jobpost.job_type == 2) {
+                  this.data.push(jobpost)
+                }
+              })
           })
-        })
-        console.log('data', this.data)
-      }
-     );
-    }
-    
+          console.log('data', this.data)
+        }
+      );
+  }
+
 
 }

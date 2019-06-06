@@ -13,7 +13,7 @@ export class CompetitionsComponent implements OnInit {
   competition = new Competition();
 
   constructor(
-    private competitionService : CompetitionService
+    private competitionService: CompetitionService
   ) { }
 
   ngOnInit() {
@@ -25,13 +25,13 @@ export class CompetitionsComponent implements OnInit {
   data = [];
   getCompetitions() {
     return this.competitionService.getCompetitions()
-    .subscribe(
-      competitions => {
-        competitions.forEach(comp =>{
-          console.log(comp)
-              this.data.push(comp)
-            })
-          }
-    );
+      .subscribe(
+        competitions => {
+          competitions.forEach(comp => {
+            console.log(comp)
+            this.data.push(comp)
+          })
         }
-      }
+      );
+  }
+}

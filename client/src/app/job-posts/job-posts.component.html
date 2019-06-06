@@ -1,30 +1,31 @@
-
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-<h1>Placement Corner</h1>
-        <div class="w3-row-padding">
-        <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>  
-          <br><br><br>
-          <div id = "new">
-              <div *ngFor="let job of data" >
-                    <div class="card" >
-                            <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job.company.id}}" style="width:246px; height : 140px"  alt="Img"></div>
-                              <div class="content">
-                               <div> Company Name :   {{job.company.name}} </div>
-                                <div>Job Profile : {{job.job_profile}}</div>
-                              <div>Job Location : {{job.job_location}}</div>
-                            <div>Salary : {{job.salary_lpa}}</div>
-                                <button [routerLink]="['/post', job.id]" class="btn btn-danger">View Details</button> </div>
-                          </div>
-                          
-              </div>
-          
-          
-          <br><br><br><br>
+  <h1>Placement Corner</h1>
+  <div class="w3-row-padding">
+    <div class="w3-container w3-card w3-white w3-margin-bottom"><br><br>
+      <br><br><br>
+      <div id="new">
+        <div *ngFor="let job of data">
+          <div class="card">
+            <div class="bg-img"><img src="http://localhost:4000/api/file/C{{job.company.id}}"
+                style="width:246px; height : 140px" alt="Img"></div>
+            <div class="content">
+              <div> Company Name : {{job.company.name}} </div>
+              <div>Job Profile : {{job.job_profile}}</div>
+              <div>Job Location : {{job.job_location}}</div>
+              <div>Salary : {{job.salary_lpa}}</div>
+              <button [routerLink]="['/post', job.id]" class="btn btn-danger">View Details</button>
+            </div>
           </div>
-          <br><br><br>
-      
-          
+
         </div>
+
+
+        <br><br><br><br>
       </div>
-      </div>
+      <br><br><br>
+
+
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { JobType } from 'src/app/models/jobtype';
 import { JobpostsService } from 'src/app/services/jobposts/jobposts.service';
@@ -28,21 +28,21 @@ import { EducationDetails } from 'src/app/models/education-details';
 })
 export class JobpostdetailsComponent implements OnInit {
   submitted = false;
-  message : string;
+  message: string;
   jt = new JobType();
-  
+
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private jobpostsService : JobpostsService,
-    private utilService : UtilsService,    
-    private companyService : CompanyService,
-    private jobtypeService : JobTypeService,
+    private jobpostsService: JobpostsService,
+    private utilService: UtilsService,
+    private companyService: CompanyService,
+    private jobtypeService: JobTypeService,
     private location: Location,
     private userService: UserService,
-    private studentService : StudentService
+    private studentService: StudentService
   ) { }
 
   ngOnInit() {
@@ -50,27 +50,27 @@ export class JobpostdetailsComponent implements OnInit {
     this.getJobType();
   }
 
-  jobtype : JobType[];
+  jobtype: JobType[];
   getJobType() {
     return this.jobtypeService.getJobTypes()
-               .subscribe(
-                 jobtype => {
-                   console.log("Job Type info" , jobtype)
-                   this.jobtype = jobtype;
-                 }
-                );
- }
+      .subscribe(
+        jobtype => {
+          console.log("Job Type info", jobtype)
+          this.jobtype = jobtype;
+        }
+      );
+  }
 
 
   data = [];
-  jobdata : JobPosts;
+  jobdata: JobPosts;
   jobstages = {};
   registered = [];
   notregistered = [];
   eligiblestudents = {};
   userdata: User;
-  verifiedstudents : EducationDetails[];
-  
+  verifiedstudents: EducationDetails[];
+
   getJobDetails() {
 
     var uid = localStorage.getItem('currentUser');
@@ -82,80 +82,80 @@ export class JobpostdetailsComponent implements OnInit {
         });
 
 
- 
-    const jobid = this.route.snapshot.params.jobid; 
-    console.log("Job Posts Data : " , this.route.snapshot.params.jobid)
+
+    const jobid = this.route.snapshot.params.jobid;
+    console.log("Job Posts Data : ", this.route.snapshot.params.jobid)
     this.jobpostsService.getJobData(jobid).subscribe(jobdata => {
-        console.log("Hey",jobdata)
-        this.jobdata = jobdata
-        this.companyService.getCompany(jobdata.company_id).subscribe(company => {
-          this.jobdata.company = company; 
+      console.log("Hey", jobdata)
+      this.jobdata = jobdata
+      this.companyService.getCompany(jobdata.company_id).subscribe(company => {
+        this.jobdata.company = company;
+      })
+      this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
+        this.jobdata.jobprocesses = jobprocess;
+      })
+
+      // this.studentService.getVerifiedStudentDetails(this.userdata.branch_id).subscribe(verfiedstudents => {
+      //   this.verifiedstudents = verfiedstudents
+      // })
+
+      this.utilService.getEligibleStudents(jobid).subscribe(eligiblestudents => {
+        eligiblestudents.forEach(student => {
+          if (student.is_qualified == "Not Registered") {
+            this.notregistered.push(eligiblestudents)
+          } else {
+            this.registered.push(eligiblestudents)
+          }
         })
-        this.utilService.getJobProcess(jobid).subscribe(jobprocess => {
-          this.jobdata.jobprocesses = jobprocess; 
+      })
+
+      var keys = Object.keys(this.registered);
+      var len = keys.length;
+      this.eligiblestudents['registered'] = len;
+
+
+      var keys = Object.keys(this.notregistered);
+      var nrlen = keys.length;
+      this.eligiblestudents['notregistered'] = nrlen;
+
+      // console.log("Registered Students : " , this.registered);
+      // console.log("Not Registered Students : " , this.notregistered);
+      console.log("Eligible Students : ", this.eligiblestudents)
+
+      this.jobtypeService.getJobType(jobdata.job_type).subscribe(jobtype => {
+        this.jobdata.jobtype = jobtype
+        this.data.push(this.jobdata)
+        console.log("Job Data : ", this.data)
+      })
+
+      this.utilService.getJobStages().subscribe(jobstages => {
+        jobstages.forEach(jobstage => {
+          this.jobstages[jobstage.id] = jobstage.stage_name;
         })
+      })
 
-        // this.studentService.getVerifiedStudentDetails(this.userdata.branch_id).subscribe(verfiedstudents => {
-        //   this.verifiedstudents = verfiedstudents
-        // })
+      console.log("Job Stages : ", this.jobstages);
 
-        this.utilService.getEligibleStudents(jobid).subscribe(eligiblestudents => {
-          eligiblestudents.forEach(student => {
-            if (student.is_qualified == "Not Registered" ) {
-              this.notregistered.push(eligiblestudents)
-            } else {
-              this.registered.push(eligiblestudents)
-            }
-          })
-        })
-
-        var keys = Object.keys(this.registered);
-        var len = keys.length;
-        this.eligiblestudents['registered'] = len;
-
-
-        var keys = Object.keys(this.notregistered);
-        var nrlen = keys.length;
-        this.eligiblestudents['notregistered'] = nrlen;
-      
-        // console.log("Registered Students : " , this.registered);
-        // console.log("Not Registered Students : " , this.notregistered);
-        console.log("Eligible Students : " , this.eligiblestudents)
-
-        this.jobtypeService.getJobType(jobdata.job_type).subscribe(jobtype => {
-          this.jobdata.jobtype = jobtype
-          this.data.push(this.jobdata)
-          console.log("Job Data : " , this.data )
-        })
-
-        this.utilService.getJobStages().subscribe(jobstages => {
-          jobstages.forEach(jobstage => {
-            this.jobstages[jobstage.id] = jobstage.stage_name;
-          })
-        })
-
-        console.log("Job Stages : " , this.jobstages);
- 
     })
   }
 
-  delete(): void { 
+  delete(): void {
     this.submitted = true;
     this.jobpostsService.deleteJobPost(this.data[0].id)
-        .subscribe(result => this.message = "Student Deleted Successfully!");
+      .subscribe(result => this.message = "Student Deleted Successfully!");
     this.router.navigateByUrl('/placements');
     window.location.reload();
   }
- 
+
 
   closeJobPost(): void {
     this.jobpostsService.closeJobPost(this.data[0].id).subscribe(result => {
-      console.log("Closed Job Post Successfully" , result);
+      console.log("Closed Job Post Successfully", result);
     })
     this.router.navigateByUrl('/placements');
     window.location.reload();
   }
-   
+
   back(): void {
     this.location.back();
   }

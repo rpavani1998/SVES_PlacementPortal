@@ -1,7 +1,7 @@
 let upload = require('../config/multer.config.js');
 
 module.exports = function(app) {
- 
+    const fileWorker = require('../controllers/file.controller.js');
     const students = require('../controllers/student.controller.js');
     const education_details = require('../controllers/education-details.controller.js');
     const experience_details = require('../controllers/experience-details.controller');
@@ -110,4 +110,6 @@ module.exports = function(app) {
 
     app.get('/api/studentdetails/:major/:passing_year/:percentage/:backlogs' , education_details.getData);
 
+
+    // app.post('/api/profile/tex', fileWorker.downloadTex)
 } 

@@ -131,7 +131,7 @@
 //     this.router.navigateByUrl('/notifications');
 //     window.location.reload()
 //   }
-  
+
 
 
 // }
@@ -163,7 +163,7 @@ export class NotificationsComponent implements OnInit {
   constructor(
     private router: Router,
     private educationservice: NotificationsService,
-    private studentService : StudentService,
+    private studentService: StudentService,
     private userService: UserService
   ) { }
 
@@ -174,8 +174,8 @@ export class NotificationsComponent implements OnInit {
 
   userdata = new User();
   edudata = [];
-  experiencedetails : ExperienceDetails;
-  studentdata : Student;
+  experiencedetails: ExperienceDetails;
+  studentdata: Student;
   data = [];
   expdata = [];
 
@@ -183,33 +183,33 @@ export class NotificationsComponent implements OnInit {
   getUserDetails() {
     var uid = localStorage.getItem('currentUser');
     return this.userService.getUser(uid).subscribe(userdata => {
-      console.log("User data : " , userdata);
+      console.log("User data : ", userdata);
       this.userdata = userdata;
       this.studentService.getStudentProfiles(userdata.branch_id).subscribe(studentdata => {
         this.studentdata = studentdata;
-        console.log("Student Profile Requests : " , studentdata)
+        console.log("Student Profile Requests : ", studentdata)
       });
       this.educationservice.getEducationDetails().subscribe(studentseducationdetails => {
-        console.log("Data : " , studentseducationdetails)
+        console.log("Data : ", studentseducationdetails)
         studentseducationdetails.forEach(studenteducationdetail => {
           this.studentService.getStudent(studenteducationdetail.roll_no).subscribe(studentdetails => {
-            console.log("Student details : " , studentdetails)
-            if ( studentdetails.branch == userdata.branch_id && studenteducationdetail.status == "Requested" ) {
+            console.log("Student details : ", studentdetails)
+            if (studentdetails.branch == userdata.branch_id && studenteducationdetail.status == "Requested") {
               this.edudata.push(studenteducationdetail)
             }
           })
         })
-        console.log("Student Education Requests : " , this.edudata)
+        console.log("Student Education Requests : ", this.edudata)
       });
       this.studentService.getStudentexperiences().subscribe(studentexperiencedetails => {
         studentexperiencedetails.forEach(studentexperiencedetail => {
           this.studentService.getStudent(studentexperiencedetail.roll_no).subscribe(studentdetails => {
-            if ( studentdetails.branch == userdata.branch_id && studentexperiencedetail.status == "Requested" ) {
+            if (studentdetails.branch == userdata.branch_id && studentexperiencedetail.status == "Requested") {
               this.expdata.push(studentexperiencedetail)
             }
           })
         });
-        console.log("Student Experience Requests : " , this.expdata)
+        console.log("Student Experience Requests : ", this.expdata)
       })
     })
   }
@@ -267,7 +267,7 @@ export class NotificationsComponent implements OnInit {
     this.router.navigateByUrl('/notifications');
     window.location.reload()
   }
-  
+
 
 
 }

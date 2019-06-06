@@ -105,7 +105,7 @@ export class AdminInternshipsComponent implements OnInit {
     this.saveJobProcess();
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getJobType();
     this.getJobPosts();
     this.getCompany();
@@ -130,7 +130,7 @@ export class AdminInternshipsComponent implements OnInit {
 
     this.utilService.getJobStages().subscribe(jobstage => {
       this.jobstage = jobstage;
-      console.log("Job Stage : ", jobstage); 
+      console.log("Job Stage : ", jobstage);
     })
 
     var uid = localStorage.getItem('currentUser');
@@ -144,22 +144,22 @@ export class AdminInternshipsComponent implements OnInit {
 
   }
 
-     companydata : Company[];
-   getCompany() {
+  companydata: Company[];
+  getCompany() {
     return this.companyService.getCompanyData()
-    .subscribe(
-      companydata => {
-        console.log("Company Data" , companydata)
-        this.companydata = companydata;
-      }
-     );
-   }
+      .subscribe(
+        companydata => {
+          console.log("Company Data", companydata)
+          this.companydata = companydata;
+        }
+      );
+  }
 
 
 
-   selectCompanyImage(event){
+  selectCompanyImage(event) {
     this.company.company_image = event.target.files[0];
-   }
+  }
 
 
   user: User;
@@ -173,7 +173,7 @@ export class AdminInternshipsComponent implements OnInit {
           this.utilService.getJobProcess(jobpost.id).subscribe(jobprocess => {
             jobpost.jobprocesses = jobprocess
 
-            if ( jobpost.job_type == 1 || jobpost.job_type == 2) {
+            if (jobpost.job_type == 1 || jobpost.job_type == 2) {
               if (jobpost.is_active == 1) {
                 this.companyService.getCompany(jobpost.company_id).subscribe(company => {
                   jobpost.company = company
@@ -195,11 +195,11 @@ export class AdminInternshipsComponent implements OnInit {
             }
           })
         })
-        console.log("Job Posts : " , this.data) 
-        console.log("Closed Job Posts :" , this.closeddata);
+        console.log("Job Posts : ", this.data)
+        console.log("Closed Job Posts :", this.closeddata);
       }
       );
-  } 
+  }
 
 
   jobtype: JobType[];
@@ -218,7 +218,7 @@ export class AdminInternshipsComponent implements OnInit {
     console.info("company info", this.job);
     this.companyService.addCompany(this.job)
       .subscribe(company =>
-        this.uploadService.pushFileToStorage('C'+company.id, this.company.company_image).subscribe()
+        this.uploadService.pushFileToStorage('C' + company.id, this.company.company_image).subscribe()
       );
   }
 

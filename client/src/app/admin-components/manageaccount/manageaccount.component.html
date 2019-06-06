@@ -11,7 +11,7 @@
                     <br>
                     <div class="container-fluid">
                         <h4><b>Personal details:</b></h4>
-                       
+
                         <!-- <div class="bg-img"><img src='http://localhost:4000/api/file/student'
                                 style="width:160px; height : 160px" alt="Img"></div> -->
                         <b>Email </b>: {{userdata.email}}<br>
@@ -132,7 +132,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
+                            <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Department Code" type="text" id="id" required
                                     [(ngModel)]="department.id" name="id" #id="ngModel">
                             </mat-form-field>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
+                            <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Department Name" type="text" id="branch_name" required
                                     [(ngModel)]="department.branch_name" name="branch_name" #branch_name="ngModel">
                             </mat-form-field>
@@ -148,7 +148,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="addDept()">Add
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                (click)="addDept()">Add
                                 Department</button>
                         </div>
                     </div>
@@ -157,7 +158,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
+                            <mat-form-field class="example-full-width">
                                 <input matInput placeholder="College Code" type="text" id="id" required
                                     [(ngModel)]="college.id" name="id" #id="ngModel">
                             </mat-form-field>
@@ -165,15 +166,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="College Name" type="text" id="college_name" required
-                                            [(ngModel)]="college.college_name" name="college_name" #college_name="ngModel">
-                                    </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="College Name" type="text" id="college_name" required
+                                    [(ngModel)]="college.college_name" name="college_name" #college_name="ngModel">
+                            </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button mat-raised-button type="submit" (click) = "addCollege()" class="btn btn-danger pull-right">Add
+                            <button mat-raised-button type="submit" (click)="addCollege()"
+                                class="btn btn-danger pull-right">Add
                                 College</button>
                         </div>
                     </div>
@@ -181,7 +183,7 @@
 
                 <mat-tab label="Add Students" *ngIf="userdata.user_type_id=='TPO'" enable>
                     <br>
-                    <div class = "contaier-fluid">
+                    <div class="contaier-fluid">
                         <h4><b>Select an xlsx file to upload students data</b></h4>
                         <div class="row">
                             <div class="col-md-6">
@@ -191,10 +193,11 @@
                                 </div>
                             </div>
                         </div>
-                            
+
                         <div class="row">
                             <div class="col-md-12">
-                                <button mat-raised-button type="submit" (click) = "upload()" class="btn btn-danger pull-right">Upload</button>
+                                <button mat-raised-button type="submit" (click)="upload()"
+                                    class="btn btn-danger pull-right">Upload</button>
                             </div>
                         </div>
                     </div>

@@ -10,14 +10,15 @@
 
         <mat-tab label="Open Job Postings"> <br>
           <div class="col-md-12 row">
-            <div class="col-md-3" *ngFor="let d of data ; let i = index"> 
+            <div class="col-md-3" *ngFor="let d of data ; let i = index">
               <mat-card class="example-card">
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"></div>
                   <mat-card-title>{{d.company.company_name}}</mat-card-title>
                   <mat-card-subtitle>{{d.job_profile}}</mat-card-subtitle>
                 </mat-card-header>
-                <div class="bg-img"><img src="http://localhost:4000/api/file/C{{d.company.company_id}}" style="width:200px; height : 100px"  alt="Img"></div>
+                <div class="bg-img"><img src="http://localhost:4000/api/file/C{{d.company.company_id}}"
+                    style="width:200px; height : 100px" alt="Img"></div>
                 <mat-card-content>
                   <p>Job Type : {{d.jobtype.job_type_name}}</p>
                   <p>Location : {{d.job_location}}</p>
@@ -43,7 +44,8 @@
                   <mat-card-title>{{data_.company.company_name}}</mat-card-title>
                   <mat-card-subtitle>{{data_.job_profile}}</mat-card-subtitle>
                 </mat-card-header>
-                <div class="bg-img"><img src="http://localhost:4000/api/file/C{{data_.company.company_id}}" style="width:200px; height : 100px"  alt="Img"></div>
+                <div class="bg-img"><img src="http://localhost:4000/api/file/C{{data_.company.company_id}}"
+                    style="width:200px; height : 100px" alt="Img"></div>
                 <mat-card-content>
                   <p>Job Type : {{data_.jobtype.job_type_name}}</p>
                   <p>Location : {{data_.job_location}}</p>
@@ -62,61 +64,60 @@
 
         <mat-tab label="Add Company" *ngIf="userdata.user_type_id == 'TPO' " enable>
 
-            <div class="row">
-                <div class="col-md-8">
-    
-                  <div class="card">
-                    <div class="card-header card-header-danger">
-                      <h4 class="card-title">Job Post</h4>
-                      <p class="card-category">Add Company Details</p>
-                    </div> 
-          <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Company Name" type="text" id="company_name" required [(ngModel)]="job.company_name"
-                              name="company_name" #company_name="ngModel">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <!-- <mat-form-field class="example-full-width">
+          <div class="row">
+            <div class="col-md-8">
+
+              <div class="card">
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title">Job Post</h4>
+                  <p class="card-category">Add Company Details</p>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Company Name" type="text" id="company_name" required
+                        [(ngModel)]="job.company_name" name="company_name" #company_name="ngModel">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- <mat-form-field class="example-full-width">
                             <input matInput placeholder="Profile Description" type="text" id="profile_description"
                               required [(ngModel)]="job.profile_description" name="profile_description"
                               #profile_description="ngModel">
                           </mat-form-field> -->
-                          <app-ngx-editor editor = "basic" minHeight="9cm" placeholder="Profile Description" type="text" id="profile_description"
-                          required [(ngModel)]="job.profile_description" name="profile_description"
-                          #profile_description="ngModel" style=" height:12cm;
+                  <app-ngx-editor editor="basic" minHeight="9cm" placeholder="Profile Description" type="text"
+                    id="profile_description" required [(ngModel)]="job.profile_description" name="profile_description"
+                    #profile_description="ngModel" style=" height:12cm;
                           "></app-ngx-editor>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Company URL" type="text" id="company_website_url" required
-                              [(ngModel)]="job.company_website_url" name="company_website_url"
-                              #company_website_url="ngModel">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                      <div class="row">
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Company URL" type="text" id="company_website_url" required
+                        [(ngModel)]="job.company_website_url" name="company_website_url" #company_website_url="ngModel">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
 
-                        <div class="col-md-6">
-                          <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
-                            <input mat-raised-button class="ng-hide" id="company_image" type="file"
-                              (change)="selectCompanyImage($event)">
-                          </div>
-                        </div>
-
-                        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                      (click)="addCompany()">Add Company</button>
-
-                      </div>
+                  <div class="col-md-6">
+                    <div ng-app="MyApp" ng-controller="AppCtrl" layout-margin layout-padding>
+                      <input mat-raised-button class="ng-hide" id="company_image" type="file"
+                        (change)="selectCompanyImage($event)">
                     </div>
-                    </div>
-                    </div>
+                  </div>
 
-        </mat-tab >
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="addCompany()">Add
+                    Company</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </mat-tab>
 
 
 
@@ -144,13 +145,13 @@
                             <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
                               {{comp.company_name}}
                             </mat-option>
-                            
+
                           </mat-select>
                         </mat-form-field>
                       </div>
                     </div>
 
-                      
+
 
                     <br>
                     <!-- Important information -->
@@ -185,10 +186,11 @@
                           </mat-form-field>
                         </div>
                         <!-- <div class="col-md-6"> -->
-                            <app-ngx-editor minHeight="9cm" placeholder="Job Description" type="text" id="job_description" required
-                            [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel" style=" height:12cm;
+                        <app-ngx-editor minHeight="9cm" placeholder="Job Description" type="text" id="job_description"
+                          required [(ngModel)]="job.job_description" name="job_description" #job_description="ngModel"
+                          style=" height:12cm;
                             "></app-ngx-editor>
-                          <!-- <mat-form-field class="example-full-width">
+                        <!-- <mat-form-field class="example-full-width">
                              
                               <app-ngx-editor type="text" class="form-control" id="job_description"  [spellcheck]="true" required [(ngModel)]="data[0].job_description" name="job_description" #job_description="ngModel" style="resize:vertical; height:12cm;
                               min-height: 12cm"></app-ngx-editor>
@@ -201,10 +203,10 @@
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput  placeholder="Apply Before" type="date" id="last_date_for_application"
+                            <input matInput placeholder="Apply Before" type="date" id="last_date_for_application"
                               required [(ngModel)]="job.last_date_for_application" name="last_date_for_application"
                               #last_date_for_application="ngModel">
-                              
+
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -218,9 +220,9 @@
                       <div class="row">
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
-                            <input matInput  placeholder="PPT Talk" type="date" id="ppt_talk" required
+                            <input matInput placeholder="PPT Talk" type="date" id="ppt_talk" required
                               [(ngModel)]="job.ppt_talk" name="ppt_talk" #ppt_talk="ngModel">
-                              
+
                           </mat-form-field>
                         </div>
                         <div class="col-md-6">
@@ -276,22 +278,22 @@
                       </div>
                       <div class="row">
                         <div class="col-md-6">
-                            <mat-form-field>
-                                <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="job.backlogs"
-                                  name="backlogs" #backlogs="ngModel">
-                                  <mat-option [value]="0">0</mat-option>
-                                  <mat-option [value]="1">1</mat-option>
-                                  <mat-option [value]="2">2</mat-option>
-                                  <mat-option [value]="3">3</mat-option>
-                                  <mat-option [value]="4">4</mat-option>
-                                  <mat-option [value]="5">5</mat-option>
-                                  <mat-option [value]="6">6</mat-option>
-                                  <mat-option [value]="7">7</mat-option>
-                                  <mat-option [value]="8">8</mat-option>
-                                  <mat-option [value]="9">9</mat-option>
-                                  <mat-option [value]="10">10</mat-option>
-                                </mat-select>
-                              </mat-form-field>
+                          <mat-form-field>
+                            <mat-select placeholder="Select Backlogs" id="backlogs" required [(ngModel)]="job.backlogs"
+                              name="backlogs" #backlogs="ngModel">
+                              <mat-option [value]="0">0</mat-option>
+                              <mat-option [value]="1">1</mat-option>
+                              <mat-option [value]="2">2</mat-option>
+                              <mat-option [value]="3">3</mat-option>
+                              <mat-option [value]="4">4</mat-option>
+                              <mat-option [value]="5">5</mat-option>
+                              <mat-option [value]="6">6</mat-option>
+                              <mat-option [value]="7">7</mat-option>
+                              <mat-option [value]="8">8</mat-option>
+                              <mat-option [value]="9">9</mat-option>
+                              <mat-option [value]="10">10</mat-option>
+                            </mat-select>
+                          </mat-form-field>
                         </div>
                         <div class="col-md-6">
                           <mat-form-field class="example-full-width">
@@ -311,8 +313,8 @@
                       </div>
                     </div>
 
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                      (click)="addJob()">Add Post</button>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="addJob()">Add
+                      Post</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -333,21 +335,21 @@
                       <mat-option *ngFor="let comp of companydata" [value]="comp.company_name">
                         {{comp.company_name}}
                       </mat-option>
-                      
+
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="col-md-5" *ngIf = "job.company_name">
+                <div class="col-md-5" *ngIf="job.company_name">
                   <div>
-                     
-                        <mat-select placeholder="Job Profile" id="job_profile" required
-                            [(ngModel)]="job.job_profile" name="job_profile" #job_profile="ngModel">
-                            <mat-option [value]="companyprofiles[job.company_name]">
-                                {{companyprofiles[job.company_name]}}
-                            </mat-option>
-                            </mat-select>
-                     
-                  </div> 
+
+                    <mat-select placeholder="Job Profile" id="job_profile" required [(ngModel)]="job.job_profile"
+                      name="job_profile" #job_profile="ngModel">
+                      <mat-option [value]="companyprofiles[job.company_name]">
+                        {{companyprofiles[job.company_name]}}
+                      </mat-option>
+                    </mat-select>
+
+                  </div>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field class="example-full-width">
@@ -355,27 +357,28 @@
                       [(ngModel)]="filters.passing_year" name="passing_year" #passing_year="ngModel">
                   </mat-form-field>
                 </div>
-                <div class="col-md-5" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'TPO' " enable>
-                    <mat-form-field>
-                        <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
-                          name="major" #major="ngModel">
-                          <mat-option *ngFor="let major of majors" [value]="major.id">
-                            {{major.branch_name}} 
-                          </mat-option> 
-                          
-                        </mat-select>
-                      </mat-form-field> 
+                <div class="col-md-5" *ngIf="userdata.user_type_id == 'CHAIR' || userdata.user_type_id == 'TPO' "
+                  enable>
+                  <mat-form-field>
+                    <mat-select multiple placeholder="Select Branch" id="major" required [(ngModel)]="filters.major"
+                      name="major" #major="ngModel">
+                      <mat-option *ngFor="let major of majors" [value]="major.id">
+                        {{major.branch_name}}
+                      </mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
                 </div>
               </div>
 
               <div class="row">
-                <button class="btn btn-danger pull-right" (click) = "getfiltereddata()" >Apply</button> &nbsp;
-                <button  (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
+                <button class="btn btn-danger pull-right" (click)="getfiltereddata()">Apply</button> &nbsp;
+                <button (click)="downloadExcel()" class="btn btn-danger pull-right"> Download Excel </button>
                 <!-- <button class="btn btn-danger pull-right" (click) = "refresh()" > Apply another filter </button> &nbsp; -->
               </div>
 
               <br><br><br>
-                         
+
 
             </form>
           </div>
@@ -391,11 +394,11 @@
                                   <tr *ngFor = "let h of dataheaders; let i = index;" >
                                     <th> {{h[i]}} </th>
                                   </tr> -->
-                                  <!-- <tr *ngFor="let data of formatedData">
+          <!-- <tr *ngFor="let data of formatedData">
                                     <td>{{data[0].roll_no}}</td> &nbsp;
                                     
                                   </tr> -->
-                                <!-- </table>
+          <!-- </table>
                               </ng-container>
                         </div>
                       </mat-card-content>
@@ -409,5 +412,5 @@
     </mat-card-content>
   </mat-card>
 
-  
+
 </div>

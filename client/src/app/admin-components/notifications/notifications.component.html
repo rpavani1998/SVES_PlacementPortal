@@ -77,7 +77,7 @@
 
                 </mat-expansion-panel> -->
 
-                <!-- <div *ngIf = "rejectRequest()" >
+<!-- <div *ngIf = "rejectRequest()" >
                     <form>
                             <mat-form-field class="example-full-width">
                                     <input matInput placeholder="Reason" type="text" id="reason" required
@@ -88,7 +88,7 @@
                 </div> -->
 
 
-                <!-- <br>
+<!-- <br>
 
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
@@ -160,23 +160,24 @@
                                 <b> <label> DOB : </label> </b> {{ed.dob}} <br><br>
                                 <b> <label> Aadhar Number : </label> </b> {{ed.aadhar_no}} <br><br>
                                 <b> <label> Backlogs : </label> </b> {{ed.backlogs}} <br><br>
-                                <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof Document</a></div>
+                                <div>Proof Document: <a href="http://localhost:4000/api/file/E{{ed.id}}">Proof
+                                        Document</a></div>
                                 <div class="row">
-                                        <div class="col-md-6">
-                                          <mat-form-field class="example-full-width">
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
                                             <input matInput placeholder="Comment" type="text" id="comment" required
-                                              [(ngModel)]="ed.comment" name="comment"
-                                              #comment="ngModel">
-                                          </mat-form-field>
-                                        </div>
-                                      </div>
+                                                [(ngModel)]="ed.comment" name="comment" #comment="ngModel">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
                                 <button #elem (click)="approveProfileRequest(ed)" class="btn-btn"> Approve </button>
                                 &nbsp;
-                                <button id = "reject" name = "reject" (click)="rejectProfileRequest(ed)" class="btn-btn"> Reject </button>
+                                <button id="reject" name="reject" (click)="rejectProfileRequest(ed)" class="btn-btn">
+                                    Reject </button>
                                 <hr>
                             </div>
-                            
-                            
+
+
                         </mat-tab>
                         <mat-tab label="Approved requests">
 
@@ -200,25 +201,25 @@
                     </mat-expansion-panel-header>
                     <mat-tab-group dynamicHeight>
                         <mat-tab label="Pending requests">
-                                <div *ngFor="let ed of edudata ; let i = index ">
-                                    <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
-                                    <b> <label> Degree : </label> </b> {{ed.certificate_degree_name}} <br><br>
-                                    <b> <label> Major : </label> </b> {{ed.major}} <br><br> 
-                                    <b> <label> Percentage : </label> </b> {{ed.percentage}} <br><br>
-                                    <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof Document</a></div>
-                                    <div class="row">
-                                            <div class="col-md-6">
-                                              <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Comment" type="text" id="comment" required
-                                                  [(ngModel)]="ed.comment" name="comment"
-                                                  #comment="ngModel">
-                                              </mat-form-field>
-                                            </div>
-                                          </div>
-                                    <button #elem (click)="approveRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
-                                    <button id = "edureject" (click)="rejectRequest(ed)" class="btn-btn"> Reject </button>
-                                    <hr>
-                                </div> 
+                            <div *ngFor="let ed of edudata ; let i = index ">
+                                <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
+                                <b> <label> Degree : </label> </b> {{ed.certificate_degree_name}} <br><br>
+                                <b> <label> Major : </label> </b> {{ed.major}} <br><br>
+                                <b> <label> Percentage : </label> </b> {{ed.percentage}} <br><br>
+                                <div>Proof Document: <a href="http://localhost:4200/api/file/E{{ed.id}}">Proof
+                                        Document</a></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Comment" type="text" id="comment" required
+                                                [(ngModel)]="ed.comment" name="comment" #comment="ngModel">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <button #elem (click)="approveRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
+                                <button id="edureject" (click)="rejectRequest(ed)" class="btn-btn"> Reject </button>
+                                <hr>
+                            </div>
                         </mat-tab>
                         <mat-tab label="Approved requests">
 
@@ -254,30 +255,31 @@
                     </mat-expansion-panel-header>
                     <mat-tab-group dynamicHeight>
                         <mat-tab label="Pending requests">
-                                <div *ngFor="let ed of expdata ; let i = index ">
-                                    <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
-                                    <b> <label> Currently Working : </label> </b> {{ed.is_current_job}} <br><br>
-                                    <b> <label> Start Date : </label> </b> {{ed.start_date}} <br><br>
-                                    <b> <label> End Date : </label> </b> {{ed.end_date}} <br><br>
-                                    <b> <label> Job Title : </label> </b> {{ed.job_title}} <br><br>
-                                    <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
-                                    <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
-                                    <b> <label> Description : </label> </b> {{ed.description}} <br><br>
-                                    <b> <label> Proof Document: </label> </b> <a href="http://localhost:4000/api/file/X{{ed.id}}">Proof
-                                        Document</a><br><br>
-                                        <div class="row">
-                                                <div class="col-md-6">
-                                                  <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Comment" type="text" id="comment" required
-                                                      [(ngModel)]="ed.comment" name="comment"
-                                                      #comment="ngModel">
-                                                  </mat-form-field>
-                                                </div>
-                                              </div>
-                                    <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button> &nbsp;
-                                    <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>
-                                    <hr>
+                            <div *ngFor="let ed of expdata ; let i = index ">
+                                <b> <label> Roll Number : </label> </b> {{ed.roll_no}} <br><br>
+                                <b> <label> Currently Working : </label> </b> {{ed.is_current_job}} <br><br>
+                                <b> <label> Start Date : </label> </b> {{ed.start_date}} <br><br>
+                                <b> <label> End Date : </label> </b> {{ed.end_date}} <br><br>
+                                <b> <label> Job Title : </label> </b> {{ed.job_title}} <br><br>
+                                <b> <label> Company Name : </label> </b> {{ed.company_name}} <br><br>
+                                <b> <label> Location : </label> </b> {{ed.job_location_city}} <br><br>
+                                <b> <label> Description : </label> </b> {{ed.description}} <br><br>
+                                <b> <label> Proof Document: </label> </b> <a
+                                    href="http://localhost:4000/api/file/X{{ed.id}}">Proof
+                                    Document</a><br><br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Comment" type="text" id="comment" required
+                                                [(ngModel)]="ed.comment" name="comment" #comment="ngModel">
+                                        </mat-form-field>
+                                    </div>
                                 </div>
+                                <button #elem (click)="approveExperienceRequest(ed)" class="btn-btn"> Approve </button>
+                                &nbsp;
+                                <button (click)="rejectExperienceRequest(ed)" class="btn-btn"> Reject </button>
+                                <hr>
+                            </div>
                         </mat-tab>
                         <mat-tab label="Approved requests">
 

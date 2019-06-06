@@ -22,9 +22,9 @@ import { StudentService } from '../../services/student/student.service';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { NgxEditorModule } from 'ngx-editor';
 
-import {FormGroup, FormArray, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
- 
+
 @Component({
   selector: 'app-placements',
   templateUrl: './placements.component.html',
@@ -59,14 +59,14 @@ export class AdminPlacementsComponent implements OnInit {
   checkAllTrades: boolean = false
 
   eligibility = {
-    eligibility_criteria : [
+    eligibility_criteria: [
       {
-      degree : ['' , Validators.required],
-      major :  ['' , Validators.required],
-      perecentage : ['' , Validators.required],
-      backlogs : ['' , Validators.required]
+        degree: ['', Validators.required],
+        major: ['', Validators.required],
+        perecentage: ['', Validators.required],
+        backlogs: ['', Validators.required]
       }
-    ] 
+    ]
   }
 
 
@@ -81,7 +81,7 @@ export class AdminPlacementsComponent implements OnInit {
     private utilService: UtilsService,
     private userService: UserService,
     private fb: FormBuilder,
-    private studentService : StudentService
+    private studentService: StudentService
 
   ) { }
 
@@ -90,7 +90,7 @@ export class AdminPlacementsComponent implements OnInit {
     this.company = new Company();
   }
 
-  addCompany() { 
+  addCompany() {
     this.submitted = true;
     this.saveCompany();
   }
@@ -107,13 +107,13 @@ export class AdminPlacementsComponent implements OnInit {
     this.saveJobProcess();
   }
   jobstages = {}
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getJobType();
     this.getJobPosts();
     this.getCompany();
 
     this.myForm = this.fb.group({
-      eligibility_criteria : this.fb.array([]),
+      eligibility_criteria: this.fb.array([]),
     })
 
     this.utilService.getJobStages().subscribe(jobstages => {
@@ -127,9 +127,9 @@ export class AdminPlacementsComponent implements OnInit {
       this.majors.forEach(m => {
         m.selected = false;
       })
-      
-      
-      console.log("Branches : ", major); 
+
+
+      console.log("Branches : ", major);
 
       this.utilService.getColleges().subscribe(institute_university_name => {
         this.institute_university_names = institute_university_name;
@@ -139,7 +139,7 @@ export class AdminPlacementsComponent implements OnInit {
 
     this.utilService.getJobStages().subscribe(jobstage => {
       this.jobstage = jobstage;
-      console.log("Job Stage : ", jobstage); 
+      console.log("Job Stage : ", jobstage);
     })
 
     var uid = localStorage.getItem('currentUser');
@@ -156,35 +156,35 @@ export class AdminPlacementsComponent implements OnInit {
     control.removeAt(index)
   }
 
-     companydata : Company[];
-   getCompany() {
+  companydata: Company[];
+  getCompany() {
     return this.companyService.getCompanyData()
-    .subscribe(
-      companydata => {
-        console.log("Company Data" , companydata) 
-        this.companydata = companydata;
-        companydata.forEach(cd => {
-          console.log(cd.company_id)
-          this.companyService.getCompanyProfiles(cd.company_id).subscribe(result => {
-            console.log("Company Profile : " , result)
-            this.companyprofiles[cd.company_name] = [result[0].job_profile]
-          }) 
-        })
-        console.log("Job Profiles : " , this.companyprofiles) 
-      }
-     );
-   }
+      .subscribe(
+        companydata => {
+          console.log("Company Data", companydata)
+          this.companydata = companydata;
+          companydata.forEach(cd => {
+            console.log(cd.company_id)
+            this.companyService.getCompanyProfiles(cd.company_id).subscribe(result => {
+              console.log("Company Profile : ", result)
+              this.companyprofiles[cd.company_name] = [result[0].job_profile]
+            })
+          })
+          console.log("Job Profiles : ", this.companyprofiles)
+        }
+      );
+  }
 
 
 
-   selectCompanyImage(event){
+  selectCompanyImage(event) {
     this.company.company_image = event.target.files[0];
-   }
+  }
 
-   refresh () {
-     window.location.reload();
-   }
- 
+  refresh() {
+    window.location.reload();
+  }
+
 
   user: User;
   student: Student;
@@ -197,7 +197,7 @@ export class AdminPlacementsComponent implements OnInit {
           this.utilService.getJobProcess(jobpost.id).subscribe(jobprocess => {
             jobpost.jobprocesses = jobprocess
 
-            if ( jobpost.job_type == 3 || jobpost.job_type == 4 ) {
+            if (jobpost.job_type == 3 || jobpost.job_type == 4) {
               if (jobpost.is_active == 1) {
                 this.companyService.getCompany(jobpost.company_id).subscribe(company => {
                   jobpost.company = company
@@ -206,7 +206,7 @@ export class AdminPlacementsComponent implements OnInit {
                   jobpost.jobtype = jobtype
                   this.data.push(jobpost)
                 })
-              }  
+              }
               else {
                 this.companyService.getCompany(jobpost.company_id).subscribe(company => {
                   jobpost.company = company
@@ -219,11 +219,11 @@ export class AdminPlacementsComponent implements OnInit {
             }
           })
         })
-        console.log("Job Posts : " , this.data) 
-        console.log("Closed Job Posts :" , this.closeddata);
+        console.log("Job Posts : ", this.data)
+        console.log("Closed Job Posts :", this.closeddata);
       }
       );
-  } 
+  }
 
 
   jobtype: JobType[];
@@ -239,26 +239,26 @@ export class AdminPlacementsComponent implements OnInit {
 
 
   private saveCompany(): void {
-    console.info("company info", this.job); 
+    console.info("company info", this.job);
     this.companyService.addCompany(this.job)
       .subscribe(company => {
-        console.log("Company ID : " , company[0].company_id, this.company.company_image)
-        this.uploadService.pushFileToStorage('C'+company[0].company_id, this.company.company_image).subscribe()
+        console.log("Company ID : ", company[0].company_id, this.company.company_image)
+        this.uploadService.pushFileToStorage('C' + company[0].company_id, this.company.company_image).subscribe()
       })
     // this.router.navigateByUrl('/placements');
-      for(let i = 0; i < 1000; i++){}
- window.location.reload();  
-    }
+    for (let i = 0; i < 1000; i++) { }
+    window.location.reload();
+  }
 
- 
+
   private saveJob(): void {
     console.info("job info", this.job);
     console.info("job id", this.job.id);
-    this.addjobService.addJob(this.job )
-      .subscribe(job => { 
+    this.addjobService.addJob(this.job)
+      .subscribe(job => {
       })
     this.jobprocess.job_post_id = this.job.id;
-    this.utilService.addJobProcess(this.jobprocess).subscribe(); 
+    this.utilService.addJobProcess(this.jobprocess).subscribe();
 
     // this.router.navigateByUrl('/placements');
     // window.location.reload(); 
@@ -266,14 +266,14 @@ export class AdminPlacementsComponent implements OnInit {
   }
 
   students = [];
-  getfiltereddata() { 
-    
-    if ( this.userdata.user_type_id == 'TPO' ) {
+  getfiltereddata() {
+
+    if (this.userdata.user_type_id == 'TPO') {
       this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
-        console.log("Job : " , jobid)
-        this.studentService.getFilteredData( this.filters.passing_year , this.filters.major).subscribe(filtereddata => {
+        console.log("Job : ", jobid)
+        this.studentService.getFilteredData(this.filters.passing_year, this.filters.major).subscribe(filtereddata => {
           filtereddata.forEach(student => {
-            this.studentService.getJobProcessPlacedStudents( student.roll_no , jobid[0].id).subscribe(student => {
+            this.studentService.getJobProcessPlacedStudents(student.roll_no, jobid[0].id).subscribe(student => {
               student.forEach(s => {
                 // console.log(s)
                 if (s.roll_no) {
@@ -282,76 +282,76 @@ export class AdminPlacementsComponent implements OnInit {
               })
             })
           })
-        })      
-    })
-    console.log("Students : " , this.students) 
-    console.log("Students : " , typeof(this.students) ) 
-   } else {
-    this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
-      console.log("Job : " , jobid)
-      this.studentService.getFilteredData( this.filters.passing_year , this.userdata.branch_id).subscribe(filtereddata => {
-        filtereddata.forEach(student => {
-          this.studentService.getJobProcessPlacedStudents( student.roll_no , jobid[0].id).subscribe(student => {
-            student.forEach(s => {
-              if (s.roll_no) {
-                this.students.push(s)
-              }
-            })
-          }) 
         })
       })
-      console.log("Students Data : " , this.students);     
-      console.log("Students : " , typeof(this.students) )  
-  })
-}
-  window.alert("Data has been retrieved please download the excel to view data!!")
+      console.log("Students : ", this.students)
+      console.log("Students : ", typeof (this.students))
+    } else {
+      this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
+        console.log("Job : ", jobid)
+        this.studentService.getFilteredData(this.filters.passing_year, this.userdata.branch_id).subscribe(filtereddata => {
+          filtereddata.forEach(student => {
+            this.studentService.getJobProcessPlacedStudents(student.roll_no, jobid[0].id).subscribe(student => {
+              student.forEach(s => {
+                if (s.roll_no) {
+                  this.students.push(s)
+                }
+              })
+            })
+          })
+        })
+        console.log("Students Data : ", this.students);
+        console.log("Students : ", typeof (this.students))
+      })
+    }
+    window.alert("Data has been retrieved please download the excel to view data!!")
   }
 
-exceldata = {};
-formatedData = []
-filteredData = []
-dataheaders = []
-changeDataFormat(){
-  this.exceldata[this.students[0].roll_no] = []
-  for(let i = 0; i < this.students.length - 1 ; i++){
-    if(this.students[i].roll_no == this.students[i+1].roll_no ){
-      this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
-    }else if( this.students[i].roll_no == this.students[i+1].roll_no && i+1 > this.students.length - 1){
-      this.exceldata[this.students[i+1].roll_no].push(this.students[i+1].is_qualified)
+  exceldata = {};
+  formatedData = []
+  filteredData = []
+  dataheaders = []
+  changeDataFormat() {
+    this.exceldata[this.students[0].roll_no] = []
+    for (let i = 0; i < this.students.length - 1; i++) {
+      if (this.students[i].roll_no == this.students[i + 1].roll_no) {
+        this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
+      } else if (this.students[i].roll_no == this.students[i + 1].roll_no && i + 1 > this.students.length - 1) {
+        this.exceldata[this.students[i + 1].roll_no].push(this.students[i + 1].is_qualified)
+      }
+      else {
+        this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
+        this.exceldata[this.students[i + 1].roll_no] = []
+      }
     }
-    else{
-      this.exceldata[this.students[i].roll_no].push(this.students[i].is_qualified)
-      this.exceldata[this.students[i+1].roll_no] = []
+    for (var key in this.exceldata) {
+      if (this.exceldata.hasOwnProperty(key)) {
+        this.formatedData.push([key.replace(/"/g, ""), this.exceldata[key]]);
+      }
     }
-  }
-  for (var key in this.exceldata) {
-    if (this.exceldata.hasOwnProperty(key)) {
-        this.formatedData.push( [ key.replace(/"/g,""), this.exceldata[key] ] );
-    }
-  }
-  console.log("Formated Data : " , this.formatedData)
-  console.log("Excel Data : " + this.exceldata)
-}
-
-getHeaders(){
-  this.changeDataFormat()
-  let headers = ['Roll Number']
-  // this.exceldata[this.students[0].roll_no] = []
-  for(let i = 0; i < this.students.length; i++){
-    if(this.students[i].roll_no == this.students[i+1].roll_no){
-      // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
-      console.log(this.students[i].job_process_id.toString().slice(-1))
-      headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
-    }else{
-      // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
-      headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
-      // this.exceldata[this.students[i+1].roll_no] = []
-      console.log("Headers : " , headers)
-      return headers
-    }
+    console.log("Formated Data : ", this.formatedData)
+    console.log("Excel Data : " + this.exceldata)
   }
 
-}
+  getHeaders() {
+    this.changeDataFormat()
+    let headers = ['Roll Number']
+    // this.exceldata[this.students[0].roll_no] = []
+    for (let i = 0; i < this.students.length; i++) {
+      if (this.students[i].roll_no == this.students[i + 1].roll_no) {
+        // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
+        console.log(this.students[i].job_process_id.toString().slice(-1))
+        headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
+      } else {
+        // this.exceldata[this.students[i].roll_no].push(this.students[i].status)
+        headers.push(this.jobstages[this.students[i].job_process_id.toString().slice(-1)])
+        // this.exceldata[this.students[i+1].roll_no] = []
+        console.log("Headers : ", headers)
+        return headers
+      }
+    }
+
+  }
   downloadExcel() {
     var options = {
       fieldSeparator: ',',
@@ -359,13 +359,13 @@ getHeaders(){
       decimalseparator: '.',
       showLabels: true,
       showTitle: true,
-      title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile ,
+      title: 'Student Placed Data - Company : ' + this.job.company_name + ' - Profile : ' + this.job.job_profile,
       useBom: true,
       noDownload: false,
       headers: this.getHeaders()
     };
 
-    new ngxCsv(this.formatedData, 'StudentData', options); 
+    new ngxCsv(this.formatedData, 'StudentData', options);
   }
 
   private saveJobProcess() {
