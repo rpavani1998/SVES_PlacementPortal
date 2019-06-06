@@ -16,7 +16,7 @@ import { CompanyService } from 'src/app/services/company_/company.service';
 import { StudentService } from '../../services/student/student.service';
 import { JobpostsService } from 'src/app/services/jobposts/jobposts.service';
 import { JobProcess } from 'src/app/models/jobprocess';
-
+import { StudentPlacementStatus } from 'src/app/models/student-placement-status'
 
 
 
@@ -33,6 +33,8 @@ export class StudentdetailsComponent implements OnInit {
   jobposts = new JobPosts();
   submitted = false;
   selectedFiles: File;
+  placement_status = new StudentPlacementStatus();
+
 
 
   majors: Branch[]
@@ -190,6 +192,7 @@ export class StudentdetailsComponent implements OnInit {
   }
 
   students = [];
+  eligibleStudents = [];
   getfiltereddata() {
 
     if (this.userdata.user_type_id == 'TPO') {
@@ -199,13 +202,19 @@ export class StudentdetailsComponent implements OnInit {
           student.forEach(student => {
             this.studentService.getFilteredDataList(student.roll_no, this.filters.passing_year, this.filters.major).subscribe(filtereddata => {
               filtereddata.forEach(data => {
-                this.students.push(student)
+                // this.students.push(student)
+                if (student.placement_status == "Eligible" ) {
+                  this.eligibleStudents.push(student)
+                } else {
+                  this.students.push(student)
+                }
               })
-              console.log("Data : ", filtereddata)
+              // console.log("Data : ", filtereddata)
             })
           })
         })
         console.log("Students : ", this.students)
+        console.log("Eligible Students : " , this.eligibleStudents )
       })
     } else {
       this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
@@ -214,13 +223,19 @@ export class StudentdetailsComponent implements OnInit {
           student.forEach(student => {
             this.studentService.getFilteredDataList(student.roll_no, this.filters.passing_year, this.userdata.branch_id).subscribe(filtereddata => {
               filtereddata.forEach(data => {
-                this.students.push(student)
+                // this.students.push(student)
+                if (student.placement_status == "Eligible" ) {
+                  this.eligibleStudents.push(student)
+                } else {
+                  this.students.push(student)
+                }
               })
-              console.log("Data : ", filtereddata)
+              // console.log("Data : ", filtereddata)
             })
           })
         })
         console.log("Students : ", this.students)
+        console.log("eligible Students : " , this.eligibleStudents )
       })
     }
     window.alert("Data has been retrieved please download the excel to view data!!")
@@ -242,4 +257,12 @@ export class StudentdetailsComponent implements OnInit {
 
     new ngxCsv(this.students, 'StudentData', options);
   }
+
+  updateStatus() {
+    console.log("Placement data : " , this.placement_status )
+    this.jobpostsService.getJobProfile(this.job.job_profile).subscribe(jobid => {
+      this.placement_status.job_post_id = jobid[0].id;
+      this.utilService.updatePlacementStatus(this.placement_status).subscribe(result => {})
+    }
+    )}
 }

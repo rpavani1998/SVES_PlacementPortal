@@ -4,4 +4,6 @@ export class StudentPlacementStatus {
     placement_status : string;
     job_process_id : number;
     is_qualified : string;
+    placed : string;
+    not_placed : string;
 }

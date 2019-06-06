@@ -115,13 +115,13 @@ exports.getFilteredDataList = (req , res) => {
 }
 
 exports.getPlacedStudents = (req , res) => {
-	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id , placement_status : 'Selected'}}).then(details => {
+	StudentPlacementStatus.findAll({where : {roll_no : req.params.roll_no ,job_post_id : req.params.job_id }}).then(details => {
 		res.json(details) 
 	})	  
 }
 
 exports.getPlacedStudentsList = (req , res) => {
-	StudentPlacementStatus.findAll({where : {job_post_id : req.params.job_id , placement_status : 'Selected'}}).then(details => {
+	StudentPlacementStatus.findAll({where : {job_post_id : req.params.job_id }}).then(details => {
 		res.json(details) 
 		console.log("Students : " , details)
 	})	  
