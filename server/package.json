@@ -37,7 +37,7 @@
     "mysql2": "^1.6.4",
     "node-latex": "^2.6.0-dev.0",
     "node-latex-pdf": "0.0.2",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "sequelize": "^4.42.0",
     "string-to-stream": "^1.1.1",
